@@ -8,6 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+	  <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+	  <PackageReference Include="DevSkill.Core" Version="6.0.1" />
+	  <PackageReference Include="DevSkill.Data" Version="6.0.1" />
+	  <PackageReference Include="DevSkill.Http" Version="6.0.5" />
+	  
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.19" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.19" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.19" />
