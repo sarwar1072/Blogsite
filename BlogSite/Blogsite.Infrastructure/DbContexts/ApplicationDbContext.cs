@@ -1,4 +1,5 @@
-﻿using Blogsite.Infrastructure.Entities.Membership;
+﻿using Blogsite.Infrastructure.Entities;
+using Blogsite.Infrastructure.Entities.Membership;
 using Blogsite.Infrastructure.Seeds;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -37,21 +38,21 @@ namespace Blogsite.Infrastructure.DbContexts
         protected override void OnModelCreating(ModelBuilder builder)
         {
             #region Seed
-            builder.Entity<ApplicationUser>()
-                .HasData(ApplicationUserSeed.Users);
+            //builder.Entity<ApplicationUser>()
+            //    .HasData(ApplicationUserSeed.Users);
 
-            builder.Entity<Role>()
-                .HasData(RoleSeed.Roles);
+            //builder.Entity<Role>()
+            //    .HasData(RoleSeed.Roles);
 
-            builder.Entity<UserRole>()
-                .HasData(UserRoleSeed.UserRole);
+            //builder.Entity<UserRole>()
+            //    .HasData(UserRoleSeed.UserRole);
 
             base.OnModelCreating(builder);
             #endregion
         }
 
         public DbSet<ApplicationUser>? ApplicationUsers { get; set; }
-        //public DbSet<Question>? Questions { get; set; }
+        public DbSet<Post>? Posts { get; set; }
         //public DbSet<Answer>? Answers { get; set; }
         //public DbSet<Comment>? Comments { get; set; }
         //public DbSet<Tag>? Tags { get; set; }

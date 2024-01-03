@@ -18,5 +18,11 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="UnitOfWprkFrPro\" />
+	  <Folder Include="Services\" />
+	  <Folder Include="Repositories\" />
+	</ItemGroup>
 	
 </Project>

@@ -20,4 +20,9 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.19" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Blogsite.Infrastructure\Blogsite.Infrastructure.csproj" />
+    <ProjectReference Include="..\Blogsite.Membership\Blogsite.Membership.csproj" />
+  </ItemGroup>
+
 </Project>
