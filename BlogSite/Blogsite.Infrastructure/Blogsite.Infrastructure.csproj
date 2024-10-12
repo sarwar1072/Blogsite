@@ -6,6 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Services\**" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
 		<PackageReference Include="DevSkill.Core" Version="6.0.1" />
@@ -21,7 +27,6 @@
 
 	<ItemGroup>
 	  <Folder Include="UnitOfWprkFrPro\" />
-	  <Folder Include="Services\" />
 	  <Folder Include="Repositories\" />
 	</ItemGroup>
 	
