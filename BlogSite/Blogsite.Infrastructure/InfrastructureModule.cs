@@ -1,5 +1,8 @@
 ﻿using Autofac;
 using Blogsite.Infrastructure.DbContexts;
+using Blogsite.Infrastructure.Repositories;
+using Blogsite.Infrastructure.Services;
+using Blogsite.Infrastructure.UOWork;
 
 namespace Blogsite.Infrastructure
 {
@@ -24,18 +27,14 @@ namespace Blogsite.Infrastructure
                 .WithParameter("migrationAssemblyName", _migrationAssemblyName)
                 .InstancePerLifetimeScope();
 
-            builder.RegisterType<ApplicationDbContext>().As<IApplicationDbContext>()
-                .WithParameter("connectionString", _connectionString)
-                .WithParameter("migrationAssemblyName", _migrationAssemblyName)
+            builder.RegisterType<TourRepository>().As<ITourRepository>()
                 .InstancePerLifetimeScope();
 
-            //builder.RegisterType<PAndSUnitOfWork>().As<IPAndSUnitOfWork>()
-            //    .InstancePerLifetimeScope();
+            builder.RegisterType<ProjectUnitOfWork>().As<IProjectUnitOfWork>()
+                .InstancePerLifetimeScope();
 
-            //builder.RegisterType<QuestionRepository>().As<IQuestionRepository>()
-            //    .InstancePerLifetimeScope();
-            //builder.RegisterType<QuestionServices>().As<IQuestionServices>()
-            //    .InstancePerLifetimeScope();
+            builder.RegisterType<TourServices>().As<ITourServices>()
+                .InstancePerLifetimeScope();
 
             //builder.RegisterType<CommentRepository>().As<ICommentRepository>()
             //    .InstancePerLifetimeScope();

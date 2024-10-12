@@ -11,7 +11,7 @@ namespace Blogsite.Infrastructure.Entities
     {
         public int Id { get; set; }
         public string? Airline { get; set; }
-        public string? Url {  get; set; }    
+        public string? FlightUrl {  get; set; }    
         public string? From { get; set; }
         public string? To { get; set; }
         public DateTime DepartureTime { get; set; }

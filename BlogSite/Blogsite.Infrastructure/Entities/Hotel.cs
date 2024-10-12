@@ -12,7 +12,7 @@ namespace Blogsite.Infrastructure.Entities
         public int Id { get; set; }
         public string? Name { get; set; }
         public string? Location { get; set; }
-        public string? Url {  get; set; }    
+        public string? HotelUrl {  get; set; }    
         public string? RoomType { get; set; }
         public double PricePerNight { get; set; }
         public int AvailableRooms { get; set; }

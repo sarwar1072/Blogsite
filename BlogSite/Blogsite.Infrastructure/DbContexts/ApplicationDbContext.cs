@@ -38,24 +38,25 @@ namespace Blogsite.Infrastructure.DbContexts
         protected override void OnModelCreating(ModelBuilder builder)
         {
             #region Seed
-            //builder.Entity<ApplicationUser>()
-            //    .HasData(ApplicationUserSeed.Users);
+            builder.Entity<ApplicationUser>()
+                .HasData(ApplicationUserSeed.Users);
 
-            //builder.Entity<Role>()
-            //    .HasData(RoleSeed.Roles);
+            builder.Entity<Role>()
+                .HasData(RoleSeed.Roles);
 
-            //builder.Entity<UserRole>()
-            //    .HasData(UserRoleSeed.UserRole);
+            builder.Entity<UserRole>()
+                .HasData(UserRoleSeed.UserRole);
 
             base.OnModelCreating(builder);
             #endregion
         }
 
         public DbSet<ApplicationUser>? ApplicationUsers { get; set; }
-        public DbSet<Post>? Posts { get; set; }
-        //public DbSet<Answer>? Answers { get; set; }
-        //public DbSet<Comment>? Comments { get; set; }
-        //public DbSet<Tag>? Tags { get; set; }
-        //public DbSet<Vote> Votes { get; set; }
+        public DbSet<Booking>? Bookings { get; set; }
+        public DbSet<Flight>? Flights { get; set; }
+        public DbSet<Hotel>? Hotels { get; set; }
+        public DbSet<Images>? Images { get; set; }
+        public DbSet<Payment>? Payments { get; set; }  
+        public DbSet<Tour>? Tours { get; set; }
     }
 }

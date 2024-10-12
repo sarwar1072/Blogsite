@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Services\**" />
-    <EmbeddedResource Remove="Services\**" />
-    <None Remove="Services\**" />
+    <Compile Remove="UnitOfWprkFrPro\**" />
+    <EmbeddedResource Remove="UnitOfWprkFrPro\**" />
+    <None Remove="UnitOfWprkFrPro\**" />
   </ItemGroup>
 
 	<ItemGroup>
@@ -23,11 +23,6 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="UnitOfWprkFrPro\" />
-	  <Folder Include="Repositories\" />
 	</ItemGroup>
 	
 </Project>

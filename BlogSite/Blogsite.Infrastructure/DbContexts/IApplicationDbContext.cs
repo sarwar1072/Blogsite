@@ -7,10 +7,11 @@ namespace Blogsite.Infrastructure.DbContexts
     public interface IApplicationDbContext
     {
         DbSet<ApplicationUser>? ApplicationUsers { get; set; }
-        DbSet<Post>? Posts { get; set; }        
-        //DbSet<Answer>? Answers { get; set; }
-        //DbSet<Comment>? Comments { get; set; }
-        //DbSet<Tag>? Tags { get; set; }
-        //DbSet<Vote>? Votes { get; set; }
+         DbSet<Booking>? Bookings { get; set; }
+         DbSet<Flight>? Flights { get; set; }
+         DbSet<Hotel>? Hotels { get; set; }
+         DbSet<Images>? Images { get; set; }
+         DbSet<Payment>? Payments { get; set; }
+         DbSet<Tour>? Tours { get; set; }
     }
 }
