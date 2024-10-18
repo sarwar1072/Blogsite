@@ -1,0 +1,85 @@
+﻿@model CreateTour
+
+@{
+    ViewData["Title"] = "Create New Tour";
+}
+
+<div class="container p-5 my-5 border">
+    <form asp-action="Add" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="TourName" class="control-label"></label>
+            <input asp-for="TourName" class="form-control" />
+            <span asp-validation-for="TourName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CoverPhotoUrl" class="control-label">Cover Photo</label>
+            <input asp-for="CoverPhotoUrl" type="file" class="form-control" />
+            <span asp-validation-for="CoverPhotoUrl" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Destination" class="control-label">Destination</label>
+            <input asp-for="Destination" class="form-control" />
+            <span asp-validation-for="Destination" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="MaxiMumPeople" class="control-label">Maximum People</label>
+            <input asp-for="MaxiMumPeople" class="form-control" />
+            <span asp-validation-for="MaxiMumPeople" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="MiniMumPeople" class="control-label">Minimum People</label>
+            <input asp-for="MiniMumPeople" class="form-control" />
+            <span asp-validation-for="MiniMumPeople" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="MapUrl" class="control-label">Map URL</label>
+            <input asp-for="MapUrl" class="form-control" />
+            <span asp-validation-for="MapUrl" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Requirements" class="control-label">Requirements</label>
+            <input asp-for="Requirements" class="form-control" />
+            <span asp-validation-for="Requirements" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="CancellationTerm" class="control-label">Cancellation Terms</label>
+            <textarea asp-for="CancellationTerm" class="form-control"></textarea>
+            <span asp-validation-for="CancellationTerm" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Price" class="control-label">Price</label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="SpotsAvailable" class="control-label">Spots Available</label>
+            <input asp-for="SpotsAvailable" class="form-control" />
+            <span asp-validation-for="SpotsAvailable" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ListofImages" class="control-label">Tour Images</label>
+            <input asp-for="ListofImages" type="file" multiple class="form-control" />
+            <span asp-validation-for="ListofImages" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+
+@section PageScript
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,21 @@
+﻿@model ResponseModel
+
+@if (Model != null)
+{
+    if (Model.ToasterClass == "success")
+    {
+        <script>
+            $(function () {
+                toastr.success('@Model.Message')
+            });
+        </script>
+    }
+    else
+    {
+        <script>
+            $(function () {
+                toastr.error('@Model.Message')
+            });
+        </script>
+    }
+}

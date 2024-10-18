@@ -1,0 +1,74 @@
+﻿@model MenuModel
+<nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        @foreach (var item in Model.MenuItems)
+        {
+            <li class="nav-item has-treeview">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <p>
+                        @item.Title
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    @foreach (var subItem in item.Childs)
+                    {
+                        <li class="nav-item">
+                            <a href="@subItem.Url" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>@subItem.Title</p>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+        <li class="nav-item">
+            <a href="#" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                    Simple Link
+                    <span class="right badge badge-danger">New</span>
+                </p>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<!-- Include the necessary JavaScript -->
+<script>
+    $(document).ready(function () {
+        // Enable sidebar toggle for small screens
+        $('.nav-sidebar .nav-link').on('click', function () {
+            var $this = $(this);
+            var $next = $this.next();
+            if ($next.is('.nav-treeview')) {
+                $next.toggle();
+                return false;
+            }
+        });
+
+        // Collapse other open menus when opening a new one
+        $('.nav-sidebar .has-treeview > a').on('click', function () {
+            var $this = $(this);
+            var $parent = $this.closest('li');
+            var $siblings = $parent.siblings();
+
+            $siblings.each(function () {
+                $(this).find('.nav-treeview').hide();
+            });
+        });
+    });
+</script>
+
+@* <style>
+    @media (max-width: 767.98px) {
+        .nav-sidebar .nav-link {
+            font-size: 14px;
+        }
+        .nav-sidebar .nav-treeview {
+            display: none;
+        }
+    }
+</style> *@

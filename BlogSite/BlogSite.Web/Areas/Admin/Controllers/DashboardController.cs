@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BlogSite.Web.Areas.Admin.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.Web.Areas.Admin.Controllers
 {
@@ -7,7 +8,8 @@ namespace BlogSite.Web.Areas.Admin.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            var model = new DashboardModel();
+            return View(model);
         }
     }
 }

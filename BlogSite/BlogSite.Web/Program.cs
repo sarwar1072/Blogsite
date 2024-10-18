@@ -32,6 +32,7 @@ namespace BlogSite.Web
                 containerBuilder.RegisterModule(new InfrastructureModule(connectionString, assemblyName, webHostEnvironment));
                 //containerBuilder.RegisterModule(new EmailMessagingModule(connectionString, assemblyName));
             });
+            builder.Services.AddHttpContextAccessor();
 
             //Serilog Configuration
             builder.Host.UseSerilog((ctx, lc) => lc

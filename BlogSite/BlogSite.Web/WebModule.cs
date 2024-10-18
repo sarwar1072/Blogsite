@@ -1,5 +1,7 @@
 ﻿
 using Autofac;
+using BlogSite.Web.Areas.Admin.Models.TourModelFolder;
+using BlogSite.Web.Models;
 
 namespace BlogSite.Web
 {
@@ -30,14 +32,16 @@ namespace BlogSite.Web
             //builder.RegisterType<QuestionCreateModel>()
             //    .AsSelf()
             //    .InstancePerLifetimeScope();
+            builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().SingleInstance();
+            builder.RegisterType<TourModel>()
+                .AsSelf()
+                .InstancePerLifetimeScope();
 
-            //builder.RegisterType<QuestionEditModel>()
-            //    .AsSelf()
-            //    .InstancePerLifetimeScope();
-
-            //builder.RegisterType<AnswerCreateModel>()
-            //    .AsSelf()
-            //    .InstancePerLifetimeScope();
+            builder.RegisterType<CreateTour>()
+                .AsSelf()
+                .InstancePerLifetimeScope();
+            builder.RegisterType<FileHelper>().As<IFileHelper>().InstancePerLifetimeScope(); 
+            
 
             base.Load(builder);
         }
