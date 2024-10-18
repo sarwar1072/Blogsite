@@ -27,11 +27,11 @@ namespace Blogsite.Infrastructure.Services
             if(tourCount > 0) {
                 throw new DuplicateException("Same tour exist");
             }
-
             await _projectUnitOfWork.TourRepository.AddAsync(tour); 
             await _projectUnitOfWork.SaveAsync();
-
         }
+
+
 
     }
 }

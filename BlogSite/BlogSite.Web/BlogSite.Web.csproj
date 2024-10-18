@@ -18,11 +18,16 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.19" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.19" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.19" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.18" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Blogsite.Infrastructure\Blogsite.Infrastructure.csproj" />
     <ProjectReference Include="..\Blogsite.Membership\Blogsite.Membership.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Data\" />
   </ItemGroup>
 
 </Project>
