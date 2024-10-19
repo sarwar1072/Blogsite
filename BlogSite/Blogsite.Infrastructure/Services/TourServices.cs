@@ -11,7 +11,7 @@ namespace Blogsite.Infrastructure.Services
 {
     public class TourServices:ITourServices
     {
-        private IProjectUnitOfWork _projectUnitOfWork;
+        private readonly IProjectUnitOfWork _projectUnitOfWork;
         public TourServices(IProjectUnitOfWork projectUnitOfWork)
         {
                 _projectUnitOfWork = projectUnitOfWork;
@@ -31,7 +31,29 @@ namespace Blogsite.Infrastructure.Services
             await _projectUnitOfWork.SaveAsync();
         }
 
-
+        public  (IList<Tour> tours,int total,int totalDisplay)GetTourList(int pageindex, int pagesize,string searchText, string orderBy)
+        {
+            (IList<Tour> data, int total, int totalDisplay) result = (null, 0, 0);
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                result = _projectUnitOfWork.TourRepository.GetDynamic(null, null, null, pageindex, pagesize, true);
+            }
+            else
+            {
+                result = _projectUnitOfWork.TourRepository.GetDynamic(x => x.TourName.ToLower() == searchText.ToLower()
+                || x.Destination.ToLower() == searchText.ToLower(), null, null, pageindex, pagesize, true);
+            }
+            return (result.data, result.total, result.totalDisplay);
+        }
+        public  void DeleteTour(int id)
+        {
+            var entity=  _projectUnitOfWork.TourRepository.GetById(id);    
+            if(entity == null) {
+                throw new InvalidOperationException("Tour is not found");
+            }
+             _projectUnitOfWork.TourRepository.Remove(entity);
+             _projectUnitOfWork.Save();   
+        }
 
     }
 }

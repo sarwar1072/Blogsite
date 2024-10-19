@@ -61,24 +61,24 @@ namespace BlogSite.Web.Areas.Admin.Models
 
                         new MenuItem
                         {
-                            Title = "Category",
-                        Childs = new List<MenuChildItem>
-                        {
-                            new MenuChildItem{ Title = "View Category", Url = "/Admin/Category" },
-                            new MenuChildItem{Title="Add category",Url="/Admin/Category/AddCategory"}
-                        }
+                            Title = "Tour",
+                            Childs = new List<MenuChildItem>
+                            {
+                                new MenuChildItem{ Title = "View Tour", Url = "/Admin/Tour" },
+                                new MenuChildItem{Title="Add category",Url="/Admin/Tour/Add"}
+                            }
                         }
                     },
 
                     {
                         new MenuItem
                         {
-                             Title="Cover type",
-                       Childs=new List<MenuChildItem>
-                       {
-                           new MenuChildItem{Title="View CoverType",Url="/Admin/CoverType"},
-                           new MenuChildItem{Title="Add CoverType",Url="/Admin/CoverType/AddCoverType"}
-                       }
+                           Title="Cover type",
+                           Childs=new List<MenuChildItem>
+                           {
+                               new MenuChildItem{Title="View CoverType",Url="/Admin/CoverType"},
+                               new MenuChildItem{Title="Add CoverType",Url="/Admin/CoverType/AddCoverType"}
+                           }
                         }
                     },
 
@@ -86,12 +86,12 @@ namespace BlogSite.Web.Areas.Admin.Models
                         new MenuItem
                         {
                             Title = "Product",
-                        Childs = new List<MenuChildItem>
-                        {
-                            new MenuChildItem{ Title = " View Product", Url = "/Admin/Product" },
-                            new MenuChildItem{ Title = "Add Product", Url ="/Admin/Product/AddProduct"}
+                            Childs = new List<MenuChildItem>
+                            {
+                                new MenuChildItem{ Title = " View Product", Url = "/Admin/Product" },
+                                new MenuChildItem{ Title = "Add Product", Url ="/Admin/Product/AddProduct"}
 
-                        }
+                            }
                         }
                     },
 
@@ -99,21 +99,21 @@ namespace BlogSite.Web.Areas.Admin.Models
                         new MenuItem
                         {
                             Title="List Order",
-                       Childs=new List<MenuChildItem>
-                       {
-                           new MenuChildItem{Title="View  Order",Url="/Admin/Order"},
-                           //new MenuChildItem{Title="Add ",Url="/Admin/StudentRegistration/CreateRegistration/"}
-                       }
+                           Childs=new List<MenuChildItem>
+                           {
+                               new MenuChildItem{Title="View  Order",Url="/Admin/Order"},
+                               //new MenuChildItem{Title="Add ",Url="/Admin/StudentRegistration/CreateRegistration/"}
+                           }
                         }
                     },
                     {
                         new MenuItem
                         {
-                            Title="List User",
-                       Childs=new List<MenuChildItem>
-                       {
-                           new MenuChildItem{Title="View  User",Url="/Admin/User"},
-                       }
+                           Title="List User",
+                           Childs=new List<MenuChildItem>
+                           {
+                               new MenuChildItem{Title="View  User",Url="/Admin/User"},
+                           }
                         }
                     }
                     ,
@@ -121,12 +121,12 @@ namespace BlogSite.Web.Areas.Admin.Models
                      {
                         new MenuItem
                         {
-                             Title="Company",
-                       Childs=new List<MenuChildItem>
-                       {
-                           new MenuChildItem{Title="View Company",Url="/Admin/Company"},
-                           new MenuChildItem{Title="Add Company",Url="/Admin/Company/AddCompany"}
-                       }
+                           Title="Company",
+                           Childs=new List<MenuChildItem>
+                           {
+                               new MenuChildItem{Title="View Company",Url="/Admin/Company"},
+                               new MenuChildItem{Title="Add Company",Url="/Admin/Company/AddCompany"}
+                           }
                         }
                     }
                 }

@@ -6,7 +6,7 @@ namespace BlogSite.Web.Areas.Admin.Models.TourModelFolder
 {
     public class CreateTour:TourModel
     {
-        private ITourServices _services; 
+      //  private ITourServices _services; 
         public int TourId { get; set; } 
         public string? TourName { get; set; }
         public IFormFile CoverPhotoUrl { get; set; }
@@ -23,51 +23,52 @@ namespace BlogSite.Web.Areas.Admin.Models.TourModelFolder
         public List<string>? UrlList {  get; set; }    
         public ICollection<Images>? Images { get; set; }
 
-        public CreateTour(IHttpContextAccessor httpContext,ITourServices tourServices):base(httpContext) 
+        public CreateTour(IHttpContextAccessor httpContext,ITourServices tourServices):base(httpContext,tourServices) 
         {               
-            _services = tourServices;   
         }
         public CreateTour()
         {    
-            UrlList = new List<string>();   
+           //ist = new List<string>();   
         }
 
-        public override void ResolveDependency(ILifetimeScope lifetimeScope)
-        {
-            _lifetimeScope = lifetimeScope; 
-            _services=_lifetimeScope.Resolve<ITourServices>();
-            base.ResolveDependency(lifetimeScope);  
-        }
+        //public override void ResolveDependency(ILifetimeScope lifetimeScope)
+        //{
+        //    _lifetimeScope = lifetimeScope; 
+        //    base.ResolveDependency(lifetimeScope);  
+        //}
 
         public async Task AddTour()
         {
-            var model = new Tour()
-            {
-                TourName = TourName, 
-                TourUrl = TourUrl,  
-                Destination=Destination,    
-                MaxiMumPeople = MaxiMumPeople,
-                MiniMumPeople = MiniMumPeople,
-                MapUrl = MapUrl,
-                Requirements = Requirements,
-                CancellationTerm =CancellationTerm, 
-                Price = Price,  
-                SpotsAvailable = SpotsAvailable,    
-
-            };
-            model.Images=new List<Images>();    
-            if(ListofImages != null) { 
-            for(int i=0;i<UrlList.Count;i++) {  
-                model.Images.Add(new Images
+                var model = new Tour()
                 {
-                    ImageUrl = UrlList[i],
-                    AlternativeText="Image not found",
-                    TourId=TourId
-                }); 
+                    TourName = TourName, 
+                    TourUrl = TourUrl,  
+                    Destination=Destination,    
+                    MaxiMumPeople = MaxiMumPeople,
+                    MiniMumPeople = MiniMumPeople,
+                    MapUrl = MapUrl,
+                    Requirements = Requirements,
+                    CancellationTerm =CancellationTerm, 
+                    Price = Price,  
+                    SpotsAvailable = SpotsAvailable,    
 
-                }  
-            }
-          await  _services.AddTour(model);    
+                };
+                model.Images=new List<Images>();    
+                if(UrlList != null) { 
+                    for(int i=0;i<UrlList.Count;i++) 
+                    {  
+                        model.Images.Add(new Images
+                        {
+                            ImageUrl = UrlList[i],
+                            AlternativeText=$"{model.TourName} image",
+                        }); 
+
+                    }            
+                }
+          await  _tourServices.AddTour(model);    
+        }
+        public void  RemoveTour(int id) { 
+          _tourServices.DeleteTour(id);  
         }
 
 

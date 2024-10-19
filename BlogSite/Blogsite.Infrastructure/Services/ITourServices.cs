@@ -10,5 +10,9 @@ namespace Blogsite.Infrastructure.Services
     public interface ITourServices
     {
         Task AddTour(Tour tour);
+        void DeleteTour(int id);
+        public (IList<Tour> tours, int total, int totalDisplay) GetTourList
+            (int pageindex, int pagesize, string searchText, string orderBy);
+
     }
 }

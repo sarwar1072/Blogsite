@@ -3,6 +3,7 @@ using Blogsite.Infrastructure.Entities.Membership;
 using Blogsite.Infrastructure.Seeds;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace Blogsite.Infrastructure.DbContexts
 {
@@ -49,6 +50,24 @@ namespace Blogsite.Infrastructure.DbContexts
 
             base.OnModelCreating(builder);
             #endregion
+
+                builder.Entity<Tour>()
+                    .HasMany(t => t.Images)
+                    .WithOne(i => i.Tour)
+                    .HasForeignKey(i => i.TourId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Hotel>()
+                    .HasMany(t => t.Images)
+                    .WithOne(i => i.Hotel)
+                    .HasForeignKey(i => i.HotelId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Booking>()
+                    .HasOne(b => b.Payment)  // A Booking has one Payment
+                    .WithOne(p => p.Booking)  // A Payment is associated with one Booking
+                    .HasForeignKey<Payment>(p => p.BookingID)  // Foreign key in Payment
+                    .OnDelete(DeleteBehavior.Cascade);  // Optional: Cascade delete
         }
 
         public DbSet<ApplicationUser>? ApplicationUsers { get; set; }
