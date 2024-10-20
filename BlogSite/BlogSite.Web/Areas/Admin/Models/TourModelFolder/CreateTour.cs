@@ -70,8 +70,41 @@ namespace BlogSite.Web.Areas.Admin.Models.TourModelFolder
         public void  RemoveTour(int id) { 
           _tourServices.DeleteTour(id);  
         }
+        public void Edit()
+        {
+            var model = new Tour()
+            {
+                Id=TourId,
+                TourName = TourName,
+                TourUrl = TourUrl,
+                Destination = Destination,
+                MaxiMumPeople = MaxiMumPeople,
+                MiniMumPeople = MiniMumPeople,
+                Requirements = Requirements,
+                CancellationTerm = CancellationTerm,
+                Price = Price,
+                SpotsAvailable = SpotsAvailable,
 
-
+            }; 
+            _tourServices.EditTour(model);
+        }
+        public void Load(int id)
+        {
+            var dataByid=_tourServices.GetByid(id);
+            if(dataByid != null) 
+            {
+                TourId = dataByid.Id;   
+                TourName = dataByid.TourName;
+                TourUrl= dataByid.TourUrl;  
+                Destination = dataByid.Destination; 
+                MaxiMumPeople= dataByid.MaxiMumPeople;  
+                MiniMumPeople= dataByid.MiniMumPeople;
+                Requirements = dataByid.Requirements;
+                CancellationTerm= dataByid.CancellationTerm;
+                Price = dataByid.Price;
+                SpotsAvailable = dataByid.SpotsAvailable;          
+            }
+        }
 
     }
 }

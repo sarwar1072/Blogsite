@@ -45,6 +45,38 @@ namespace Blogsite.Infrastructure.Services
             }
             return (result.data, result.total, result.totalDisplay);
         }
+
+        public  void EditTour(Tour tour) 
+        {
+            if (tour is null)
+            {
+                throw new InvalidOperationException("Question can not be null");
+            }
+
+            var entity= _projectUnitOfWork.TourRepository.GetById(tour.Id);   
+            
+            if(entity ==null)
+                throw new InvalidOperationException("Question can not be null");
+
+           // entity.Id = tour.Id;
+            entity.TourName = tour.TourName;    
+            entity.TourUrl = tour.TourUrl;  
+            entity.Destination = tour.Destination;
+            entity.MaxiMumPeople = tour.MaxiMumPeople;
+            entity.MiniMumPeople = tour.MiniMumPeople;  
+            entity.Requirements = tour.Requirements;    
+            entity.CancellationTerm = tour.CancellationTerm;    
+            entity.Price = tour.Price;
+            entity.SpotsAvailable = tour.SpotsAvailable;    
+            
+             _projectUnitOfWork.TourRepository.Edit(entity);  
+             _projectUnitOfWork.Save();   
+        }
+        public Tour GetByid(int id)
+        {
+            var entity=_projectUnitOfWork.TourRepository.GetById(id);
+            return entity;  
+        }
         public  void DeleteTour(int id)
         {
             var entity=  _projectUnitOfWork.TourRepository.GetById(id);    

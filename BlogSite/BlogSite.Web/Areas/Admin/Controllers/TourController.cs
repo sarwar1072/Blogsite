@@ -1,5 +1,8 @@
 ﻿using Autofac;
 using Autofac.Core.Lifetime;
+using Blogsite.Infrastructure;
+using Blogsite.Infrastructure.Entities;
+using BlogSite.Web.Areas.Admin.Models;
 using BlogSite.Web.Areas.Admin.Models.TourModelFolder;
 using BlogSite.Web.Models;
 using Microsoft.AspNetCore.Hosting;
@@ -72,6 +75,43 @@ namespace BlogSite.Web.Areas.Admin.Controllers
                 }
             }           
             return View(tour);
+        }
+        public IActionResult EditTour(int id)
+        {
+            var model = _scope.Resolve<CreateTour>();
+            model.Load(id);
+            return View(model);
+        }
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult EditTour(CreateTour model)
+        {
+            model.ResolveDependency(_scope);
+
+            //if (ModelState.IsValid)
+            //{
+            try
+            {
+                    if (model.CoverPhotoUrl != null)
+                    {
+                        _fileHelper.DeleteFile(model.TourUrl);
+                        model.TourUrl = _fileHelper.UploadFile(model.CoverPhotoUrl);
+                    }
+                    model.Edit();
+                   // model.Response = new ResponseModel("Edited successfully", ResponseType.Success);
+                    return RedirectToAction("Index");
+                }
+                //catch (DuplicationException ex)
+                //{
+                //    //model.Response = new ResponseModel(ex.Message, ResponseType.Failure);
+                //}
+                catch (Exception ex)
+                {
+                    _logger.LogError($"{ex.Message}");
+
+                    //model.Response = new ResponseModel("edited fail", ResponseType.Failure);
+                }
+           // }
+            return View(model);
         }
         [HttpPost,ValidateAntiForgeryToken]
         public  ActionResult Delete(int id) 

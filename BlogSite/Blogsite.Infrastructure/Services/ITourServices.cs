@@ -11,6 +11,8 @@ namespace Blogsite.Infrastructure.Services
     {
         Task AddTour(Tour tour);
         void DeleteTour(int id);
+        void EditTour(Tour tour);
+        Tour GetByid(int id);
         public (IList<Tour> tours, int total, int totalDisplay) GetTourList
             (int pageindex, int pagesize, string searchText, string orderBy);
 
