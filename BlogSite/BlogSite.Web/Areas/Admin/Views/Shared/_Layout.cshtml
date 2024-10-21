@@ -1,5 +1,4 @@
 ﻿@model AdminBaseModel
-
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -239,8 +238,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="/Admin/js/adminlte.min.js"></script>
     <script src="/Admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 
-@*     <partial name="_ToasterMessage" model="@Model.Response" />
- *@    <script>
+    <partial name="_ToasterMessage" model="@Model.Response" />
+    <script>
         $(function () {
 
             $("#response-alert").fadeTo(5000, 500).slideUp(500, function () {

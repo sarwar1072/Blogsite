@@ -1,5 +1,5 @@
-﻿
-using Autofac;
+﻿using Autofac;
+using BlogSite.Web.Areas.Admin.Models;
 using BlogSite.Web.Areas.Admin.Models.TourModelFolder;
 using BlogSite.Web.Models;
 
@@ -25,13 +25,13 @@ namespace BlogSite.Web
             //    .AsSelf()
             //    .InstancePerLifetimeScope();
 
-            //builder.RegisterType<PostLayoutModel>()
-            //    .AsSelf()
-            //    .InstancePerLifetimeScope();
+            builder.RegisterType<EditTourModel>()
+                .AsSelf()
+                .InstancePerLifetimeScope();
 
-            //builder.RegisterType<QuestionCreateModel>()
-            //    .AsSelf()
-            //    .InstancePerLifetimeScope();
+            builder.RegisterType<ResponseModel>()
+                .AsSelf()
+                .InstancePerLifetimeScope();
             builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().SingleInstance();
             builder.RegisterType<TourModel>()
                 .AsSelf()

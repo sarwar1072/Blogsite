@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using AutoMapper;
 using Blogsite.Membership.Services;
+using BlogSite.Web.Models;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -15,26 +16,34 @@ namespace BlogSite.Web.Areas.Admin.Models
         protected IMapper? _mapper;
         protected ILifetimeScope? _lifetimeScope;
         public MenuModel MenuModel { get; set; }
-        //public ResponseModel Response
-        //{
-        //    get
-        //    {
-        //        if (_httpContextAccessor.HttpContext.Session.IsAvailable
-        //            && _httpContextAccessor.HttpContext.Session.Keys.Contains(nameof(Response)))
-        //        {
-        //            var response = _httpContextAccessor.HttpContext.Session.Get<ResponseModel>(nameof(Response));
-        //            _httpContextAccessor.HttpContext.Session.Remove(nameof(Response));
-        //            return response;
-        //        }
-        //        else
-        //            return null;
-        //    }
-        //    set
-        //    {
-        //        _httpContextAccessor.HttpContext.Session.Set(nameof(Response),
-        //            value);
-        //    }
-        //}
+
+        public ResponseModel? Response
+        {
+            get
+            {
+                if (_contextAccessor == null || _contextAccessor.HttpContext == null || !_contextAccessor.HttpContext.Session.IsAvailable)
+                {
+                    return null;  // Return null or handle the absence of HttpContext
+                }
+
+                if (_contextAccessor.HttpContext.Session.Keys.Contains(nameof(Response)))
+                {
+                    var response = _contextAccessor.HttpContext.Session.Get<ResponseModel>(nameof(Response));
+                    _contextAccessor.HttpContext.Session.Remove(nameof(Response));
+                    return response;
+                }
+
+                return null;
+            }
+            set
+            {
+                if (_contextAccessor != null && _contextAccessor.HttpContext != null)
+                {
+                    _contextAccessor.HttpContext.Session.Set(nameof(Response), value);
+                }
+            }
+        }
+
         public AdminBaseModel(IHttpContextAccessor httpContextAccessor)
         {
             _contextAccessor = httpContextAccessor;
@@ -65,7 +74,7 @@ namespace BlogSite.Web.Areas.Admin.Models
                             Childs = new List<MenuChildItem>
                             {
                                 new MenuChildItem{ Title = "View Tour", Url = "/Admin/Tour" },
-                                new MenuChildItem{Title="Add category",Url="/Admin/Tour/Add"}
+                                new MenuChildItem{Title="Add Tour",Url="/Admin/Tour/Add"}
                             }
                         }
                     },

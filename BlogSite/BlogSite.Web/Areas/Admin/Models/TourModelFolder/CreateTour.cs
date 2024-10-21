@@ -1,12 +1,13 @@
 ﻿using Autofac;
 using Blogsite.Infrastructure.Entities;
 using Blogsite.Infrastructure.Services;
+using DevSkill.Http;
+using Microsoft.AspNetCore.Http;
 
 namespace BlogSite.Web.Areas.Admin.Models.TourModelFolder
 {
     public class CreateTour:TourModel
     {
-      //  private ITourServices _services; 
         public int TourId { get; set; } 
         public string? TourName { get; set; }
         public IFormFile CoverPhotoUrl { get; set; }
@@ -23,6 +24,7 @@ namespace BlogSite.Web.Areas.Admin.Models.TourModelFolder
         public List<string>? UrlList {  get; set; }    
         public ICollection<Images>? Images { get; set; }
 
+
         public CreateTour(IHttpContextAccessor httpContext,ITourServices tourServices):base(httpContext,tourServices) 
         {               
         }
@@ -37,7 +39,7 @@ namespace BlogSite.Web.Areas.Admin.Models.TourModelFolder
         //    base.ResolveDependency(lifetimeScope);  
         //}
 
-        public async Task AddTour()
+        public void  AddTour()
         {
                 var model = new Tour()
                 {
@@ -65,7 +67,7 @@ namespace BlogSite.Web.Areas.Admin.Models.TourModelFolder
 
                     }            
                 }
-          await  _tourServices.AddTour(model);    
+            _tourServices.AddTour(model);    
         }
         public void  RemoveTour(int id) { 
           _tourServices.DeleteTour(id);  

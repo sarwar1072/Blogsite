@@ -1,4 +1,5 @@
-﻿@model CreateTour
+﻿@model  EditTourModel
+
 @{
     ViewData["Title"] = "EditTour";
 }
@@ -83,29 +84,7 @@
                     <span asp-validation-for="SpotsAvailable" class="text-danger"></span>
                 </div>
             </div>
-            @* <div class="form-group row">
-                <div class="col-4">
-                    Category
-                </div>
-                <div class="col-sm-8">
-                    <select asp-for="CategoryId" asp-items="@Model.ListOfCategory()" class="form-control">
-                        <option>Please Select One</option>
-                    </select>
-                    <span asp-validation-for="CategoryId" class="text-danger"></span>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-4">
-                    Category
-                </div>
-                <div class="col-sm-8">
-                    <select asp-for="CoverTypeId" asp-items="@Model.ListOfCoverType()" class="form-control">
-                        <option>Please Select One</option>
-                    </select>
-                    <span asp-validation-for="CoverTypeId" class="text-danger"></span>
-                </div>
-            </div> *@
-
+            
             <div class="form-group row">
                 <div class="col-4">
                     <label asp-for="CoverPhotoUrl" class="control-label">Form File</label>

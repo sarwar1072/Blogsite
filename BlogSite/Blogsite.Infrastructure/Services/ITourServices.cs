@@ -9,7 +9,7 @@ namespace Blogsite.Infrastructure.Services
 {
     public interface ITourServices
     {
-        Task AddTour(Tour tour);
+        void AddTour(Tour tour);
         void DeleteTour(int id);
         void EditTour(Tour tour);
         Tour GetByid(int id);

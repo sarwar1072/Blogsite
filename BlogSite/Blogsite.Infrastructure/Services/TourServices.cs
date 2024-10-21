@@ -16,19 +16,19 @@ namespace Blogsite.Infrastructure.Services
         {
                 _projectUnitOfWork = projectUnitOfWork;
         }
-        public async Task AddTour(Tour tour)
+        public void  AddTour(Tour tour)
         {
             if (tour is null)
             {
                 throw new InvalidOperationException("Tour can not be null");
             }
-            var tourCount = await _projectUnitOfWork.TourRepository.GetCountAsync(c => c.TourName == tour.TourName);
+            var tourCount =  _projectUnitOfWork.TourRepository.GetCount(c => c.TourName == tour.TourName);
 
             if(tourCount > 0) {
                 throw new DuplicateException("Same tour exist");
             }
-            await _projectUnitOfWork.TourRepository.AddAsync(tour); 
-            await _projectUnitOfWork.SaveAsync();
+             _projectUnitOfWork.TourRepository.Add(tour); 
+             _projectUnitOfWork.Save();
         }
 
         public  (IList<Tour> tours,int total,int totalDisplay)GetTourList(int pageindex, int pagesize,string searchText, string orderBy)
@@ -57,6 +57,7 @@ namespace Blogsite.Infrastructure.Services
             
             if(entity ==null)
                 throw new InvalidOperationException("Question can not be null");
+            
 
            // entity.Id = tour.Id;
             entity.TourName = tour.TourName;    

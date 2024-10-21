@@ -43,7 +43,7 @@ namespace BlogSite.Web.Areas.Admin.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Add(CreateTour tour)
+        public  IActionResult Add(CreateTour tour)
         {
             tour.ResolveDependency(_scope);
             if(ModelState.IsValid)
@@ -55,49 +55,51 @@ namespace BlogSite.Web.Areas.Admin.Controllers
                         tour.UrlList = new List<string>();  
                     }
                     if(tour.ListofImages != null)
-                    {
-                        //for (int i = 0; i < tour.ListofImages.Count;i++)
-                        //{
-                        //    tour.UrlList.Add(_fileHelper.UploadFile(tour.ListofImages[i]));
-                        //}
+                    {                        
                         foreach (var item in tour.ListofImages)
                         {
                             tour.UrlList.Add(_fileHelper.UploadFile(item));
                         }
                     }
-                  await   tour.AddTour();
-                  return RedirectToAction(nameof(Index));
+                     tour.AddTour();
+                 tour.Response = new ResponseModel("Added successfully", ResponseType.Success);
+                    return RedirectToAction("Index");
+
+                   // return View(tour);
 
                 }
                 catch (Exception ex)
                 {
                     _logger.LogError($"{ex.Message}");
+
+                   tour.Response = new ResponseModel("Fail", ResponseType.Failure);
+
                 }
             }           
             return View(tour);
         }
         public IActionResult EditTour(int id)
         {
-            var model = _scope.Resolve<CreateTour>();
+            var model = _scope.Resolve<EditTourModel>();
             model.Load(id);
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult EditTour(CreateTour model)
+        public IActionResult EditTour(EditTourModel model)
         {
             model.ResolveDependency(_scope);
 
-            //if (ModelState.IsValid)
-            //{
-            try
+            if (ModelState.IsValid)
             {
+                try
+                {
                     if (model.CoverPhotoUrl != null)
                     {
                         _fileHelper.DeleteFile(model.TourUrl);
                         model.TourUrl = _fileHelper.UploadFile(model.CoverPhotoUrl);
                     }
                     model.Edit();
-                   // model.Response = new ResponseModel("Edited successfully", ResponseType.Success);
+                    model.Response = new ResponseModel("Edited successfully", ResponseType.Success);
                     return RedirectToAction("Index");
                 }
                 //catch (DuplicationException ex)
@@ -108,25 +110,26 @@ namespace BlogSite.Web.Areas.Admin.Controllers
                 {
                     _logger.LogError($"{ex.Message}");
 
-                    //model.Response = new ResponseModel("edited fail", ResponseType.Failure);
+                   model.Response = new ResponseModel("edited fail", ResponseType.Failure);
                 }
-           // }
+            }
             return View(model);
         }
         [HttpPost,ValidateAntiForgeryToken]
         public  ActionResult Delete(int id) 
         {
+            var dataDelete = _scope.Resolve<CreateTour>();
+
             try
             {
-                var dataDelete = _scope.Resolve<CreateTour>();
                  dataDelete.RemoveTour(id);
-                //ViewResponse("Blog has been deleted", ResponseTypes.Success);
+                dataDelete.Response = new ResponseModel("Deleted", ResponseType.Success);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
                 _logger.LogError($"{ex.Message}");
-                //ViewResponse(ex.Message, ResponseTypes.Error);
+                dataDelete.Response = new ResponseModel("Failed to delete", ResponseType.Failure);
             }
             return RedirectToAction(nameof(Index));
         }

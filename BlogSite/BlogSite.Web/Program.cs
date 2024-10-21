@@ -24,6 +24,9 @@ namespace BlogSite.Web
             var assemblyName = Assembly.GetExecutingAssembly().FullName!;
             var webHostEnvironment = builder.Environment.WebRootPath;
 
+            // builder.Services.AddControllersWithViews();
+            builder.Services.AddHttpContextAccessor();
+
             builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
             builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
             {
@@ -32,7 +35,15 @@ namespace BlogSite.Web
                 containerBuilder.RegisterModule(new InfrastructureModule(connectionString, assemblyName, webHostEnvironment));
                 //containerBuilder.RegisterModule(new EmailMessagingModule(connectionString, assemblyName));
             });
-            builder.Services.AddHttpContextAccessor();
+
+            builder.Services.AddDistributedMemoryCache(); // For storing session data in memory
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30); // Set session timeout (optional)
+                options.Cookie.HttpOnly = true; // Make the session cookie HTTP only
+                options.Cookie.IsEssential = true; // Make session cookie essential
+            });
+
 
             //Serilog Configuration
             builder.Host.UseSerilog((ctx, lc) => lc
@@ -115,13 +126,25 @@ namespace BlogSite.Web
                 app.UseHsts();
             }
 
+            //app.UseHttpsRedirection();
+            //app.UseStaticFiles();
+
+            //app.UseRouting();
+
+            //app.UseAuthentication();
+            //app.UseAuthorization();
+            //app.UseSession();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
-            app.UseAuthentication();
+            app.UseSession(); // Ensure Session middleware is added before the endpoints
+
+            app.UseAuthentication(); // Add Authentication middleware
             app.UseAuthorization();
+
 
             app.MapControllerRoute(
                 name: "areas",
