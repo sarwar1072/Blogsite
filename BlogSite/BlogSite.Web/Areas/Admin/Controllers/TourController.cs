@@ -62,18 +62,13 @@ namespace BlogSite.Web.Areas.Admin.Controllers
                         }
                     }
                      tour.AddTour();
-                 tour.Response = new ResponseModel("Added successfully", ResponseType.Success);
+                     tour.Response = new ResponseModel("Added successfully", ResponseType.Success);
                     return RedirectToAction("Index");
-
-                   // return View(tour);
-
                 }
                 catch (Exception ex)
                 {
                     _logger.LogError($"{ex.Message}");
-
                    tour.Response = new ResponseModel("Fail", ResponseType.Failure);
-
                 }
             }           
             return View(tour);

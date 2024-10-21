@@ -23,7 +23,6 @@ namespace BlogSite.Web.Areas.Admin.Models.TourModelFolder
         }
         public EditTourModel()
         {
-            //ist = new List<string>();   
         }
 
         public void Edit()

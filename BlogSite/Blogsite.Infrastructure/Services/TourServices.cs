@@ -60,18 +60,18 @@ namespace Blogsite.Infrastructure.Services
             
 
            // entity.Id = tour.Id;
-            entity.TourName = tour.TourName;    
-            entity.TourUrl = tour.TourUrl;  
-            entity.Destination = tour.Destination;
-            entity.MaxiMumPeople = tour.MaxiMumPeople;
-            entity.MiniMumPeople = tour.MiniMumPeople;  
-            entity.Requirements = tour.Requirements;    
-            entity.CancellationTerm = tour.CancellationTerm;    
-            entity.Price = tour.Price;
-            entity.SpotsAvailable = tour.SpotsAvailable;    
+                entity.TourName = tour.TourName;    
+                entity.TourUrl = tour.TourUrl;  
+                entity.Destination = tour.Destination;
+                entity.MaxiMumPeople = tour.MaxiMumPeople;
+                entity.MiniMumPeople = tour.MiniMumPeople;  
+                entity.Requirements = tour.Requirements;    
+                entity.CancellationTerm = tour.CancellationTerm;    
+                entity.Price = tour.Price;
+                entity.SpotsAvailable = tour.SpotsAvailable;    
             
-             _projectUnitOfWork.TourRepository.Edit(entity);  
-             _projectUnitOfWork.Save();   
+                 _projectUnitOfWork.TourRepository.Edit(entity);  
+                 _projectUnitOfWork.Save();   
         }
         public Tour GetByid(int id)
         {
