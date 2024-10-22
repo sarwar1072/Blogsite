@@ -1,7 +1,9 @@
 ﻿using Blogsite.Infrastructure.Entities;
 using Blogsite.Infrastructure.Exceptions;
 using Blogsite.Infrastructure.UOWork;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -87,6 +89,23 @@ namespace Blogsite.Infrastructure.Services
              _projectUnitOfWork.TourRepository.Remove(entity);
              _projectUnitOfWork.Save();   
         }
+        public IList<Tour> ListOfTour(string destination)
+        {
+            var list=_projectUnitOfWork.TourRepository.Get(x=>x.Destination.ToLower()==destination.ToLower(),null,
+                null,false);  
+            return list;    
+        }
+        public Tour TourDetailsById(int id)
+        {
+            var tour = _projectUnitOfWork.TourRepository.GetFirstOrDefault(c=>c.Id==id,"Images");
+
+            //if (tour != null)
+            //{
+            //    tour.Images = tour.Images.Where(img => img.TourId == id).ToList();  // Filter images manually
+            //}
+            return tour;
+        }
+
 
     }
 }

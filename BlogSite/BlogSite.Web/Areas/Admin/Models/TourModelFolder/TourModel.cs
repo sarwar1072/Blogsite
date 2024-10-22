@@ -20,7 +20,14 @@ namespace BlogSite.Web.Areas.Admin.Models.TourModelFolder
             _tourServices=_lifetimeScope.Resolve<ITourServices>();
             base.ResolveDependency(lifetimeScope);
         }
-
+        public void getByid(int id)
+        {
+            _tourServices.TourDetailsById(id);
+        }
+        public void getByDestination(string destination)
+        {
+            _tourServices.ListOfTour(destination);
+        }
         internal object GetTour(DataTablesAjaxRequestModel dataTables)
         {
             var data = _tourServices.GetTourList(dataTables.PageIndex,

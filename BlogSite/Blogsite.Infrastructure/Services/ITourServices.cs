@@ -13,6 +13,8 @@ namespace Blogsite.Infrastructure.Services
         void DeleteTour(int id);
         void EditTour(Tour tour);
         Tour GetByid(int id);
+        IList<Tour> ListOfTour(string destination);
+        Tour TourDetailsById(int id);
         public (IList<Tour> tours, int total, int totalDisplay) GetTourList
             (int pageindex, int pagesize, string searchText, string orderBy);
 
