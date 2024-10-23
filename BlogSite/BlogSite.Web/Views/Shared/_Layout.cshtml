@@ -9,55 +9,97 @@
     <link rel="stylesheet" href="~/BlogSite.Web.styles.css" asp-append-version="true" />
     <link href="~/css/footer.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    @RenderSection("PageStyles", false)
 
 </head>
 <body>
-   
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
-                <a class="navbar-brand" href="#">Booking.com</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Sign In</a>
-                        </li>
-                    </ul>
-                </div>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Booking.com</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Sign In</a>
+                    </li>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <!-- Search Section -->
-        <section class="search-section bg-primary text-white py-5">
-            <div class="container text-center">
-                <h1>Find your next stay</h1>
-                <p>Search low prices on hotels, homes, and much more...</p>
+<!-- Search Section -->
+    <section class="search-section bg-primary text-white py-5">
+        <div class="container text-center">
+            <h1>Find your next stay</h1>
+            <p>Search low prices on hotels, homes, and much more...</p>
+        <div class="container">
+            <h2>Search Options</h2>
+            <partial name="Search" />
 
-                <!-- Search Form -->
-                <form class="search-form mt-4">
-                    <div class="row g-2 justify-content-center">
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" placeholder="Dhaka" aria-label="Location">
-                        </div>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" placeholder="Check-in date - Check-out date" aria-label="Date">
-                        </div>
-                        <div class="col-md-3">
-                            <input type="text" class="form-control" placeholder="2 adults · 0 children · 1 room" aria-label="Guests">
-                        </div>
-                        <div class="col-md-1">
-                            <button type="submit" class="btn btn-warning w-100">Search</button>
-                        </div>
+            <!-- Tour Search Form -->
+            <div id="tourSearch" class="search-form mt-4" style="display: none;">
+                <h3>Search for Tours</h3>
+                <form method="get" asp-action="SearchTour" asp-controller="Tour">
+                    <div class="form-group">
+                        <label for="tourDestination">Destination</label>
+                        <input type="text" class="form-control" id="tourDestination" name="destination" placeholder="Enter destination">
                     </div>
+                    <div class="form-group">
+                        <label for="tourDate">Date</label>
+                        <input type="date" class="form-control" id="tourDate" name="date">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Search Tour</button>
                 </form>
             </div>
-        </section>
+
+        <!-- Hotel Search Form -->
+        <div id="hotelSearch" class="search-form mt-4" style="display: none;">
+            <h3>Search for Hotels</h3>
+            <form method="get" asp-action="SearchHotel" asp-controller="Hotel">
+                <div class="form-group">
+                    <label for="hotelLocation">Location</label>
+                    <input type="text" class="form-control" id="hotelLocation" name="location" placeholder="Enter location">
+                </div>
+                <div class="form-group">
+                    <label for="checkInDate">Check-in Date</label>
+                    <input type="date" class="form-control" id="checkInDate" name="checkInDate">
+                </div>
+                <div class="form-group">
+                    <label for="checkOutDate">Check-out Date</label>
+                    <input type="date" class="form-control" id="checkOutDate" name="checkOutDate">
+                </div>
+                <button type="submit" class="btn btn-secondary">Search Hotel</button>
+            </form>
+        </div>
+
+            <!-- Flight Search Form -->
+        <div id="flightSearch" class="search-form mt-4" style="display: none;">
+        <h3>Search for Flights</h3>
+        <form method="get" asp-action="SearchFlight" asp-controller="Flight">
+            <div class="form-group">
+                <label for="departureCity">Departure City</label>
+                <input type="text" class="form-control" id="departureCity" name="departureCity" placeholder="Enter departure city">
+            </div>
+            <div class="form-group">
+                <label for="arrivalCity">Arrival City</label>
+                <input type="text" class="form-control" id="arrivalCity" name="arrivalCity" placeholder="Enter arrival city">
+            </div>
+            <div class="form-group">
+                <label for="flightDate">Flight Date</label>
+                <input type="date" class="form-control" id="flightDate" name="flightDate">
+            </div>
+            <button type="submit" class="btn btn-success">Search Flight</button>
+        </form>
+       </div>
+        </div>        
+    </div>
+    </section>
 
         <!-- Bootstrap JS -->
     <div class="container">
@@ -70,6 +112,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

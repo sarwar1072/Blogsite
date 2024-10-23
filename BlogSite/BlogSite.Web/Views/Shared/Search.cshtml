@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Tabs</title>
+   
+    <link href="~/css/searchcss.css" rel="stylesheet" />
+
+</head>
+<body>
+<div class="search-tabs">
+    <div class="search-tab active" id="btnTour">
+        <div class="icon-and-text">
+                            🏝
+            <span>Tour</span>
+        </div>
+        <div class="active-indicator" ></div>
+    </div>
+    <div class="search-tab " id="btnFlight">
+        <div class="icon-and-text">
+            ✈
+            <span>Flight</span>
+        </div>
+        <div class="active-indicator" style="visibility: hidden;"></div>
+    </div>
+    <div class="search-tab" id="btnHotel">
+        <div class="icon-and-text">
+            🏨
+            <span>Hotel</span>
+        </div>
+        <div class="active-indicator" style="visibility: hidden;"></div>
+    </div>       
+</div>
+
+    <!-- Placeholder for tab content -->
+    <div id="tourContent" class="tab-content ">
+        <h3>Tour Search</h3>
+        <!-- Tour search form content goes here -->
+    </div>
+    <div id="flightContent" class="tab-content ">
+        <h3>Flight Search</h3>
+        <!-- Flight search form content goes here -->
+    </div>
+
+    <div id="hotelContent" class="tab-content">
+        <h3>Hotel Search</h3>
+        <!-- Hotel search form content goes here -->
+    </div>
+  
+    
+</body>
+</html>
+
+
+@section Scripts
+{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="~/js/searchjs.js"></script>
+}
+
+@* <script>
+        // JavaScript for tab switching
+        $(document).ready(function () {
+            $(".search-tab").click(function () {
+                // Remove active class from all tabs
+                $(".search-tab").removeClass("active");
+                $(".search-tab img").addClass("inactive");
+                $(".active-indicator").css("visibility", "hidden");
+
+                // Add active class to clicked tab
+                $(this).addClass("active");
+                $(this).find("img").removeClass("inactive");
+                $(this).find(".active-indicator").css("visibility", "visible");
+
+                // Hide all tab content
+                $(".tab-content").removeClass("active");
+
+                // Show the relevant tab content
+                var tabId = $(this).attr("id");
+                $("#" + tabId + "Content").addClass("active");
+            });
+        });
+    </script> *@
