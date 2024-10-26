@@ -95,6 +95,11 @@ namespace Blogsite.Infrastructure.Services
                 null,false);  
             return list;    
         }
+        public IList<Tour> ListOfTourName()
+        {
+            var list = _projectUnitOfWork.TourRepository.GetAll();
+            return list;
+        }
         public Tour TourDetailsById(int id)
         {
             var tour = _projectUnitOfWork.TourRepository.GetFirstOrDefault(c=>c.Id==id,"Images");

@@ -15,6 +15,7 @@ namespace Blogsite.Infrastructure.Services
         Tour GetByid(int id);
         IList<Tour> ListOfTour(string destination);
         Tour TourDetailsById(int id);
+        IList<Tour> ListOfTourName();
         public (IList<Tour> tours, int total, int totalDisplay) GetTourList
             (int pageindex, int pagesize, string searchText, string orderBy);
 

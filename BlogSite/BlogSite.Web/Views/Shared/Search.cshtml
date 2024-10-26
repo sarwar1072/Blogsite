@@ -4,9 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Tabs</title>
-   
-    <link href="~/css/searchcss.css" rel="stylesheet" />
+   <style>
+        .search-tabs {
+            display: flex;
+            justify-content: space-around;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            align-items: center;
+        }
 
+        .search-tab {
+            text-align: center;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            padding: 10px;
+            color: #333;
+        }
+
+            .search-tab img {
+                width: 25px;
+                height: 25px;
+                display: block;
+                margin: 0 auto 5px;
+            }
+
+            .search-tab.active {
+                color: #0056b3; /* Highlighted text color */
+                font-weight: bold;
+            }
+
+                .search-tab.active img {
+                    filter: none; /* To make the image normal when active */
+                }
+
+            .search-tab img.inactive {
+                filter: grayscale(100%);
+            }
+
+        .active-indicator {
+            height: 3px;
+            width: 100%;
+            background-color: #fdd835; /* Yellow underline */
+            margin-top: 5px;
+        }
+
+        .tab-content {
+            display: none;
+            margin-top: 20px;
+        }
+
+            .tab-content.active {
+                display: block;
+            }
+
+        .icon-and-text {
+            position: relative;
+        }
+
+   </style>
+@*     <link href="~/css/searchcss.css" rel="stylesheet" />
+ *@
 </head>
 <body>
 <div class="search-tabs">
@@ -47,39 +106,39 @@
         <h3>Hotel Search</h3>
         <!-- Hotel search form content goes here -->
     </div>
-  
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+    // JavaScript for tab switching
+    $(document).ready(function () {
+        $(".search-tab").click(function () {
+        // Remove active class from all tabs
+            $(".search-tab").removeClass("active");
+            $(".search-tab img").addClass("inactive");
+            $(".active-indicator").css("visibility", "hidden");
+
+        // Add active class to clicked tab
+            $(this).addClass("active");
+            $(this).find("img").removeClass("inactive");
+            $(this).find(".active-indicator").css("visibility", "visible");
+
+        // Hide all tab content
+            $(".tab-content").removeClass("active");
+
+            // Show the relevant tab content
+            var tabId = $(this).attr("id");
+            $("#" + tabId + "Content").addClass("active");
+        });
+    });
+    </script>
 </body>
 </html>
 
 
-@section Scripts
+@* @section Scripts
 {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="~/js/searchjs.js"></script>
-}
+} *@
 
-@* <script>
-        // JavaScript for tab switching
-        $(document).ready(function () {
-            $(".search-tab").click(function () {
-                // Remove active class from all tabs
-                $(".search-tab").removeClass("active");
-                $(".search-tab img").addClass("inactive");
-                $(".active-indicator").css("visibility", "hidden");
-
-                // Add active class to clicked tab
-                $(this).addClass("active");
-                $(this).find("img").removeClass("inactive");
-                $(this).find(".active-indicator").css("visibility", "visible");
-
-                // Hide all tab content
-                $(".tab-content").removeClass("active");
-
-                // Show the relevant tab content
-                var tabId = $(this).attr("id");
-                $("#" + tabId + "Content").addClass("active");
-            });
-        });
-    </script> *@

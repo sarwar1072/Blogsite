@@ -10,6 +10,11 @@
     <link href="~/css/footer.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     @RenderSection("PageStyles", false)
+   <style>
+    .dropdown-item {
+        cursor: pointer;
+    }
+</style>
 
 </head>
 <body>
@@ -40,23 +45,57 @@
             <p>Search low prices on hotels, homes, and much more...</p>
         <div class="container">
             <h2>Search Options</h2>
+
             <partial name="Search" />
 
             <!-- Tour Search Form -->
-            <div id="tourSearch" class="search-form mt-4" style="display: none;">
+            @* <div id="tourSearch" class="search-form mt-4" style="display: none;">
                 <h3>Search for Tours</h3>
                 <form method="get" asp-action="SearchTour" asp-controller="Tour">
                     <div class="form-group">
                         <label for="tourDestination">Destination</label>
                         <input type="text" class="form-control" id="tourDestination" name="destination" placeholder="Enter destination">
                     </div>
-                    <div class="form-group">
+                   @*  <div class="form-group">
                         <label for="tourDate">Date</label>
                         <input type="date" class="form-control" id="tourDate" name="date">
-                    </div>
+                    </div> 
                     <button type="submit" class="btn btn-primary">Search Tour</button>
                 </form>
-            </div>
+            </div> *@
+
+               @*  <div id="tourSearch" class="search-form mt-4" style="display: none;">
+                    <h3>Search for Tours</h3>
+                    <form method="get" asp-action="SearchTour" asp-controller="Tour">
+                        <div class="form-group">
+                            <label for="tourDestination">Destination</label>
+                            <input type="text" class="form-control" id="tourDestination" name="destination" placeholder="Enter destination" autocomplete="off">
+                            <!-- Dropdown for tour destination suggestions -->
+                            <ul id="destinationList" class="dropdown-list" style="display:none;">
+                                <!-- Suggestions will be dynamically added here -->
+                            </ul>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Search Tour</button>
+                    </form>
+                </div> *@
+
+                <div id="tourSearch" class="search-form mt-4" style="display: none;">
+                    <h3>Search for Tours</h3>
+                    <form method="get" asp-action="SearchTour" asp-controller="Tour">
+                        <div class="form-group position-relative">
+                            <label for="tourDestination">Destination</label>
+                            <input type="text" class="form-control" id="tourDestination" name="destination" placeholder="Enter destination" autocomplete="off">
+
+                            <!-- Dropdown for tour destination suggestions -->
+                            <div id="destinationList" class="dropdown-menu" style="display: none; position: absolute; width: 100%;">
+                                <!-- Suggested destinations will be appended here dynamically -->
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Search Tour</button>
+                    </form>
+                </div>
+
+
 
         <!-- Hotel Search Form -->
         <div id="hotelSearch" class="search-form mt-4" style="display: none;">
@@ -97,7 +136,7 @@
             <button type="submit" class="btn btn-success">Search Flight</button>
         </form>
        </div>
-        </div>        
+       </div>        
     </div>
     </section>
 
@@ -115,5 +154,47 @@
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        $(document).ready(function () {
+            $("#tourDestination").on("focus", function () {
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/GetListOfDetination",
+                    contentType: "application/json;charset=utf-8",
+                    success: function (data) {
+                        // Clear previous suggestions
+                        $("#destinationList").empty();
+                        console.log(data);
+
+                        // Append each destination as a dropdown item
+                        $.each(data, function (index, v) {
+                            //console.log(v.destination);
+                           // const destination = typeof item === "string" ? item : item.name; // Adjust property if `name` is not correct
+
+                            $("#destinationList").append(
+                                `<a href="#" class="dropdown-item" onclick="selectDestination('${v.destination}')">${v.destination}</a>`
+                            );
+                        });
+
+                        // Show the dropdown
+                        $("#destinationList").show();
+                    }
+                });
+            });
+
+            // Hide the dropdown if clicked outside
+            $(document).on("click", function (e) {
+                if (!$(e.target).closest("#tourDestination").length) {
+                    $("#destinationList").hide();
+                }
+            });
+        });
+
+        // Function to handle the click on a dropdown item
+        function selectDestination(destination) {
+            $("#tourDestination").val(destination); // Set the selected value in the input field
+            $("#destinationList").hide(); // Hide the dropdown
+        }
+    </script>
 </body>
 </html>

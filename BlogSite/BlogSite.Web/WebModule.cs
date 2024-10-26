@@ -2,6 +2,7 @@
 using BlogSite.Web.Areas.Admin.Models;
 using BlogSite.Web.Areas.Admin.Models.TourModelFolder;
 using BlogSite.Web.Models;
+using BlogSite.Web.Models.tourViewModel;
 
 namespace BlogSite.Web
 {
@@ -21,9 +22,9 @@ namespace BlogSite.Web
             //    .AsSelf()
             //    .InstancePerLifetimeScope();
 
-            //builder.RegisterType<RegisterModel>()
-            //    .AsSelf()
-            //    .InstancePerLifetimeScope();
+            builder.RegisterType<TourViewModel>()
+                .AsSelf()
+                .InstancePerLifetimeScope();
 
             builder.RegisterType<EditTourModel>()
                 .AsSelf()
