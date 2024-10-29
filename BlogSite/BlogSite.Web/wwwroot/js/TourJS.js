@@ -1,5 +1,4 @@
-﻿
-$(function () {
+﻿$(function () {
     $('#tour').DataTable({
         "processing": true,
         "serverSide": true,

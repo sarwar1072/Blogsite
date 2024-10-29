@@ -5,140 +5,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Tabs</title>
    <style>
-        .search-tabs {
-            display: flex;
-            justify-content: space-around;
-            background-color: #fff;
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            align-items: center;
-        }
-
-        .search-tab {
-            text-align: center;
-            cursor: pointer;
-            font-family: Arial, sans-serif;
-            padding: 10px;
-            color: #333;
-        }
-
-            .search-tab img {
-                width: 25px;
-                height: 25px;
-                display: block;
-                margin: 0 auto 5px;
-            }
-
-            .search-tab.active {
-                color: #0056b3; /* Highlighted text color */
-                font-weight: bold;
-            }
-
-                .search-tab.active img {
-                    filter: none; /* To make the image normal when active */
-                }
-
-            .search-tab img.inactive {
-                filter: grayscale(100%);
-            }
-
-        .active-indicator {
-            height: 3px;
-            width: 100%;
-            background-color: #fdd835; /* Yellow underline */
-            margin-top: 5px;
-        }
-
-        .tab-content {
-            display: none;
+        .container {
             margin-top: 20px;
         }
 
-            .tab-content.active {
-                display: block;
-            }
-
-        .icon-and-text {
-            position: relative;
+        .tour-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-   </style>
-@*     <link href="~/css/searchcss.css" rel="stylesheet" />
- *@
+        .tour-card {
+            width: 250px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .card-price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #28a745;
+            margin-bottom: 15px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 8px 12px;
+            font-size: 14px;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
+    </style>
+
+
+
 </head>
 <body>
-<div class="search-tabs">
-    <div class="search-tab active" id="btnTour">
-        <div class="icon-and-text">
-                            🏝
-            <span>Tour</span>
-        </div>
-        <div class="active-indicator" ></div>
-    </div>
-    <div class="search-tab " id="btnFlight">
-        <div class="icon-and-text">
-            ✈
-            <span>Flight</span>
-        </div>
-        <div class="active-indicator" style="visibility: hidden;"></div>
-    </div>
-    <div class="search-tab" id="btnHotel">
-        <div class="icon-and-text">
-            🏨
-            <span>Hotel</span>
-        </div>
-        <div class="active-indicator" style="visibility: hidden;"></div>
-    </div>       
-</div>
 
-    <!-- Placeholder for tab content -->
-    <div id="tourContent" class="tab-content ">
-        <h3>Tour Search</h3>
-        <!-- Tour search form content goes here -->
-    </div>
-    <div id="flightContent" class="tab-content ">
-        <h3>Flight Search</h3>
-        <!-- Flight search form content goes here -->
+   
+
+
+    <div class="container">
+        <h3 id="sectionTitle">Popular Tours .Hay i am from search partial page</h3>
+        <div id="tourList" class="tour-cards"></div>
     </div>
 
-    <div id="hotelContent" class="tab-content">
-        <h3>Hotel Search</h3>
-        <!-- Hotel search form content goes here -->
-    </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-    // JavaScript for tab switching
-    $(document).ready(function () {
-        $(".search-tab").click(function () {
-        // Remove active class from all tabs
-            $(".search-tab").removeClass("active");
-            $(".search-tab img").addClass("inactive");
-            $(".active-indicator").css("visibility", "hidden");
+   // JavaScript for tab switching
 
-        // Add active class to clicked tab
-            $(this).addClass("active");
-            $(this).find("img").removeClass("inactive");
-            $(this).find(".active-indicator").css("visibility", "visible");
 
-        // Hide all tab content
-            $(".tab-content").removeClass("active");
+        $(document).ready(function () {
+            $("#btnTour").click(function (e) {
+                e.preventDefault();
 
-            // Show the relevant tab content
-            var tabId = $(this).attr("id");
-            $("#" + tabId + "Content").addClass("active");
+                $.ajax({
+                    type: "GET",
+                    url: "/Home/GetListOfTour", // Replace with the actual endpoint for fetching tours
+                    contentType: "application/json",
+                    success: function (data) {
+                        renderTours(data);
+                    },
+                    error: function (error) {
+                        console.log("Error fetching tour data:", error);
+                    }
+                });
+            });
         });
-    });
-    </script>
+
+        function renderTours(response) {
+            const tours = Array.isArray(response) ? response : response.tours; // Adjust based on actual structure
+
+            $("#tourList").empty();
+
+            if (Array.isArray(tours)) {
+
+                tours.forEach(function (tour) {
+                    const tourCard = `
+                                <div class="card tour-card">
+                                            <img src="${tour.tourUrl}" alt="${tour.tourName}" class="card-img-top">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${tour.tourName}</h5>
+                                        <p class="card-text">${tour.destination}</p>
+                                        <p class="card-price">Price: $${tour.price}</p>
+                                        <button class="btn btn-primary">Book Now</button>
+                                    </div>
+                                </div>
+                            `;
+                    $("#tourList").append(tourCard);
+                });
+            } else {
+                console.error("Expected an array but received:", tours);
+            }
+        }
+       
+     </script>
+
 </body>
 </html>
 
-
-@* @section Scripts
-{
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script src="~/js/searchjs.js"></script>
-} *@
 

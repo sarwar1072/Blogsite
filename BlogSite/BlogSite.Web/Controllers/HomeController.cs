@@ -45,6 +45,14 @@ namespace BlogSite.Web.Controllers
             
             return Json(js);
         }
+        [HttpGet]
+        public IActionResult GetListOfTour()
+        {
+            var model = _scope.Resolve<TourViewModel>();
+            var tour=model.ListOfTours();
+
+            return Json(tour); 
+        }
         public IActionResult Privacy()
         {
             return View();

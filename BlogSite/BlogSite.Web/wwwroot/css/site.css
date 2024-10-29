@@ -46,3 +46,6 @@ body {
 .search-form .btn-warning:hover {
     background-color: #e6b800;
 }
+.dropdown-item {
+    cursor: pointer;
+}

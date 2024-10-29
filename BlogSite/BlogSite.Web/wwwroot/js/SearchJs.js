@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+﻿$(document).ready(function (){
     $(".search-tab").click(function () {
         // Remove active class from all tabs
         $(".search-tab").removeClass("active");
@@ -18,3 +18,4 @@
         $("#" + tabId + "Content").addClass("active");
     });
 });
+

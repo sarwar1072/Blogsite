@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Blogsite.Infrastructure.Entities;
 using Blogsite.Infrastructure.Services;
 using BlogSite.Web.Areas.Admin.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -21,7 +22,7 @@ namespace BlogSite.Web.Models.tourViewModel
         public string? CancellationTerm { get; set; }
         public double Price { get; set; }
         public int SpotsAvailable { get; set; }
-       // public  List<string> ListOfDestination { set; get; }
+        public  IList<Tour> TourList { set; get; }
         public TourViewModel(IHttpContextAccessor httpContext,ITourServices tourServices):base(httpContext)
         {
             _tourServices = tourServices;
@@ -34,6 +35,25 @@ namespace BlogSite.Web.Models.tourViewModel
             _tourServices = _lifetimeScope.Resolve<ITourServices>();
             base.ResolveDependency(lifetimeScope);
         }
+        public IList<Tour> ListOfTours()
+        {
+            var entity = _tourServices.ListOfTourName();
+            TourList = new List<Tour>();
+            foreach(var tour in entity)
+            {
+                TourList.Add(new Tour
+                {
+                    TourUrl = tour.TourUrl,
+                    Destination = tour.Destination,
+                    TourName = tour.TourName,
+                   Price = tour.Price,
+                });
+              
+            }  
+            return TourList;
+        }
+
+
         //public IList<SelectListItem> ListOfCoverType()
         //{
         //    var cover = new List<SelectListItem>();
