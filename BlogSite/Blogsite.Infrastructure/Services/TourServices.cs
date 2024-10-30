@@ -93,6 +93,7 @@ namespace Blogsite.Infrastructure.Services
         {
             var list=_projectUnitOfWork.TourRepository.Get(x=>x.Destination.ToLower()==destination.ToLower(),null,
                 null,false);  
+
             return list;    
         }
         public IList<Tour> ListOfTourName()

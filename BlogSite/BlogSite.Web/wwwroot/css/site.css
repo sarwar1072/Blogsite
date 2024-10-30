@@ -23,7 +23,9 @@ body {
 
 /* Style for the search section */
 .search-section {
-    background-color: #003580; /* The dark blue background */
+    background-color: #00008b;
+    /*    #003580
+*/ /* The dark blue background */
 }
 
 .search-section h1 {

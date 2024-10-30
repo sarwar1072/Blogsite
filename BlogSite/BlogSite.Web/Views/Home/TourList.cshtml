@@ -1,0 +1,80 @@
+﻿@model TourViewModel
+@{
+        Layout = "_NewLayout";
+}
+@section PageStyles {
+    <link href="~/css/carddesigntour.css" rel="stylesheet" />
+
+}
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Tour Sidebar (Filter) -->
+        <div class="col-md-3 card">
+            <h5>Filter By</h5>
+            <div class="form-group">
+                <label for="priceRange">Price Range</label>
+                <input type="range" class="form-control-range" id="priceRange" min="0" max="30000">
+                <div class="d-flex justify-content-between">
+                    <span>BDT 0</span>
+                    <span>BDT 30,000</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Duration</label>
+                <div><input type="checkbox"> Less than 6 hours</div>
+                <div><input type="checkbox"> 6 - 12 hours</div>
+                <div><input type="checkbox"> 12 - 24 hours</div>
+                <div><input type="checkbox"> 24+ hours</div>
+            </div>
+            <div class="form-group">
+                <label>Time</label>
+                <div class="d-flex">
+                    <span>00-06</span>
+                    <span>06-12</span>
+                    <span>12-18</span>
+                    <span>18-00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tour Listings -->
+        <div class="col-md-9">
+            <h5>Destination: @Model.Count places found</h5>
+            <!-- Single Tour Card -->
+            @foreach (var item in Model.TourList)
+            {
+                <div class="card mb-4 p-3">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <!-- Tour Image -->
+                            <img src="@item.TourUrl" class="img-fluid rounded" alt="Tour Image">
+                        </div>
+                        <div class="col-md-8">
+                            <!-- Tour Information -->
+                            <h5 class="text-primary">Honeymoon at @item.TourName}</h5>
+                            <p class="text-muted">@item.Destination</p>
+                            <p>
+                                <span>@item.MaxiMumPeople - @item.MiniMumPeople people</span> &bull;
+                                Requirements:  <span>@item.Requirements</span>
+                            </p>
+                            <p class="text-muted">@item.CancellationTerm</p>
+                            <div class="d-flex align-items-center">
+                                <p class="text-primary font-weight-bold">Starting From BDT @item.Price Per Person</p>
+                                <button class="btn btn-primary ml-auto">Get Points</button>
+@*                                 <a href="@Url.Action("AddProfile", "Home")" class="btn btn-primary">
+ *@
+                            </div>
+                            <div>
+                                <span class="badge badge-secondary">Spots Available: @item.SpotsAvailable</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            
+            <!-- End of Single Tour Card -->
+
+        </div>
+    </div>
+</div>

@@ -23,6 +23,7 @@ namespace BlogSite.Web.Models.tourViewModel
         public double Price { get; set; }
         public int SpotsAvailable { get; set; }
         public  IList<Tour> TourList { set; get; }
+        public int Count {  get; set; } 
         public TourViewModel(IHttpContextAccessor httpContext,ITourServices tourServices):base(httpContext)
         {
             _tourServices = tourServices;
@@ -34,6 +35,30 @@ namespace BlogSite.Web.Models.tourViewModel
             _lifetimeScope = lifetimeScope;
             _tourServices = _lifetimeScope.Resolve<ITourServices>();
             base.ResolveDependency(lifetimeScope);
+        }
+        public IList<Tour> ListofTour(string destination)
+        {
+            var entity = _tourServices.ListOfTour(destination);
+            Count = entity.Count;
+            TourList=new List<Tour>();
+            foreach (var item in entity)
+            {
+                TourList.Add(new Tour
+                {
+                    Id = item.Id,
+                    TourUrl=item.TourUrl,
+                    TourName=item.TourName,
+                    Destination=item.Destination,
+                    MaxiMumPeople=item.MaxiMumPeople,   
+                    MiniMumPeople=item.MiniMumPeople,   
+                    Requirements=item.Requirements, 
+                    CancellationTerm=item.CancellationTerm, 
+                    Price=item.Price,
+                    SpotsAvailable=item.SpotsAvailable, 
+                });
+
+            }
+            return TourList;    
         }
         public IList<Tour> ListOfTours()
         {

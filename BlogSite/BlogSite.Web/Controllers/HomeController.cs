@@ -53,6 +53,14 @@ namespace BlogSite.Web.Controllers
 
             return Json(tour); 
         }
+        public IActionResult TourList(string destination)
+        {
+            var model=_scope.Resolve<TourViewModel>();   
+            model.ListofTour(destination);
+            return View(model);
+
+        }
+
         public IActionResult Privacy()
         {
             return View();
