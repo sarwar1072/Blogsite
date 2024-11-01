@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Autofac.Core.Lifetime;
 using Blogsite.Infrastructure.Services;
 using BlogSite.Web.Models;
 using BlogSite.Web.Models.tourViewModel;
@@ -40,25 +41,72 @@ namespace BlogSite.Web.Controllers
             //    };
             //    model.Add(addItem);
             //}
-            var model = _tourServices.ListOfTourName();
-            var js = model.Select(c => new { c.Id, c.Destination });
-            
-            return Json(js);
+            try
+            {
+                var model = _tourServices.ListOfTourName();
+                var js = model.Select(c => new { c.Id, c.Destination });
+
+                return Json(js);
+            }
+            catch(Exception ex)
+            {
+                _logger.LogError($"{ex.Message}");
+                ViewBag.ErrorMessage = ex.Message;  
+            }
+            return View();  
+        }
+        public IActionResult Details(int id) 
+        {
+            try
+            {
+                var model = _scope.Resolve<TourDetailsModel>();
+                model.ResolveDependency(_scope);
+
+                 model.TourDetails(id);
+                //_logger.LogInformation("Returning TourList view with model data");
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"{ex.Message}");
+                ViewBag.Message = "Error";
+            }
+            //var model=_scope.Resolve<TourViewModel>();
+            //model.Details(id);
+            return View(); 
         }
         [HttpGet]
         public IActionResult GetListOfTour()
         {
-            var model = _scope.Resolve<TourViewModel>();
-            var tour=model.ListOfTours();
+            try
+            {
+                var model = _scope.Resolve<TourViewModel>();
+                var tour = model.ListOfTours();
 
-            return Json(tour); 
+                return Json(tour);
+            }
+            catch(Exception ex) {
+                _logger.LogError($"{ex.Message}");
+                ViewBag.Message = "Error";
+
+            }
+            return View();  
+
         }
         public IActionResult TourList(string destination)
         {
-            var model=_scope.Resolve<TourViewModel>();   
-            model.ListofTour(destination);
-            return View(model);
-
+            try
+            {
+                var model = _scope.Resolve<TourViewModel>();
+                model.ListofTour(destination);
+                return View(model);
+            }
+            catch(Exception e) {
+                _logger.LogError($"{e.Message}");
+                ViewBag.Message = "Error";  
+            }
+            return View();
         }
 
         public IActionResult Privacy()

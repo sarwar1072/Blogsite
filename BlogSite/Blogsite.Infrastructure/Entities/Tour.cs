@@ -1,6 +1,7 @@
 ﻿using DevSkill.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,5 +22,8 @@ namespace Blogsite.Infrastructure.Entities
         public double Price { get; set; }
         public int SpotsAvailable { get; set; }
         public ICollection<Images>? Images { get; set; }
+        [ForeignKey("TourDetails")]
+       public int TourDetailsId {  get; set; }    
+        public TourDetails? TourDetails { get; set; }    
     }
 }

@@ -63,6 +63,12 @@ namespace Blogsite.Infrastructure.DbContexts
                     .HasForeignKey(i => i.HotelId)
                     .OnDelete(DeleteBehavior.Cascade);
 
+            builder.Entity<Tour>()
+                   .HasOne(t => t.TourDetails)
+                   .WithMany(td => td.Tours)
+                   .HasForeignKey(t => t.TourDetailsId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
             builder.Entity<Booking>()
                     .HasOne(b => b.Payment)  // A Booking has one Payment
                     .WithOne(p => p.Booking)  // A Payment is associated with one Booking
@@ -77,5 +83,6 @@ namespace Blogsite.Infrastructure.DbContexts
         public DbSet<Images>? Images { get; set; }
         public DbSet<Payment>? Payments { get; set; }  
         public DbSet<Tour>? Tours { get; set; }
+        public DbSet<TourDetails>? ToursDetails { get; set;}
     }
 }

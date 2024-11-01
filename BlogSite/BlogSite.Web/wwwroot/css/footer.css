@@ -1,42 +1,50 @@
-/* Footer Styling */
+
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#content {
+    flex: 1 0 auto; /* Main content area that grows to fill the space */
+}
 
 footer {
+    flex-shrink: 0; /* Footer remains at the bottom */
     background-color: #2c2c2c;
-}
-
-footer h5 {
-    font-size: 18px;
-    color: #ffcc00;
-    font-weight: bold;
-}
-
-footer p {
-    font-size: 14px;
+    padding: 2rem 0 1rem 0;
     color: #ccc;
 }
 
-footer a {
-color: #ffcc00;
-text-decoration: none;
-}
+    footer h5 {
+        font-size: 18px;
+        color: #ffcc00;
+        font-weight: bold;
+    }
 
-footer a:hover {
-    color: #e6b800;
-}
+    footer p {
+        font-size: 14px;
+    }
 
-footer i {
-font-size: 20px;
-margin-right: 10px;
-}
+    footer a {
+        color: #ffcc00;
+        text-decoration: none;
+    }
 
-footer .fa-facebook, .fa-twitter, .fa-instagram, .fa-linkedin {
-    color: #ffcc00;
-}
+        footer a:hover {
+            color: #e6b800;
+        }
 
-footer .fa-facebook:hover, .fa-twitter:hover, .fa-instagram:hover, .fa-linkedin:hover {
-    color: #e6b800;
-}
+    footer i {
+        font-size: 20px;
+        margin-right: 10px;
+    }
 
+    footer .fa-facebook, .fa-twitter, .fa-instagram, .fa-linkedin {
+        color: #ffcc00;
+    }
 
-/*body {
-}*/
+        footer .fa-facebook:hover, .fa-twitter:hover, .fa-instagram:hover, .fa-linkedin:hover {
+            color: #e6b800;
+        }

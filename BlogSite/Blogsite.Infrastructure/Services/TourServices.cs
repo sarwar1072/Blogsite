@@ -47,7 +47,11 @@ namespace Blogsite.Infrastructure.Services
             }
             return (result.data, result.total, result.totalDisplay);
         }
-
+        public Tour GetTourDetails(int id)
+        {
+            var entity=_projectUnitOfWork.TourRepository.GetFirstOrDefault(x=>x.Id==id,"Images");
+            return entity;
+        }
         public  void EditTour(Tour tour) 
         {
             if (tour is null)
@@ -99,6 +103,7 @@ namespace Blogsite.Infrastructure.Services
         public IList<Tour> ListOfTourName()
         {
             var list = _projectUnitOfWork.TourRepository.GetAll();
+           
             return list;
         }
         public Tour TourDetailsById(int id)
@@ -111,7 +116,10 @@ namespace Blogsite.Infrastructure.Services
             //}
             return tour;
         }
-
+        public IList<TourDetails> GetTypeOfTour()
+        {
+            return _projectUnitOfWork.TourDetailsRepository.GetAll();
+        }
 
     }
 }

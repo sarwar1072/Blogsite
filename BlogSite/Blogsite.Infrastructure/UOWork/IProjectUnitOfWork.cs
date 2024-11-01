@@ -11,6 +11,7 @@ namespace Blogsite.Infrastructure.UOWork
     public interface IProjectUnitOfWork:IUnitOfWork
     {
          ITourRepository TourRepository { get; }
+        ITourDetailsRepository TourDetailsRepository { get; }
 
     }
 }

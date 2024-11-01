@@ -12,7 +12,6 @@ namespace BlogSite.Web.Models.tourViewModel
 
         public int TourId { get; set; }
         public string? TourName { get; set; }
-       // public IFormFile CoverPhotoUrl { get; set; }
         public string? TourUrl { get; set; }
         public string? Destination { get; set; }
         public int MaxiMumPeople { get; set; }
@@ -28,7 +27,8 @@ namespace BlogSite.Web.Models.tourViewModel
         {
             _tourServices = tourServices;
         }
-        public TourViewModel() { }
+        public TourViewModel() {
+        }
 
         public override void ResolveDependency(ILifetimeScope lifetimeScope)
         {
@@ -36,6 +36,33 @@ namespace BlogSite.Web.Models.tourViewModel
             _tourServices = _lifetimeScope.Resolve<ITourServices>();
             base.ResolveDependency(lifetimeScope);
         }
+        //public void TourDetails(int id)
+       
+        //{
+        //    var data=_tourServices.GetTourDetails(id);
+
+        //    if(data != null) {
+        //        id= data.Id;
+        //        TourName = data.TourName;
+        //        TourUrl = data.TourUrl; 
+        //        Destination = data.Destination; 
+        //        MaxiMumPeople = data.MaxiMumPeople;
+        //        MiniMumPeople = data.MiniMumPeople;
+        //        MapUrl = data.MapUrl;
+        //        Requirements = data.Requirements;   
+        //        CancellationTerm = data.CancellationTerm;   
+        //    }
+        //    TourImages = new List<Images>(); 
+        //    foreach(var image in data.Images)
+        //    {
+        //        TourImages.Add(new Images
+        //        {
+        //            ImageUrl=image.ImageUrl,
+        //            AlternativeText=image.AlternativeText,
+
+        //        });  
+        //    }
+        //}
         public IList<Tour> ListofTour(string destination)
         {
             var entity = _tourServices.ListOfTour(destination);

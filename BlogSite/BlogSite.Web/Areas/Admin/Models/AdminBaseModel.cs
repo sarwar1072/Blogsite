@@ -82,11 +82,11 @@ namespace BlogSite.Web.Areas.Admin.Models
                     {
                         new MenuItem
                         {
-                           Title="Cover type",
+                           Title="TourDetails type",
                            Childs=new List<MenuChildItem>
                            {
-                               new MenuChildItem{Title="View CoverType",Url="/Admin/CoverType"},
-                               new MenuChildItem{Title="Add CoverType",Url="/Admin/CoverType/AddCoverType"}
+                               new MenuChildItem{Title="View Details",Url="/Admin/TourDetails"},
+                               new MenuChildItem{Title="Add details",Url="/Admin/TourDetails/AddTourDetails"}
                            }
                         }
                     },

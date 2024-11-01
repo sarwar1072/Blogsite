@@ -12,9 +12,12 @@ namespace Blogsite.Infrastructure.UOWork
     public class ProjectUnitOfWork:UnitOfWork,IProjectUnitOfWork
     {
         public ITourRepository TourRepository { get;private  set;}
-        public ProjectUnitOfWork(ApplicationDbContext dbContext, ITourRepository tourRepository):base(dbContext)
+        public ITourDetailsRepository TourDetailsRepository { get;private set;}
+        public ProjectUnitOfWork(ApplicationDbContext dbContext, ITourRepository tourRepository,
+            ITourDetailsRepository tourDetailsRepository) :base(dbContext)
         {
                 TourRepository = tourRepository;
+                TourDetailsRepository = tourDetailsRepository;  
         }
     }
 }

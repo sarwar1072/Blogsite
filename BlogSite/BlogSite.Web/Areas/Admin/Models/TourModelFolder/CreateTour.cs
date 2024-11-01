@@ -3,6 +3,7 @@ using Blogsite.Infrastructure.Entities;
 using Blogsite.Infrastructure.Services;
 using DevSkill.Http;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BlogSite.Web.Areas.Admin.Models.TourModelFolder
 {
@@ -22,7 +23,7 @@ namespace BlogSite.Web.Areas.Admin.Models.TourModelFolder
         public IFormFileCollection ListofImages { get; set; }  
         public List<string>? UrlList {  get; set; }    
         public ICollection<Images>? Images { get; set; }
-
+        public int TourDetailsId {  get; set; } 
 
         public CreateTour(IHttpContextAccessor httpContext,ITourServices tourServices):base(httpContext,tourServices) 
         {               
@@ -45,7 +46,8 @@ namespace BlogSite.Web.Areas.Admin.Models.TourModelFolder
                     Requirements = Requirements,
                     CancellationTerm =CancellationTerm, 
                     Price = Price,  
-                    SpotsAvailable = SpotsAvailable,    
+                    SpotsAvailable = SpotsAvailable, 
+                    TourDetailsId = TourDetailsId,  
 
                 };
                 model.Images=new List<Images>();    
@@ -61,6 +63,20 @@ namespace BlogSite.Web.Areas.Admin.Models.TourModelFolder
                     }            
                 }
             _tourServices.AddTour(model);    
+        }
+        public IList<SelectListItem> ListOfTourDetails()
+        {
+            var listOftour = new List<SelectListItem>();
+            foreach (var item in _tourServices.GetTypeOfTour())
+            {
+                var addItem = new SelectListItem
+                {
+                    Text = item.Location,
+                    Value = item.Id.ToString()
+                };
+                listOftour.Add(addItem);
+            }
+            return listOftour;
         }
         public void  RemoveTour(int id) { 
           _tourServices.DeleteTour(id);  

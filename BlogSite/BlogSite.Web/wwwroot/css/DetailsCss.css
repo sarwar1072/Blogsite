@@ -1,0 +1,11 @@
+
+/* Optional styling */
+.container {
+    margin-top: 20px;
+}
+
+.carousel-inner img {
+    max-height: 400px;
+}
+
+

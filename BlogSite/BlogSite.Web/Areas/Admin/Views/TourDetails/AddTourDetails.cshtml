@@ -1,0 +1,63 @@
+﻿@model  CreateTourDetails
+
+@{
+    ViewData["Title"] = "AddTourDetails";
+}
+
+<form asp-action="AddTourDetails" method="post">
+    <div class="form-group">
+        <label asp-for="Overview" class="control-label">Overview</label>
+        <textarea asp-for="Overview" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Overview" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Location" class="control-label">Location</label>
+        <input asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Timing" class="control-label">Timing</label>
+        <input asp-for="Timing" class="form-control" />
+        <span asp-validation-for="Timing" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="InclusionExclusion" class="control-label">Inclusion & Exclusion</label>
+        <textarea asp-for="InclusionExclusion" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="InclusionExclusion" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description" class="control-label">Description</label>
+        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AdditionalInformation" class="control-label">Additional Information</label>
+        <textarea asp-for="AdditionalInformation" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="AdditionalInformation" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="TravelTips" class="control-label">Travel Tips</label>
+        <textarea asp-for="TravelTips" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="TravelTips" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Options" class="control-label">Options</label>
+        <textarea asp-for="Options" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Options" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Policy" class="control-label">Policy</label>
+        <textarea asp-for="Policy" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Policy" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

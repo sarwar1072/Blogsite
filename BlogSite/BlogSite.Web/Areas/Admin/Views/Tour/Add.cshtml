@@ -17,6 +17,13 @@
             <input asp-for="CoverPhotoUrl" type="file" class="form-control" />
             <span asp-validation-for="CoverPhotoUrl" class="text-danger"></span>
         </div>
+        <div class="form-group ">
+            <label asp-for="TourDetailsId" class="control-label">Type</label>
+                <select asp-for="TourDetailsId" asp-items="@Model.ListOfTourDetails()" class="form-control">
+                    <option>Please Select One</option>
+                </select>
+                <span asp-validation-for="TourDetailsId" class="text-danger"></span>
+        </div>
         <div class="form-group">
             <label asp-for="Destination" class="control-label">Destination</label>
             <input asp-for="Destination" class="form-control" />

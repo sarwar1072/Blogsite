@@ -36,10 +36,11 @@ namespace Blogsite.Infrastructure
             builder.RegisterType<TourServices>().As<ITourServices>()
                 .InstancePerLifetimeScope();
 
-            //builder.RegisterType<CommentRepository>().As<ICommentRepository>()
-            //    .InstancePerLifetimeScope();
-            //builder.RegisterType<CommentService>().As<ICommentService>()
-            //    .InstancePerLifetimeScope();
+            builder.RegisterType<TourDetailsRepository>().As<ITourDetailsRepository>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<TourDetailsServices>().As<ITourDetailsServices>()
+                .InstancePerLifetimeScope();
 
             //builder.RegisterType<AnswerRepository>().As<IAnswerRepository>()
             //    .InstancePerLifetimeScope();

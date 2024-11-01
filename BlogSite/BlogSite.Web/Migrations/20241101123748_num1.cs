@@ -91,22 +91,24 @@ namespace BlogSite.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tours",
+                name: "ToursDetails",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TourName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TourUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Destination = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    SpotsAvailable = table.Column<int>(type: "int", nullable: false)
+                    Overview = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Timing = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    InclusionExclusion = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AdditionalInformation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TravelTips = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Options = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Policy = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tours", x => x.Id);
+                    table.PrimaryKey("PK_ToursDetails", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -238,29 +240,30 @@ namespace BlogSite.Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Images",
+                name: "Tours",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AlternativeText = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    HotelId = table.Column<int>(type: "int", nullable: false),
-                    TourId = table.Column<int>(type: "int", nullable: false)
+                    TourName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TourUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Destination = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MaxiMumPeople = table.Column<int>(type: "int", nullable: false),
+                    MiniMumPeople = table.Column<int>(type: "int", nullable: false),
+                    MapUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Requirements = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CancellationTerm = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    SpotsAvailable = table.Column<int>(type: "int", nullable: false),
+                    TourDetailsId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Images", x => x.Id);
+                    table.PrimaryKey("PK_Tours", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Images_Hotels_HotelId",
-                        column: x => x.HotelId,
-                        principalTable: "Hotels",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Images_Tours_TourId",
-                        column: x => x.TourId,
-                        principalTable: "Tours",
+                        name: "FK_Tours_ToursDetails_TourDetailsId",
+                        column: x => x.TourDetailsId,
+                        principalTable: "ToursDetails",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -287,13 +290,41 @@ namespace BlogSite.Web.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AlternativeText = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HotelId = table.Column<int>(type: "int", nullable: true),
+                    TourId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Images_Hotels_HotelId",
+                        column: x => x.HotelId,
+                        principalTable: "Hotels",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Images_Tours_TourId",
+                        column: x => x.TourId,
+                        principalTable: "Tours",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { new Guid("2c5e174e-3b0e-446f-86af-483d56fd7210"), "638643490857100837", "Admin", "ADMIN" },
-                    { new Guid("e943ffbf-65a4-4d42-bb74-f2ca9ea8d22a"), "638643490857100864", "User", "USER" }
+                    { new Guid("2c5e174e-3b0e-446f-86af-483d56fd7210"), "638660830679312459", "Admin", "ADMIN" },
+                    { new Guid("e943ffbf-65a4-4d42-bb74-f2ca9ea8d22a"), "638660830679312491", "User", "USER" }
                 });
 
             migrationBuilder.InsertData(
@@ -301,8 +332,8 @@ namespace BlogSite.Web.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "Password", "PasswordHash", "Phone", "PhoneNumber", "PhoneNumberConfirmed", "Role", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("8f3d96ce-76ec-4992-911a-33ceb81fa29d"), 0, "606285b7-ec1e-435e-baca-508458eee91b", "user@gmail.com.com", true, true, null, "sarwar", "user@gmail.com.com", "user@gmail.com.com", null, "AQAAAAEAACcQAAAAEPQRg423WpxGV6Qudi/ItcCPHDNhy7sgi7Rf1V/wbyG8NJpedhR9bws6kJNQNiz6lg==", null, null, false, null, "9f037fea-9f7c-4d4e-af47-f7504fec2c12", false, "user@gmail.com.com" },
-                    { new Guid("e9b3be8c-99c5-42c7-8f2e-1eb39f6d9125"), 0, "40539506-1071-409c-9b9f-e66213b7f16d", "admin@gmail.com", true, true, null, "Admin", "admin@gmail.com", "admin@gmail.com", null, "AQAAAAEAACcQAAAAEJMrcpGueRK5dvohE5anVzkodx0xc0RhaC1Ib6GU3sVG0j/3CzQeLrRv5EdsEA78Wg==", null, null, false, null, "74615b55-dea1-4eab-af11-4cc8e4402e64", false, "admin@gmail.com" }
+                    { new Guid("8f3d96ce-76ec-4992-911a-33ceb81fa29d"), 0, "04384bf0-a5f7-443a-99d2-bb914052168b", "user@gmail.com.com", true, true, null, "sarwar", "user@gmail.com.com", "user@gmail.com.com", null, "AQAAAAEAACcQAAAAEOtuSb4UDwM3i5HG/+HLEgaDc/vh3D/4/n1TGg4oODCIrdeCfGhJt/uOX4iSMDJH3A==", null, null, false, null, "93ad2ad6-c334-41f5-ad88-b0f7920bdba0", false, "user@gmail.com.com" },
+                    { new Guid("e9b3be8c-99c5-42c7-8f2e-1eb39f6d9125"), 0, "7477720a-7ffa-45b2-a28e-70a60105bc06", "admin@gmail.com", true, true, null, "Admin", "admin@gmail.com", "admin@gmail.com", null, "AQAAAAEAACcQAAAAEP3qpIyLvzXVh8wNJIj6BrRDDGMlxM8NduPvmvOeXDD0ofq2KADTH9ic/IYHnQZBPQ==", null, null, false, null, "78cd8ebd-2cfc-466b-a8e6-9173118c26ae", false, "admin@gmail.com" }
                 });
 
             migrationBuilder.InsertData(
@@ -374,6 +405,11 @@ namespace BlogSite.Web.Migrations
                 table: "Payments",
                 column: "BookingID",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tours_TourDetailsId",
+                table: "Tours",
+                column: "TourDetailsId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -413,6 +449,9 @@ namespace BlogSite.Web.Migrations
 
             migrationBuilder.DropTable(
                 name: "Bookings");
+
+            migrationBuilder.DropTable(
+                name: "ToursDetails");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
