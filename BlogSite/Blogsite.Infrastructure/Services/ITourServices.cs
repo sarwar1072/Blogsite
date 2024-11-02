@@ -18,6 +18,9 @@ namespace Blogsite.Infrastructure.Services
         IList<Tour> ListOfTourName();
         Tour GetTourDetails(int id);
         IList<TourDetails> GetTypeOfTour();
+        void AddConsulationForm(ConsultationForm Form);
+        (IList<ConsultationForm> forms, int total, int totalDisplay) GetConsultForm(int pageindex, int pagesize, string searchText, string orderBy);
+
         public (IList<Tour> tours, int total, int totalDisplay) GetTourList
             (int pageindex, int pagesize, string searchText, string orderBy);
 

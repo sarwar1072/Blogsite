@@ -162,8 +162,9 @@
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="~/js/searchdropdown.js"></script>
     <script src="~/js/searchjs.js"></script>
+    @RenderSection("MainLayoutScript", false)
 
-    @await RenderSectionAsync("Scripts", required: false)
-   
+@*     @await RenderSectionAsync("Scripts", required: false)
+ *@   
 </body>
 </html>

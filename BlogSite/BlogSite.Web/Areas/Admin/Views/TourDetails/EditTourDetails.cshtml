@@ -1,10 +1,11 @@
-﻿@model  CreateTourDetails
-
+﻿@model EditTourDetails
 @{
-    ViewData["Title"] = "AddTourDetails";
+    ViewData["Title"] = "EditTourDetails";
 }
 
-<form asp-action="AddTourDetails" method="post">
+<form asp-action="EditTourDetails" method="post">
+    <input type="hidden" asp-for="Id" />
+
     <div class="form-group">
         <label asp-for="Overview" class="control-label">Overview</label>
         <textarea asp-for="Overview" class="form-control" rows="3"></textarea>
@@ -63,7 +64,7 @@
 </form>
 
 @section PageScript
-        {
+{
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }

@@ -1,0 +1,23 @@
+.accordion .card-header {
+    background-color: #f8f9fa;
+    cursor: pointer;
+}
+
+    .accordion .card-header h5 button {
+        color: #333;
+        font-weight: bold;
+    }
+
+        .accordion .card-header h5 button i {
+            margin-right: 10px;
+        }
+
+.btn-warning {
+    background-color: #ffcc00;
+    border-color: #ffcc00;
+}
+
+    .btn-warning:hover {
+        background-color: #e6b800;
+        border-color: #e6b800;
+    }

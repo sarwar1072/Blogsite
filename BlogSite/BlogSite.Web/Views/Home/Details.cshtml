@@ -6,6 +6,7 @@
 @section PageStyles {
 
     <link href="~/css/detailscss.css" rel="stylesheet" />
+    <link href="~/css/accordationcss.css" rel="stylesheet" />
 }
 
 <div class="container">
@@ -43,7 +44,6 @@
             <p><strong>Destination:</strong> @Model.Destination</p>
             <p><strong>Duration:</strong> 3 days</p>
             <p><strong>People:</strong> From @Model.MiniMumPeople to @Model.MaxiMumPeople people</p>
-            <p><strong>Price:</strong> $@Model.Price</p>
             <p><strong>Spots Available:</strong> @Model.SpotsAvailable</p>
             <p><strong>Requirements:</strong> @Model.Requirements</p>
             <p><strong>Cancellation Terms:</strong> @Model.CancellationTerm</p>
@@ -52,3 +52,212 @@
     </div>
 </div>
 
+
+<div class="container mt-5">
+    <div class="row">
+        <!-- Left Column for Details Accordion -->
+        <div class="col-md-8">
+            <div class="accordion" id="detailsAccordion">
+                <div class="card">
+                    <div class="card-header" id="headingOverview">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOverview" aria-expanded="true" aria-controls="collapseOverview">
+                                <i class="fas fa-globe"></i> Overview
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseOverview" class="collapse" aria-labelledby="headingOverview" data-parent="#detailsAccordion">
+                        <div class="card-body">
+                            @Model.TourDetails.Overview
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingLoc">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseLoc" aria-expanded="true" aria-controls="collapseOverview">
+                                <i class="fas fa-globe"></i> Location
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseLoc" class="collapse" aria-labelledby="headingLoc" data-parent="#detailsAccordion">
+                        <div class="card-body">
+                            @Model.TourDetails.Location
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingTim">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsetime" aria-expanded="true" aria-controls="collapseOverview">
+                                <i class="fas fa-globe"></i> Timing
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapsetime" class="collapse" aria-labelledby="headingTim" data-parent="#detailsAccordion">
+                        <div class="card-body">
+                            @Model.TourDetails.Timing
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingIncl">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseInclu" aria-expanded="true" aria-controls="collapseOverview">
+                                <i class="fas fa-globe"></i> InclusionExclusion
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseInclu" class="collapse" aria-labelledby="headingIncl" data-parent="#detailsAccordion">
+                        <div class="card-body">
+                            @Model.TourDetails.InclusionExclusion
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingDes">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseDes" aria-expanded="true" aria-controls="collapseOverview">
+                                <i class="fas fa-globe"></i> Description
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseDes" class="collapse" aria-labelledby="headingDes" data-parent="#detailsAccordion">
+                        <div class="card-body">
+                            @Model.TourDetails.Description
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingAdd">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseAdd" aria-expanded="true" aria-controls="collapseOverview">
+                                <i class="fas fa-globe"></i> AdditionalInformation
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseAdd" class="collapse" aria-labelledby="headingAdd" data-parent="#detailsAccordion">
+                        <div class="card-body">
+                            @Model.TourDetails.AdditionalInformation
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingTips">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTips" aria-expanded="true" aria-controls="collapseOverview">
+                                <i class="fas fa-globe"></i> TravelTips
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseTips" class="collapse" aria-labelledby="headingTips" data-parent="#detailsAccordion">
+                        <div class="card-body">
+                            @Model.TourDetails.TravelTips
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingPolicy">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsePoli" aria-expanded="true" aria-controls="collapseOverview">
+                                <i class="fas fa-globe"></i> Policy
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapsePoli" class="collapse" aria-labelledby="headingPolicy" data-parent="#detailsAccordion">
+                        <div class="card-body">
+                            @Model.TourDetails.Policy
+                        </div>
+                    </div>
+                </div>
+                <!-- Repeat for Location, Timing, etc. -->
+            </div>
+        </div>
+
+        <!-- Right Column for Consultation Form -->
+        <div class="col-md-4">
+            <div class="bg-light p-4 rounded">
+                <h5 class="text-uppercase mb-4 font-weight-bold">Get Free Tour Consultation</h5>
+                <form id="tourConsultationForm">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input type="text" id="nm" class="form-control" asp-for="FirstName" />
+
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input type="text" id="lm" class="form-control" asp-for="LastName" />
+                    </div>
+                    <div class="form-group">
+                        <label for="emailAddress">Email Address</label>
+                        <input type="text" id="em" class="form-control" asp-for="EmailAddress" />
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone Number</label>
+                        <input type="text" id="pm" class="form-control" asp-for="PhoneNumber" />
+                    </div>
+                    <div class="form-group">
+                        <label for="journeyDate">Preferred Journey Date</label>
+                        <input type="date" id="jd" class="form-control" asp-for="PreferredJourneyDate"  >
+                    </div>
+                    <div class="form-group">
+                        <label for="requirements">Additional Requirements</label>
+                        <textarea class="form-control" id="ar" asp-for="AdditionalRequirements"  rows="3" placeholder="Additional Requirements"></textarea>
+                    </div>
+                                        <input type="button" value="Send Data" class="btn btn-warning btn-block" onclick="BtnClick()" />
+@*                     <button type="submit" class="btn btn-warning btn-block"  onclick="BtnClick()"   text-uppercase font-weight-bold">Submit</button>
+ *@                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@* <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ *@
+<script>
+
+    function BtnClick() {
+        var fname = $("#nm").val();
+        var lname = $("#lm").val();
+        var email = $("#em").val();
+        var phon = $("#pm").val();
+        var jdate = $("#jd").val();
+        var reqir = $("#ar").val();
+        var obj = {
+            FirstName: fname,
+            LastName: lname,
+            EmailAddress: email,
+            PhoneNumber: phon,
+            PreferredJourneyDate: jdate,
+            AdditionalRequirements: reqir,
+
+        }
+        formSubmit(obj);
+    }
+    function formSubmit(obj) {
+
+        $.ajax({
+            url: '/Home/Details',  // Replace with your actual controller and action method URL
+            type: 'POST',
+           // data: JSON.stringify(obj),
+            data: JSON.stringify(obj),
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                alert('Form submitted successfully!');
+                // Optional: Clear the form fields
+                $('#tourConsultationForm')[0].reset();
+            },
+            error: function (xhr, status, error) {
+                alert('Error: ' + error);
+            }
+        });
+
+    }
+
+</script>

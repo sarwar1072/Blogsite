@@ -11,9 +11,9 @@ namespace BlogSite.Web
     {
         protected override void Load(ContainerBuilder builder)
         {
-            //builder.RegisterType<PublicLayoutModel>()
-            //    .AsSelf()
-            //    .InstancePerLifetimeScope();
+            builder.RegisterType<EditTourDetails>()
+                .AsSelf()
+                .InstancePerLifetimeScope();
 
             builder.RegisterType<CreateTourDetails>()
                 .AsSelf()

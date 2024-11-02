@@ -3,7 +3,7 @@ using Blogsite.Infrastructure.Services;
 
 namespace BlogSite.Web.Areas.Admin.Models.TourDetailsFolder
 {
-    public class CreateTourDetails:TourDetailsVModel
+    public class EditTourDetails:TourDetailsVModel
     {
         public int Id { get; set; }
         public string? Overview { get; set; }
@@ -15,31 +15,46 @@ namespace BlogSite.Web.Areas.Admin.Models.TourDetailsFolder
         public string? TravelTips { get; set; }
         public string? Options { get; set; }
         public string? Policy { get; set; }
-        public CreateTourDetails(IHttpContextAccessor httpContext, ITourDetailsServices  tourDetails) : base(httpContext, tourDetails)
+        public EditTourDetails(IHttpContextAccessor httpContext, ITourDetailsServices tourDetails) : base(httpContext, tourDetails)
         {
         }
-        public CreateTourDetails() { }
-        
-        public void AddTourDetails()
+        public EditTourDetails() { }
+
+        public void EditDetails()
         {
             var model = new TourDetails()
             {
+                Id = Id,   
                 Overview = Overview,
                 Location = Location,
                 Timing = Timing,
                 InclusionExclusion = InclusionExclusion,
                 Description = Description,
                 AdditionalInformation = AdditionalInformation,
-                TravelTips = TravelTips,    
+                TravelTips = TravelTips,
                 Policy = Policy,
                 Options = Options,
             };
-            _tourDetails.AddTourDetails(model);           
+            _tourDetails.EditDetails(model);
         }
-        public void RemoveTour(int id)
+        public void Load(int id)
         {
-            _tourDetails.DeleteTourDetails(id);
+            var dataByid = _tourDetails.GetByid(id);
+            if (dataByid != null)
+            {
+                Id = dataByid.Id;
+                Overview = dataByid.Overview;
+                Location = dataByid.Location;
+                Timing = dataByid.Timing;
+                InclusionExclusion = dataByid.InclusionExclusion;
+                Description = dataByid.Description;
+                AdditionalInformation = dataByid.AdditionalInformation;
+                TravelTips = dataByid.TravelTips;
+                Policy = dataByid.Policy;
+                Options = dataByid.Options;
+            }
         }
+
 
     }
 }

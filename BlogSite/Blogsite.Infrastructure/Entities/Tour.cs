@@ -23,7 +23,7 @@ namespace Blogsite.Infrastructure.Entities
         public int SpotsAvailable { get; set; }
         public ICollection<Images>? Images { get; set; }
         [ForeignKey("TourDetails")]
-       public int TourDetailsId {  get; set; }    
+       public int? TourDetailsId {  get; set; }    
         public TourDetails? TourDetails { get; set; }    
     }
 }

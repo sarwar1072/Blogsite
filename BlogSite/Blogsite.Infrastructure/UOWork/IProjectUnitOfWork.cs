@@ -12,6 +12,8 @@ namespace Blogsite.Infrastructure.UOWork
     {
          ITourRepository TourRepository { get; }
         ITourDetailsRepository TourDetailsRepository { get; }
+         IConsultationFormRepository ConsultationFormRepository { get; }
+
 
     }
 }

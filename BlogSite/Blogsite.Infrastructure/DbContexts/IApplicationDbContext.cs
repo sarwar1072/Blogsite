@@ -14,5 +14,7 @@ namespace Blogsite.Infrastructure.DbContexts
          DbSet<Payment>? Payments { get; set; }
          DbSet<Tour>? Tours { get; set; }
          DbSet<TourDetails>? ToursDetails { get; set; }
+         DbSet<ConsultationForm>? ConsultationForms { get; set; }
+
     }
 }

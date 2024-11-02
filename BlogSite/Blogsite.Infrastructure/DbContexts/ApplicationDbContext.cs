@@ -84,5 +84,6 @@ namespace Blogsite.Infrastructure.DbContexts
         public DbSet<Payment>? Payments { get; set; }  
         public DbSet<Tour>? Tours { get; set; }
         public DbSet<TourDetails>? ToursDetails { get; set;}
+        public DbSet<ConsultationForm>?  ConsultationForms { get; set; }  
     }
 }

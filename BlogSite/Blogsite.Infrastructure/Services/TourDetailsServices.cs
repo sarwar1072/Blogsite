@@ -3,6 +3,7 @@ using Blogsite.Infrastructure.Exceptions;
 using Blogsite.Infrastructure.UOWork;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,47 @@ namespace Blogsite.Infrastructure.Services
             _projectUnitOfWork.TourDetailsRepository.Add(tourDetails);
             _projectUnitOfWork.Save();
         }
+        public void EditDetails(TourDetails details)
+        {
+            if (details is null)
+            {
+                throw new InvalidOperationException("details can not be null");
+            }
+
+            var entity = _projectUnitOfWork.TourDetailsRepository.GetById(details.Id);
+
+            if (entity == null)
+                throw new InvalidOperationException("details can not be null");
+
+            // entity.Id = tour.Id;
+            entity.Overview = details.Overview;
+            entity.Location = details.Location;
+            entity.Timing = details.Timing;
+            entity.InclusionExclusion = details.InclusionExclusion;
+            entity.Description = details.Description;
+            entity.AdditionalInformation = details.AdditionalInformation;
+            entity.TravelTips = details.TravelTips;
+            entity.Options = details.Options;
+            entity.Policy = details.Policy;
+
+            _projectUnitOfWork.TourDetailsRepository.Edit(entity);
+            _projectUnitOfWork.Save();
+        }
+        public TourDetails GetByid(int id)
+        {
+            var entity = _projectUnitOfWork.TourDetailsRepository.GetById(id);
+            return entity;
+        }
+        public void DeleteTourDetails(int id)
+        {
+            var entity = _projectUnitOfWork.TourDetailsRepository.GetById(id);
+            if (entity == null)
+            {
+                throw new InvalidOperationException("Tour details is not found");
+            }
+            _projectUnitOfWork.TourDetailsRepository.Remove(entity);
+            _projectUnitOfWork.Save();
+        }
         public (IList<TourDetails> tours, int total, int totalDisplay) GetTourdetailsList(int pageindex, int pagesize, string searchText, string orderBy)
         {
             (IList<TourDetails> data, int total, int totalDisplay) result = (null, 0, 0);
@@ -46,6 +88,7 @@ namespace Blogsite.Infrastructure.Services
             }
             return (result.data, result.total, result.totalDisplay);
         }
+       
 
     }
 }

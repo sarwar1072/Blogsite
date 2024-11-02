@@ -42,8 +42,9 @@ namespace Blogsite.Infrastructure
             builder.RegisterType<TourDetailsServices>().As<ITourDetailsServices>()
                 .InstancePerLifetimeScope();
 
-            //builder.RegisterType<AnswerRepository>().As<IAnswerRepository>()
-            //    .InstancePerLifetimeScope();
+            builder.RegisterType<ConsultationFormRepository>().As<IConsultationFormRepository>()
+                .InstancePerLifetimeScope();
+
             //builder.RegisterType<AnswerServices>().As<IAnswerServices>()
             //    .InstancePerLifetimeScope();
 

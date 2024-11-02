@@ -14,7 +14,7 @@
                 "targets": 7,
                 "width": "20%",
                 "render": function (data, type, row) {
-                    return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/admin/Tour/EditTour/${data}'" value='${data}'>
+                    return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/admin/TourDetails/EditTourDetails/${data}'" value='${data}'>
                                                                         <i class="fas fa-pencil-alt">
                                                                         </i>
                                                                         Edit

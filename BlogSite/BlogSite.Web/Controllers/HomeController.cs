@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Core.Lifetime;
+using Blogsite.Infrastructure.Entities;
 using Blogsite.Infrastructure.Services;
 using BlogSite.Web.Models;
 using BlogSite.Web.Models.tourViewModel;
@@ -62,9 +63,25 @@ namespace BlogSite.Web.Controllers
                 var model = _scope.Resolve<TourDetailsModel>();
                 model.ResolveDependency(_scope);
 
-                 model.TourDetails(id);
+                 model.GetTourDetails(id);
                 //_logger.LogInformation("Returning TourList view with model data");
-
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"{ex.Message}");
+                ViewBag.Message = "Error";
+            }           
+            return View(); 
+        }
+        [HttpPost]
+        public IActionResult Details([FromBody] TourDetailsModel model)
+        {
+            try
+            {
+                model.ResolveDependency(_scope);
+                //await model.GetUserInfoAsync();
+                 model.AddConsult();
                 return View(model);
             }
             catch (Exception ex)
@@ -72,10 +89,10 @@ namespace BlogSite.Web.Controllers
                 _logger.LogError($"{ex.Message}");
                 ViewBag.Message = "Error";
             }
-            //var model=_scope.Resolve<TourViewModel>();
-            //model.Details(id);
-            return View(); 
+
+            return View();
         }
+
         [HttpGet]
         public IActionResult GetListOfTour()
         {

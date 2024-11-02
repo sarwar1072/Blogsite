@@ -21,8 +21,8 @@ namespace BlogSite.Web.Areas.Admin.Controllers
         public TourController(ILifetimeScope scope,IFileHelper fileHelper,ILogger<TourController> logger)
         {
                 _fileHelper = fileHelper;
-            _scope = scope; 
-            _logger = logger;   
+                _scope = scope; 
+                 _logger = logger;   
         }
         public IActionResult Index()
         {

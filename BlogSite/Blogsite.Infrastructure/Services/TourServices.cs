@@ -32,7 +32,24 @@ namespace Blogsite.Infrastructure.Services
              _projectUnitOfWork.TourRepository.Add(tour); 
              _projectUnitOfWork.Save();
         }
+        public void AddConsulationForm(ConsultationForm Form)
+        {
 
+            if (Form is null)
+            {
+                throw new InvalidOperationException("Tour details  can not be null");
+            }
+
+            _projectUnitOfWork.ConsultationFormRepository.Add(Form);
+            _projectUnitOfWork.Save();
+        }
+        public (IList<ConsultationForm> forms, int total, int totalDisplay) GetConsultForm(int pageindex, int pagesize, string searchText, string orderBy)
+        {
+
+            var result = _projectUnitOfWork.ConsultationFormRepository.GetDynamic(null, null, null, pageindex, pagesize, true);
+
+            return (result.data, result.total, result.totalDisplay);
+        }
         public  (IList<Tour> tours,int total,int totalDisplay)GetTourList(int pageindex, int pagesize,string searchText, string orderBy)
         {
             (IList<Tour> data, int total, int totalDisplay) result = (null, 0, 0);
@@ -49,7 +66,7 @@ namespace Blogsite.Infrastructure.Services
         }
         public Tour GetTourDetails(int id)
         {
-            var entity=_projectUnitOfWork.TourRepository.GetFirstOrDefault(x=>x.Id==id,"Images");
+            var entity=_projectUnitOfWork.TourRepository.GetFirstOrDefault(x=>x.Id==id,"Images,TourDetails");
             return entity;
         }
         public  void EditTour(Tour tour) 

@@ -4,6 +4,7 @@ using Blogsite.Infrastructure.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogSite.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241101172410_num2")]
+    partial class num2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,37 +52,6 @@ namespace BlogSite.Web.Migrations
                     b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Bookings");
-                });
-
-            modelBuilder.Entity("Blogsite.Infrastructure.Entities.ConsultationForm", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("AdditionalRequirements")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("EmailAddress")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PreferredJourneyDate")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ConsultationForms");
                 });
 
             modelBuilder.Entity("Blogsite.Infrastructure.Entities.Flight", b =>
@@ -262,16 +233,16 @@ namespace BlogSite.Web.Migrations
                         {
                             Id = new Guid("e9b3be8c-99c5-42c7-8f2e-1eb39f6d9125"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "737f5460-2e46-4976-b14e-6ad0da5a5b29",
+                            ConcurrencyStamp = "0c0bd7a7-d34b-4fad-b2a2-671e616e1a4f",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             Name = "Admin",
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "admin@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKgKmFWMehPFi7KgL+FfWBR0ch8pIBEVV+MUJ1P0btuJlbXkUTv5ALGDYX8RHGEVNw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOaikVNnsafLdEAdkGC45AshmLXssM6nm+MBgjOrTA6wPgO2gko3zAwYLBP5Mx8HGQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d4c27d18-1a64-4f4a-98cc-2cefa59ecc2b",
+                            SecurityStamp = "e3eef3d5-25b0-468b-902b-97d0f10ff5cd",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
@@ -279,16 +250,16 @@ namespace BlogSite.Web.Migrations
                         {
                             Id = new Guid("8f3d96ce-76ec-4992-911a-33ceb81fa29d"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "267ef944-7f73-4d6a-90ae-f77966e53d71",
+                            ConcurrencyStamp = "a8da75fe-fa77-4fcb-a0e7-f9f8b0b9d618",
                             Email = "user@gmail.com.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             Name = "sarwar",
                             NormalizedEmail = "user@gmail.com.com",
                             NormalizedUserName = "user@gmail.com.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFGhrh8bq92VwPz+z6D+qf1eyc+KSW64F2Ah18M0/Jfj2y17PghTh2f7fsqJvoretg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFow3X9mPxLAH0OUQPhiOtqTENC0ofeTz1lIUsPmwsh2kIqcVCUynMJC7QiKjkGHEQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1926b292-1b5b-41a6-85d0-5779035faaf3",
+                            SecurityStamp = "341efacc-42f0-4b17-abe6-7a5671639702",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com.com"
                         });
@@ -325,14 +296,14 @@ namespace BlogSite.Web.Migrations
                         new
                         {
                             Id = new Guid("2c5e174e-3b0e-446f-86af-483d56fd7210"),
-                            ConcurrencyStamp = "638661726119018809",
+                            ConcurrencyStamp = "638661002502733868",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("e943ffbf-65a4-4d42-bb74-f2ca9ea8d22a"),
-                            ConcurrencyStamp = "638661726119018856",
+                            ConcurrencyStamp = "638661002502733891",
                             Name = "User",
                             NormalizedName = "USER"
                         });
