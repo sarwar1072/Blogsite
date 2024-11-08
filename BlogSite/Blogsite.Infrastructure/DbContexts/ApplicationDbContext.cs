@@ -74,6 +74,14 @@ namespace Blogsite.Infrastructure.DbContexts
                     .WithOne(p => p.Booking)  // A Payment is associated with one Booking
                     .HasForeignKey<Payment>(p => p.BookingID)  // Foreign key in Payment
                     .OnDelete(DeleteBehavior.Cascade);  // Optional: Cascade delete
+
+            builder.Entity<Hotel>()
+                   .HasMany(t => t.Rooms)
+                   .WithOne(i => i.Hotel)
+                   .HasForeignKey(i => i.HotelId)
+                   .OnDelete(DeleteBehavior.Cascade);
+
+
         }
 
         public DbSet<ApplicationUser>? ApplicationUsers { get; set; }
@@ -85,5 +93,6 @@ namespace Blogsite.Infrastructure.DbContexts
         public DbSet<Tour>? Tours { get; set; }
         public DbSet<TourDetails>? ToursDetails { get; set;}
         public DbSet<ConsultationForm>?  ConsultationForms { get; set; }  
+        public DbSet<Room>? Rooms { get; set; }
     }
 }

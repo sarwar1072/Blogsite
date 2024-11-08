@@ -26,8 +26,14 @@
             $("#destinationList").hide();
         }
     });
+
+    
 });
 
+
+// $(document).ready(function () {
+  
+// });
 // Function to handle the click on a dropdown item
 function selectDestination(destination) {
     $("#tourDestination").val(destination); // Set the selected value in the input field

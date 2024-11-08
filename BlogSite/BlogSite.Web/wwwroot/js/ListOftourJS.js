@@ -1,6 +1,4 @@
-﻿    // JavaScript for tab switching
-
-    $(document).ready(function () {
+﻿    $(document).ready(function () {
         $("#btnTour").click(function (e) {
             e.preventDefault();
 
@@ -42,26 +40,5 @@
         console.error("Expected an array but received:", tours);
             }
         }
-
-
-        // function renderTours(tours) {
-        //     $("#tourList").empty();
-
-        //     tours.forEach(function (tour) {
-        //         const tourCard = `
-        //         <div class="card tour-card">
-        //             <img src="${tour.TourUrl}" alt="${tour.TourName}" class="card-img-top">
-        //             <div class="card-body">
-        //                 <h5 class="card-title">${tour.TourName}</h5>
-        //                 <p class="card-text">${tour.Destination}</p>
-        //                 <p class="card-price">Price: $${tour.Price}</p>
-        //                 <button class="btn btn-primary">Book Now</button>
-        //             </div>
-        //         </div>
-        //     `;
-        //         $("#tourList").append(tourCard);
-        //     });
-
-        // }
-
+        
 

@@ -13,14 +13,20 @@ namespace Blogsite.Infrastructure.UOWork
     {
         public ITourRepository TourRepository { get;private  set;}
         public ITourDetailsRepository TourDetailsRepository { get;private set;}
-        public IConsultationFormRepository ConsultationFormRepository { get;private set;}   
+        public IConsultationFormRepository ConsultationFormRepository { get;private set;}
+        public IHotelRepository HotelRepository { get;private set;}
+        public IRoomRepository RoomRepository { get;private set;}                                                                                                       
         public ProjectUnitOfWork(ApplicationDbContext dbContext, ITourRepository tourRepository,
             ITourDetailsRepository tourDetailsRepository,
+            IHotelRepository hotelRepository,  
+            IRoomRepository roomRepository,
             IConsultationFormRepository formRepository) :base(dbContext)
         {
                 TourRepository = tourRepository;
                 TourDetailsRepository = tourDetailsRepository;  
                 ConsultationFormRepository = formRepository;
+                 HotelRepository = hotelRepository;  
+                  RoomRepository = roomRepository;
         }
     }
 }

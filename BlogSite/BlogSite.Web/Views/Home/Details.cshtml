@@ -182,7 +182,17 @@
         </div>
 
         <!-- Right Column for Consultation Form -->
-        <div class="col-md-4">
+                     
+        <div id="successMessage" class="col-md-4 bg-light p-4 rounded text-center" style="display: none;">
+
+            <div class="icon-check">
+                <i class="fa fa-check-circle" style="font-size: 4rem; color: #4caf50;"></i>
+            </div>
+            <h4 class="mt-3 mb-2">Thanks for your interest!</h4>
+            <p>One of our tour experts will reach out to you soon!</p>
+        </div>
+          
+        <div class="col-md-4" id="consultationForm">
             <div class="bg-light p-4 rounded">
                 <h5 class="text-uppercase mb-4 font-weight-bold">Get Free Tour Consultation</h5>
                 <form id="tourConsultationForm">
@@ -211,17 +221,16 @@
                         <label for="requirements">Additional Requirements</label>
                         <textarea class="form-control" id="ar" asp-for="AdditionalRequirements"  rows="3" placeholder="Additional Requirements"></textarea>
                     </div>
-                                        <input type="button" value="Send Data" class="btn btn-warning btn-block" onclick="BtnClick()" />
-@*                     <button type="submit" class="btn btn-warning btn-block"  onclick="BtnClick()"   text-uppercase font-weight-bold">Submit</button>
- *@                </form>
+                     <input type="button" value="Send Data" class="btn btn-warning btn-block" onclick="BtnClick()" />
+                 </form>
             </div>
         </div>
-    </div>
-</div>
-@* <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
- *@
-<script>
+    
 
+   </div>
+</div>
+ 
+<script>
     function BtnClick() {
         var fname = $("#nm").val();
         var lname = $("#lm").val();
@@ -236,12 +245,10 @@
             PhoneNumber: phon,
             PreferredJourneyDate: jdate,
             AdditionalRequirements: reqir,
-
         }
         formSubmit(obj);
     }
     function formSubmit(obj) {
-
         $.ajax({
             url: '/Home/Details',  // Replace with your actual controller and action method URL
             type: 'POST',
@@ -249,15 +256,14 @@
             data: JSON.stringify(obj),
             contentType: 'application/json; charset=utf-8',
             success: function (data) {
-                alert('Form submitted successfully!');
+                //alert('Form submitted successfully!');
                 // Optional: Clear the form fields
-                $('#tourConsultationForm')[0].reset();
+                $('#consultationForm').hide();
+                $('#successMessage').show();
             },
             error: function (xhr, status, error) {
                 alert('Error: ' + error);
             }
         });
-
     }
-
 </script>

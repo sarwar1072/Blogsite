@@ -6,6 +6,7 @@ using BlogSite.Web.Models;
 using BlogSite.Web.Models.tourViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.Host.Mef;
 using System.Diagnostics;
 
 namespace BlogSite.Web.Controllers
@@ -113,19 +114,30 @@ namespace BlogSite.Web.Controllers
         }
         public IActionResult TourList(string destination)
         {
-            try
+            if(destination != null)
             {
-                var model = _scope.Resolve<TourViewModel>();
-                model.ListofTour(destination);
-                return View(model);
+                try
+                {
+                    var model = _scope.Resolve<TourViewModel>();
+                    model.ListofTour(destination);
+                    return View(model);
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError($"{e.Message}");
+                    ViewBag.Message = "Error";
+                }
             }
-            catch(Exception e) {
-                _logger.LogError($"{e.Message}");
-                ViewBag.Message = "Error";  
+            else{
+                return RedirectToAction("ResultNotFound");
             }
+            
             return View();
         }
-
+        public IActionResult ResultNotFound()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

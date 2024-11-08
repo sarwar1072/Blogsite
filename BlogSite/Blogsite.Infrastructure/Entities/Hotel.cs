@@ -13,9 +13,9 @@ namespace Blogsite.Infrastructure.Entities
         public string? Name { get; set; }
         public string? Location { get; set; }
         public string? HotelUrl {  get; set; }    
-        public string? RoomType { get; set; }
         public double PricePerNight { get; set; }
         public int AvailableRooms { get; set; }
+        public ICollection<Room>? Rooms { get; set; }
         public ICollection<Images>? Images { get; set; }
     }
 }

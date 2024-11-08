@@ -3,6 +3,7 @@ using Blogsite.Infrastructure.DbContexts;
 using Blogsite.Infrastructure.Repositories;
 using Blogsite.Infrastructure.Services;
 using Blogsite.Infrastructure.UOWork;
+using Microsoft.Extensions.Hosting;
 
 namespace Blogsite.Infrastructure
 {
@@ -45,11 +46,14 @@ namespace Blogsite.Infrastructure
             builder.RegisterType<ConsultationFormRepository>().As<IConsultationFormRepository>()
                 .InstancePerLifetimeScope();
 
-            //builder.RegisterType<AnswerServices>().As<IAnswerServices>()
-            //    .InstancePerLifetimeScope();
+            builder.RegisterType<HotelRepository>().As<IHotelRepository>()
+                .InstancePerLifetimeScope();
 
-            //builder.RegisterType<VoteRepository>().As<IVoteRepository>()
-            //    .InstancePerLifetimeScope();
+            builder.RegisterType<RoomRepository>().As<IRoomRepository>()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterType<RoomServices>().As<IRoomServices>().InstancePerLifetimeScope();
+            builder.RegisterType<HotelServices>().As<IHotelServices>().InstancePerLifetimeScope();
 
             base.Load(builder);
         }
