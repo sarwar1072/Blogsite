@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using BlogSite.Web.Areas.Admin.Models;
+using BlogSite.Web.Areas.Admin.Models.HotelmodelFolder;
+using BlogSite.Web.Areas.Admin.Models.RoomFolder;
 using BlogSite.Web.Areas.Admin.Models.TourDetailsFolder;
 using BlogSite.Web.Areas.Admin.Models.TourModelFolder;
 using BlogSite.Web.Models;
@@ -44,9 +46,15 @@ namespace BlogSite.Web
             builder.RegisterType<CreateTour>()
                 .AsSelf()
                 .InstancePerLifetimeScope();
-            builder.RegisterType<FileHelper>().As<IFileHelper>().InstancePerLifetimeScope(); 
-            
 
+            builder.RegisterType<FileHelper>().As<IFileHelper>().InstancePerLifetimeScope();
+            builder.RegisterType<RoomModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<EditRoomModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<CreateRoomModel>().AsSelf().InstancePerLifetimeScope();
+
+            builder.RegisterType<CreateHotelModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<HotelModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<EditHotelModel>().AsSelf().InstancePerLifetimeScope();
             base.Load(builder);
         }
     }

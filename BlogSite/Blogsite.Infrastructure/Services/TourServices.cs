@@ -81,7 +81,6 @@ namespace Blogsite.Infrastructure.Services
             if(entity ==null)
                 throw new InvalidOperationException("Question can not be null");
             
-
            // entity.Id = tour.Id;
                 entity.TourName = tour.TourName;    
                 entity.TourUrl = tour.TourUrl;  

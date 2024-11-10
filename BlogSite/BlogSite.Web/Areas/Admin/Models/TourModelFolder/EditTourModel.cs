@@ -60,5 +60,6 @@ namespace BlogSite.Web.Areas.Admin.Models.TourModelFolder
                 SpotsAvailable = dataByid.SpotsAvailable;
             }
         }
+
     }
 }

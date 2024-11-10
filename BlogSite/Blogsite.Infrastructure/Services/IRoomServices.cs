@@ -10,5 +10,10 @@ namespace Blogsite.Infrastructure.Services
     public interface IRoomServices
     {
         void AddRoom(Room room);
+        void EditRoom(Room room);
+        public IList<Hotel> GetAll();
+        Room GetById(int id);
+        public void DeleteRoom(int id);
+        (IList<Room> rooms, int total, int totalDisplay) GetRoomList(int pageindex, int pagesize, string searchText, string orderBy);
     }
 }

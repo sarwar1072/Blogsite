@@ -48,7 +48,6 @@ namespace BlogSite.Web.Areas.Admin.Models.TourModelFolder
                     Price = Price,  
                     SpotsAvailable = SpotsAvailable, 
                     TourDetailsId = TourDetailsId,  
-
                 };
                 model.Images=new List<Images>();    
                 if(UrlList != null) { 

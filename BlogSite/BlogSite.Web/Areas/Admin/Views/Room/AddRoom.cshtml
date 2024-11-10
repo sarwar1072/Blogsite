@@ -1,0 +1,50 @@
+﻿@model CreateRoomModel
+@{
+    ViewData["Title"] = "AddRoom";
+}
+
+
+<div class="container p-5 my-5 border">
+    <form asp-action="AddRoom" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="RoomNumber" class="control-label">Number</label>
+            <input asp-for="RoomNumber" class="form-control" />
+            <span asp-validation-for="RoomNumber" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="RoomType" class="control-label">Type</label>
+            <input asp-for="RoomType" class="form-control" />
+            <span asp-validation-for="RoomType" class="text-danger"></span>
+        </div>
+        <div class="form-group ">
+            <label asp-for="formFile" class="control-label">Room photo</label>
+            <input asp-for="formFile" type="file" class="form-control" />
+            <span asp-validation-for="formFile" class="text-danger"></span>
+        </div>
+        <div class="form-group ">
+            <label asp-for="HotelId" class="control-label">Hotel List</label>
+            <select asp-for="HotelId" asp-items="@Model.ListOfHotelName()" class="form-control">
+                <option>Please Select One</option>
+            </select>
+            <span asp-validation-for="HotelId" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Price" class="control-label">Price Per Night</label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+             
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+
+@section PageScript
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

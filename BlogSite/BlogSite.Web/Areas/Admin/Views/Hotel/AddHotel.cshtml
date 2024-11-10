@@ -1,0 +1,54 @@
+﻿@model CreateHotelModel
+@{
+    ViewData["Title"] = "AddHotel";
+}
+
+
+<div class="container p-5 my-5 border">
+    <form asp-action="AddHotel" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label">Name</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Location" class="control-label">Location</label>
+            <input asp-for="Location" class="form-control" />
+            <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
+        <div class="form-group ">
+            <label asp-for="formFile" class="control-label">Hotel photo</label>
+            <input asp-for="formFile" type="file" class="form-control" />
+            <span asp-validation-for="formFile" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PricePerNight" class="control-label">Price Per Night</label>
+            <input asp-for="PricePerNight" class="form-control" />
+            <span asp-validation-for="PricePerNight" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="AvailableRooms" class="control-label">AvailableRooms</label>
+            <input asp-for="AvailableRooms" class="form-control" />
+            <span asp-validation-for="AvailableRooms" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ListofImages" class="control-label">Tour Images</label>
+            <input asp-for="ListofImages" type="file" multiple class="form-control" />
+            <span asp-validation-for="ListofImages" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+
+@section PageScript
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
