@@ -5,6 +5,7 @@ using BlogSite.Web.Areas.Admin.Models.RoomFolder;
 using BlogSite.Web.Areas.Admin.Models.TourDetailsFolder;
 using BlogSite.Web.Areas.Admin.Models.TourModelFolder;
 using BlogSite.Web.Models;
+using BlogSite.Web.Models.HotelViewM;
 using BlogSite.Web.Models.tourViewModel;
 
 namespace BlogSite.Web
@@ -55,6 +56,8 @@ namespace BlogSite.Web
             builder.RegisterType<CreateHotelModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<HotelModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<EditHotelModel>().AsSelf().InstancePerLifetimeScope();
+
+            builder.RegisterType< HotelModelView >().AsSelf().InstancePerLifetimeScope();   
             base.Load(builder);
         }
     }

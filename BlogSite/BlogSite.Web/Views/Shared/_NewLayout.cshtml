@@ -45,48 +45,22 @@
         <div class="container">
             <h2>Search Options</h2>
 
-                <div class="search-tabs">
-                    <div class="search-tab active " id="btnTour">
-                        <div class="icon-and-text">
-                            🏝
-                            <span>Tour</span>
-                        </div>
-                        <div class="active-indicator"></div>
-                    </div>
-                    <div class="search-tab " id="btnFlight">
-                        <div class="icon-and-text">
-                            ✈
-                            <span>Flight</span>
-                        </div>
-                        <div class="active-indicator" style="visibility: hidden;"></div>
-                    </div>
-                    <div class="search-tab" id="btnHotel">
-                        <div class="icon-and-text">
-                            🏨
-                            <span>Hotel</span>
-                        </div>
-                        <div class="active-indicator" style="visibility: hidden;"></div>
-                    </div>
-                </div>
-
-
+                <partial name="_SearchTab" />
 
                 <!-- Placeholder for tab content -->
                 <div id="tourContent" class="tab-content ">
                     <h3>Tour Search</h3>
                     <!-- Tour search form content goes here -->
                 </div>
-                <div id="flightContent" class="tab-content ">
-                    <h3>Flight Search</h3>
-                    <!-- Flight search form content goes here -->
-                </div>
-
                 <div id="hotelContent" class="tab-content">
                     <h3>Hotel Search</h3>
                     <!-- Hotel search form content goes here -->
                 </div>
-
-        
+                <div id="flightContent" class="tab-content ">
+                    <h3>Flight Search</h3>
+                    <!-- Flight search form content goes here -->
+                </div>
+                      
       <!-- for search  tour"-->
     <div id="tourSearch" class="search-form mt-4" style="display: none;">
         <h3>Search for Tours</h3>
@@ -145,7 +119,6 @@
             <button type="submit" class="btn btn-success">Search Flight</button>
         </form>
        </div>
-
 
        </div>        
     </div>

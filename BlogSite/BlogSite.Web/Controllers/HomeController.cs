@@ -3,6 +3,7 @@ using Autofac.Core.Lifetime;
 using Blogsite.Infrastructure.Entities;
 using Blogsite.Infrastructure.Services;
 using BlogSite.Web.Models;
+using BlogSite.Web.Models.HotelViewM;
 using BlogSite.Web.Models.tourViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -136,6 +137,25 @@ namespace BlogSite.Web.Controllers
         }
         public IActionResult ResultNotFound()
         {
+            return View();
+        }
+        //for hotel slot
+        [HttpGet]
+        public IActionResult GetListOfHotel()
+        {
+            try
+            {
+                var model = _scope.Resolve<HotelModelView>();
+                var htModel = model.ListOfHotel();
+
+                return Json(htModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"{ex.Message}");
+                ViewBag.Message = "Error";
+
+            }
             return View();
         }
         public IActionResult Privacy()

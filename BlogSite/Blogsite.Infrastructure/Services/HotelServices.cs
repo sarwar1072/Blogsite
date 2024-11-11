@@ -29,6 +29,10 @@ namespace Blogsite.Infrastructure.Services
             _unitOfWork.HotelRepository.Add(hotel);
             _unitOfWork.Save();
         }
+        public IList<Hotel> GetAlHotesls()
+        {
+            return _unitOfWork.HotelRepository.GetAll().Take(5).ToList();
+        }
         public void EditHotel(Hotel hotel)
         {
             if (hotel is null)
@@ -48,7 +52,6 @@ namespace Blogsite.Infrastructure.Services
             entity.PricePerNight = hotel.PricePerNight;
             entity.AvailableRooms =hotel.AvailableRooms;
             
-
             _unitOfWork.HotelRepository.Edit(entity);
             _unitOfWork.Save();
         }
