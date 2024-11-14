@@ -56,7 +56,7 @@ namespace BlogSite.Web
             builder.RegisterType<CreateHotelModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<HotelModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<EditHotelModel>().AsSelf().InstancePerLifetimeScope();
-
+            builder.RegisterType<HotelSearchFilter>().AsSelf().InstancePerLifetimeScope();  
             builder.RegisterType< HotelModelView >().AsSelf().InstancePerLifetimeScope();   
             base.Load(builder);
         }

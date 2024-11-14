@@ -36,22 +36,21 @@
         </div>
     </nav>
 
-<!-- Search Section -->
+    <!-- Search Section -->
     <section class="search-section  text-white py-5 " id="content">
         <div class="container text-center">
             <h1>Find your next stay</h1>
             <p>Search low prices on hotels, homes, and much more...</p>
-        <div class="container">
-            <h2>Search Options</h2>
-
-
+            <div class="container">
+                <h2>Search Options</h2>
+                <p>Click to see popupar tour,hotel,flight</p>
                 <partial name="_SearchTab" />
 
                 <!-- Placeholder for tab content -->
                 <div id="tourContent" class="tab-content ">
                     <h3>Tour Search</h3>
                     <!-- Tour search form content goes here -->
-                </div>             
+                </div>
 
                 <div id="hotelContent" class="tab-content">
                     <h3>Hotel Search</h3>
@@ -62,88 +61,97 @@
                     <!-- Flight search form content goes here -->
                 </div>
 
-        
-      <!-- for search  tour"-->
-    <div id="tourSearch" class="search-form mt-4" style="display: none;">
-        <h3>Search for Tours</h3>
-         <form method="post" asp-action="TourList" asp-controller="Home">
-            <div class="form-group position-relative">
-                <label for="tourDestination">Destination</label>
-                <input type="text" class="form-control" id="tourDestination" name="destination" placeholder="Enter destination" autocomplete="off">
-                <!-- Dropdown for tour destination suggestions -->
-                <div id="destinationList" class="dropdown-menu" style="display: none; position: absolute; width: 100%;">
-                    <!-- Suggested destinations will be appended here dynamically -->
+
+                <!-- for search  tour"-->
+                <div id="tourSearch" class="search-form mt-4" style="display: none;">
+                    <h3>Search for Tours</h3>
+                    <form method="post" asp-action="TourList" asp-controller="Home">
+                        <div class="form-group position-relative">
+                            <label for="tourDestination">Destination</label>
+                            <input type="text" class="form-control" id="tourDestination" name="destination" placeholder="Enter destination" autocomplete="off">
+                            <!-- Dropdown for tour destination suggestions -->
+                            <div id="destinationList" class="dropdown-menu" style="display: none; position: absolute; width: 100%;">
+                                <!-- Suggested destinations will be appended here dynamically -->
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="searchButton">Search Tour</button>
+                    </form>
+                    <partial name="_tourSearchPartial" />
+                </div>
+
+                <!-- Hotel Search Form -->
+                <div id="hotelSearch" class="search-form mt-4" style="display: none;">
+                    <h3>Search for Hotels</h3>
+                    <form method="post" id="hotelForm" asp-action="SearchHotel" asp-controller="Home">
+                        <div class="form-group">
+                            <label for="hotelLocation">Location</label>
+                            <input type="text" class="form-control" id="hotelLocation" name="location" placeholder="Enter location">
+                        </div>
+                        <div id="HotelLocationList" class="dropdown-menu" style="display: none; position: absolute; width: 100%;">
+                            <!-- Suggested destinations will be appended here dynamically -->
+                        </div>
+                        <div class="form-group">
+                            <label for="checkInDate">Check-in Date</label>
+                            <input type="date" class="form-control" id="checkInDate" name="checkInDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="checkOutDate">Check-out Date</label>
+                            <input type="date" class="form-control" id="checkOutDate" name="checkOutDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="numberOfGuests">Number of Guests</label>
+                            <input type="number" id="Number" name="NumberOfGuests" class="form-control" min="1" required>
+                        </div>
+                        <button type="submit" class="btn btn-secondary">Search Hotel</button>
+                    </form>
+                    <partial name="_hotelsearchpartial" />
+                </div>
+
+                <!-- Flight Search Form -->
+                <div id="flightSearch" class="search-form mt-4" style="display: none;">
+                    <h3>Search for Flights</h3>
+                    <form method="get" asp-action="SearchFlight" asp-controller="Flight">
+                        <div class="form-group">
+                            <label for="departureCity">Departure City</label>
+                            <input type="text" class="form-control" id="departureCity" name="departureCity" placeholder="Enter departure city">
+                        </div>
+                        <div class="form-group">
+                            <label for="arrivalCity">Arrival City</label>
+                            <input type="text" class="form-control" id="arrivalCity" name="arrivalCity" placeholder="Enter arrival city">
+                        </div>
+                        <div class="form-group">
+                            <label for="flightDate">Flight Date</label>
+                            <input type="date" class="form-control" id="flightDate" name="flightDate">
+                        </div>
+                        <button type="submit" class="btn btn-success">Search Flight</button>
+                    </form>
                 </div>
             </div>
-           <button type="submit" class="btn btn-primary" id="searchButton" >Search Tour</button>
-        </form>
-
-            <partial name="Search" />
-                   
-      </div>
-
-        <!-- Hotel Search Form -->
-    <div id="hotelSearch" class="search-form mt-4" style="display: none;">
-        <h3>Search for Hotels</h3>
-        <form method="get" asp-action="SearchHotel" asp-controller="Hotel">
-            <div class="form-group">
-                <label for="hotelLocation">Location</label>
-                <input type="text" class="form-control" id="hotelLocation" name="location" placeholder="Enter location">
-            </div>
-            <div class="form-group">
-                <label for="checkInDate">Check-in Date</label>
-                <input type="date" class="form-control" id="checkInDate" name="checkInDate">
-            </div>
-            <div class="form-group">
-                <label for="checkOutDate">Check-out Date</label>
-                <input type="date" class="form-control" id="checkOutDate" name="checkOutDate">
-            </div>
-            <button type="submit" class="btn btn-secondary">Search Hotel</button>
-        </form>
-                    <partial name="_hotelsearchpartial" />
-
-    </div>
-
-            <!-- Flight Search Form -->
-        <div id="flightSearch" class="search-form mt-4" style="display: none;">
-        <h3>Search for Flights</h3>
-        <form method="get" asp-action="SearchFlight" asp-controller="Flight">
-            <div class="form-group">
-                <label for="departureCity">Departure City</label>
-                <input type="text" class="form-control" id="departureCity" name="departureCity" placeholder="Enter departure city">
-            </div>
-            <div class="form-group">
-                <label for="arrivalCity">Arrival City</label>
-                <input type="text" class="form-control" id="arrivalCity" name="arrivalCity" placeholder="Enter arrival city">
-            </div>
-            <div class="form-group">
-                <label for="flightDate">Flight Date</label>
-                <input type="date" class="form-control" id="flightDate" name="flightDate">
-            </div>
-            <button type="submit" class="btn btn-success">Search Flight</button>
-        </form>
-       </div>
-       </div>        
-    </div>
+        </div>
     </section>
 
-        <!-- Bootstrap JS -->
+    <!-- Bootstrap JS -->
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
     <partial name="_footer" />
-   
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="~/js/searchdropdown.js"></script>
     <script src="~/js/searchjs.js"></script>
+    <script src="~/js/hotelsearchdropdown.js"></script>
+    <script src="~/js/formhotel.js"></script>
+
+
+
     @RenderSection("MainLayoutScript", false)
 
-@*     @await RenderSectionAsync("Scripts", required: false)
- *@   
+    @*     @await RenderSectionAsync("Scripts", required: false)
+    *@
 </body>
 </html>

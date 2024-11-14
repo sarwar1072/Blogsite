@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Tabs</title>
-   <style>
+    <style>
         .container {
             margin-top: 20px;
         }
@@ -81,7 +81,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-   // JavaScript for tab switching
+        // JavaScript for tab switching
 
 
         $(document).ready(function () {
@@ -111,24 +111,24 @@
 
                 hotels.forEach(function (hotel) {
                     const hotelCard = `
-                                <div class="card hotel-card">
-                                            <img src="${hotel.hotelUrl}" alt="${hotel.Name}" class="card-img-top">
-                                    <div class="card-body">
-                                                <h5 class="card-title">${hotel.Name}</h5>
-                                                <p class="card-text">${hotel.location}</p>
-                                        <p class="card-price">Price: $${hotel.pricePerNight}</p>
-                                        <button class="btn btn-primary">Book Now</button>
-                                    </div>
-                                </div>
-                            `;
+                                        <div class="card hotel-card">
+                                                    <img src="${hotel.hotelUrl}" alt="${hotel.Name}" class="card-img-top">
+                                            <div class="card-body">
+                                                        <h5 class="card-title">${hotel.Name}</h5>
+                                                        <p class="card-text">${hotel.location}</p>
+                                                <p class="card-price">Price: $${hotel.pricePerNight}</p>
+                                                <button class="btn btn-primary">Book Now</button>
+                                            </div>
+                                        </div>
+                                    `;
                     $("#hotelList").append(hotelCard);
                 });
             } else {
                 console.error("Expected an array but received:", hotels);
             }
         }
-       
-     </script>
+
+    </script>
 
 </body>
 </html>

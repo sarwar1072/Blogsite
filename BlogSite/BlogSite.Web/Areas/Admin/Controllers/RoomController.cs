@@ -35,6 +35,7 @@ namespace BlogSite.Web.Areas.Admin.Controllers
         public IActionResult AddRoom()
         {
             var model = _scope.Resolve<CreateRoomModel>();
+            //model.ListOfHotelName();
             return View(model);
         }
         [HttpPost]

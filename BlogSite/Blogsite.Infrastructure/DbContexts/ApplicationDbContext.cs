@@ -81,6 +81,11 @@ namespace Blogsite.Infrastructure.DbContexts
                    .HasForeignKey(i => i.HotelId)
                    .OnDelete(DeleteBehavior.Cascade);
 
+            builder.Entity<Room>()
+                    .HasMany(t=>t.HotelBookings)
+                    .WithOne(i=> i.Room)
+                    .HasForeignKey(i => i.RoomId)
+                   .OnDelete(DeleteBehavior.Cascade);
 
         }
 
@@ -94,5 +99,6 @@ namespace Blogsite.Infrastructure.DbContexts
         public DbSet<TourDetails>? ToursDetails { get; set;}
         public DbSet<ConsultationForm>?  ConsultationForms { get; set; }  
         public DbSet<Room>? Rooms { get; set; }
+        public DbSet<HotelBooking>? HotelBookings { get; set;}
     }
 }

@@ -23,10 +23,10 @@ namespace Blogsite.Infrastructure.Services
                 throw new InvalidOperationException("room can not be null");
             }
 
-            var count=_projectUnitOfWork.RoomRepository.GetCount(x=>room.RoomNumber == x.RoomNumber);   
-            if(count!=0) {
-               throw new DuplicateException("Same room number exist");
-            }
+            //var count=_projectUnitOfWork.RoomRepository.GetCount(x=>room.RoomNumber == x.RoomNumber);   
+            //if(count!=0) {
+            //   throw new DuplicateException("Same room number exist");
+            //}
             _projectUnitOfWork.RoomRepository.Add(room);
             _projectUnitOfWork.Save();
         }

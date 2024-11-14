@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.Routing;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blogsite.Infrastructure.Services
 {
@@ -21,7 +23,7 @@ namespace Blogsite.Infrastructure.Services
             if (hotel == null)
                 throw new InvalidOperationException("hotel can not be null");
 
-            var name=_unitOfWork.HotelRepository.GetCount(x=> x.Name == hotel.Name);
+            var name = _unitOfWork.HotelRepository.GetCount(x => x.Name == hotel.Name);
 
             if (name != 0)
                 throw new DuplicateException("hotel name can be same");
@@ -32,6 +34,19 @@ namespace Blogsite.Infrastructure.Services
         public IList<Hotel> GetAlHotesls()
         {
             return _unitOfWork.HotelRepository.GetAll().Take(5).ToList();
+        }
+        public IList<string> GetAllHoteslsWithoutLimit()
+        {
+            var entity = _unitOfWork.HotelRepository.GetAll();
+
+            // Select distinct locations from the entity list
+            var locations = entity
+                .Select(c => c.Location)
+                .Where(location => !string.IsNullOrEmpty(location)) // Optional: Filter out null or empty locations
+                .Distinct()
+                .ToList();
+
+            return locations;
         }
         public void EditHotel(Hotel hotel)
         {
@@ -50,8 +65,8 @@ namespace Blogsite.Infrastructure.Services
             entity.Location = hotel.Location;
             entity.HotelUrl = hotel.HotelUrl;
             entity.PricePerNight = hotel.PricePerNight;
-            entity.AvailableRooms =hotel.AvailableRooms;
-            
+            entity.AvailableRooms = hotel.AvailableRooms;
+
             _unitOfWork.HotelRepository.Edit(entity);
             _unitOfWork.Save();
         }
@@ -69,6 +84,26 @@ namespace Blogsite.Infrastructure.Services
             }
             _unitOfWork.HotelRepository.Remove(entity);
             _unitOfWork.Save();
+        }
+        //public IList<Hotel> SearchedHotelList(string Location, DateTime CheckInDate, DateTime CheckOutDate, int NumberOfGuests)
+        //{
+        //    var result = _unitOfWork.HotelRepository.GetDynamic(s => s.Location.ToLower().Contains(Location.ToLower()), null,
+        //                       c => c.Include(h => h.Rooms).ThenInclude(r => r.HotelBookings), false)
+        //                       .Where(h => h.Rooms.Any(r => r.Capacity >= NumberOfGuests && r.HotelBookings.All(b =>
+        //                       (CheckInDate < b.CheckInDate && CheckOutDate <= b.CheckInDate) || (CheckInDate >= b.CheckOutDate)))).ToList();
+
+        //    return result;
+        //}
+        public IList<Hotel> SearchedHotelList(string Location, DateTime CheckInDate, DateTime CheckOutDate, int NumberOfGuests)
+        {
+            var result = _unitOfWork.HotelRepository.GetDynamic(
+                         s => s.Location.ToLower().Contains(Location.ToLower()), null, c => c.Include(h => h.Rooms)
+                         .ThenInclude(r => r.HotelBookings), false);
+
+            var finalres=result.Where(h => h.Rooms.Any(r => r.Capacity >= NumberOfGuests && 
+                         r.HotelBookings.All(b => (CheckOutDate <= b.CheckInDate || CheckInDate >= b.CheckOutDate)))).ToList();
+
+            return finalres;
         }
 
         public (IList<Hotel> hotels, int total, int totalDisplay) GetHotelList(int pageindex, int pagesize, string searchText, string orderBy)

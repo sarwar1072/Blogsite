@@ -16,12 +16,16 @@ namespace BlogSite.Web.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         protected readonly ILifetimeScope _scope;
-        private ITourServices _tourServices;    
-        public HomeController(ILogger<HomeController> logger,ILifetimeScope lifetime,ITourServices tour)
+        private ITourServices _tourServices;
+        private IHotelServices _hotelServices;
+
+        public HomeController(ILogger<HomeController> logger,ILifetimeScope lifetime,ITourServices tour,
+            IHotelServices hotelServices)
         {
             _logger = logger;
             _scope = lifetime;
             _tourServices = tour;   
+            _hotelServices = hotelServices;
         }
 
         public IActionResult Index()
@@ -94,7 +98,32 @@ namespace BlogSite.Web.Controllers
 
             return View();
         }
-
+        public IActionResult TourList(string destination)
+        {
+            if (destination != null)
+            {
+                try
+                {
+                    var model = _scope.Resolve<TourViewModel>();
+                    model.ListofTour(destination);
+                    return View(model);
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError($"{e.Message}");
+                    ViewBag.Message = "Error";
+                }
+            }
+            else
+            {
+                return RedirectToAction("ResultNotFound");
+            }
+            return View();
+        }
+        public IActionResult ResultNotFound()
+        {
+            return View();
+        }
         [HttpGet]
         public IActionResult GetListOfTour()
         {
@@ -111,34 +140,9 @@ namespace BlogSite.Web.Controllers
 
             }
             return View();  
-
         }
-        public IActionResult TourList(string destination)
-        {
-            if(destination != null)
-            {
-                try
-                {
-                    var model = _scope.Resolve<TourViewModel>();
-                    model.ListofTour(destination);
-                    return View(model);
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError($"{e.Message}");
-                    ViewBag.Message = "Error";
-                }
-            }
-            else{
-                return RedirectToAction("ResultNotFound");
-            }
-            
-            return View();
-        }
-        public IActionResult ResultNotFound()
-        {
-            return View();
-        }
+       
+       
         //for hotel slot
         [HttpGet]
         public IActionResult GetListOfHotel()
@@ -154,10 +158,31 @@ namespace BlogSite.Web.Controllers
             {
                 _logger.LogError($"{ex.Message}");
                 ViewBag.Message = "Error";
-
             }
             return View();
         }
+      //  [HttpPost]
+        public IActionResult SearchHotel(string location,DateTime checkInDate, DateTime checkOutDate,int numberOfGuests)
+        {
+            var result=_hotelServices.SearchedHotelList(location, checkInDate, checkOutDate,numberOfGuests);
+            return View(result);
+        }
+        public IActionResult GetHotelList()
+        {
+            try
+            {
+                var model = _hotelServices.GetAllHoteslsWithoutLimit();
+                return Json(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"{ex.Message}");
+                ViewBag.ErrorMessage = ex.Message;
+            }
+            return View();
+        }
+
+
         public IActionResult Privacy()
         {
             return View();
