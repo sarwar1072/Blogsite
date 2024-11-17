@@ -161,11 +161,60 @@ namespace BlogSite.Web.Controllers
             }
             return View();
         }
-      //  [HttpPost]
-        public IActionResult SearchHotel(string location,DateTime checkInDate, DateTime checkOutDate,int numberOfGuests)
+        //  [HttpPost]
+        public IActionResult SearchHotel(HotelSearchFilter filter)
         {
-            var result=_hotelServices.SearchedHotelList(location, checkInDate, checkOutDate,numberOfGuests);
-            return View(result);
+            HttpContext.Session.SetString("Location", filter.Location);
+            HttpContext.Session.SetString("CheckInDate", filter.CheckInDate.ToString());
+            HttpContext.Session.SetString("CheckOutDate", filter.CheckOutDate.ToString());
+            HttpContext.Session.SetInt32("NumberOfGuests", filter.NumberOfGuests);
+
+            try
+            {
+                var model = _scope.Resolve<HotelModelView>();
+                model.ListOfHotelWithRoom(filter.Location, filter.CheckInDate, filter.CheckOutDate, filter.NumberOfGuests);
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"{ex.Message}");
+            }
+            return View();  
+        }
+        //[HttpPost]
+        public IActionResult SearchHotelRooms(int hotelId)
+        {
+            // Retrieve parameters from session
+            var location = HttpContext.Session.GetString("Location");
+            var checkInDate = DateTime.Parse(HttpContext.Session.GetString("CheckInDate"));
+            var checkOutDate = DateTime.Parse(HttpContext.Session.GetString("CheckOutDate"));
+            var numberOfGuests = HttpContext.Session.GetInt32("NumberOfGuests");
+
+            // Fetch hotel and rooms based on previous parameters and HotelId
+            //var result = _unitOfWork.HotelRepository.GetDynamic(
+            //    h => h.Id == hotelId && h.Location.ToLower().Contains(location.ToLower()),
+            //    null, c => c.Include(h => h.Rooms).ThenInclude(r => r.HotelBookings), false)
+            //    .Where(h => h.Rooms.Any(r => r.Capacity >= numberOfGuests &&
+            //        !r.HotelBookings.Any(b =>
+            //            checkInDate <= b.CheckOutDate && checkOutDate >= b.CheckInDate)))
+            //    .ToList();
+            try
+            {
+                var model = _scope.Resolve<HotelModelView>();
+                model.ListOfHotelWithRoomDetails(hotelId, location, checkInDate, checkOutDate, 4);
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"{ex.Message}");
+            }
+            return View();
+        }
+
+        public IActionResult HotelDetails(int id)
+        {
+
+            return View();  
         }
         public IActionResult GetHotelList()
         {

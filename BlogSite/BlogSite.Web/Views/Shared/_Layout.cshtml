@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BlogSite.Web</title>
+    <title>@ViewData["Title"] - Booking.com</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BlogSite.Web.styles.css" asp-append-version="true" />
@@ -69,7 +69,6 @@
                         <div class="form-group position-relative">
                             <label for="tourDestination">Destination</label>
                             <input type="text" class="form-control" id="tourDestination" name="destination" placeholder="Enter destination" autocomplete="off">
-                            <!-- Dropdown for tour destination suggestions -->
                             <div id="destinationList" class="dropdown-menu" style="display: none; position: absolute; width: 100%;">
                                 <!-- Suggested destinations will be appended here dynamically -->
                             </div>
@@ -82,14 +81,15 @@
                 <!-- Hotel Search Form -->
                 <div id="hotelSearch" class="search-form mt-4" style="display: none;">
                     <h3>Search for Hotels</h3>
-                    <form method="post" id="hotelForm" asp-action="SearchHotel" asp-controller="Home">
-                        <div class="form-group">
+                    <form method="post"  asp-action="SearchHotel" asp-controller="Home">
+                        <div class="form-group position-relative">
                             <label for="hotelLocation">Location</label>
-                            <input type="text" class="form-control" id="hotelLocation" name="location" placeholder="Enter location">
+                            <input type="text" class="form-control"  id="hotelLocation" name="location" placeholder="Enter location">
+                            <div id="HotelLocationList" class="dropdown-menu" style="display: none; position: absolute; width: 100%;">
+                                <!-- Suggested destinations will be appended here dynamically -->
+                            </div>
                         </div>
-                        <div id="HotelLocationList" class="dropdown-menu" style="display: none; position: absolute; width: 100%;">
-                            <!-- Suggested destinations will be appended here dynamically -->
-                        </div>
+                       
                         <div class="form-group">
                             <label for="checkInDate">Check-in Date</label>
                             <input type="date" class="form-control" id="checkInDate" name="checkInDate">
@@ -145,7 +145,6 @@
     <script src="~/js/searchdropdown.js"></script>
     <script src="~/js/searchjs.js"></script>
     <script src="~/js/hotelsearchdropdown.js"></script>
-    <script src="~/js/formhotel.js"></script>
 
 
 

@@ -62,7 +62,6 @@ namespace BlogSite.Web.Models.tourViewModel
             _tourServices.AddConsulationForm(model);    
         }
         public void GetTourDetails(int id)
-
         {
             var data = _tourServices.GetTourDetails(id);
 

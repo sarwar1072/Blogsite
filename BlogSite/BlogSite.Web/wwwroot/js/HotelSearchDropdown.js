@@ -11,7 +11,7 @@
                 $.each(data, function (index, v) {
 
                     $("#HotelLocationList").append(
-                        `<a href="#" class="dropdown-item" onclick="selectDestination('${v}')">${v}</a>`
+                        `<a href="#" class="dropdown-item" onclick="selectLocation('${v}')">${v}</a>`
                     );
                 });
 
@@ -22,14 +22,13 @@
     });
     // Hide the dropdown if clicked outside
     $(document).on("click", function (e) {
-        if (!$(e.target).closest("#hotelLocation").length) {
-            $("#HotelLocationList").hide();
-        }
+        if (!$(e.target).closest("#hotelLocation, #HotelLocationList").length) {
+            $("#HotelLocationList").hide(); // Hide the dropdown
+        }      
     });
    
 });
-
-function selectDestination(location) {
+function selectLocation(location) {
     $("#hotelLocation").val(location); // Set the selected value in the input field
     $("#HotelLocationList").hide(); // Hide the dropdown
 }

@@ -22,19 +22,16 @@
     });
     // Hide the dropdown if clicked outside
     $(document).on("click", function (e) {
-        if (!$(e.target).closest("#tourDestination").length) {
-            $("#destinationList").hide();
+        if (!$(e.target).closest("#tourDestination, #destinationList").length) {
+            $("#destinationList").hide(); // Hide the dropdown
         }
+        //if (!$(e.target).closest("#tourDestination").length) {
+        //    $("#destinationList").hide();
+        //}
     });
 
     
 });
-
-
-// $(document).ready(function () {
-  
-// });
-// Function to handle the click on a dropdown item
 function selectDestination(destination) {
     $("#tourDestination").val(destination); // Set the selected value in the input field
     $("#destinationList").hide(); // Hide the dropdown

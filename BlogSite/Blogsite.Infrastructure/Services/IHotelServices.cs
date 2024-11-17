@@ -15,6 +15,7 @@ namespace Blogsite.Infrastructure.Services
         IList<Hotel> GetAlHotesls();
         IList<Hotel> SearchedHotelList(string Location, DateTime CheckInDate, DateTime CheckOutDate, int NumberOfGuests);
         IList<string> GetAllHoteslsWithoutLimit();
+        IList<Hotel> SearchedRoomListWithHotel(int id, string Location, DateTime CheckInDate, DateTime CheckOutDate, int NumberOfGuests);
 
         void EditHotel(Hotel hotel);
         (IList<Hotel> hotels, int total, int totalDisplay) GetHotelList(int pageindex, int pagesize, string searchText, string orderBy);

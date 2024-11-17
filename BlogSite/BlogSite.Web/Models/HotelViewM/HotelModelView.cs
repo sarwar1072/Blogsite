@@ -2,6 +2,8 @@
 using Blogsite.Infrastructure.Entities;
 using Blogsite.Infrastructure.Services;
 using BlogSite.Web.Areas.Admin.Models;
+using DevSkill.Data;
+using Microsoft.CodeAnalysis;
 using System.CodeDom;
 
 namespace BlogSite.Web.Models.HotelViewM
@@ -16,8 +18,11 @@ namespace BlogSite.Web.Models.HotelViewM
         public IFormFile formFile { get; set; }
         public double PricePerNight { get; set; }
         public int AvailableRooms { get; set; }
+        public DateTime CheckInDate { get; set; }
+        public DateTime CheckOutDate { get; set; }
+        public int NumberOfGuests {  get; set; }    
         public IList<Hotel> HotelList { set; get; }
-
+        public IList<Room> rooms { set; get; }
         public HotelModelView(IHttpContextAccessor contextAccessor,IHotelServices hotelServices):base(contextAccessor)
         {
                 _hotelServices = hotelServices; 
@@ -28,6 +33,44 @@ namespace BlogSite.Web.Models.HotelViewM
             _lifetimeScope = lifetimeScope;
             _hotelServices = _lifetimeScope.Resolve<IHotelServices>();
             base.ResolveDependency(lifetimeScope);
+        }
+        public void ListOfHotelWithRoom(string location, DateTime checkInDate, DateTime checkOutDate,int numberOfGuests)
+        {
+            var data = _hotelServices.SearchedHotelList(location, checkInDate, checkOutDate, numberOfGuests);
+
+            HotelList = new List<Hotel>();
+            foreach (var hotel in data)
+            {
+                HotelList.Add(new Hotel
+                {
+                    Id = hotel.Id,  
+                    Name = hotel.Name,
+                    Location = hotel.Location,
+                    HotelUrl = hotel.HotelUrl,
+                    AvailableRooms = hotel.AvailableRooms,
+                    PricePerNight = hotel.PricePerNight,
+                });
+            }
+
+        }
+        public void ListOfHotelWithRoomDetails(int id,string location, DateTime checkInDate, DateTime checkOutDate, int numberOfGuests)
+        {
+            var data = _hotelServices.SearchedRoomListWithHotel(id,location, checkInDate, checkOutDate, numberOfGuests);
+
+            HotelList = new List<Hotel>();
+            foreach (var hotel in data)
+            {
+                HotelList.Add(new Hotel
+                {
+                    Id = hotel.Id,
+                    Name = hotel.Name,
+                    Location = hotel.Location,
+                    HotelUrl = hotel.HotelUrl,
+                    AvailableRooms = hotel.AvailableRooms,
+                    PricePerNight = hotel.PricePerNight,
+                });
+            }
+
         }
         public IList<Hotel> ListOfHotel()
         {
@@ -42,7 +85,6 @@ namespace BlogSite.Web.Models.HotelViewM
                     HotelUrl = hotel.HotelUrl,
                     PricePerNight = hotel.PricePerNight,
                 });
-
             }
             return HotelList;
         }
