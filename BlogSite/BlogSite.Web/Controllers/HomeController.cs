@@ -165,8 +165,11 @@ namespace BlogSite.Web.Controllers
         public IActionResult SearchHotel(HotelSearchFilter filter)
         {
             HttpContext.Session.SetString("Location", filter.Location);
+
             HttpContext.Session.SetString("CheckInDate", filter.CheckInDate.ToString());
+
             HttpContext.Session.SetString("CheckOutDate", filter.CheckOutDate.ToString());
+
             HttpContext.Session.SetInt32("NumberOfGuests", filter.NumberOfGuests);
 
             try
@@ -186,22 +189,17 @@ namespace BlogSite.Web.Controllers
         {
             // Retrieve parameters from session
             var location = HttpContext.Session.GetString("Location");
-            var checkInDate = DateTime.Parse(HttpContext.Session.GetString("CheckInDate"));
-            var checkOutDate = DateTime.Parse(HttpContext.Session.GetString("CheckOutDate"));
-            var numberOfGuests = HttpContext.Session.GetInt32("NumberOfGuests");
 
-            // Fetch hotel and rooms based on previous parameters and HotelId
-            //var result = _unitOfWork.HotelRepository.GetDynamic(
-            //    h => h.Id == hotelId && h.Location.ToLower().Contains(location.ToLower()),
-            //    null, c => c.Include(h => h.Rooms).ThenInclude(r => r.HotelBookings), false)
-            //    .Where(h => h.Rooms.Any(r => r.Capacity >= numberOfGuests &&
-            //        !r.HotelBookings.Any(b =>
-            //            checkInDate <= b.CheckOutDate && checkOutDate >= b.CheckInDate)))
-            //    .ToList();
+            var checkInDate = DateTime.Parse(HttpContext.Session.GetString("CheckInDate"));
+
+            var checkOutDate = DateTime.Parse(HttpContext.Session.GetString("CheckOutDate"));
+
+            var numberOfGuests = HttpContext.Session.GetInt32("NumberOfGuests");
+        
             try
             {
                 var model = _scope.Resolve<HotelModelView>();
-                model.ListOfHotelWithRoomDetails(hotelId, location, checkInDate, checkOutDate, 4);
+                model.ListOfHotelWithRoomDetails(hotelId, location, checkInDate, checkOutDate, numberOfGuests??0);
                 return View(model);
             }
             catch (Exception ex)

@@ -97,20 +97,25 @@ namespace Blogsite.Infrastructure.Services
         public IList<Hotel> SearchedHotelList(string Location, DateTime CheckInDate, DateTime CheckOutDate, int NumberOfGuests)
         {
             var result = _unitOfWork.HotelRepository.GetDynamic(s => s.Location.ToLower().Contains(Location.ToLower()), 
+
                       null,c => c.Include(h => h.Rooms).ThenInclude(r => r.HotelBookings), false)
+
                        .Where(h => h.Rooms.Any(r =>r.Capacity >= NumberOfGuests &&
+
                     !r.HotelBookings.Any(b =>(CheckInDate <= b.CheckInDate && CheckOutDate >= b.CheckOutDate)))).ToList();
 
             return result;
         }
-        public IList<Hotel> SearchedRoomListWithHotel(int id,string Location, DateTime CheckInDate, DateTime CheckOutDate, int NumberOfGuests)
+        public Hotel SearchedRoomListWithHotel(int id,string Location, DateTime CheckInDate, DateTime CheckOutDate, int NumberOfGuests)
         {
-            // Fetch hotel and rooms based on previous parameters and HotelId
-            var result = _unitOfWork.HotelRepository.GetDynamic(h => h.Id == id && h.Location.ToLower().Contains(Location.ToLower()),
-                     null, c => c.Include(h => h.Rooms).ThenInclude(r => r.HotelBookings), false)
-                .Where(h => h.Rooms.Any(r => r.Capacity >= NumberOfGuests && !r.HotelBookings.Any(b =>
-                        CheckInDate <= b.CheckOutDate && CheckOutDate >= b.CheckInDate))).ToList();
+            var result = _unitOfWork.HotelRepository.GetDynamic(h => h.Id == id && h.Location.ToLower().Contains(Location.ToLower()),null,
 
+                          c => c.Include(d => d.Images).Include(h => h.Rooms).ThenInclude(r => r.HotelBookings), false)
+
+                        .Where(h => h.Rooms.Any(r => r.Capacity >= NumberOfGuests && !r.HotelBookings.Any(b =>
+
+                        CheckInDate <= b.CheckOutDate && CheckOutDate >= b.CheckInDate))).FirstOrDefault();
+                                
             return result;
         }
         public (IList<Hotel> hotels, int total, int totalDisplay) GetHotelList(int pageindex, int pagesize, string searchText, string orderBy)

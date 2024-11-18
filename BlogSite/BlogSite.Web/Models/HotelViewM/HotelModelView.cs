@@ -23,6 +23,7 @@ namespace BlogSite.Web.Models.HotelViewM
         public int NumberOfGuests {  get; set; }    
         public IList<Hotel> HotelList { set; get; }
         public IList<Room> rooms { set; get; }
+        public IList<Images> images { set; get; }
         public HotelModelView(IHttpContextAccessor contextAccessor,IHotelServices hotelServices):base(contextAccessor)
         {
                 _hotelServices = hotelServices; 
@@ -57,20 +58,35 @@ namespace BlogSite.Web.Models.HotelViewM
         {
             var data = _hotelServices.SearchedRoomListWithHotel(id,location, checkInDate, checkOutDate, numberOfGuests);
 
-            HotelList = new List<Hotel>();
-            foreach (var hotel in data)
+           if (data != null)
             {
-                HotelList.Add(new Hotel
+                Id= data.Id; 
+                Location= data.Location;    
+                Name= data.Name;    
+                PricePerNight= data.PricePerNight;
+                AvailableRooms= data.AvailableRooms;
+                images=new List<Images>();    
+                if(data.Images != null)
                 {
-                    Id = hotel.Id,
-                    Name = hotel.Name,
-                    Location = hotel.Location,
-                    HotelUrl = hotel.HotelUrl,
-                    AvailableRooms = hotel.AvailableRooms,
-                    PricePerNight = hotel.PricePerNight,
-                });
+                    foreach (var item in data.Images)
+                    {
+                        images.Add(new Images
+                        {
+                            ImageUrl = item.ImageUrl,
+                            AlternativeText=item.AlternativeText,
+                        });
+                    }
+                }
+                rooms=new List<Room>(); 
+                if(data.Rooms != null)
+                {
+                    foreach(var item in data.Rooms)
+                    {
+                        rooms.Add(item);
+                    }
+                }
             }
-
+          
         }
         public IList<Hotel> ListOfHotel()
         {

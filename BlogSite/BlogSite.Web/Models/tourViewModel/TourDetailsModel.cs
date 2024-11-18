@@ -64,7 +64,6 @@ namespace BlogSite.Web.Models.tourViewModel
         public void GetTourDetails(int id)
         {
             var data = _tourServices.GetTourDetails(id);
-
             if (data != null)
             {
                 TourId = data.Id;
@@ -76,7 +75,7 @@ namespace BlogSite.Web.Models.tourViewModel
                 MapUrl = data.MapUrl;
                 Requirements = data.Requirements;
                 CancellationTerm = data.CancellationTerm;
-            }
+            }               
             TourDetails = new TourDetails()
             {
                 Overview=data.TourDetails.Overview,
@@ -96,7 +95,6 @@ namespace BlogSite.Web.Models.tourViewModel
                 {
                     ImageUrl = image.ImageUrl,
                     AlternativeText = image.AlternativeText,
-
                 });
             }
         }
