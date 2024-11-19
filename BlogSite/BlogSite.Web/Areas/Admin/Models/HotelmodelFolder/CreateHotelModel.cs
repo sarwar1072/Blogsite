@@ -29,7 +29,7 @@ namespace BlogSite.Web.Areas.Admin.Models.HotelmodelFolder
                 Location = Location,
                 HotelUrl = HotelUrl,
                 PricePerNight = PricePerNight,
-                AvailableRooms = AvailableRooms,    
+                AvailableRooms = AvailableRooms,  
             };
             model.Images = new List<Images>();
             if (UrlList != null)

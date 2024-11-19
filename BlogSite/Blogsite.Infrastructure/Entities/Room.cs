@@ -14,6 +14,9 @@ namespace Blogsite.Infrastructure.Entities
         public string? RoomType {  get; set; }   
         public decimal Price {  get; set; }
         public int? Capacity { get; set; }
+        public string? Amenities {  get; set; }  
+        public string? RoomFacilities {  get; set; } 
+        public string? Policies {  get; set; }   
         public string? RoomPhUrl {  get; set; }
         public  Hotel? Hotel { get; set; }   
         public int HotelId {  get; set; }  

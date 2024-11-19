@@ -9,6 +9,8 @@
 @section PageStyles {
 
     <link href="~/css/detailscss.css" rel="stylesheet" />
+
+    <link href="~/css/roomdetailscss.css" rel="stylesheet" />
 }
 
 <div class="container">
@@ -43,10 +45,64 @@
         </div>
         <div class="col-md-4">
             <h4>@Model.Name</h4>
-
             <p><strong>Destination:</strong> @Model.Location</p>
             <p><strong>Price:</strong>  @Model.PricePerNight </p>
             <p><strong>Spots Available:</strong> @Model.AvailableRooms</p>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <!-- Room Details Section -->
+    <div class="row">
+        <!-- Room Details -->
+        <div class="col-md-8">
+@*             <h4>Room Details</h4>
+ *@            <div class="room-details-header">
+                <h4>Room Details</h4>
+                <span>For 2 Adults, for 4 Nights</span>
+            </div>
+
+            @foreach (var item in Model.rooms)
+            {
+                <div class="room-card">
+                    <!-- Room Images -->
+                    <div class="room-images">
+                        <div class="thumbnail-images">
+                            <img src="@item.RoomPhUrl" class="d-block w-100" alt="No photo found">
+                        </div>
+                    </div>
+
+                    <!-- Room Info -->
+                    <div class="room-info">
+                        <h4>Master Suite</h4>
+                        <p><strong>King</strong> | Maximum Room Capacity: <strong>@item.Capacity</strong></p>
+                        <a href="#" class="view-room-details">View Room Details</a>
+                        <p class="availability">Hurry Up! Only 5 Rooms Left</p>
+                        <p class="availability">Option No: @item.RoomNumber</p>
+                        <p class="availability">RoomType: @item.RoomType</p>
+                        <p class="availability">Price: @item.Price</p>
+
+
+                        <ul class="amenities">
+                            <li>✔ Air Conditioning</li>
+                            <li>✔ Safe/Locker</li>
+                            <li>✔ Ceiling Fan</li>
+                            <li>✔ Toiletries</li>
+                            <a href="#">Show All</a>
+                        </ul>
+                    </div>
+                </div>
+
+            }
+        </div>
+
+        <!-- Pricing Summary -->
+        <div class="col-md-4">
+            <div class="pricing-summary">
+                <h4>Pricing Summary</h4>
+                <p>Add Rooms to Continue</p>
+                <button class="btn btn-primary" disabled>Continue</button>
+            </div>
         </div>
     </div>
 </div>

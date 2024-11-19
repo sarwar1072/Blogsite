@@ -51,11 +51,11 @@ namespace Blogsite.Infrastructure.DbContexts
             base.OnModelCreating(builder);
             #endregion
 
-                builder.Entity<Tour>()
-                    .HasMany(t => t.Images)
-                    .WithOne(i => i.Tour)
-                    .HasForeignKey(i => i.TourId)
-                    .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Tour>()
+                .HasMany(t => t.Images)
+                .WithOne(i => i.Tour)
+                .HasForeignKey(i => i.TourId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Hotel>()
                     .HasMany(t => t.Images)
@@ -87,6 +87,13 @@ namespace Blogsite.Infrastructure.DbContexts
                     .HasForeignKey(i => i.RoomId)
                    .OnDelete(DeleteBehavior.Cascade);
 
+            builder.Entity<HotelFacilities>()
+                   .HasOne(b => b.Hotel)  
+                   .WithOne(p => p.HotelFacilities)  
+                   .HasForeignKey<HotelFacilities>(p => p.HotelId)  
+                   .OnDelete(DeleteBehavior.Cascade);  
+
+
         }
 
         public DbSet<ApplicationUser>? ApplicationUsers { get; set; }
@@ -100,5 +107,6 @@ namespace Blogsite.Infrastructure.DbContexts
         public DbSet<ConsultationForm>?  ConsultationForms { get; set; }  
         public DbSet<Room>? Rooms { get; set; }
         public DbSet<HotelBooking>? HotelBookings { get; set;}
+        public DbSet<HotelFacilities>? HotelFacilities { get;}
     }
 }

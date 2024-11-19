@@ -1,0 +1,91 @@
+.container {
+    margin-top: 20px;
+}
+
+.room-card {
+    display: flex;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.room-images {
+    width: 40%;
+}
+
+    .room-images .main-image {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+.thumbnail-images img {
+    width: 20%;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.thumbnail-images span {
+    display: inline-block;
+    width: 20%;
+    text-align: center;
+    color: blue;
+}
+
+.room-info {
+    width: 60%;
+    padding-left: 15px;
+}
+
+    .room-info h4 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+    }
+
+.availability {
+    color: red;
+    font-weight: bold;
+}
+
+.amenities {
+    list-style: none;
+    padding: 0;
+}
+
+    .amenities li {
+        display: inline-block;
+        width: 48%;
+    }
+
+.pricing-summary {
+    border: 1px solid #ddd;
+    padding: 15px;
+    text-align: center;
+}
+
+    .pricing-summary button {
+        width: 100%;
+    }
+
+/*css form room details header
+*/
+.room-details-header {
+    display: flex;
+    justify-content: space-between; /* Push items to the sides */
+    align-items: center; /* Align items vertically in the center */
+    background-color: #eaf3ff; /* Light blue background */
+    padding: 10px 20px; /* Add some padding around the content */
+    border-radius: 8px; /* Optional: Rounded corners */
+    font-family: Arial, sans-serif; /* Match the font style */
+}
+
+    .room-details-header h4 {
+        margin: 0;
+        color: #000066; /* Dark blue color for heading */
+        font-weight: bold;
+    }
+
+    .room-details-header span {
+        color: #000066; /* Dark blue color for text */
+        font-weight: bold;
+    }

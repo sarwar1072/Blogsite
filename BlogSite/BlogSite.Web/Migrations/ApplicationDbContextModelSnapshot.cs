@@ -172,6 +172,47 @@ namespace BlogSite.Web.Migrations
                     b.ToTable("HotelBookings");
                 });
 
+            modelBuilder.Entity("Blogsite.Infrastructure.Entities.HotelFacilities", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("BusinessFacilities")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FitnessFacilities")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FoodFacilities")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("General")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("HotelId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("IndoorFacitilies")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Parking")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Policies")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HotelId")
+                        .IsUnique()
+                        .HasFilter("[HotelId] IS NOT NULL");
+
+                    b.ToTable("HotelFacilities");
+                });
+
             modelBuilder.Entity("Blogsite.Infrastructure.Entities.Images", b =>
                 {
                     b.Property<int>("Id")
@@ -283,16 +324,16 @@ namespace BlogSite.Web.Migrations
                         {
                             Id = new Guid("e9b3be8c-99c5-42c7-8f2e-1eb39f6d9125"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d08c798c-2169-48c9-b0ac-568e2f9445c8",
+                            ConcurrencyStamp = "8d7a9249-0efd-4890-9652-857d1a155b1b",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             Name = "Admin",
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "admin@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKi3KXr/T5B/ppp/1U87JtpL9eThsEKUMSeyqYGuuiZJzq14HOF1TzoEY+LJcouw7A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEP+d299UukIBzzyGTmtRHuc6bGFpIHDueyM+zrpKEQA6aRr8xZt7CKdMpv+4eldy2g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "83eda425-b31e-43a6-99e3-87e38ab08f53",
+                            SecurityStamp = "55cb5d6a-c165-4df3-8112-55689e3fcbf2",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
@@ -300,16 +341,16 @@ namespace BlogSite.Web.Migrations
                         {
                             Id = new Guid("8f3d96ce-76ec-4992-911a-33ceb81fa29d"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6bd808b5-6aff-4753-8fcd-df8d3ff3a7a4",
+                            ConcurrencyStamp = "eb455503-487c-4cb8-8e5c-c278274bba5a",
                             Email = "user@gmail.com.com",
                             EmailConfirmed = true,
                             LockoutEnabled = true,
                             Name = "sarwar",
                             NormalizedEmail = "user@gmail.com.com",
                             NormalizedUserName = "user@gmail.com.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEC320tbST2ZYyA/ZS8r4dhowmm8OAvqZNDdNbcK/h2JaQ1lkumuu+2wYAgRlEargBA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEH+mRbrBCeZxCxfWdIpS0ZDD7YTn4h3FJCT0XX1dJAv2evg8vkbCVk0yw8WbdputAA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "2c95a90a-9d27-4674-b428-c1cc58a44c92",
+                            SecurityStamp = "6ce3ef77-7935-4220-b300-7c4f9e877688",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com.com"
                         });
@@ -346,14 +387,14 @@ namespace BlogSite.Web.Migrations
                         new
                         {
                             Id = new Guid("2c5e174e-3b0e-446f-86af-483d56fd7210"),
-                            ConcurrencyStamp = "638671199266384106",
+                            ConcurrencyStamp = "638676429855313937",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("e943ffbf-65a4-4d42-bb74-f2ca9ea8d22a"),
-                            ConcurrencyStamp = "638671199266384128",
+                            ConcurrencyStamp = "638676429855313960",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -510,14 +551,23 @@ namespace BlogSite.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("Amenities")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("Capacity")
                         .HasColumnType("int");
 
                     b.Property<int>("HotelId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Policies")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("RoomFacilities")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RoomNumber")
                         .HasColumnType("int");
@@ -633,11 +683,21 @@ namespace BlogSite.Web.Migrations
             modelBuilder.Entity("Blogsite.Infrastructure.Entities.HotelBooking", b =>
                 {
                     b.HasOne("Blogsite.Infrastructure.Entities.Room", "Room")
-                        .WithMany("HotelBooking")
+                        .WithMany("HotelBookings")
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Room");
+                });
+
+            modelBuilder.Entity("Blogsite.Infrastructure.Entities.HotelFacilities", b =>
+                {
+                    b.HasOne("Blogsite.Infrastructure.Entities.Hotel", "Hotel")
+                        .WithOne("HotelFacilities")
+                        .HasForeignKey("Blogsite.Infrastructure.Entities.HotelFacilities", "HotelId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.Navigation("Hotel");
                 });
 
             modelBuilder.Entity("Blogsite.Infrastructure.Entities.Images", b =>
@@ -747,6 +807,8 @@ namespace BlogSite.Web.Migrations
 
             modelBuilder.Entity("Blogsite.Infrastructure.Entities.Hotel", b =>
                 {
+                    b.Navigation("HotelFacilities");
+
                     b.Navigation("Images");
 
                     b.Navigation("Rooms");
@@ -759,7 +821,7 @@ namespace BlogSite.Web.Migrations
 
             modelBuilder.Entity("Blogsite.Infrastructure.Entities.Room", b =>
                 {
-                    b.Navigation("HotelBooking");
+                    b.Navigation("HotelBookings");
                 });
 
             modelBuilder.Entity("Blogsite.Infrastructure.Entities.Tour", b =>

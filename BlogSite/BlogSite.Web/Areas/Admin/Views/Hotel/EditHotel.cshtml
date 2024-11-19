@@ -3,7 +3,9 @@
     ViewData["Title"] = "AddHotel";
 }
 
-
+@section PageStyle {
+    <link href="~/FloraEditorFile/CSS/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
+}
 <div class="container p-5 my-5 border">
     <form asp-action="EditHotel" method="post" enctype="multipart/form-data">
         <input type="hidden" asp-for="Id" />
@@ -24,6 +26,14 @@
             <input asp-for="formFile" type="file" class="form-control" />
             <span asp-validation-for="formFile" class="text-danger"></span>
         </div>
+       @*  <div class="form-group">
+            <label class="form-label">Facilities</label>
+            <textarea class="form-control" id="content" asp-for="Hotelfacilities"></textarea>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Policies</label>
+            <textarea class="form-control" id="content" asp-for="Policy"></textarea>
+        </div> *@
         <div class="form-group">
             <label asp-for="PricePerNight" class="control-label">Price Per Night</label>
             <input asp-for="PricePerNight" class="form-control" />
@@ -50,6 +60,13 @@
 
 @section PageScript
 {
+    <script type="text/javascript" src="~/FloraEditorFile/JS/froala_editor.pkgd.min.js"></script>
+
+    <script>
+        var editor = new FroalaEditor('#content', {
+            toolbarButtons: [['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript'], ['fontFamily', 'fontSize', 'textColor', 'backgroundColor'], ['inlineClass', 'inlineStyle', 'clearFormatting']]
+        });
+    </script>
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
