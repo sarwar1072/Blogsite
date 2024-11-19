@@ -10,7 +10,7 @@ namespace Blogsite.Infrastructure.Services
     public interface IHotelfacilityServices
     {
         void Addfacility(HotelFacilities hotelfacility);
-        IList<HotelFacilities> GetAlHoteslfacility();
+        public IList<Hotel> GetAlHotesls();
         void EditHotelfacility(HotelFacilities hotel);
         HotelFacilities GetByid(int id);
         void DeletehotelFacility(int id);

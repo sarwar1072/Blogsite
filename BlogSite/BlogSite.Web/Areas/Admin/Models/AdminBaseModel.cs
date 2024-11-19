@@ -111,17 +111,18 @@ namespace BlogSite.Web.Areas.Admin.Models
                            Childs=new List<MenuChildItem>
                            {
                                new MenuChildItem{Title="View  Room",Url="/Admin/Room"},
-                               new MenuChildItem{Title="Add ",Url="/Admin/Room/AddRoom/"}
+                               new MenuChildItem{Title="Add ",Url="/Admin/Room/AddRoom"}
                            }
                         }
                     },
                     {
                         new MenuItem
                         {
-                           Title="List User",
+                           Title="Hotel Facilitiy",
                            Childs=new List<MenuChildItem>
                            {
-                               new MenuChildItem{Title="View  User",Url="/Admin/User"},
+                               new MenuChildItem{Title="Hotel Facility",Url="/Admin/HotelFacility"},
+                               new MenuChildItem{Title="Add AddFacility",Url="/Admin/HotelFacility/AddFacility"}
                            }
                         }
                     }

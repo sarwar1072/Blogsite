@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Blogsite.Infrastructure.Services
 {
-    public class HotelfacilityServices
+    public class HotelfacilityServices:IHotelfacilityServices
     {
         private IProjectUnitOfWork _unitOfWork;
         public HotelfacilityServices(IProjectUnitOfWork projectUnitOfWork)
@@ -25,9 +25,9 @@ namespace Blogsite.Infrastructure.Services
             _unitOfWork.HotelFacilitiesRepositories.Add(hotelfacility);
             _unitOfWork.Save();
         }
-        public IList<HotelFacilities> GetAlHoteslfacility()
+        public IList<Hotel> GetAlHotesls()
         {
-            return _unitOfWork.HotelFacilitiesRepositories.GetAll();
+            return _unitOfWork.HotelRepository.GetAll();
         }
         public IList<string> GetAllHoteslsWithoutLimit()
         {
