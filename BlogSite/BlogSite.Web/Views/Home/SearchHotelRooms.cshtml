@@ -13,9 +13,9 @@
     <link href="~/css/roomdetailscss.css" rel="stylesheet" />
 }
 
-<div class="container">
+<div class="container card p-2">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8 ">
             <div id="tourCarousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner">
                     @if (Model?.images != null && Model.images.Any())
@@ -51,17 +51,16 @@
         </div>
     </div>
 </div>
-<div class="container">
+
+<div class="container p-2">
     <!-- Room Details Section -->
     <div class="row">
         <!-- Room Details -->
         <div class="col-md-8">
-@*             <h4>Room Details</h4>
- *@            <div class="room-details-header">
-                <h4>Room Details</h4>
-                <span>For 2 Adults, for 4 Nights</span>
-            </div>
-
+           <div class="room-details-header">
+                       <h4>Room Details</h4>
+                      <span>For 2 Adults, for 4 Nights</span>
+                </div>
             @foreach (var item in Model.rooms)
             {
                 <div class="room-card">
@@ -82,17 +81,15 @@
                         <p class="availability">RoomType: @item.RoomType</p>
                         <p class="availability">Price: @item.Price</p>
 
-
                         <ul class="amenities">
                             <li>✔ Air Conditioning</li>
                             <li>✔ Safe/Locker</li>
                             <li>✔ Ceiling Fan</li>
                             <li>✔ Toiletries</li>
-                            <a href="#">Show All</a>
+                             <a href="#">Show All</a>
                         </ul>
                     </div>
                 </div>
-
             }
         </div>
 
@@ -106,3 +103,145 @@
         </div>
     </div>
 </div>
+
+<h4>Facilities</h4>
+
+<div class="facilities-section card p-2">
+    <div class="row">
+        <!-- Business Facilities -->
+        <div class="col-md-4">
+            <h5>Business Facilities</h5>
+            @if (!string.IsNullOrEmpty(Model.hotelFacilities.BusinessFacilities))
+            {
+                <ul class="facility-list">
+                    @foreach (var item in Model.hotelFacilities.BusinessFacilities.Split(','))
+                    {
+                        <li>
+                            <i class="fa fa-check"></i> @Html.Raw(item)
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+
+        <!-- Fitness & Wellness Facilities -->
+        <div class="col-md-4">
+            <h5>Fitness & Wellness Facilities</h5>
+            @if (!string.IsNullOrEmpty(Model.hotelFacilities.FitnessFacilities))
+            {
+                <ul class="facility-list">
+                    @foreach (var item in Model.hotelFacilities.FitnessFacilities.Split(','))
+                    {
+                        <li><i class="fa fa-check"></i> @Html.Raw(item)</li>
+                    }
+                </ul>
+            }
+        </div>
+
+        <!-- Food & Drink -->
+        <div class="col-md-4">
+            <h5>Food & Drink</h5>
+            @if (!string.IsNullOrEmpty(Model.hotelFacilities.FoodFacilities))
+            {
+                <ul class="facility-list">
+                    @foreach (var item in Model.hotelFacilities.FoodFacilities.Split(','))
+                    {
+                        <li><i class="fa fa-check"></i> @Html.Raw(item)</li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <!-- General -->
+        <div class="col-md-4">
+            <h5>General</h5>
+            @if (!string.IsNullOrEmpty(Model.hotelFacilities.General))
+            {
+                <ul class="facility-list">
+                    @foreach (var item in Model.hotelFacilities.General.Split(','))
+                    {
+                        <li><i class="fa fa-check"></i> @Html.Raw(item)</li>
+                    }
+                </ul>
+            }
+        </div>
+
+        <!-- Indoor Entertainment -->
+        <div class="col-md-4">
+            <h5>Indoor Entertainment</h5>
+            @if (!string.IsNullOrEmpty(Model.hotelFacilities.IndoorFacitilies))
+            {
+                <ul class="facility-list">
+                    @foreach (var item in Model.hotelFacilities.IndoorFacitilies.Split(','))
+                    {
+                        <li><i class="fa fa-check"></i> @Html.Raw(item)</li>
+                    }
+                </ul>
+            }
+        </div>
+
+        <!-- Parking -->
+        <div class="col-md-4">
+            <h5>Parking</h5>
+            @if (!string.IsNullOrEmpty(Model.hotelFacilities.Parking))
+            {
+                <ul class="facility-list">
+                    @foreach (var item in Model.hotelFacilities.Parking.Split(','))
+                    {
+                        <li><i class="fa fa-check"></i> @Html.Raw(item)</li>
+                    }
+                </ul>
+            }
+        </div>
+        <div class="col-md-4">
+            <h5>Policy</h5>
+            @if (!string.IsNullOrEmpty(Model.hotelFacilities.Policies))
+            {
+                <ul class="facility-list">
+                    @foreach (var item in Model.hotelFacilities.Policies.Split(','))
+                    {
+                        <li><i class="fa fa-check"></i> @Html.Raw(item)</li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+    .facility-list {
+        list-style: none; /* Remove default bullets */
+        padding: 0; /* Remove padding for the list */
+    }
+
+        .facility-list li {
+            display: flex; /* Ensures items are in the same line */
+            align-items: center; /* Vertically align icon and text */
+            margin-bottom: 5px; /* Space between list items */
+        }
+
+            .facility-list li i {
+                color: green; /* Color for the checkmark */
+                margin-right: 8px; /* Space between icon and text */
+            }
+    .facilities-section h5 {
+        color: #003366;
+        font-weight: bold;
+    }
+
+    .facilities-section ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .facilities-section ul li {
+        margin-bottom: 5px;
+    }
+
+    .facilities-section ul li i {
+        color: green;
+        margin-right: 5px;
+    }
+</style>

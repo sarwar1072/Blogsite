@@ -23,6 +23,7 @@ namespace BlogSite.Web.Models.HotelViewM
         public int NumberOfGuests {  get; set; }    
         public IList<Hotel> HotelList { set; get; }
         public IList<Room> rooms { set; get; }
+        public HotelFacilities hotelFacilities { get; set; }    
         public IList<Images> images { set; get; }
         public HotelModelView(IHttpContextAccessor contextAccessor,IHotelServices hotelServices):base(contextAccessor)
         {
@@ -65,8 +66,20 @@ namespace BlogSite.Web.Models.HotelViewM
                 Name= data.Name;    
                 PricePerNight= data.PricePerNight;
                 AvailableRooms= data.AvailableRooms;
-                images=new List<Images>();    
-                if(data.Images != null)
+                images=new List<Images>();   
+                hotelFacilities=new HotelFacilities();
+                if(data.HotelFacilities != null)
+                {
+                    hotelFacilities.BusinessFacilities = data.HotelFacilities.BusinessFacilities;
+                    hotelFacilities.FitnessFacilities = data.HotelFacilities.FitnessFacilities;
+                    hotelFacilities.FoodFacilities = data.HotelFacilities.FoodFacilities;
+                    hotelFacilities.General = data.HotelFacilities.General;
+                    hotelFacilities.IndoorFacitilies = data.HotelFacilities.IndoorFacitilies;
+                    hotelFacilities.Parking = data.HotelFacilities.Parking;
+                    hotelFacilities.Policies = data.HotelFacilities.Policies;
+
+                }
+                if (data.Images != null)
                 {
                     foreach (var item in data.Images)
                     {

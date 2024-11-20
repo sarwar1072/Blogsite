@@ -110,7 +110,7 @@ namespace Blogsite.Infrastructure.Services
         {
             var result = _unitOfWork.HotelRepository.GetDynamic(h => h.Id == id && h.Location.ToLower().Contains(Location.ToLower()),null,
 
-                          c => c.Include(d => d.Images).Include(h => h.Rooms).ThenInclude(r => r.HotelBookings), false)
+                          c => c.Include(d => d.Images).Include(i => i.HotelFacilities).Include(h => h.Rooms).ThenInclude(r => r.HotelBookings), false)
 
                         .Where(h => h.Rooms.Any(r => r.Capacity >= NumberOfGuests && !r.HotelBookings.Any(b =>
 

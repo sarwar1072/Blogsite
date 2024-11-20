@@ -10,7 +10,7 @@ namespace BlogSite.Web.Areas.Admin.Models.HotelFacFolder
         public CreateHotelfacility(IHttpContextAccessor httpContext, IHotelfacilityServices hotelfacility) : base(httpContext, hotelfacility) { }
        
         public CreateHotelfacility() { }
-        
+       
         public string? BusinessFacilities { get; set; }
         public string? FitnessFacilities { get; set; }
         public string? FoodFacilities { get; set; }

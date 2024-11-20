@@ -89,3 +89,24 @@
         color: #000066; /* Dark blue color for text */
         font-weight: bold;
     }
+
+
+
+/*.facilities-section h5 {
+    color: #003366;
+    font-weight: bold;
+}
+
+.facilities-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+    .facilities-section ul li {
+        margin-bottom: 5px;
+    }
+
+        .facilities-section ul li i {
+            color: green;
+            margin-right: 5px;
+        }*/
