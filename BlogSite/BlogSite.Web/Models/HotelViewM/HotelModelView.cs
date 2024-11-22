@@ -23,6 +23,7 @@ namespace BlogSite.Web.Models.HotelViewM
         public int NumberOfGuests {  get; set; }    
         public IList<Hotel> HotelList { set; get; }
         public IList<Room> rooms { set; get; }
+        public int roomId {  get; set; }    
         public HotelFacilities hotelFacilities { get; set; }    
         public IList<Images> images { set; get; }
         public HotelModelView(IHttpContextAccessor contextAccessor,IHotelServices hotelServices):base(contextAccessor)
@@ -95,7 +96,15 @@ namespace BlogSite.Web.Models.HotelViewM
                 {
                     foreach(var item in data.Rooms)
                     {
-                        rooms.Add(item);
+                        rooms.Add(new Room
+                        {
+                            Id = item.Id,   
+                            RoomNumber = item.RoomNumber,   
+                            RoomType = item.RoomType,   
+                            Price = item.Price, 
+                            Capacity = item.Capacity,
+                            RoomPhUrl = item.RoomPhUrl, 
+                        });
                     }
                 }
             }

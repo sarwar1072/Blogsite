@@ -62,7 +62,7 @@ namespace BlogSite.Web
             builder.RegisterType< CreateHotelfacility >().AsSelf().InstancePerLifetimeScope ();
             builder.RegisterType<EditHotelfacility>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<HotelfacilityModel>().AsSelf().InstancePerLifetimeScope();
-
+            builder.RegisterType< RoomDetailsModel >().AsSelf() .InstancePerLifetimeScope();    
             base.Load(builder);
         }
     }

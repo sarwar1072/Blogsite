@@ -13,6 +13,8 @@ namespace Blogsite.Infrastructure.Services
         void Deletehotel(int id);
         Hotel GetByid(int id);
         IList<Hotel> GetAlHotesls();
+        Room GetRoomDetailsById(int id);
+
         IList<Hotel> SearchedHotelList(string Location, DateTime CheckInDate, DateTime CheckOutDate, int NumberOfGuests);
         IList<string> GetAllHoteslsWithoutLimit();
         Hotel SearchedRoomListWithHotel(int id, string Location, DateTime CheckInDate, DateTime CheckOutDate, int NumberOfGuests);

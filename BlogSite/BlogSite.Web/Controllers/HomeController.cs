@@ -19,12 +19,12 @@ namespace BlogSite.Web.Controllers
         private ITourServices _tourServices;
         private IHotelServices _hotelServices;
 
-        public HomeController(ILogger<HomeController> logger,ILifetimeScope lifetime,ITourServices tour,
+        public HomeController(ILogger<HomeController> logger, ILifetimeScope lifetime, ITourServices tour,
             IHotelServices hotelServices)
         {
             _logger = logger;
             _scope = lifetime;
-            _tourServices = tour;   
+            _tourServices = tour;
             _hotelServices = hotelServices;
         }
 
@@ -55,21 +55,21 @@ namespace BlogSite.Web.Controllers
 
                 return Json(js);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError($"{ex.Message}");
-                ViewBag.ErrorMessage = ex.Message;  
+                ViewBag.ErrorMessage = ex.Message;
             }
-            return View();  
+            return View();
         }
-        public IActionResult Details(int id) 
+        public IActionResult Details(int id)
         {
             try
             {
                 var model = _scope.Resolve<TourDetailsModel>();
                 model.ResolveDependency(_scope);
 
-                 model.GetTourDetails(id);
+                model.GetTourDetails(id);
                 //_logger.LogInformation("Returning TourList view with model data");
                 return View(model);
             }
@@ -77,8 +77,8 @@ namespace BlogSite.Web.Controllers
             {
                 _logger.LogError($"{ex.Message}");
                 ViewBag.Message = "Error";
-            }           
-            return View(); 
+            }
+            return View();
         }
         [HttpPost]
         public IActionResult Details([FromBody] TourDetailsModel model)
@@ -87,7 +87,7 @@ namespace BlogSite.Web.Controllers
             {
                 model.ResolveDependency(_scope);
                 //await model.GetUserInfoAsync();
-                 model.AddConsult();
+                model.AddConsult();
                 return View(model);
             }
             catch (Exception ex)
@@ -134,15 +134,15 @@ namespace BlogSite.Web.Controllers
 
                 return Json(tour);
             }
-            catch(Exception ex) {
+            catch (Exception ex) {
                 _logger.LogError($"{ex.Message}");
                 ViewBag.Message = "Error";
 
             }
-            return View();  
+            return View();
         }
-       
-       
+
+
         //for hotel slot
         [HttpGet]
         public IActionResult GetListOfHotel()
@@ -182,7 +182,7 @@ namespace BlogSite.Web.Controllers
             {
                 _logger.LogError($"{ex.Message}");
             }
-            return View();  
+            return View();
         }
         //[HttpPost]
         public IActionResult SearchHotelRooms(int hotelId)
@@ -195,11 +195,11 @@ namespace BlogSite.Web.Controllers
             var checkOutDate = DateTime.Parse(HttpContext.Session.GetString("CheckOutDate"));
 
             var numberOfGuests = HttpContext.Session.GetInt32("NumberOfGuests");
-        
+
             try
             {
                 var model = _scope.Resolve<HotelModelView>();
-                model.ListOfHotelWithRoomDetails(hotelId, location, checkInDate, checkOutDate, numberOfGuests??0);
+                model.ListOfHotelWithRoomDetails(hotelId, location, checkInDate, checkOutDate, numberOfGuests ?? 0);
                 return View(model);
             }
             catch (Exception ex)
@@ -208,7 +208,21 @@ namespace BlogSite.Web.Controllers
             }
             return View();
         }
+        public IActionResult RoomBook(int id)
+        {
+            var location = HttpContext.Session.GetString("Location");
 
+            var checkInDate = DateTime.Parse(HttpContext.Session.GetString("CheckInDate"));
+
+            var checkOutDate = DateTime.Parse(HttpContext.Session.GetString("CheckOutDate"));
+
+            var numberOfGuests = HttpContext.Session.GetInt32("NumberOfGuests");
+            
+            var model=_scope.Resolve<RoomDetailsModel>();
+            model.RoomDetails(id, checkInDate, checkOutDate, numberOfGuests ?? 0);
+
+            return View(model);  
+        }
         public IActionResult HotelDetails(int id)
         {
 

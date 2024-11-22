@@ -132,6 +132,11 @@ namespace Blogsite.Infrastructure.Services
             }
             return (result.data, result.total, result.totalDisplay);
         }
+        public Room GetRoomDetailsById(int id) 
+        {
+            var roomData = _unitOfWork.RoomRepository.GetDynamic(c => c.Id == id, x => x.Include(y => y.Hotel));
+            return roomData;
+        }
 
     }
 }
