@@ -14,7 +14,9 @@
                 <div class="card-body">
                     <h2 class="card-title">Review Your Booking</h2>
                     <h3 class="mt-3">@Model.Name</h3>
+                    <input type="hidden" asp-for="Id" id="roomid" />
                     <p class="text-muted">@Model.filter.NumberOfGuests Guests | 1 Room</p>
+                     <input type="hidden" asp-for="NumberOfGuests" id="numgeust" />
 
                     <div class="d-flex justify-content-between mt-4">
                         <div>
@@ -22,12 +24,16 @@
                             <strong>@Model.filter.CheckInDate.ToString("dd MMM, yyyy")</strong>
                             <br />
                             <span class="text-muted">@Model.filter.CheckInDate.DayOfWeek</span>
+                            <input type="hidden" asp-for="CheckInDate" id="checkindate" />
+
                         </div>
                         <div>
                             <p class="mb-1 text-muted">Check Out:</p>
                             <strong>@Model.CheckOutDate.ToString("dd MMM, yyyy")</strong>
                             <br />
                             <span class="text-muted">@Model.CheckOutDate.DayOfWeek</span>
+                            <input type="hidden" asp-for="CheckOutDate" id="checkioutdate" />
+
                         </div>
                     </div>
                     <p class="mt-3"><strong>@Model.nights</strong> Nights</p>
@@ -71,3 +77,133 @@
         </div>
     </div>
 </div>
+
+@* <div class="container my-4">
+    <div class="card p-4 shadow-sm">
+        <h5 class="fw-bold mb-3">Guest Details</h5>
+
+        <!-- Room Name -->
+        <h6 class="fw-bold text-primary">@Model.Name</h6>
+
+        @for (int i = 1; i <= Model.filter.NumberOfGuests; i++)
+        {
+            <div class="row mb-3">
+                <!-- Guest Heading -->
+                <div class="col-12">
+                    <p class="fw-bold">Guest @i (Adult)</p>
+                </div>
+
+                <!-- Input Fields for First Name and Last Name -->
+                <div class="col-md-6 mb-3">
+                    <input type="text" name="Guests[@(i - 1)].GivenName" class="form-control" placeholder="Given Name" required />
+                </div>
+                <div class="col-md-6 mb-3">
+                    <input type="text" name="Guests[@(i - 1)].Surname" class="form-control" placeholder="Surname" required />
+                </div>
+            </div>
+        }
+    </div>
+</div>
+ *@
+<div class="container my-4">
+    <div class="card p-4 shadow-sm">
+        <h2 class="mb-3">Additional Requests</h2>
+        <p>Request will be passed to property, <strong>fulfillment subject to availability</strong></p>
+
+        <form asp-action="RoomBook" method="post">
+            <!-- Request Options -->
+             <input type="hidden" asp-for="Id" id="roomid" />
+
+            <div class="mb-4">
+                <h5 class="mb-2">Request Options</h5>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" asp-for="AirportTransfer" id="AirportTransfer" />
+                    <label class="form-check-label" for="AirportTransfer">Airport Transfer</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" asp-for="ExtraBed" id="ExtraBed" />
+                    <label class="form-check-label" for="ExtraBed">Extra Bed</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" asp-for="RoomOnHigherFloor" id="RoomOnHigherFloor" />
+                    <label class="form-check-label" for="RoomOnHigherFloor">Room On a Higher Floor</label>
+                </div>
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" asp-for="DecorationsInRoom" id="DecorationsInRoom" />
+                    <label class="form-check-label" for="DecorationsInRoom">Decorations in Room</label>
+                </div>
+            </div>
+            <!-- Bed Type -->
+            <div class="mb-4">
+                <h5 class="mb-2">Bed Type</h5>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" asp-for="BedType" value="Large Bed" id="LargeBed" />
+                    <label class="form-check-label" for="LargeBed">Large Bed 🛏️</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" asp-for="BedType" value="Twin Beds" id="TwinBeds" />
+                    <label class="form-check-label" for="TwinBeds">Twin Beds 🛏️</label>
+                </div>
+            </div>
+            <!-- Room Preference -->
+            <div class="mb-4">
+                <h5 class="mb-2">Room Preference</h5>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" asp-for="RoomPreference" value="Non-Smoking" id="NonSmoking" />
+                    <label class="form-check-label" for="NonSmoking">Non-Smoking</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" asp-for="RoomPreference" value="Smoking" id="Smoking" />
+                    <label class="form-check-label" for="Smoking">Smoking</label>
+                </div>
+            </div>
+            <!-- Note to Property -->
+            <div class="mb-4">
+                <h5 class="mb-2">Leave a Note For The Property</h5>
+                <textarea class="form-control" asp-for="NoteToProperty" rows="3" placeholder="I am arriving by Flight No. XX-XXX. Please see if you can arrange an airport shuttle."></textarea>
+            </div>
+
+            <!-- Confirm Booking Button -->
+            <button type="submit" class="btn btn-warning w-100 fw-bold">Confirm Booking</button>
+        </form>
+    </div>
+</div>
+@* <script>
+    $(document).ready(function () {
+        // Attach the submit event handler to the form
+        $('form').on('submit', function (e) {
+            e.preventDefault(); // Prevent default form submission
+
+            // Collect form data into a JavaScript object
+            const formData = {
+                AirportTransfer: $('#AirportTransfer').is(':checked'), // Check if checkbox is checked
+                ExtraBed: $('#ExtraBed').is(':checked'), // Check if checkbox is checked
+                RoomOnHigherFloor: $('#RoomOnHigherFloor').is(':checked'), // Check if checkbox is checked
+                DecorationsInRoom: $('#DecorationsInRoom').is(':checked'), // Check if checkbox is checked
+                BedType: $('input[name="BedType"]:checked').val(), // Get selected bed type radio button
+                RoomPreference: $('input[name="RoomPreference"]:checked').val(), // Get selected room preference radio button
+                NoteToProperty: $('textarea[asp-for="NoteToProperty"]').val() // Get textarea value
+            };
+            // Log collected data for debugging
+            console.log('Form Data:', formData);
+            // Send the data to the server using AJAX
+            $.ajax({
+                url: '/Home/RoomBooks', // Update with your controller and action URL
+                method: 'POST',
+                contentType: 'application/json', // Sending JSON data
+                data: JSON.stringify(formData), // Convert form data object to JSON string
+                success: function (response) {
+                    console.log('Success:', response);
+                    alert('Booking request submitted successfully!');
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                    alert('Something went wrong. Please try again.');
+                }
+            });
+        });
+    });
+
+</script>
+ *@
+

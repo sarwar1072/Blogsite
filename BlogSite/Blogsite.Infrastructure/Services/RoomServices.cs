@@ -80,6 +80,11 @@ namespace Blogsite.Infrastructure.Services
             _projectUnitOfWork.RoomRepository.Remove(entity);
             _projectUnitOfWork.Save();
         }
+        public void AddBookingData(HotelBooking hotelBooking)
+        {
+            _projectUnitOfWork.HotelBookingRepository.Add(hotelBooking);
+            _projectUnitOfWork.Save();
 
+        }
     }
 }

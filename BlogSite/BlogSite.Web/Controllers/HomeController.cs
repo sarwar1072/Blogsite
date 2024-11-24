@@ -34,20 +34,7 @@ namespace BlogSite.Web.Controllers
             return View();
         }
         public IActionResult GetListOfDetination()
-        {
-
-            //var model = new List<SelectListItem>();
-
-            //foreach (var tour in _tourServices.ListOfTourName())
-            //{
-            //    var addItem = new SelectListItem()
-            //    {
-            //        Text = tour.Destination,
-            //        Value = tour.Id.ToString(),
-
-            //    };
-            //    model.Add(addItem);
-            //}
+        {          
             try
             {
                 var model = _tourServices.ListOfTourName();
@@ -208,6 +195,7 @@ namespace BlogSite.Web.Controllers
             }
             return View();
         }
+        [HttpGet]
         public IActionResult RoomBook(int id)
         {
             var location = HttpContext.Session.GetString("Location");
@@ -223,11 +211,46 @@ namespace BlogSite.Web.Controllers
 
             return View(model);  
         }
-        public IActionResult HotelDetails(int id)
-        {
 
+        [HttpPost]
+        public IActionResult RoomBook( RoomDetailsModel model)
+        {
+            model.ResolveDependency(_scope);
+            try
+            {
+                var checkInDate = HttpContext.Session.GetString("CheckInDate");
+                var checkOutDate = HttpContext.Session.GetString("CheckOutDate");
+                var numberOfGuests = HttpContext.Session.GetInt32("NumberOfGuests");
+
+                if (checkInDate == null || checkOutDate == null || !numberOfGuests.HasValue)
+                {
+                    return BadRequest("Session values are missing.");
+                }
+
+                // Map session values to the filter
+                var filter = new HotelSearchFilter
+                {
+                    CheckInDate = DateTime.Parse(checkInDate),
+                    CheckOutDate = DateTime.Parse(checkOutDate),
+                    NumberOfGuests = numberOfGuests.Value
+                };
+                // Initialize your model and call AddBookingInfo
+                //var data = new RoomDetailsModel();
+                model.AddBookingInfo(filter);
+
+                return RedirectToAction(nameof(WishPage));
+            }
+            catch (Exception ex)
+            {
+                // Log the exception and return an error response
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+        public IActionResult WishPage()
+        {
             return View();  
         }
+        
         public IActionResult GetHotelList()
         {
             try

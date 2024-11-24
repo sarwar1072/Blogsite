@@ -1,16 +1,11 @@
-﻿using DevSkill.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Blogsite.Infrastructure.Entities
+﻿namespace BlogSite.Web.Models.HotelViewM
 {
-    public class HotelBooking:IEntity<int>
+    public class BookingRequestViewModel
     {
         public int Id { get; set; }
         public int NumberOfGuests { get; set; } // Number of Guests
+        public DateTime CheckInDate { get; set; } // Check-In Date
+        public DateTime CheckOutDate { get; set; } // Check-Out Date
         public bool AirportTransfer { get; set; }
         public bool ExtraBed { get; set; }
         public bool RoomOnHigherFloor { get; set; }
@@ -18,9 +13,5 @@ namespace Blogsite.Infrastructure.Entities
         public string? BedType { get; set; } // Radio button value
         public string? RoomPreference { get; set; } // Radio button value
         public string? NoteToProperty { get; set; } // Textarea
-        public int? RoomId { get; set; }
-        public Room? Room { get; set; } 
-        public DateTime CheckInDate { get; set; }
-        public DateTime CheckOutDate { get; set; }
     }
 }
