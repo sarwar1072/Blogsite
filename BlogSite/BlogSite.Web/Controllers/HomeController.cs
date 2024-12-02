@@ -129,7 +129,6 @@ namespace BlogSite.Web.Controllers
             return View();
         }
 
-
         //for hotel slot
         [HttpGet]
         public IActionResult GetListOfHotel()
@@ -187,6 +186,9 @@ namespace BlogSite.Web.Controllers
             {
                 var model = _scope.Resolve<HotelModelView>();
                 model.ListOfHotelWithRoomDetails(hotelId, location, checkInDate, checkOutDate, numberOfGuests ?? 0);
+                model.NumberOfGuests = numberOfGuests??0;
+                model.night = (checkOutDate - checkInDate).Days; ;
+                
                 return View(model);
             }
             catch (Exception ex)

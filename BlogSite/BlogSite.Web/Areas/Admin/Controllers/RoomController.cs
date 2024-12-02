@@ -11,7 +11,7 @@ namespace BlogSite.Web.Areas.Admin.Controllers
     public class RoomController : Controller
     {
         protected readonly ILifetimeScope _scope;
-       private IFileHelper _fileHelper;
+        private IFileHelper _fileHelper;
         protected readonly ILogger<TourController> _logger;
         public RoomController(ILifetimeScope scope, IFileHelper fileHelper, ILogger<TourController> logger)
         {

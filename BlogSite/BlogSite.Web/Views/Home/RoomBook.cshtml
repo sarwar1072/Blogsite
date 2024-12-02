@@ -29,9 +29,9 @@
                         </div>
                         <div>
                             <p class="mb-1 text-muted">Check Out:</p>
-                            <strong>@Model.CheckOutDate.ToString("dd MMM, yyyy")</strong>
+                            <strong>@Model.filter.CheckOutDate.ToString("dd MMM, yyyy")</strong>
                             <br />
-                            <span class="text-muted">@Model.CheckOutDate.DayOfWeek</span>
+                            <span class="text-muted">@Model.filter.CheckOutDate.DayOfWeek</span>
                             <input type="hidden" asp-for="CheckOutDate" id="checkioutdate" />
 
                         </div>
@@ -78,33 +78,7 @@
     </div>
 </div>
 
-@* <div class="container my-4">
-    <div class="card p-4 shadow-sm">
-        <h5 class="fw-bold mb-3">Guest Details</h5>
 
-        <!-- Room Name -->
-        <h6 class="fw-bold text-primary">@Model.Name</h6>
-
-        @for (int i = 1; i <= Model.filter.NumberOfGuests; i++)
-        {
-            <div class="row mb-3">
-                <!-- Guest Heading -->
-                <div class="col-12">
-                    <p class="fw-bold">Guest @i (Adult)</p>
-                </div>
-
-                <!-- Input Fields for First Name and Last Name -->
-                <div class="col-md-6 mb-3">
-                    <input type="text" name="Guests[@(i - 1)].GivenName" class="form-control" placeholder="Given Name" required />
-                </div>
-                <div class="col-md-6 mb-3">
-                    <input type="text" name="Guests[@(i - 1)].Surname" class="form-control" placeholder="Surname" required />
-                </div>
-            </div>
-        }
-    </div>
-</div>
- *@
 <div class="container my-4">
     <div class="card p-4 shadow-sm">
         <h2 class="mb-3">Additional Requests</h2>

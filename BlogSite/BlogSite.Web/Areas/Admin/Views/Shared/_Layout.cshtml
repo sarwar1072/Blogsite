@@ -173,8 +173,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
 
                 <!-- Sidebar Menu -->
-                <partial name="_LeftMenu" model="@Model.MenuModel" />
-                <!-- /.sidebar-menu -->
+@*                 <partial name="_LeftMenu" model="@Model.MenuModel" />
+ *@                <!-- /.sidebar-menu -->
             </div>
             <!-- /.sidebar -->
         </aside>
@@ -238,7 +238,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="/Admin/js/adminlte.min.js"></script>
     <script src="/Admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 
-    <partial name="_ToasterMessage" model="@Model.Response" />
+        <partial name="_ToasterMessage" model="@Model.Response" />
+
+    
     <script>
         $(function () {
 

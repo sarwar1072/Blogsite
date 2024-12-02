@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@* @model AdminBaseModel 
+ *@<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -146,7 +147,16 @@
     <script src="~/js/searchjs.js"></script>
     <script src="~/js/hotelsearchdropdown.js"></script>
 
+    @* <partial name="_ToasterMessage" model="@Model.Response" />
 
+    <script>
+        $(function () {
+
+            $("#response-alert").fadeTo(5000, 500).slideUp(500, function () {
+                $("#response-alert").slideUp(500);
+            });
+        });
+    </script> *@
 
     @RenderSection("MainLayoutScript", false)
 

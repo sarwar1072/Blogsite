@@ -66,7 +66,7 @@
         <div class="col-lg-8 col-md-12">
             <div class="mb-4">
                 <h4 class="fw-bold">Room Details</h4>
-                <span class="text-muted">For 2 Adults, for 4 Nights</span>
+                <span class="text-muted">For @Model.NumberOfGuests Guest, for @Model.night Nights</span>
             </div>
             @for (int i = 0; i < Model.rooms.Count; i++)
             {

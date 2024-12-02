@@ -17,6 +17,7 @@ namespace BlogSite.Web.Models.HotelViewM
         public string? HotelUrl { get; set; }
         public IFormFile formFile { get; set; }
         public double PricePerNight { get; set; }
+        public int night {  get; set; } 
         public int AvailableRooms { get; set; }
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
@@ -62,7 +63,7 @@ namespace BlogSite.Web.Models.HotelViewM
 
            if (data != null)
             {
-                Id= data.Id; 
+                Id= data.Id;
                 Location= data.Location;    
                 Name= data.Name;    
                 PricePerNight= data.PricePerNight;
@@ -107,8 +108,7 @@ namespace BlogSite.Web.Models.HotelViewM
                         });
                     }
                 }
-            }
-          
+            }        
         }
         public IList<Hotel> ListOfHotel()
         {
@@ -118,6 +118,7 @@ namespace BlogSite.Web.Models.HotelViewM
             {
                 HotelList.Add(new Hotel
                 {
+                    Id=hotel.Id,
                     Name = hotel.Name,
                     Location = hotel.Location,
                     HotelUrl = hotel.HotelUrl,
