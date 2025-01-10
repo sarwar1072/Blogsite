@@ -45,7 +45,33 @@
             <div class="container">
                 <h2>Search Options</h2>
                 <p>Click to see popupar tour,hotel,flight</p>
-                <partial name="_SearchTab" />
+@*                 <partial name="_SearchTab" />
+ *@
+                <div class="search-tabs">
+                    <div class="search-tab active " id="btnTour">
+                        <div class="icon-and-text">
+                            🏝
+                            <span>Tour</span>
+                        </div>
+                        <div class="active-indicator"></div>
+                    </div>
+
+                    <div class="search-tab" id="btnHotel">
+                        <div class="icon-and-text">
+                            🏨
+                            <span>Hotel</span>
+                        </div>
+                        <div class="active-indicator" style="visibility: hidden;"></div>
+                    </div>
+
+                    <div class="search-tab " id="btnFlight">
+                        <div class="icon-and-text">
+                            ✈
+                            <span>Flight</span>
+                        </div>
+                        <div class="active-indicator" style="visibility: hidden;"></div>
+                    </div>
+                </div>
 
                 <!-- Placeholder for tab content -->
                 <div id="tourContent" class="tab-content ">

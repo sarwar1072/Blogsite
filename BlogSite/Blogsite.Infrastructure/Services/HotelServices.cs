@@ -94,30 +94,71 @@ namespace Blogsite.Infrastructure.Services
 
         //    return result;
         //}
-        public IList<Hotel> SearchedHotelList(string Location, DateTime CheckInDate, DateTime CheckOutDate, int NumberOfGuests)
+        //public IList<Hotel> SearchedHotelList(string Location, DateTime CheckInDate, DateTime CheckOutDate, int NumberOfGuests)
+        //{
+        //    var result = _unitOfWork.HotelRepository.GetDynamic(s => s.Location.ToLower().Contains(Location.ToLower()),
+
+        //              null, c => c.Include(h => h.Rooms).ThenInclude(r => r.HotelBookings), false)
+
+        //               .Where(h => h.Rooms.Any(r => r.Capacity >= NumberOfGuests &&
+
+        //            !r.HotelBookings.Any(b => (CheckInDate >= b.CheckInDate && CheckOutDate <= b.CheckOutDate)))).ToList();
+
+        //    return result;
+        //}
+        public IList<Hotel> SearchedHotelList(string location, DateTime checkInDate, DateTime checkOutDate, int numberOfGuests)
         {
-            var result = _unitOfWork.HotelRepository.GetDynamic(s => s.Location.ToLower().Contains(Location.ToLower()), 
-
-                      null,c => c.Include(h => h.Rooms).ThenInclude(r => r.HotelBookings), false)
-
-                       .Where(h => h.Rooms.Any(r =>r.Capacity >= NumberOfGuests &&
-
-                    !r.HotelBookings.Any(b =>(CheckInDate <= b.CheckInDate && CheckOutDate >= b.CheckOutDate)))).ToList();
+            var result = _unitOfWork.HotelRepository.GetDynamic(
+                h => h.Location.ToLower().Contains(location.ToLower()),
+                null,
+                h => h.Include(h => h.Rooms).ThenInclude(r => r.HotelBookings),
+                false
+            )
+            .Where(h => h.Rooms.Any(r =>
+                r.Capacity >= numberOfGuests && // Room capacity must be sufficient
+                !r.HotelBookings.Any(b =>       // Room must not be booked in the specified date range
+                    checkInDate < b.CheckOutDate && checkOutDate > b.CheckInDate)))
+            .ToList();
 
             return result;
         }
-        public Hotel SearchedRoomListWithHotel(int id,string Location, DateTime CheckInDate, DateTime CheckOutDate, int NumberOfGuests)
+
+        //public Hotel SearchedRoomListWithHotel(int id,string Location, DateTime CheckInDate, DateTime CheckOutDate, int NumberOfGuests)
+        //{
+        //    var result = _unitOfWork.HotelRepository.GetDynamic(h => h.Id == id && h.Location.ToLower().Contains(Location.ToLower()),null,
+
+        //                  c => c.Include(d => d.Images).Include(i => i.HotelFacilities).Include(h => h.Rooms).ThenInclude(r => r.HotelBookings), false)
+
+        //                .Where(h => h.Rooms.Any(r => r.Capacity >= NumberOfGuests && !r.HotelBookings.Any(b =>
+
+        //                CheckInDate <= b.CheckOutDate && CheckOutDate >= b.CheckInDate))).FirstOrDefault();
+
+        //    return result;
+        //}
+        public Hotel SearchedRoomListWithHotel(int id, string location, DateTime checkInDate, DateTime checkOutDate, int numberOfGuests)
         {
-            var result = _unitOfWork.HotelRepository.GetDynamic(h => h.Id == id && h.Location.ToLower().Contains(Location.ToLower()),null,
+            var hotel = _unitOfWork.HotelRepository.GetDynamic(
+                h => h.Id == id && h.Location.ToLower().Contains(location.ToLower()),
+                null,
+                h => h.Include(d => d.Images)
+                      .Include(i => i.HotelFacilities)
+                      .Include(h => h.Rooms).ThenInclude(r => r.HotelBookings),
+                false
+            ).FirstOrDefault();
 
-                          c => c.Include(d => d.Images).Include(i => i.HotelFacilities).Include(h => h.Rooms).ThenInclude(r => r.HotelBookings), false)
+            // If the hotel exists, filter out rooms that are not booked for the specified date range
+            if (hotel != null)
+            {
+                hotel.Rooms = hotel.Rooms
+                    .Where(r => r.Capacity >= numberOfGuests &&
+                                !r.HotelBookings.Any(b =>
+                                    checkInDate < b.CheckOutDate && checkOutDate > b.CheckInDate))
+                    .ToList();
+            }
 
-                        .Where(h => h.Rooms.Any(r => r.Capacity >= NumberOfGuests && !r.HotelBookings.Any(b =>
-
-                        CheckInDate <= b.CheckOutDate && CheckOutDate >= b.CheckInDate))).FirstOrDefault();
-                                
-            return result;
+            return hotel;
         }
+
         public (IList<Hotel> hotels, int total, int totalDisplay) GetHotelList(int pageindex, int pagesize, string searchText, string orderBy)
         {
             (IList<Hotel> data, int total, int totalDisplay) result = (null, 0, 0);
