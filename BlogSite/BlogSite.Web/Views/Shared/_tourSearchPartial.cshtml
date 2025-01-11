@@ -100,59 +100,6 @@
         });
 
         
-        // $(document).ready(function () {
-        //     // Function to fetch and render tour data
-        //     function fetchTourData() {
-        //         $.ajax({
-        //             type: "GET",
-        //             url: "/Home/GetListOfTour", // Update with the correct endpoint for fetching tours
-        //             contentType: "application/json",
-        //             success: function (data) {
-        //                 renderTours(data);
-        //             },
-        //             error: function (error) {
-        //                 console.log("Error fetching tour data:", error);
-        //             }
-        //         });
-        //     }
-
-        //     // Automatically call fetchTourData when the page loads
-        //     fetchTourData();
-
-        //     // Optional: Manual refresh if `btnTour` is clicked
-        //     $("#btnTour").click(function (e) {
-        //         e.preventDefault();
-        //         fetchTourData();
-        //     });
-
-            // Function to render the list of tours
-        //     function renderTours(tours) {
-        //         var container = $("#tourListContainer");
-        //         container.empty(); // Clear existing content
-
-        //         if (tours.length === 0) {
-        //             container.append("<p>No tours available at the moment.</p>");
-        //             return;
-        //         }
-
-        //         // Loop through each tour and create HTML for it
-        //         tours.forEach(function (tour) {
-        //             var tourHtml = `
-        //                         <div class="card tour-card">
-        //                                                 <img src="${tour.tourUrl}" alt="${tour.tourName}" class="card-img-top">
-        //                                         <div class="card-body">
-        //                                             <h5 class="card-title">${tour.tourName}</h5>
-        //                                             <p class="card-text">${tour.destination}</p>
-        //                                             <p class="card-price">Price: $${tour.price}</p>
-        //                                             <button class="btn btn-primary">Book Now</button>
-        //                                         </div>
-        //                                     </div>
-        //             `;
-        //             container.append(tourHtml); // Append each tour to the container
-        //         });
-        //     }
-        // });
-
         function renderTours(response) {
             const tours = Array.isArray(response) ? response : response.tours; // Adjust based on actual structure
 

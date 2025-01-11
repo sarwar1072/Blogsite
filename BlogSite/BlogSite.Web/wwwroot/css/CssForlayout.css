@@ -1,0 +1,75 @@
+
+/* Additional Custom Styling */
+body {
+    background-color: #f8f9fa; /* Light background */
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.nav-tabs {
+    background-color: white;
+    border-radius: 15px;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+    .nav-tabs .nav-link {
+        font-size: 16px;
+        font-weight: bold;
+        color: black;
+        padding: 12px 30px;
+        transition: all 0.3s;
+    }
+
+        .nav-tabs .nav-link i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: #1e2a78; /* Active state dark blue */
+            font-weight: bold;
+        }
+
+            .nav-tabs .nav-link.active::after {
+                content: "";
+                display: block;
+                width: 40px;
+                height: 3px;
+                background-color: gold;
+                margin-top: 3px;
+                border-radius: 5px;
+            }
+
+.search-section {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: white;
+    padding: 50px 0;
+}
+
+    .search-section h1 {
+        font-size: 2.5rem;
+    }
+
+    .search-section p {
+        font-size: 1.2rem;
+    }
+
+@@media (max-width: 768px) {
+    .nav-tabs .nav-link {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    .search-section h1 {
+        font-size: 2rem;
+    }
+
+    .search-section p {
+        font-size: 1rem;
+    }
+}
+

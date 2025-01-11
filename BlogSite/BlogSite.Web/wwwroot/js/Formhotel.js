@@ -10,7 +10,7 @@
 
         // Send AJAX POST request
         $.ajax({
-            url: '/Home/SearchHotel',
+            url: '/Hotel/SearchHotel',
             type: 'POST',
             data: {
                 location: location,

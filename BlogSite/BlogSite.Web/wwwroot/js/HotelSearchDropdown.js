@@ -2,7 +2,7 @@
     $("#hotelLocation").on("focus", function () {
         $.ajax({
             type: "POST",
-            url: "/Home/GetHotelList",
+            url: "/Hotel/GetHotelList",
             contentType: "application/json;charset=utf-8",
             success: function (data) {
                 // Clear previous suggestions
