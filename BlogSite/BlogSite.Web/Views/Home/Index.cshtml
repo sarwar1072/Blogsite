@@ -1,5 +1,53 @@
-﻿
-    <form method="post" asp-action="TourList" asp-controller="Home">
+﻿<div class="container d-flex justify-content-center align-items-center p-4 ">
+    <form method="post" asp-action="TourList" asp-controller="Home" class="p-4 bg-white rounded shadow-lg" style="max-width: 500px; width: 100%;">
+        <h3 class="text-center mb-4">Search Tour</h3>
+
+        <!-- Destination Input -->
+        <div class="form-group position-relative mb-3">
+            <label for="tourDestination" class="form-label fw-bold">Destination</label>
+            <input type="text"
+                   class="form-control"
+                   id="tourDestination"
+                   name="destination"
+                   placeholder="Enter destination"
+                   autocomplete="off"
+                   style="border-radius: 8px;">
+            <div id="destinationList"
+                 class="dropdown-menu shadow-sm p-2"
+                 style="display: none; position: absolute; width: 100%; border-radius: 8px; z-index: 1050;">
+                <!-- Suggested destinations will be dynamically appended here -->
+            </div>
+        </div>
+
+        <!-- Search Button -->
+        <button type="submit" class="btn btn-primary w-100" id="searchButton" style="border-radius: 8px;">
+            <i class="fas fa-search me-2"></i>Search Tour
+        </button>
+    </form>
+</div>
+
+@* <style>
+    #destinationList {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        max-height: 200px; /* Limit the height */
+        overflow-y: auto; /* Add scroll for long lists */
+    }
+
+        #destinationList .dropdown-item {
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            #destinationList .dropdown-item:hover {
+                background-color: #f1f1f1;
+            }
+
+</style>
+ *@
+
+@*     <form method="post" asp-action="TourList" asp-controller="Home">
         <div class="form-group position-relative">
             <label for="tourDestination">Destination</label>
             <input type="text" class="form-control" id="tourDestination" name="destination" placeholder="Enter destination" autocomplete="off">
@@ -9,5 +57,5 @@
         </div>
         <button type="submit" class="btn btn-primary" id="searchButton">Search Tour</button>
     </form>
-<h1>Hot deals </h1>
+ *@<h1>Hot deals </h1>
 <h2>popular Tour</h2>

@@ -1,4 +1,49 @@
-﻿    <h3>Search for Flights</h3>
+﻿<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <form method="get" asp-action="SearchFlight" asp-controller="Flight" class="p-4 bg-white rounded shadow-lg" style="max-width: 600px; width: 100%;">
+        <h3 class="text-center mb-4 text-primary">Search for Flights</h3>
+
+        <!-- Departure City -->
+        <div class="form-group mb-3">
+            <label for="departureCity" class="form-label fw-bold">Departure City</label>
+            <input type="text"
+                   class="form-control"
+                   id="departureCity"
+                   name="departureCity"
+                   placeholder="Enter departure city"
+                   style="border-radius: 8px;">
+        </div>
+
+        <!-- Arrival City -->
+        <div class="form-group mb-3">
+            <label for="arrivalCity" class="form-label fw-bold">Arrival City</label>
+            <input type="text"
+                   class="form-control"
+                   id="arrivalCity"
+                   name="arrivalCity"
+                   placeholder="Enter arrival city"
+                   style="border-radius: 8px;">
+        </div>
+
+        <!-- Flight Date -->
+        <div class="form-group mb-4">
+            <label for="flightDate" class="form-label fw-bold">Flight Date</label>
+            <input type="date"
+                   class="form-control"
+                   id="flightDate"
+                   name="flightDate"
+                   style="border-radius: 8px;">
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-success w-100" style="border-radius: 8px;">
+            <i class="fas fa-plane-departure me-2"></i> Search Flight
+        </button>
+    </form>
+</div>
+
+
+
+@*     <h3>Search for Flights</h3>
     <form method="get" asp-action="SearchFlight" asp-controller="Flight">
         <div class="form-group">
             <label for="departureCity">Departure City</label>
@@ -14,3 +59,5 @@
         </div>
         <button type="submit" class="btn btn-success">Search Flight</button>
     </form>
+ *@
+ <h1>Flight</h1>

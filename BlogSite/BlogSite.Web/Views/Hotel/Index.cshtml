@@ -1,5 +1,65 @@
-﻿
-    <form method="post" asp-action="SearchHotel" asp-controller="Home">
+﻿<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <form method="post" asp-action="SearchHotel" asp-controller="Home" class="p-4 bg-white rounded shadow-lg" style="max-width: 600px; width: 100%;">
+        <h3 class="text-center mb-4">Search Hotels</h3>
+
+        <!-- Location -->
+        <div class="form-group position-relative mb-3">
+            <label for="hotelLocation" class="form-label fw-bold">Location</label>
+            <input type="text"
+                   class="form-control"
+                   id="hotelLocation"
+                   name="location"
+                   placeholder="Enter location"
+                   autocomplete="off"
+                   style="border-radius: 8px;">
+            <div id="HotelLocationList"
+                 class="dropdown-menu shadow-sm p-2"
+                 style="display: none; position: absolute; width: 100%; border-radius: 8px; z-index: 1050;">
+                <!-- Suggested destinations will be dynamically appended here -->
+            </div>
+        </div>
+
+        <!-- Check-in Date -->
+        <div class="form-group mb-3">
+            <label for="checkInDate" class="form-label fw-bold">Check-in Date</label>
+            <input type="date"
+                   class="form-control"
+                   id="checkInDate"
+                   name="checkInDate"
+                   style="border-radius: 8px;">
+        </div>
+
+        <!-- Check-out Date -->
+        <div class="form-group mb-3">
+            <label for="checkOutDate" class="form-label fw-bold">Check-out Date</label>
+            <input type="date"
+                   class="form-control"
+                   id="checkOutDate"
+                   name="checkOutDate"
+                   style="border-radius: 8px;">
+        </div>
+
+        <!-- Number of Guests -->
+        <div class="form-group mb-4">
+            <label for="numberOfGuests" class="form-label fw-bold">Number of Guests</label>
+            <input type="number"
+                   id="numberOfGuests"
+                   name="NumberOfGuests"
+                   class="form-control"
+                   min="1"
+                   required
+                   style="border-radius: 8px;">
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100" style="border-radius: 8px;">
+            <i class="fas fa-search me-2"></i> Search Hotel
+        </button>
+    </form>
+</div>
+
+
+@*     <form method="post" asp-action="SearchHotel" asp-controller="Home">
         <div class="form-group position-relative">
             <label for="hotelLocation">Location</label>
             <input type="text" class="form-control" id="hotelLocation" name="location" placeholder="Enter location">
@@ -22,4 +82,4 @@
         </div>
         <button type="submit" class="btn btn-secondary">Search Hotel</button>
     </form>
-<h1>hot deal</h1>
+ *@<h1>hot deal</h1>
