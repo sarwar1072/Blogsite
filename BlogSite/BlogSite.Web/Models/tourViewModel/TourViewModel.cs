@@ -2,6 +2,7 @@
 using Blogsite.Infrastructure.Entities;
 using Blogsite.Infrastructure.Services;
 using BlogSite.Web.Areas.Admin.Models;
+using DevSkill.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BlogSite.Web.Models.tourViewModel
@@ -37,7 +38,7 @@ namespace BlogSite.Web.Models.tourViewModel
             base.ResolveDependency(lifetimeScope);
         }
         //public void TourDetails(int id)
-       
+
         //{
         //    var data=_tourServices.GetTourDetails(id);
 
@@ -63,6 +64,27 @@ namespace BlogSite.Web.Models.tourViewModel
         //        });  
         //    }
         //}
+        public IList<Tour> PopularTourDestination()
+        {
+            var data = _tourServices.ListOfPopularDestination();
+            TourList = new List<Tour>();
+
+            if (data != null)
+            {
+                foreach (var item in data)
+                {
+                    TourList.Add(new Tour
+                    {
+                        Id = item.Id,
+                        TourUrl = item.TourUrl,
+                        TourName = item.TourName,
+                        Destination = item.Destination,
+                    });
+
+                }
+            }
+            return TourList;
+        }
         public IList<Tour> ListofTour(string destination)
         {
             var entity = _tourServices.ListOfTour(destination);

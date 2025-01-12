@@ -58,7 +58,7 @@
 @*                             <p class="text-muted">@item.PricePerNight</p>
  *@                            <div class="d-flex align-items-center">
                                 <p class="text-primary font-weight-bold">Starting From BDT @item.PricePerNight Per Person</p>
-                                <a href="@Url.Action("SearchHotelRooms", "Home",new {hotelId = item.Id })" class="btn btn-primary ml-auto">Select</a>
+                                <a href="@Url.Action("SearchHotelRooms", "Hotel",new {hotelId = item.Id })" class="btn btn-primary ml-auto">Select</a>
                             </div>
                            @*  <div>
                                 <span class="badge badge-secondary">Spots Available: @item.SpotsAvailable</span>

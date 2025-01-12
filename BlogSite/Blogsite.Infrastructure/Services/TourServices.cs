@@ -116,6 +116,12 @@ namespace Blogsite.Infrastructure.Services
 
             return list;    
         }
+        public IList<Tour> ListOfPopularDestination()
+        {
+            var list = _projectUnitOfWork.TourRepository.Get(null, null,null, false).DistinctBy(x=>x.Destination).Take(6).ToList();
+
+            return list;
+        }
         public IList<Tour> ListOfTourName()
         {
             var list = _projectUnitOfWork.TourRepository.GetAll();

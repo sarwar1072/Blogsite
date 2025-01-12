@@ -1,4 +1,10 @@
-﻿<div class="container d-flex justify-content-center align-items-center p-4 ">
+﻿@model TourViewModel
+
+@section PageStyles{
+    <link href="~/css/clickentindextour/tourindex.css" rel="stylesheet" />
+}
+
+<div class="container d-flex justify-content-center align-items-center p-4 ">
     <form method="post" asp-action="TourList" asp-controller="Home" class="p-4 bg-white rounded shadow-lg" style="max-width: 500px; width: 100%;">
         <h3 class="text-center mb-4">Search Tour</h3>
 
@@ -26,6 +32,70 @@
     </form>
 </div>
 
+
+<div class="container my-5">
+    <h3 class="text-primary mb-4">Popular Destinations</h3>
+    <div id="popularDestinationsCarousel" class="carousel slide" data-bs-ride="carousel">
+        <!-- Left and right navigation -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#popularDestinationsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#popularDestinationsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+            @if (Model.TourList != null && Model.TourList.Any())
+            {
+                // Initialize counter for grouping into sets of four
+                var counter = 0;
+
+                foreach (var group in Model.TourList.Select((tour, index) => new { tour, index })
+                .GroupBy(x => x.index / 4)) // Group items into sets of 4
+                {
+                    <div class="carousel-item @(counter == 0 ? "active" : "")">
+                        <div class="row">
+                            @foreach (var item in group)
+                            {
+                                <div class="col-md-3">
+                                    <div class="card">
+                                        <img src="@item.tour.TourUrl" class="card-img-top" alt="@item.tour.TourName">
+                                        <div class="card-body">
+                                            <h5 class="card-title text-center">@item.tour.Destination</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    counter++;
+                }
+            }
+            else
+            {
+                <div class="carousel-item active">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <p>No destinations available.</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+ @section MainLayoutScript{
+
+    <script src="~/js/jstourindex/formhotel.js"></script>
+  
+}
+
+
 @* <style>
     #destinationList {
         background-color: #fff;
@@ -46,6 +116,3 @@
 
 </style>
  *@
-
-<h1>Hot deals </h1>
-<h2>popular Tour</h2>

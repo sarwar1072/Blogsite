@@ -11,8 +11,7 @@ namespace BlogSite.Web.Controllers
         private readonly ILogger<HomeController> _logger;
         protected readonly ILifetimeScope _scope;
         private IHotelServices _hotelServices;
-        public HotelController(ILogger<HomeController> logger, ILifetimeScope lifetime,
-            IHotelServices hotelServices)
+        public HotelController(ILogger<HomeController> logger, ILifetimeScope lifetime, IHotelServices hotelServices)
         {
             _logger = logger;
             _scope = lifetime;
