@@ -118,13 +118,13 @@ namespace Blogsite.Infrastructure.Services
         }
         public IList<Tour> ListOfPopularDestination()
         {
-            var list = _projectUnitOfWork.TourRepository.Get(null, null,null, false).DistinctBy(x=>x.Destination).Take(6).ToList();
-
+            var list = _projectUnitOfWork.TourRepository.Get(null, null,null, false).DistinctBy(x => x.Destination).Take(6).ToList();
+            //.DistinctBy(x => x.Destination)
             return list;
         }
         public IList<Tour> ListOfTourName()
         {
-            var list = _projectUnitOfWork.TourRepository.GetAll();
+            var list = _projectUnitOfWork.TourRepository.GetAll().DistinctBy(x=>x.Destination).ToList();
            
             return list;
         }

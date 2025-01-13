@@ -21,11 +21,11 @@ body {
   margin-bottom: 60px;
 }
 
-/* Style for the search section */
+ Style for the search section 
 .search-section {
     background-color: #00008b;
-    /*    #003580
-*/ /* The dark blue background */
+        #003580
+  The dark blue background 
 }
 
 .search-section h1 {
@@ -34,7 +34,7 @@ body {
 }
 
 .search-form .form-control {
-    border-radius: 0.375rem; /* Slightly rounded corners */
+    border-radius: 0.375rem;  Slightly rounded corners 
     padding: 1rem;
 }
 

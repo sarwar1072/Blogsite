@@ -2,6 +2,7 @@
 
 @section PageStyles{
     <link href="~/css/clickentindextour/tourindex.css" rel="stylesheet" />
+
 }
 
 <div class="container d-flex justify-content-center align-items-center p-4 ">
@@ -33,15 +34,15 @@
 </div>
 
 
-<div class="container my-5">
+  <div class="container my-5">
     <h3 class="text-primary mb-4">Popular Destinations</h3>
-    <div id="popularDestinationsCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div id="popularDestiCarousel" class="carousel slide" data-bs-ride="carousel">
         <!-- Left and right navigation -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#popularDestinationsCarousel" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#popularDestiCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#popularDestinationsCarousel" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#popularDestiCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
@@ -52,7 +53,6 @@
             {
                 // Initialize counter for grouping into sets of four
                 var counter = 0;
-
                 foreach (var group in Model.TourList.Select((tour, index) => new { tour, index })
                 .GroupBy(x => x.index / 4)) // Group items into sets of 4
                 {
@@ -61,13 +61,16 @@
                             @foreach (var item in group)
                             {
                                 <div class="col-md-3">
-                                    <div class="card">
-                                        <img src="@item.tour.TourUrl" class="card-img-top" alt="@item.tour.TourName">
-                                        <div class="card-body">
-                                            <h5 class="card-title text-center">@item.tour.Destination</h5>
+                                     <a href="/Home/TourList?Destination=@item.tour.Destination" class="text-decoration-none">
+ 
+                                        <div class="card">
+                                            <img src="@item.tour.TourUrl" class="card-img-top" alt="@item.tour.TourName">
+                                            <div class="card-body">
+                                                    <h5 class="card-title text-center">@item.tour.Destination</h5>                                           
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
+                                     </a>
+                                 </div>                               
                             }
                         </div>
                     </div>
@@ -86,13 +89,14 @@
             }
         </div>
     </div>
-</div>
-
+</div> 
+ 
+                 
+         
 
  @section MainLayoutScript{
+    <script src="~/js/jstourindex/carosuljs.js"></script>
 
-    <script src="~/js/jstourindex/formhotel.js"></script>
-  
 }
 
 

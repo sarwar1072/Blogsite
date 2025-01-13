@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.Host.Mef;
 using System.Diagnostics;
+using System.Reflection.Metadata;
 
 namespace BlogSite.Web.Controllers
 {
@@ -33,6 +34,11 @@ namespace BlogSite.Web.Controllers
 
             return View(model);
         }
+        //public IActionResult ListOfTourDestination(string Destination)
+        //{
+        //    var model = _scope.Resolve<TourViewModel>();
+
+        //}
         public IActionResult GetListOfDetination()
         {          
             try
@@ -85,14 +91,14 @@ namespace BlogSite.Web.Controllers
 
             return View();
         }
-        public IActionResult TourList(string destination)
+        public IActionResult TourList(string Destination)
         {
-            if (destination != null)
+            if (Destination != null)
             {
                 try
                 {
                     var model = _scope.Resolve<TourViewModel>();
-                    model.ListofTour(destination);
+                    model.ListofTour(Destination);
                     return View(model);
                 }
                 catch (Exception e)
