@@ -122,6 +122,12 @@ namespace Blogsite.Infrastructure.Services
             //.DistinctBy(x => x.Destination)
             return list;
         }
+        public IList<Tour> ListOfPopularTours()
+        {
+            var list = _projectUnitOfWork.TourRepository.Get(null, null, null, false).OrderBy(x=>x.Price).Take(4).ToList();
+            //.DistinctBy(x => x.Destination)
+            return list;
+        }
         public IList<Tour> ListOfTourName()
         {
             var list = _projectUnitOfWork.TourRepository.GetAll().DistinctBy(x=>x.Destination).ToList();

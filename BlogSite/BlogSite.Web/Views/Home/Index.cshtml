@@ -89,10 +89,42 @@
             }
         </div>
     </div>
-</div> 
- 
-                 
-         
+</div>
+
+<div class="container my-5">
+    <h3 class="text-primary mb-4">Popular Tours</h3>
+    <div class="row">
+        @if (Model.ListOfTours != null && Model.TourList.Any())
+        {
+            foreach (var tour in Model.ListOfTours())
+            {
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <!-- Link to details page -->
+                        <a href="@Url.Action("Details", "Home", new { id = tour.Id })" class="text-decoration-none">
+                            <img src="@tour.TourUrl" class="card-img-top" alt="@tour.TourName">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title text-center">
+                                <a href="@Url.Action("Details", "Home", new { id = tour.Id })" class="text-dark text-decoration-none">
+                                    @tour.TourName
+                                </a>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <p class="text-center">No tours available.</p>
+            </div>
+        }
+    </div>
+</div>
+
+
 
  @section MainLayoutScript{
     <script src="~/js/jstourindex/carosuljs.js"></script>

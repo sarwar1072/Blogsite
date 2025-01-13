@@ -111,12 +111,13 @@ namespace BlogSite.Web.Models.tourViewModel
         }
         public IList<Tour> ListOfTours()
         {
-            var entity = _tourServices.ListOfTourName();
+            var entity = _tourServices.ListOfPopularTours();
             TourList = new List<Tour>();
             foreach(var tour in entity)
             {
                 TourList.Add(new Tour
                 {
+                    Id = tour.Id,   
                     TourUrl = tour.TourUrl,
                     Destination = tour.Destination,
                     TourName = tour.TourName,
