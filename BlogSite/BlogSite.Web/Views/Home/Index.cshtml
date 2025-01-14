@@ -18,6 +18,7 @@
                    name="destination"
                    placeholder="Enter destination"
                    autocomplete="off"
+                   value="@Model.Destination"
                    style="border-radius: 8px;">
             <div id="destinationList"
                  class="dropdown-menu shadow-sm p-2"
@@ -49,11 +50,11 @@
 
         <!-- Carousel items -->
         <div class="carousel-inner">
-            @if (Model.TourList != null && Model.TourList.Any())
+            @if (Model.PopularTourDestination() != null && Model.TourList.Any())
             {
                 // Initialize counter for grouping into sets of four
                 var counter = 0;
-                foreach (var group in Model.TourList.Select((tour, index) => new { tour, index })
+                foreach (var group in Model.PopularTourDestination().Select((tour, index) => new { tour, index })
                 .GroupBy(x => x.index / 4)) // Group items into sets of 4
                 {
                     <div class="carousel-item @(counter == 0 ? "active" : "")">
@@ -129,6 +130,14 @@
  @section MainLayoutScript{
     <script src="~/js/jstourindex/carosuljs.js"></script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Set default location
+            document.getElementById('tourDestination').value = "Dhaka";
+            
+        });
+    </script>
+  
 }
 
 

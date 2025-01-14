@@ -20,7 +20,9 @@ namespace BlogSite.Web.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var model=_scope.Resolve<HotelModelView>();
+            model.ListOfHotel();
+            return View(model);
         }
         [HttpGet]
         public IActionResult GetListOfHotel()
@@ -40,20 +42,20 @@ namespace BlogSite.Web.Controllers
             return View();
         }
         //  [HttpPost]
-        public IActionResult SearchHotel(HotelSearchFilter filter)
+        public IActionResult SearchHotel(string location, string checkInDate, string checkOutDate, int numberOfGuests)
         {
-            HttpContext.Session.SetString("Location", filter.Location);
+            HttpContext.Session.SetString("Location", location);
 
-            HttpContext.Session.SetString("CheckInDate", filter.CheckInDate.ToString());
+            HttpContext.Session.SetString("CheckInDate", checkInDate);
 
-            HttpContext.Session.SetString("CheckOutDate", filter.CheckOutDate.ToString());
+            HttpContext.Session.SetString("CheckOutDate", checkOutDate);
 
-            HttpContext.Session.SetInt32("NumberOfGuests", filter.NumberOfGuests);
+            HttpContext.Session.SetInt32("NumberOfGuests", numberOfGuests);
 
             try
             {
                 var model = _scope.Resolve<HotelModelView>();
-                model.ListOfHotelWithRoom(filter.Location, filter.CheckInDate, filter.CheckOutDate, filter.NumberOfGuests);
+                model.ListOfHotelWithRoom(location, DateTime.Parse(checkInDate), DateTime.Parse(checkOutDate), numberOfGuests);
                 return View(model);
             }
             catch (Exception ex)
@@ -66,20 +68,20 @@ namespace BlogSite.Web.Controllers
         public IActionResult SearchHotelRooms(int hotelId)
         {
             // Retrieve parameters from session
-            var location = HttpContext.Session.GetString("Location");
+            var location= HttpContext.Session.GetString("Location");
 
-            var checkInDate = DateTime.Parse(HttpContext.Session.GetString("CheckInDate"));
+            var checkInDate =DateTime.Parse(HttpContext.Session.GetString("CheckInDate"));
 
-            var checkOutDate = DateTime.Parse(HttpContext.Session.GetString("CheckOutDate"));
+               var checkOutDate = DateTime.Parse(HttpContext.Session.GetString("CheckOutDate"));
 
-            var numberOfGuests = HttpContext.Session.GetInt32("NumberOfGuests");
+              var numberOfGuests=  HttpContext.Session.GetInt32("NumberOfGuests")??0;
 
             try
             {
                 var model = _scope.Resolve<HotelModelView>();
-                model.ListOfHotelWithRoomDetails(hotelId, location, checkInDate, checkOutDate, numberOfGuests ?? 0);
-                model.NumberOfGuests = numberOfGuests ?? 0;
-                model.night = (checkOutDate - checkInDate).Days; ;
+                model.ListOfHotelWithRoomDetails(hotelId, location, checkInDate,checkOutDate, numberOfGuests );
+                model.NumberOfGuests = numberOfGuests ;
+                model.night = (checkOutDate -checkInDate).Days; ;
 
                 return View(model);
             }

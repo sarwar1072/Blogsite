@@ -33,7 +33,7 @@ namespace Blogsite.Infrastructure.Services
         }
         public IList<Hotel> GetAlHotesls()
         {
-            return _unitOfWork.HotelRepository.GetAll().Take(5).ToList();
+            return _unitOfWork.HotelRepository.GetAll().Take(4).ToList();
         }
         public IList<string> GetAllHoteslsWithoutLimit()
         {

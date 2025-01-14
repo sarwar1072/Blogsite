@@ -1,4 +1,7 @@
-﻿<div class="container d-flex justify-content-center align-items-center p-5">
+﻿@model HotelModelView
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<div class="container d-flex justify-content-center align-items-center p-5">
     <form method="post" asp-action="SearchHotel" asp-controller="Hotel" class="p-4 bg-white rounded shadow-lg" style="max-width: 600px; width: 100%;">
         <h3 class="text-center mb-4">Search Hotels</h3>
 
@@ -11,6 +14,7 @@
                    name="location"
                    placeholder="Enter location"
                    autocomplete="off"
+                   value="@Model.Location"
                    style="border-radius: 8px;">
             <div id="HotelLocationList"
                  class="dropdown-menu shadow-sm p-2"
@@ -26,6 +30,7 @@
                    class="form-control"
                    id="checkInDate"
                    name="checkInDate"
+                   value="@Model.CheckInDate.ToString("yyyy-MM-dd")"
                    style="border-radius: 8px;">
         </div>
 
@@ -36,6 +41,7 @@
                    class="form-control"
                    id="checkOutDate"
                    name="checkOutDate"
+                   value="@Model.CheckOutDate.ToString(" yyyy-MM-dd")"
                    style="border-radius: 8px;">
         </div>
 
@@ -48,6 +54,7 @@
                    class="form-control"
                    min="1"
                    required
+                   value="@Model.NumberOfGuests"
                    style="border-radius: 8px;">
         </div>
 
@@ -57,7 +64,175 @@
         </button>
     </form>
 </div>
+<div class="container my-5">
+    <h3 class="text-primary mb-4">Popular Hotels</h3>
+    <div class="row">
+        @if (Model.ListOfHotel != null && Model.HotelList.Any())
+        {
+            foreach (var hotel in Model.ListOfHotel())
+            {
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <a href="@Url.Action("SearchHotelRooms", "Hotel", new
+                        {
+                            hotelId = hotel.Id,
+                            location =HttpContextAccessor. HttpContext.Session.GetString("Location") ?? "Default Location",
+                            checkInDate = HttpContextAccessor.HttpContext.Session.GetString("CheckInDate") ?? DateTime.Now.ToString("yyyy-MM-dd"),
+                            checkOutDate =HttpContextAccessor. HttpContext.Session.GetString("CheckOutDate") ?? DateTime.Now.AddDays(1).ToString("yyyy-MM-dd"),
+                            numberOfGuests =HttpContextAccessor. HttpContext.Session.GetInt32("NumberOfGuests") ?? 1
+                        })" class="text-decoration-none">
+                            <img src="@hotel.HotelUrl" class="card-img-top" alt="@hotel.Name">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title text-center">
+                                <a href="@Url.Action("SearchHotelRooms", "Hotel", new
+                                {
+                                    hotelId = hotel.Id,
+                                    location =HttpContextAccessor. HttpContext.Session.GetString("Location") ?? "Default Location",
+                                    checkInDate =HttpContextAccessor. HttpContext.Session.GetString("CheckInDate") ?? DateTime.Now.ToString("yyyy-MM-dd"),
+                                    checkOutDate =HttpContextAccessor. HttpContext.Session.GetString("CheckOutDate") ?? DateTime.Now.AddDays(1).ToString("yyyy-MM-dd"),
+                                    numberOfGuests =HttpContextAccessor. HttpContext.Session.GetInt32("NumberOfGuests") ?? 1
+                                })" class="text-dark text-decoration-none">
+                                    @hotel.Name
+                                </a>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <p class="text-center">No hotels available.</p>
+            </div>
+        }
+    </div>
+</div>
 
+@* <div class="container my-5">
+    <h3 class="text-primary mb-4">Popular Hotel</h3>
+    <div class="row">
+        @if (Model.ListOfHotel != null && Model.HotelList.Any())
+        {
+            foreach (var hotel in Model.ListOfHotel())
+            {
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <!-- Generate link with additional parameters -->
+                        <a href="@Url.Action("SearchHotelRooms", "Hotel", new
+                        {
+                            hotelId = hotel.Id,
+                            checkInDate = HttpContextAccessor.HttpContext.Session.GetString("CheckInDate"),
+                            checkOutDate =HttpContextAccessor. HttpContext.Session.GetString("CheckOutDate"),
+                            numberOfGuests = HttpContextAccessor.HttpContext.Session.GetInt32("NumberOfGuests"),
+                            location = HttpContextAccessor.HttpContext.Session.GetString("Location")
+                        })" class="text-decoration-none">
+                            <img src="@hotel.HotelUrl" class="card-img-top" alt="@hotel.Name">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title text-center">
+                                <a href="@Url.Action("SearchHotelRooms", "Hotel", new
+                                {
+                                    hotelId = hotel.Id,
+                                     checkInDate =HttpContextAccessor. HttpContext.Session.GetString("CheckInDate"),
+                                    checkOutDate = HttpContextAccessor.HttpContext.Session.GetString("CheckOutDate"),
+                                    numberOfGuests =HttpContextAccessor. HttpContext.Session.GetInt32("NumberOfGuests"),
+                                    location = HttpContextAccessor.HttpContext.Session.GetString("Location")
+                                })" class="text-dark text-decoration-none">
+                                    @hotel.Name
+                                </a>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <p class="text-center">No hotel available.</p>
+            </div>
+        }
+    </div>
+</div>
+ *@
+
+@* <div class="container my-5">
+    <h3 class="text-primary mb-4">Popular Hotel</h3>
+    <div class="row">
+        @if (Model.ListOfHotel != null && Model.HotelList.Any())
+        {
+            foreach (var hotel in Model.ListOfHotel())
+            {
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        <!-- Link to details page -->
+                        <a href="@Url.Action("SearchHotelRooms", "Hotel", new { hotelId = hotel.Id })" class="text-decoration-none">
+                            <img src="@hotel.HotelUrl" class="card-img-top" alt="@hotel.Name">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title text-center">
+                                <a href="@Url.Action("SearchHotelRooms", "Hotel", new { hotelId = hotel.Id })" class="text-dark text-decoration-none">
+                                    @hotel.Name
+                                </a>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <p class="text-center">No hotel available.</p>
+            </div>
+        }
+    </div>
+</div>
+ *@
+
+@* <div class="col-md-9">
+    <h5></h5>
+    <!-- Single Tour Card -->
+    @if (Model.HotelList.Any())
+    {
+        @foreach (var item in Model.HotelList)
+        {
+            <div class="card mb-4 p-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <!-- Tour Image -->
+                        <img src="@item.HotelUrl" class="img-fluid rounded" alt="Tour Image">
+                    </div>
+                    <div class="col-md-8">
+                        <!-- Tour Information -->
+                        <h5 class="text-primary">Honeymoon at @item.Name</h5>
+                        <p class="text-muted">@item.Location</p>
+                        <p class="text-muted">
+                            Available Rooms: <span>@item.AvailableRooms </span>
+                        </p>
+                        @*                             <p class="text-muted">@item.PricePerNight</p>
+                     <div class="d-flex align-items-center">
+                            <p class="text-primary font-weight-bold">Starting From BDT @item.PricePerNight Per Person</p>
+                            <a href="@Url.Action("SearchHotelRooms", "Hotel",new {hotelId = item.Id })" class="btn btn-primary ml-auto">Select</a>
+                        </div>
+                          <div>
+                <span class="badge badge-secondary">Spots Available: @item.SpotsAvailable</span>
+                </div >
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+    else
+    {
+        <h4 class="d-flex justify-content-center align-items-center m-5">No suitable hotel found</h4>
+    }
+    <!-- End of Single Tour Card -->
+</div>
+ *@
 @* <style>
     #HotelLocationList {
         background-color: #fff;
@@ -78,4 +253,9 @@
 
 </style>
  *@
- <h1>hot deal</h1>
+
+ @section MainLayoutScript{
+    <script src="~/js/defaultvaluehotel.js"></script>
+
+
+}

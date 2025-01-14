@@ -55,7 +55,6 @@ namespace BlogSite.Web.Models.HotelViewM
                     PricePerNight = hotel.PricePerNight,
                 });
             }
-
         }
         public void ListOfHotelWithRoomDetails(int id,string location, DateTime checkInDate, DateTime checkOutDate, int numberOfGuests)
         {
