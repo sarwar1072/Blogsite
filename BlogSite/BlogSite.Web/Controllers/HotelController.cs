@@ -44,12 +44,9 @@ namespace BlogSite.Web.Controllers
         //  [HttpPost]
         public IActionResult SearchHotel(string location, string checkInDate, string checkOutDate, int numberOfGuests)
         {
-            HttpContext.Session.SetString("Location", location);
-
-            HttpContext.Session.SetString("CheckInDate", checkInDate);
-
-            HttpContext.Session.SetString("CheckOutDate", checkOutDate);
-
+            HttpContext.Session.SetString("Location", location );
+            HttpContext.Session.SetString("CheckInDate", checkInDate );
+            HttpContext.Session.SetString("CheckOutDate", checkOutDate );
             HttpContext.Session.SetInt32("NumberOfGuests", numberOfGuests);
 
             try
@@ -68,13 +65,36 @@ namespace BlogSite.Web.Controllers
         public IActionResult SearchHotelRooms(int hotelId)
         {
             // Retrieve parameters from session
-            var location= HttpContext.Session.GetString("Location");
+            var location = HttpContext.Session.GetString("Location");
+            if (string.IsNullOrEmpty(location))
+            {
+                location = "Dhaka";
+                HttpContext.Session.SetString("Location", location);
+            }
 
-            var checkInDate =DateTime.Parse(HttpContext.Session.GetString("CheckInDate"));
+            var checkInDateStr = HttpContext.Session.GetString("CheckInDate");
+            DateTime checkInDate;
+            if (string.IsNullOrEmpty(checkInDateStr) || !DateTime.TryParse(checkInDateStr, out checkInDate))
+            {
+                checkInDate = DateTime.Now.AddDays(2);
+                HttpContext.Session.SetString("CheckInDate", checkInDate.ToString("yyyy-MM-dd"));
+            }
 
-               var checkOutDate = DateTime.Parse(HttpContext.Session.GetString("CheckOutDate"));
+            var checkOutDateStr = HttpContext.Session.GetString("CheckOutDate");
+            DateTime checkOutDate;
+            if (string.IsNullOrEmpty(checkOutDateStr) || !DateTime.TryParse(checkOutDateStr, out checkOutDate))
+            {
+                checkOutDate = DateTime.Now.AddDays(7);
+                HttpContext.Session.SetString("CheckOutDate", checkOutDate.ToString("yyyy-MM-dd"));
+            }
 
-              var numberOfGuests=  HttpContext.Session.GetInt32("NumberOfGuests")??0;
+            var numberOfGuests = HttpContext.Session.GetInt32("NumberOfGuests") ?? 0;
+            if (numberOfGuests <= 0)
+            {
+                numberOfGuests = 1;
+                HttpContext.Session.SetInt32("NumberOfGuests", numberOfGuests);
+            }
+            
 
             try
             {
