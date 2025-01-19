@@ -76,11 +76,7 @@
                     <div class="card h-100">
                         <a href="@Url.Action("SearchHotelRooms", "Hotel", new
                         {
-                            hotelId = hotel.Id,
-                            location = HttpContextAccessor.HttpContext.Session.GetString("Location") ?? "Dhaka",
-                            checkInDate = HttpContextAccessor.HttpContext.Session.GetString("CheckInDate") ?? DateTime.Now.AddDays(2).ToString("yyyy-MM-dd"),
-                            checkOutDate = HttpContextAccessor.HttpContext.Session.GetString("CheckOutDate") ?? DateTime.Now.AddDays(7).ToString("yyyy-MM-dd"),
-                            numberOfGuests = HttpContextAccessor.HttpContext.Session.GetInt32("NumberOfGuests") ?? 2
+                             hotelId = hotel.Id,                               
                         })" class="text-decoration-none">
                             <img src="@hotel.HotelUrl" class="card-img-top" alt="@hotel.Name">
                         </a>
@@ -88,11 +84,7 @@
                             <h5 class="card-title text-center">
                                 <a href="@Url.Action("SearchHotelRooms", "Hotel", new
                                 {
-                                    hotelId = hotel.Id,
-                                    location = HttpContextAccessor.HttpContext.Session.GetString("Location") ?? "Dhaka",
-                                    checkInDate = HttpContextAccessor.HttpContext.Session.GetString("CheckInDate") ?? DateTime.Now.AddDays(2).ToString("yyyy-MM-dd"),
-                                    checkOutDate = HttpContextAccessor.HttpContext.Session.GetString("CheckOutDate") ?? DateTime.Now.AddDays(7).ToString("yyyy-MM-dd"),
-                                    numberOfGuests = HttpContextAccessor.HttpContext.Session.GetInt32("NumberOfGuests") ?? 2
+                                    hotelId = hotel.Id,                                   
                                 })" class="text-dark text-decoration-none">
                                     @hotel.Name
                                 </a>
@@ -112,133 +104,7 @@
 </div>
 
 
-@* <div class="container my-5">
-    <h3 class="text-primary mb-4">Popular Hotels</h3>
-    <div class="row">
-        @if (Model.ListOfHotel != null && Model.HotelList.Any())
-        {
-            foreach (var hotel in Model.ListOfHotel())
-            {
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100">
-                        <a href="@Url.Action("SearchHotelRooms", "Hotel", new
-                        {
-                            hotelId = hotel.Id,
-                            location =HttpContextAccessor. HttpContext.Session.GetString("Location") ?? "Default Location",
-                            checkInDate = HttpContextAccessor.HttpContext.Session.GetString("CheckInDate") ?? DateTime.Now.ToString("yyyy-MM-dd"),
-                            checkOutDate =HttpContextAccessor. HttpContext.Session.GetString("CheckOutDate") ?? DateTime.Now.AddDays(1).ToString("yyyy-MM-dd"),
-                            numberOfGuests =HttpContextAccessor. HttpContext.Session.GetInt32("NumberOfGuests") ?? 1
-                        })" class="text-decoration-none">
-                            <img src="@hotel.HotelUrl" class="card-img-top" alt="@hotel.Name">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title text-center">
-                                <a href="@Url.Action("SearchHotelRooms", "Hotel", new
-                                {
-                                    hotelId = hotel.Id,
-                                    location =HttpContextAccessor. HttpContext.Session.GetString("Location") ?? "Default Location",
-                                    checkInDate =HttpContextAccessor. HttpContext.Session.GetString("CheckInDate") ?? DateTime.Now.ToString("yyyy-MM-dd"),
-                                    checkOutDate =HttpContextAccessor. HttpContext.Session.GetString("CheckOutDate") ?? DateTime.Now.AddDays(1).ToString("yyyy-MM-dd"),
-                                    numberOfGuests =HttpContextAccessor. HttpContext.Session.GetInt32("NumberOfGuests") ?? 1
-                                })" class="text-dark text-decoration-none">
-                                    @hotel.Name
-                                </a>
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-            }
-        }
-        else
-        {
-            <div class="col-12">
-                <p class="text-center">No hotels available.</p>
-            </div>
-        }
-    </div>
-</div>
- *@
-@* <div class="container my-5">
-    <h3 class="text-primary mb-4">Popular Hotel</h3>
-    <div class="row">
-        @if (Model.ListOfHotel != null && Model.HotelList.Any())
-        {
-            foreach (var hotel in Model.ListOfHotel())
-            {
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100">
-                        <!-- Generate link with additional parameters -->
-                        <a href="@Url.Action("SearchHotelRooms", "Hotel", new
-                        {
-                            hotelId = hotel.Id,
-                            checkInDate = HttpContextAccessor.HttpContext.Session.GetString("CheckInDate"),
-                            checkOutDate =HttpContextAccessor. HttpContext.Session.GetString("CheckOutDate"),
-                            numberOfGuests = HttpContextAccessor.HttpContext.Session.GetInt32("NumberOfGuests"),
-                            location = HttpContextAccessor.HttpContext.Session.GetString("Location")
-                        })" class="text-decoration-none">
-                            <img src="@hotel.HotelUrl" class="card-img-top" alt="@hotel.Name">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title text-center">
-                                <a href="@Url.Action("SearchHotelRooms", "Hotel", new
-                                {
-                                    hotelId = hotel.Id,
-                                     checkInDate =HttpContextAccessor. HttpContext.Session.GetString("CheckInDate"),
-                                    checkOutDate = HttpContextAccessor.HttpContext.Session.GetString("CheckOutDate"),
-                                    numberOfGuests =HttpContextAccessor. HttpContext.Session.GetInt32("NumberOfGuests"),
-                                    location = HttpContextAccessor.HttpContext.Session.GetString("Location")
-                                })" class="text-dark text-decoration-none">
-                                    @hotel.Name
-                                </a>
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-            }
-        }
-        else
-        {
-            <div class="col-12">
-                <p class="text-center">No hotel available.</p>
-            </div>
-        }
-    </div>
-</div>
- *@
 
-@* <div class="container my-5">
-    <h3 class="text-primary mb-4">Popular Hotel</h3>
-    <div class="row">
-        @if (Model.ListOfHotel != null && Model.HotelList.Any())
-        {
-            foreach (var hotel in Model.ListOfHotel())
-            {
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100">
-                        <!-- Link to details page -->
-                        <a href="@Url.Action("SearchHotelRooms", "Hotel", new { hotelId = hotel.Id })" class="text-decoration-none">
-                            <img src="@hotel.HotelUrl" class="card-img-top" alt="@hotel.Name">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title text-center">
-                                <a href="@Url.Action("SearchHotelRooms", "Hotel", new { hotelId = hotel.Id })" class="text-dark text-decoration-none">
-                                    @hotel.Name
-                                </a>
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-            }
-        }
-        else
-        {
-            <div class="col-12">
-                <p class="text-center">No hotel available.</p>
-            </div>
-        }
-    </div>
-</div>
- *@
 
 @* <div class="col-md-9">
     <h5></h5>

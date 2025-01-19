@@ -1,11 +1,11 @@
-﻿@model TourDetailsModel
+﻿ @* @model TourDetailsModel
 @section PageStyles {
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
    
 
-}
+} *@
 
-
+@* 
 <div class="container my-4">
     <h1 class="text-center">@Model.TourName</h1>
     <div class="row">
@@ -271,4 +271,327 @@
             }
         });
     }
-</script>
+</script>  *@
+@model TourDetailsModel
+
+@section PageStyles {
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Custom Styles */
+        .carousel img {
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-warning:hover {
+            background-color: #e6a800;
+        }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .accordion-button {
+            font-weight: bold;
+        }
+        .icon-check i {
+            animation: pulse 1s infinite;
+        }
+        @@keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+    </style>
+}
+
+<div class="container my-4">
+    <h1 class="text-center text-primary fw-bold">@Model.TourName</h1>
+    <div class="row g-4 mt-4">
+        <!-- Carousel Section -->
+        <div class="col-lg-8">
+            <div id="tourCarousel" class="carousel slide" data-bs-ride="carousel">
+                <!-- Carousel Indicators -->
+                <div class="carousel-indicators">
+                    @for (int i = 0; i < Model.TourImages.Count; i++)
+                    {
+                        <button type="button" data-bs-target="#tourCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")" aria-current="@(i == 0 ? "true" : "false")"></button>
+                    }
+                </div>
+                <!-- Carousel Inner -->
+                <div class="carousel-inner">
+                    @if (Model?.TourImages != null && Model.TourImages.Any())
+                    {
+                        @for (int i = 0; i < Model.TourImages.Count; i++)
+                        {
+                            <div class="carousel-item @(i == 0 ? "active" : "")">
+                                <img src="@Model.TourImages[i].ImageUrl" class="d-block w-100" alt="@Model.TourImages[i].AlternativeText">
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="carousel-item active">
+                            <p class="text-center py-5">No images available.</p>
+                        </div>
+                    }
+                </div>
+                <!-- Carousel Controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#tourCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#tourCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Tour Details Section -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <p><strong>Destination:</strong> @Model.Destination</p>
+                    <p><strong>Duration:</strong> 3 days</p>
+                    <p><strong>People:</strong> From @Model.MiniMumPeople to @Model.MaxiMumPeople people</p>
+                    <p><strong>Spots Available:</strong> @Model.SpotsAvailable</p>
+                    <p><strong>Requirements:</strong> @Model.Requirements</p>
+                    <p><strong>Cancellation Terms:</strong> @Model.CancellationTerm</p>
+                    <a href="@Model.MapUrl" target="_blank" class="btn btn-primary btn-block mt-3">View on Map</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row g-4">
+        <!-- Accordion Section -->
+@*         <div class="col-lg-8">
+            <div class="accordion" id="detailsAccordion">
+                @foreach (var detail in Model.TourDetails.GetType().GetProperties())
+                {
+                    var value = detail.GetValue(Model.TourDetails)?.ToString();
+                    if (!string.IsNullOrWhiteSpace(value))
+                    {
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@detail.Name">
+                                    <i class="fas fa-info-circle me-2"></i> @detail.Name
+                                </button>
+                            </h2>
+                            <div id="collapse-@detail.Name" class="accordion-collapse collapse">
+                                <div class="accordion-body">@value</div>
+                            </div>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+ *@
+        <div class="col-md-8">
+            <div class="accordion" id="detailsAccordion">
+                <div class="card">
+                    <div class="card-header" id="headingOverview">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseOverview" aria-expanded="true" aria-controls="collapseOverview">
+                                <i class="fas fa-globe"></i> Overview
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseOverview" class="collapse" aria-labelledby="headingOverview" data-parent="#detailsAccordion">
+                        <div class="card-body">
+                            @Model.TourDetails.Overview
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingLoc">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseLoc" aria-expanded="true" aria-controls="collapseOverview">
+                                <i class="fas fa-map-marker-alt"></i> Location
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseLoc" class="collapse" aria-labelledby="headingLoc" data-parent="#detailsAccordion">
+                        <div class="card-body">
+                            @Model.TourDetails.Location
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingTim">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsetime" aria-expanded="true" aria-controls="collapseOverview">
+                                <i class="fas fa-clock"></i> Timing
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapsetime" class="collapse" aria-labelledby="headingTim" data-parent="#detailsAccordion">
+                        <div class="card-body">
+                            @Model.TourDetails.Timing
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingIncl">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseInclu" aria-expanded="true" aria-controls="collapseOverview">
+                                <i class="fas fa-check-square"></i> InclusionExclusion
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseInclu" class="collapse" aria-labelledby="headingIncl" data-parent="#detailsAccordion">
+                        <div class="card-body">
+                            @Model.TourDetails.InclusionExclusion
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingDes">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseDes" aria-expanded="true" aria-controls="collapseOverview">
+                                <i class="fas fa-align-left"></i> Description
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseDes" class="collapse" aria-labelledby="headingDes" data-parent="#detailsAccordion">
+                        <div class="card-body">
+                            @Model.TourDetails.Description
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingAdd">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseAdd" aria-expanded="true" aria-controls="collapseOverview">
+                                <i class="fas fa-info-circle"></i> AdditionalInformation
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseAdd" class="collapse" aria-labelledby="headingAdd" data-parent="#detailsAccordion">
+                        <div class="card-body">
+                            @Model.TourDetails.AdditionalInformation
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingTips">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTips" aria-expanded="true" aria-controls="collapseOverview">
+                                <i class="fas fa-lightbulb"></i> TravelTips
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapseTips" class="collapse" aria-labelledby="headingTips" data-parent="#detailsAccordion">
+                        <div class="card-body">
+                            @Model.TourDetails.TravelTips
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" id="headingPolicy">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapsePoli" aria-expanded="true" aria-controls="collapseOverview">
+                                <i class="fas fa-file-alt"></i> Policy
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="collapsePoli" class="collapse" aria-labelledby="headingPolicy" data-parent="#detailsAccordion">
+                        <div class="card-body">
+                            @Model.TourDetails.Policy
+                        </div>
+                    </div>
+                </div>
+                <!-- Repeat for Location, Timing, etc. -->
+            </div>
+        </div>
+
+
+        <!-- Consultation Form Section -->
+        <div class="col-lg-4">
+            <div id="successMessage" class="bg-light p-4 rounded text-center d-none">
+                <div class="icon-check">
+                    <i class="fa fa-check-circle text-success display-4"></i>
+                </div>
+                <h4 class="mt-3 mb-2">Thanks for your interest!</h4>
+                <p>One of our tour experts will reach out to you soon!</p>
+            </div>
+
+            <div id="consultationForm" class="bg-light p-4 rounded shadow-sm">
+                <h5 class="text-uppercase mb-4 fw-bold text-center">Get Free Tour Consultation</h5>
+                <form id="tourConsultationForm">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="nm" placeholder="First Name" asp-for="FirstName">
+                        <label for="nm">First Name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="lm" placeholder="Last Name" asp-for="LastName">
+                        <label for="lm">Last Name</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="em" placeholder="Email Address" asp-for="EmailAddress">
+                        <label for="em">Email Address</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="pm" placeholder="Phone Number" asp-for="PhoneNumber">
+                        <label for="pm">Phone Number</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="date" class="form-control" id="jd" asp-for="PreferredJourneyDate">
+                        <label for="jd">Preferred Journey Date</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control" placeholder="Additional Requirements" id="ar" asp-for="AdditionalRequirements" style="height: 100px"></textarea>
+                        <label for="ar">Additional Requirements</label>
+                    </div>
+                    <button type="button" class="btn btn-warning w-100" onclick="BtnClick()">Send Data</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section MainLayoutScript {
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function BtnClick() {
+            var obj = {
+                FirstName: $("#nm").val(),
+                LastName: $("#lm").val(),
+                EmailAddress: $("#em").val(),
+                PhoneNumber: $("#pm").val(),
+                PreferredJourneyDate: $("#jd").val(),
+                AdditionalRequirements: $("#ar").val()
+            };
+            $.ajax({
+                url: '/Home/Details',
+                type: 'POST',
+                data: JSON.stringify(obj),
+                contentType: 'application/json; charset=utf-8',
+                success: function () {
+                    $('#consultationForm').hide();
+                    $('#successMessage').removeClass('d-none');
+                },
+                error: function (xhr, status, error) {
+                    alert('Error: ' + error);
+                }
+            });
+        }
+    </script>
+}
