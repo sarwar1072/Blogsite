@@ -76,6 +76,7 @@ namespace BlogSite.Web.Models.tourViewModel
                 MapUrl = data.MapUrl;
                 Requirements = data.Requirements;
                 CancellationTerm = data.CancellationTerm;
+                SpotsAvailable = data.SpotsAvailable;   
             }               
             TourDetails = new TourDetails()
             {

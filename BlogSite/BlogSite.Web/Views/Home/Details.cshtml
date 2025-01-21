@@ -355,19 +355,48 @@
         </div>
 
         <!-- Tour Details Section -->
-        <div class="col-lg-4">
+        <div class="col-lg-4 col-md-6 mb-4">
             <div class="card shadow-sm">
+                <!-- Card Header with Title -->
                 <div class="card-body">
-                    <p><strong>Destination:</strong> @Model.Destination</p>
-                    <p><strong>Duration:</strong> 3 days</p>
-                    <p><strong>People:</strong> From @Model.MiniMumPeople to @Model.MaxiMumPeople people</p>
-                    <p><strong>Spots Available:</strong> @Model.SpotsAvailable</p>
+                    <h5 class="card-title fw-bold">@Model.TourName</h5>
+                    <p class="text-muted mb-2">
+                        <i class="fa fa-map-marker-alt me-1"></i>
+                         @Model.Destination
+                    </p>
+                    
+
+                    <!-- Map Image -->
+                    <div class="mb-3">
+                        <img src="@Model.MapUrl" class="img-fluid rounded" alt="Map Image">
+                    </div>
+
+                    <!-- Details Section -->
+                    <ul class="list-unstyled mb-3">
+                        <li><i class="fa fa-clock me-2 text-primary"></i> 3 days</li>
+                        <li><i class="fa fa-user-friends me-2 text-primary"></i> From @Model.MiniMumPeople to @Model.MaxiMumPeople people</li>
+                        <li class="text-muted">
+                            <i class="fa fa-info-circle me-2"></i>
+                            @Model.CancellationTerm
+                        </li>
+                        <p>
+                            <i class="fa fa-map-marker-alt me-2 text-primary"></i>
+                            <strong>Spots Available:</strong> @Model.SpotsAvailable
+                        </p>
+                    </ul>
+
+                    <!-- Requirements Section -->
                     <p><strong>Requirements:</strong> @Model.Requirements</p>
-                    <p><strong>Cancellation Terms:</strong> @Model.CancellationTerm</p>
-                    <a href="@Model.MapUrl" target="_blank" class="btn btn-primary btn-block mt-3">View on Map</a>
+
+                    <!-- Button to View on Map -->
+                    <a href="https://maps.google.com" target="_blank" class="btn btn-primary btn-block mt-3">
+                        <i class="fa fa-map-marker-alt me-1"></i> View on Map
+                    </a>
                 </div>
             </div>
         </div>
+
+
     </div>
 </div>
 
