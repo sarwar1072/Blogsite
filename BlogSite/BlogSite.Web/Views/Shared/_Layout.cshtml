@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/css/cssforlayout.css" rel="stylesheet" />
+    <link href="~/css/navdesign.css" rel="stylesheet" />
 
     @RenderSection("PageStyles", false)
 </head>
@@ -36,7 +37,7 @@
         </div>
     </nav>
 
-    <!-- Search Section -->
+  
     <section class="search-section text-white py-5">
         <div class="container text-center">
             <h1 class="mb-3">Find Your Next Stay</h1>
@@ -47,19 +48,19 @@
                 <ul class="nav nav-tabs border-0 justify-content-center mb-4">
                     <!-- Tour -->
                     <li class="nav-item">
-                        <a class="nav-link active" href="/Home/Index">
+                        <a class="nav-link " href="/Home/Index" id="tourTab">
                             <i class="fas fa-umbrella-beach"></i> Tour
                         </a>
                     </li>
                     <!-- Hotel -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/Hotel/Index">
+                        <a class="nav-link" href="/Hotel/Index" id="hotelTab">
                             <i class="fas fa-hotel"></i> Hotel
                         </a>
                     </li>
                     <!-- Flight -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/Flight/Index">
+                        <a class="nav-link" href="/Flight/Index" id="flightTab">
                             <i class="fas fa-plane"></i> Flight
                         </a>
                     </li>
@@ -67,7 +68,7 @@
             </div>
         </div>
     </section>
-     <!-- Bootstrap JS -->
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -87,7 +88,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
+    <script src="~/js/navdesignjs.js"></script>
 
     <!-- jQuery, Popper.js, and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -95,6 +96,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     @RenderSection("MainLayoutScript", false)
 
-</body>
+
+   </body>
 </html> 
 

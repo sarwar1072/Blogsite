@@ -13,247 +13,258 @@
     <link href="~/css/roomdetailscss.css" rel="stylesheet" />
 } *@
 
-<div class="container card p-4 my-4">
-    <div class="row g-4">
-        <!-- Carousel Section -->
-        <div class="col-lg-8 col-md-12">
-            <div id="hotelCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    @if (Model?.images != null && Model.images.Any())
-                    {
-                        @for (int i = 0; i < Model.images.Count; i++)
+<div class="container my-5">
+    <div class="card border-0 shadow-lg p-4 rounded-4 bg-light">
+        <div class="row g-4">
+            <!-- Carousel Section -->
+            <div class="col-lg-8 col-md-12">
+                <div id="hotelCarousel" class="carousel slide rounded overflow-hidden shadow-sm" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @if (Model?.images != null && Model.images.Any())
                         {
-                            <div class="carousel-item @(i == 0 ? "active" : "")">
-                                <img src="@Model.images[i].ImageUrl" class="d-block w-100 rounded" alt="@Model.images[i].AlternativeText">
+                            @for (int i = 0; i < Model.images.Count; i++)
+                            {
+                                <div class="carousel-item @(i == 0 ? "active" : "")">
+                                    <img src="@Model.images[i].ImageUrl" class="d-block w-100 rounded-3" alt="@Model.images[i].AlternativeText">
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="text-center p-5 bg-light rounded-3">
+                                <p class="text-muted fs-5">No images available.</p>
                             </div>
                         }
-                    }
-                    else
-                    {
-                        <div class="text-center">
-                            <p class="text-muted">No images available.</p>
-                        </div>
-                    }
+                    </div>
+                    <!-- Carousel Controls -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#hotelCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#hotelCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
-                <!-- Carousel Controls -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#hotelCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#hotelCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
             </div>
-        </div>
 
-        <!-- Details Section -->
-        <div class="col-lg-4 col-md-12">
-            <div class="p-3 border rounded shadow-sm">
-                <h4 class="fw-bold">@Model.Name</h4>
-                <p class="mb-2"><strong>Destination:</strong> @Model.Location</p>
-                <p class="mb-2"><strong>Price:</strong> @Model.PricePerNight</p>
-                <p class="mb-0"><strong>Spots Available:</strong> @Model.AvailableRooms</p>
+            <!-- Details Section -->
+            <div class="col-lg-4 col-md-12">
+                <div class="p-4 bg-white border rounded-4 shadow-sm text-center">
+                    <h3 class="fw-bold text-primary">@Model.Name</h3>
+                    <p class="text-muted"><i class="bi bi-geo-alt-fill text-danger"></i> @Model.Location</p>
+                    <hr class="my-3">
+                    <p class="fs-5"><strong>Price:</strong> <span class="text-success fw-bold">@Model.PricePerNight</span> / Night</p>
+                    <p class="fs-5"><strong>Available Spots:</strong> <span class="text-warning fw-bold">@Model.AvailableRooms</span></p>
+                    <a href="#" class="btn btn-outline-primary w-100 fw-bold mt-3">Book Now</a>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container p-3 my-4">
-    <!-- Room Details Section -->
-    <div class="row g-4">
-        <!-- Room Details -->
-        <div class="col-lg-8 col-md-12">
-           
-            @if (Model.rooms !=null)
+
+<div class="container py-5">
+    <div class="mb-4 text-center">
+        <h2 class="fw-bold text-primary">Room Details</h2>
+        <p class="text-muted">For <strong>@Model.NumberOfGuests</strong> Guest(s), <strong>@Model.night</strong> Night(s)</p>
+    </div>
+
+    @if (Model.rooms != null && Model.rooms.Any())
+    {
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            @foreach (var item in Model.rooms)
             {
-                <div class="mb-4">
-                    <h4 class="fw-bold">Room Details</h4>
-                    <span class="text-muted">For @Model.NumberOfGuests Guest, for @Model.night Nights</span>
-                </div>
-                
-                @foreach (var item in Model.rooms)
-                 {
-                        <div class="card mb-4 shadow-sm">
-                            <div class="row g-0">
-                                <!-- Room Images -->
-                                <div class="col-md-5">
-                                    <img src="@item.RoomPhUrl" class="img-fluid rounded-start" alt="No photo found">
-                                </div>
-                                <!-- Room Info -->
-                                <div class="col-md-7">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Master Suite</h5>
-                                        <p class="card-text"><strong>King</strong> | Maximum Room Capacity: <strong>@item.Capacity</strong></p>
-                                        <a href="#" class="text-decoration-underline text-primary">View Room Details</a>
-                                        <p class="text-danger mt-2 fw-semibold">Hurry Up! Only 5 Rooms Left</p>
-                                        <p class="text-muted">Option No: <strong>@item.RoomNumber</strong></p>
-                                        <p class="text-muted">Room Type: <strong>@item.RoomType</strong></p>
-                                        <p class="text-success fw-bold">Price: @item.Price</p>
-                                        <ul class="list-unstyled mt-2">
-                                            <li>✔ Air Conditioning</li>
-                                            <li>✔ Safe/Locker</li>
-                                            <li>✔ Ceiling Fan</li>
-                                            <li>✔ Toiletries</li>
-                                        </ul>
-                                        <a href="@Url.Action("Roombook", "Hotel", new { Id = item.Id })" class="btn btn-outline-primary btn-sm mt-2">
-                                            Show All Amenities
-                                        </a>
-                                    </div>
+                <div class="col">
+                    <div class="card shadow-lg border-0 rounded-4 overflow-hidden position-relative">
+                        <div class="row g-0">
+                            <!-- Room Image -->
+                            <div class="col-md-5">
+                                <img src="@item.RoomPhUrl" class="img-fluid rounded-start h-100 object-fit-cover" alt="Room Image">
+                            </div>
+                            <!-- Room Info -->
+                            <div class="col-md-7">
+                                <div class="card-body">
+                                    <h4 class="card-title text-dark fw-bold">Master Suite</h4>
+                                    <p class="card-text text-muted"><strong>King</strong> | Max Capacity: <strong>@item.Capacity</strong></p>
+                                    <a href="#" class="text-decoration-none text-primary fw-semibold">View Room Details →</a>
+
+                                    <p class="text-danger fw-semibold mt-3">Hurry Up! Only 5 Rooms Left</p>
+                                    <p class="text-muted"><strong>Option No:</strong> @item.RoomNumber</p>
+                                    <p class="text-muted"><strong>Room Type:</strong> @item.RoomType</p>
+                                    <p class="text-success fw-bold fs-5">Price: @item.Price</p>
+
+                                    <ul class="list-unstyled text-muted mt-3">
+                                        <li>✔ Air Conditioning</li>
+                                        <li>✔ Safe/Locker</li>
+                                        <li>✔ Ceiling Fan</li>
+                                        <li>✔ Toiletries</li>
+                                    </ul>
+
+                                    <a href="@Url.Action("Roombook", "Hotel", new { Id = item.Id })" class="btn btn-outline-primary w-100 mt-2">
+                                        Show All Amenities
+                                    </a>
                                 </div>
                             </div>
                         </div>
-
-                    }
-            }else{
-                <h2>no rooms found</h2>
-            }
-            
-        </div>
-
-        <!-- Pricing Summary -->
-        <div class="col-lg-4 col-md-12">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <h4 class="card-title fw-bold">Pricing Summary</h4>
-                    <p class="card-text text-muted">Add Rooms to Continue</p>
-                    <button class="btn btn-primary w-100" disabled>Continue</button>
+                    </div>
                 </div>
-            </div>
+            }
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="text-center">
+            <h3 class="text-muted">No Rooms Found</h3>
+        </div>
+    }
 </div>
 
-
-@if(Model.hotelFacilities != null)
+@if (Model.hotelFacilities != null)
 {
-    <h4>Facilities</h4>
-    <div class="container my-4">
-        <div class="card p-4 shadow-sm facilities-section">
-            <!-- Facilities Section -->
+    <div class="container my-5">
+        <div class="card border-0 shadow-lg p-4 rounded-4 bg-light">
+            <h3 class="fw-bold text-center text-primary"><i class="fas fa-hotel"></i> Hotel Facilities</h3>
+            <hr class="mb-4">
+
             <div class="row g-4">
                 <!-- Business Facilities -->
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <h5 class="fw-bold">Business Facilities</h5>
-                    @if (!string.IsNullOrEmpty(Model.hotelFacilities.BusinessFacilities))
-                    {
-                        <ul class="list-unstyled facility-list">
-                            @foreach (var item in Model.hotelFacilities.BusinessFacilities.Split(','))
-                            {
-                                <li class="d-flex align-items-center">
-                                    <i class="fa fa-check text-success me-2"></i> @Html.Raw(item)
-                                </li>
-                            }
-                        </ul>
-                    }
+                    <div class="p-3 bg-white rounded-3 shadow-sm text-center">
+                        <h5 class="fw-bold"><i class="fas fa-briefcase text-primary me-2"></i> Business Facilities</h5>
+                        @if (!string.IsNullOrEmpty(Model.hotelFacilities.BusinessFacilities))
+                        {
+                            <ul class="list-unstyled text-muted">
+                                @foreach (var item in Model.hotelFacilities.BusinessFacilities.Split(','))
+                                {
+                                    <li class="d-flex align-items-center">
+                                        <i class="fa fa-check-circle text-success me-2"></i> @Html.Raw(item)
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </div>
                 </div>
 
                 <!-- Fitness & Wellness Facilities -->
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <h5 class="fw-bold">Fitness & Wellness Facilities</h5>
-                    @if (!string.IsNullOrEmpty(Model.hotelFacilities.FitnessFacilities))
-                    {
-                        <ul class="list-unstyled facility-list">
-                            @foreach (var item in Model.hotelFacilities.FitnessFacilities.Split(','))
-                            {
-                                <li class="d-flex align-items-center">
-                                    <i class="fa fa-check text-success me-2"></i> @Html.Raw(item)
-                                </li>
-                            }
-                        </ul>
-                    }
+                    <div class="p-3 bg-white rounded-3 shadow-sm text-center">
+                        <h5 class="fw-bold"><i class="fas fa-dumbbell text-danger me-2"></i> Fitness & Wellness</h5>
+                        @if (!string.IsNullOrEmpty(Model.hotelFacilities.FitnessFacilities))
+                        {
+                            <ul class="list-unstyled text-muted">
+                                @foreach (var item in Model.hotelFacilities.FitnessFacilities.Split(','))
+                                {
+                                    <li class="d-flex align-items-center">
+                                        <i class="fa fa-check-circle text-success me-2"></i> @Html.Raw(item)
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </div>
                 </div>
 
                 <!-- Food & Drink -->
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <h5 class="fw-bold">Food & Drink</h5>
-                    @if (!string.IsNullOrEmpty(Model.hotelFacilities.FoodFacilities))
-                    {
-                        <ul class="list-unstyled facility-list">
-                            @foreach (var item in Model.hotelFacilities.FoodFacilities.Split(','))
-                            {
-                                <li class="d-flex align-items-center">
-                                    <i class="fa fa-check text-success me-2"></i> @Html.Raw(item)
-                                </li>
-                            }
-                        </ul>
-                    }
+                    <div class="p-3 bg-white rounded-3 shadow-sm text-center">
+                        <h5 class="fw-bold"><i class="fas fa-utensils text-warning me-2"></i> Food & Drink</h5>
+                        @if (!string.IsNullOrEmpty(Model.hotelFacilities.FoodFacilities))
+                        {
+                            <ul class="list-unstyled text-muted">
+                                @foreach (var item in Model.hotelFacilities.FoodFacilities.Split(','))
+                                {
+                                    <li class="d-flex align-items-center">
+                                        <i class="fa fa-check-circle text-success me-2"></i> @Html.Raw(item)
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </div>
                 </div>
             </div>
 
+            <!-- Additional Facilities -->
             <div class="row g-4 mt-3">
-                <!-- General -->
+                <!-- General Facilities -->
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <h5 class="fw-bold">General</h5>
-                    @if (!string.IsNullOrEmpty(Model.hotelFacilities.General))
-                    {
-                        <ul class="list-unstyled facility-list">
-                            @foreach (var item in Model.hotelFacilities.General.Split(','))
-                            {
-                                <li class="d-flex align-items-center">
-                                    <i class="fa fa-check text-success me-2"></i> @Html.Raw(item)
-                                </li>
-                            }
-                        </ul>
-                    }
+                    <div class="p-3 bg-white rounded-3 shadow-sm text-center">
+                        <h5 class="fw-bold"><i class="fas fa-hotel text-info me-2"></i> General</h5>
+                        @if (!string.IsNullOrEmpty(Model.hotelFacilities.General))
+                        {
+                            <ul class="list-unstyled text-muted">
+                                @foreach (var item in Model.hotelFacilities.General.Split(','))
+                                {
+                                    <li class="d-flex align-items-center">
+                                        <i class="fa fa-check-circle text-success me-2"></i> @Html.Raw(item)
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </div>
                 </div>
 
                 <!-- Indoor Entertainment -->
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <h5 class="fw-bold">Indoor Entertainment</h5>
-                    @if (!string.IsNullOrEmpty(Model.hotelFacilities.IndoorFacitilies))
-                    {
-                        <ul class="list-unstyled facility-list">
-                            @foreach (var item in Model.hotelFacilities.IndoorFacitilies.Split(','))
-                            {
-                                <li class="d-flex align-items-center">
-                                    <i class="fa fa-check text-success me-2"></i> @Html.Raw(item)
-                                </li>
-                            }
-                        </ul>
-                    }
+                    <div class="p-3 bg-white rounded-3 shadow-sm text-center">
+                        <h5 class="fw-bold"><i class="fas fa-gamepad text-danger me-2"></i> Indoor Entertainment</h5>
+                        @if (!string.IsNullOrEmpty(Model.hotelFacilities.IndoorFacitilies))
+                        {
+                            <ul class="list-unstyled text-muted">
+                                @foreach (var item in Model.hotelFacilities.IndoorFacitilies.Split(','))
+                                {
+                                    <li class="d-flex align-items-center">
+                                        <i class="fa fa-check-circle text-success me-2"></i> @Html.Raw(item)
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </div>
                 </div>
 
                 <!-- Parking -->
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <h5 class="fw-bold">Parking</h5>
-                    @if (!string.IsNullOrEmpty(Model.hotelFacilities.Parking))
-                    {
-                        <ul class="list-unstyled facility-list">
-                            @foreach (var item in Model.hotelFacilities.Parking.Split(','))
-                            {
-                                <li class="d-flex align-items-center">
-                                    <i class="fa fa-check text-success me-2"></i> @Html.Raw(item)
-                                </li>
-                            }
-                        </ul>
-                    }
+                    <div class="p-3 bg-white rounded-3 shadow-sm text-center">
+                        <h5 class="fw-bold"><i class="fas fa-parking text-secondary me-2"></i> Parking</h5>
+                        @if (!string.IsNullOrEmpty(Model.hotelFacilities.Parking))
+                        {
+                            <ul class="list-unstyled text-muted">
+                                @foreach (var item in Model.hotelFacilities.Parking.Split(','))
+                                {
+                                    <li class="d-flex align-items-center">
+                                        <i class="fa fa-check-circle text-success me-2"></i> @Html.Raw(item)
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </div>
                 </div>
 
                 <!-- Policies -->
                 <div class="col-lg-4 col-md-6 col-sm-12">
-                    <h5 class="fw-bold">Policy</h5>
-                    @if (!string.IsNullOrEmpty(Model.hotelFacilities.Policies))
-                    {
-                        <ul class="list-unstyled facility-list">
-                            @foreach (var item in Model.hotelFacilities.Policies.Split(','))
-                            {
-                                <li class="d-flex align-items-center">
-                                    <i class="fa fa-check text-success me-2"></i> @Html.Raw(item)
-                                </li>
-                            }
-                        </ul>
-                    }
+                    <div class="p-3 bg-white rounded-3 shadow-sm text-center">
+                        <h5 class="fw-bold"><i class="fas fa-file-alt text-dark me-2"></i> Policies</h5>
+                        @if (!string.IsNullOrEmpty(Model.hotelFacilities.Policies))
+                        {
+                            <ul class="list-unstyled text-muted">
+                                @foreach (var item in Model.hotelFacilities.Policies.Split(','))
+                                {
+                                    <li class="d-flex align-items-center">
+                                        <i class="fa fa-check-circle text-success me-2"></i> @Html.Raw(item)
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 }
 else
 {
-    <h4>no facilities found.</h4>
+    <div class="text-center my-5">
+        <h4 class="text-muted"><i class="fas fa-exclamation-circle text-danger"></i> No Facilities Found</h4>
+    </div>
 }
-
 
 

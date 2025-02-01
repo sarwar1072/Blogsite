@@ -6,7 +6,132 @@
     Layout = "~/Views/Shared/_NewLayout.cshtml";
 } *@
 
-<div class="container my-4">
+<div class="container my-5">
+    <div class="row g-4">
+        <!-- Left Section: Booking Details -->
+        <div class="col-lg-6 col-md-12">
+            <div class="card shadow-lg rounded-4 border-0">
+                <div class="card-body">
+                    <h2 class="card-title text-primary fw-bold text-center">Review Your Booking</h2>
+                    <h3 class="mt-3 fw-semibold text-dark">@Model.Name</h3>
+                    <input type="hidden" asp-for="Id" id="roomid" />
+                    <p class="text-muted">👥 @Model.filter.NumberOfGuests Guests | 🏨 1 Room</p>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <div>
+                            <p class="mb-1 text-muted">📅 Check In:</p>
+                            <strong class="text-dark">@Model.filter.CheckInDate.ToString("dd MMM, yyyy")</strong>
+                            <br>
+                            <span class="text-muted">@Model.filter.CheckInDate.DayOfWeek</span>
+                        </div>
+                        <div>
+                            <p class="mb-1 text-muted">📅 Check Out:</p>
+                            <strong class="text-dark">@Model.filter.CheckOutDate.ToString("dd MMM, yyyy")</strong>
+                            <br>
+                            <span class="text-muted">@Model.filter.CheckOutDate.DayOfWeek</span>
+                        </div>
+                    </div>
+                    <p class="mt-3 fw-semibold">🛏️ <strong>@Model.nights</strong> Nights</p>
+
+                    <div class="row mt-4 align-items-center">
+                        <div class="col-md-6">
+                            <img src="@Model.RoomPhUrl" alt="Room Image" class="img-fluid rounded shadow-sm" />
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="mt-2 fw-bold text-dark">@Model.RoomType</h4>
+                            <p class="text-muted">🍳 @Model.RoomFacilities</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Section: Fare Summary -->
+        <div class="col-lg-6 col-md-12">
+            <div class="card shadow-lg rounded-4 border-0">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <img src="@Model.hotel.HotelUrl" alt="Hotel Image" class="img-fluid rounded shadow-sm" />
+                        </div>
+                        <div class="col-6">
+                            <h4 class="fw-bold text-dark">@Model.hotel.Name</h4>
+                            <p class="text-muted">📍 @Model.hotel.Location</p>
+                        </div>
+                    </div>
+                    <h4 class="mt-4 fw-bold">💰 Fare Summary</h4>
+                    <p>📅 Check-In: <strong>@Model.filter.CheckInDate.ToString("dd MMM, yyyy")</strong></p>
+                    <p>📅 Check-Out: <strong>@Model.filter.CheckOutDate.ToString("dd MMM, yyyy")</strong></p>
+                    <p>⏳ @Model.nights Night(s)</p>
+                    <hr>
+                    <h3 class="text-dark fw-bold">Total: <span class="text-success">BDT @Model.Price</span></h3>
+                    <button class="btn btn-primary btn-lg w-100 mt-3 fw-bold">💳 Pay Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Additional Requests -->
+<div class="container my-5">
+    <div class="card p-4 shadow-lg rounded-4 border-0">
+        <h2 class="mb-3 text-primary fw-bold">✨ Additional Requests</h2>
+        <p class="text-muted">Your requests will be forwarded to the property. <strong>Fulfillment subject to availability.</strong></p>
+
+        <form asp-action="RoomBook" method="post">
+            <input type="hidden" asp-for="Id" id="roomid" />
+
+            <!-- Request Options -->
+            <div class="mb-4">
+                <h5 class="mb-2 fw-bold">📝 Request Options</h5>
+                <div class="row row-cols-2">
+                    <div class="col"><input type="checkbox" class="form-check-input" asp-for="AirportTransfer" id="AirportTransfer" /> <label class="form-check-label" for="AirportTransfer">✈️ Airport Transfer</label></div>
+                    <div class="col"><input type="checkbox" class="form-check-input" asp-for="ExtraBed" id="ExtraBed" /> <label class="form-check-label" for="ExtraBed">🛏️ Extra Bed</label></div>
+                    <div class="col"><input type="checkbox" class="form-check-input" asp-for="RoomOnHigherFloor" id="RoomOnHigherFloor" /> <label class="form-check-label" for="RoomOnHigherFloor">🏢 Higher Floor</label></div>
+                    <div class="col"><input type="checkbox" class="form-check-input" asp-for="DecorationsInRoom" id="DecorationsInRoom" /> <label class="form-check-label" for="DecorationsInRoom">🎉 Room Decorations</label></div>
+                </div>
+            </div>
+
+            <!-- Bed Type -->
+            <div class="mb-4">
+                <h5 class="mb-2 fw-bold">🛏️ Bed Type</h5>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" asp-for="BedType" value="Large Bed" id="LargeBed" />
+                    <label class="form-check-label" for="LargeBed">King-Size Bed 👑</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" asp-for="BedType" value="Twin Beds" id="TwinBeds" />
+                    <label class="form-check-label" for="TwinBeds">Twin Beds 👬</label>
+                </div>
+            </div>
+
+            <!-- Room Preference -->
+            <div class="mb-4">
+                <h5 class="mb-2 fw-bold">🚭 Room Preference</h5>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" asp-for="RoomPreference" value="Non-Smoking" id="NonSmoking" />
+                    <label class="form-check-label" for="NonSmoking">Non-Smoking</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" asp-for="RoomPreference" value="Smoking" id="Smoking" />
+                    <label class="form-check-label" for="Smoking">Smoking</label>
+                </div>
+            </div>
+
+            <!-- Note to Property -->
+            <div class="mb-4">
+                <h5 class="mb-2 fw-bold">✍️ Leave a Note</h5>
+                <textarea class="form-control" asp-for="NoteToProperty" rows="3" placeholder="e.g., I will arrive at 10 PM. Please arrange late check-in."></textarea>
+            </div>
+
+            <!-- Confirm Booking Button -->
+            <button type="submit" class="btn btn-warning w-100 fw-bold">✅ Confirm Booking</button>
+        </form>
+    </div>
+</div>
+
+
+@* <div class="container my-4">
     <div class="row g-4">
         <!-- Left Section: Booking Details -->
         <div class="col-lg-6 col-md-12">
@@ -141,7 +266,10 @@
             <button type="submit" class="btn btn-warning w-100 fw-bold">Confirm Booking</button>
         </form>
     </div>
-</div>
+</div> *@
+
+
+
 @* <script>
     $(document).ready(function () {
         // Attach the submit event handler to the form

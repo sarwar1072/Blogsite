@@ -66,6 +66,42 @@
 </div>
 
 <div class="container my-5">
+    <h3 class="text-primary mb-4 fw-bold">🌟 Popular Hotels</h3>
+    <div class="row g-4">
+        @if (Model.ListOfHotel != null && Model.HotelList.Any())
+        {
+            foreach (var hotel in Model.ListOfHotel())
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <a href="@Url.Action("SearchHotelRooms", "Hotel", new { hotelId = hotel.Id })" class="text-decoration-none">
+                            <img src="@hotel.HotelUrl" class="card-img-top rounded-top" alt="@hotel.Name" style="height: 200px; object-fit: cover;">
+                        </a>
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold">
+                                <a href="@Url.Action("SearchHotelRooms", "Hotel", new { hotelId = hotel.Id })" class="text-dark text-decoration-none">
+                                    @hotel.Name
+                                </a>
+                            </h5>
+                        </div>
+                        <div class="card-footer bg-white text-center py-3">
+                            <a href="@Url.Action("SearchHotelRooms", "Hotel", new { hotelId = hotel.Id })" class="btn btn-primary px-4">View Rooms</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <p class="text-center text-muted">No hotels available.</p>
+            </div>
+        }
+    </div>
+</div>
+
+
+@* <div class="container my-5">
     <h3 class="text-primary mb-4">Popular Hotels</h3>
     <div class="row">
         @if (Model.ListOfHotel != null && Model.HotelList.Any())
@@ -101,7 +137,7 @@
             </div>
         }
     </div>
-</div>
+</div> *@
 
 
 
