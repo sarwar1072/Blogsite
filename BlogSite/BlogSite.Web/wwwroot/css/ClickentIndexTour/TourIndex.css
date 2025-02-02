@@ -1,4 +1,4 @@
-.card {
+/*.card {
     border: none;
     transition: transform 0.3s ease-in-out;
 }
@@ -13,85 +13,18 @@
     border-radius: 50%;
     width: 40px;
     height: 40px;
-}
-
-
-
-/* Smaller arrow icons */
-/*.custom-arrow .carousel-control-prev-icon,
-.custom-arrow .carousel-control-next-icon {
-    width: 20px;
-    height: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
 }*/
-
-/* Center the arrows on both sides */
-/*.carousel-control-prev, .carousel-control-next {
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-}*/
-
-/* Card responsiveness */
-/*.card img {
-    height: 200px;
-    object-fit: cover;
-}
-
-.card {
-    border: none;
+/*new design
+*/.hover-card {
     transition: transform 0.3s ease-in-out;
 }
 
-    .card:hover {
+    .hover-card:hover {
         transform: scale(1.05);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }*/
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    }
 
-/*.carousel-inner {
-    display: flex;
-    justify-content: center;
-}*/
-
-/* Smaller arrow icons */
-/*.custom-arrow .carousel-control-prev-icon,
-.custom-arrow .carousel-control-next-icon {
-    width: 20px;
-    height: 20px;
-    background-color: rgba(0, 0, 0, 0.5);
-    border-radius: 50%;
-}*/
-
-/* Position arrows at the far edges of the container */
-/*.carousel-control-prev, .carousel-control-next {
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-}*/
-
-/* Card responsiveness */
-/*.card img {
-    height: 200px;
-    object-fit: cover;
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    filter: invert(1);
 }
-
-.card {
-    border: none;
-    transition: transform 0.3s ease-in-out;
-}
-
-    .card:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }*/
-
-/* Carousel row alignment */
-/*.carousel-inner {
-    display: flex;
-    justify-content: center;
-}*/
-
 

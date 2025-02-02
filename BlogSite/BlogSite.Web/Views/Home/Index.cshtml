@@ -34,8 +34,116 @@
     </form>
 </div>
 
+<div class="container my-5">
+    <h3 class="text-primary mb-4 fw-bold text-center">🌍 Popular Destinations</h3>
+    <div id="popularDestiCarousel" class="carousel slide" data-bs-ride="carousel">
+        <!-- Left and right navigation -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#popularDestiCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#popularDestiCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
 
-  <div class="container my-5">
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+            @if (Model.PopularTourDestination() != null && Model.TourList.Any())
+            {
+                var counter = 0;
+                foreach (var group in Model.PopularTourDestination().Select((tour, index) => new { tour, index })
+                .GroupBy(x => x.index / 4)) // Group items into sets of 4
+                {
+                    <div class="carousel-item @(counter == 0 ? "active" : "")">
+                        <div class="row g-4">
+                            @foreach (var item in group)
+                            {
+                                <div class="col-md-3">
+                                    <a href="/Home/TourList?Destination=@item.tour.Destination" class="text-decoration-none">
+                                        <div class="card border-0 shadow-sm hover-card">
+                                            <img src="@item.tour.TourUrl" class="card-img-top rounded-top" alt="@item.tour.TourName" style="height: 200px; object-fit: cover;">
+                                            <div class="card-body text-center">
+                                                <h5 class="card-title fw-bold text-dark">@item.tour.Destination</h5>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    counter++;
+                }
+            }
+            else
+            {
+                <div class="carousel-item active">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <p class="text-muted">No destinations available.</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Popular Tours Section -->
+<div class="container my-5">
+    <h3 class="text-primary mb-4 fw-bold text-center">🏕️ Popular Tours</h3>
+    <div class="row g-4">
+        @if (Model.ListOfTours != null && Model.TourList.Any())
+        {
+            foreach (var tour in Model.ListOfTours())
+            {
+                <div class="col-md-3">
+                    <div class="card border-0 shadow-sm hover-card h-100">
+                        <!-- Link to details page -->
+                        <a href="@Url.Action("Details", "Home", new { id = tour.Id })" class="text-decoration-none">
+                            <img src="@tour.TourUrl" class="card-img-top rounded-top" alt="@tour.TourName" style="height: 200px; object-fit: cover;">
+                        </a>
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold text-dark">
+                                <a href="@Url.Action("Details", "Home", new { id = tour.Id })" class="text-dark text-decoration-none">
+                                    @tour.TourName
+                                </a>
+                            </h5>
+                        </div>
+                        <div class="card-footer bg-white text-center py-3">
+                            <a href="@Url.Action("Details", "Home", new { id = tour.Id })" class="btn btn-primary px-4">View Tour</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <p class="text-center text-muted">No tours available.</p>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Custom CSS for Hover Effects -->
+@* <style>
+    .hover-card {
+        transition: transform 0.3s ease-in-out;
+    }
+
+        .hover-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+        filter: invert(1);
+    }
+</style>
+ *@
+
+  @* <div class="container my-5">
     <h3 class="text-primary mb-4">Popular Destinations</h3>
     <div id="popularDestiCarousel" class="carousel slide" data-bs-ride="carousel">
         <!-- Left and right navigation -->
@@ -123,7 +231,7 @@
             </div>
         }
     </div>
-</div>
+</div> *@
 
 
 
