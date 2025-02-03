@@ -25,7 +25,9 @@
                             @for (int i = 0; i < Model.images.Count; i++)
                             {
                                 <div class="carousel-item @(i == 0 ? "active" : "")">
-                                    <img src="@Model.images[i].ImageUrl" class="d-block w-100 rounded-3" alt="@Model.images[i].AlternativeText">
+                                    <img src="@Model.images[i].ImageUrl" class="d-block w-100 rounded-3"
+                                         alt="@Model.images[i].AlternativeText"
+                                         style="height: 400px; object-fit: cover;">
                                 </div>
                             }
                         }
@@ -62,6 +64,57 @@
         </div>
     </div>
 </div>
+
+
+@* <div class="container my-5">
+    <div class="card border-0 shadow-lg p-4 rounded-4 bg-light">
+        <div class="row g-4">
+            <!-- Carousel Section -->
+            <div class="col-lg-8 col-md-12">
+                <div id="hotelCarousel" class="carousel slide rounded overflow-hidden shadow-sm" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @if (Model?.images != null && Model.images.Any())
+                        {
+                            @for (int i = 0; i < Model.images.Count; i++)
+                            {
+                                <div class="carousel-item @(i == 0 ? "active" : "")">
+                                    <img src="@Model.images[i].ImageUrl" class="d-block w-100 rounded-3" alt="@Model.images[i].AlternativeText">
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="text-center p-5 bg-light rounded-3">
+                                <p class="text-muted fs-5">No images available.</p>
+                            </div>
+                        }
+                    </div>
+                    <!-- Carousel Controls -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#hotelCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#hotelCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon bg-dark rounded-circle p-3" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Details Section -->
+            <div class="col-lg-4 col-md-12">
+                <div class="p-4 bg-white border rounded-4 shadow-sm text-center">
+                    <h3 class="fw-bold text-primary">@Model.Name</h3>
+                    <p class="text-muted"><i class="bi bi-geo-alt-fill text-danger"></i> @Model.Location</p>
+                    <hr class="my-3">
+                    <p class="fs-5"><strong>Price:</strong> <span class="text-success fw-bold">@Model.PricePerNight</span> / Night</p>
+                    <p class="fs-5"><strong>Available Spots:</strong> <span class="text-warning fw-bold">@Model.AvailableRooms</span></p>
+                    <a href="#" class="btn btn-outline-primary w-100 fw-bold mt-3">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> *@
 
 
 <div class="container py-5">

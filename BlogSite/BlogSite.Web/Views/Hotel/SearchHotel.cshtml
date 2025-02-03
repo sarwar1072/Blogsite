@@ -1,7 +1,7 @@
-﻿@model HotelModelView
+﻿@* @model HotelModelView
 @* @{
     Layout = "_NewLayout";
-} *@
+} 
 @section PageStyles {
     <link href="~/css/carddesigntour.css" rel="stylesheet" />
 }
@@ -56,14 +56,14 @@
                                 <p class="text-muted">
                                     Available Rooms: <span>@item.AvailableRooms </span>
                                 </p>
-                                @*                             <p class="text-muted">@item.PricePerNight</p>
-                        *@      <div class="d-flex align-items-center">
+                                                          <p class="text-muted">@item.PricePerNight</p>
+                             <div class="d-flex align-items-center">
                                     <p class="text-primary font-weight-bold">Starting From BDT @item.PricePerNight Per Person</p>
                                     <a href="@Url.Action("SearchHotelRooms", "Hotel",new {hotelId = item.Id })" class="btn btn-primary ml-auto">Select</a>
                                 </div>
-                                @*  <div>
+                                  <div>
                         <span class="badge badge-secondary">Spots Available: @item.SpotsAvailable</span>
-                        </div >*@
+                        </div >
                             </div>
                         </div>
                     </div>
@@ -78,3 +78,128 @@
         </div>
     </div>
 </div>
+ *@
+ @model HotelModelView
+
+
+<style>
+    /* Hotel Card Hover Effect */
+    .hotel-card:hover {
+        transform: scale(1.03);
+        transition: 0.3s ease-in-out;
+    }
+
+    /* Image Styling */
+    .hotel-img {
+        height: 200px;
+        object-fit: cover;
+        border-radius: 10px 10px 0 0;
+    }
+
+    /* Button Hover */
+    .btn-primary:hover {
+        background-color: #0047ab;
+        border-color: #0047ab;
+    }
+</style>
+<div class="container mt-5">
+    <div class="row">
+        <!-- Sidebar: Filters -->
+        <div class="col-md-3">
+            <div class="card p-3 shadow-sm">
+                <h5 class="fw-bold text-primary">Filter By</h5>
+
+                <!-- Price Range -->
+                <div class="mb-3">
+                    <label for="priceRange" class="form-label">Price Range</label>
+                    <input type="range" class="form-range" id="priceRange" min="0" max="30000">
+                    <div class="d-flex justify-content-between text-muted">
+                        <span>BDT 0</span>
+                        <span>BDT 30,000</span>
+                    </div>
+                </div>
+
+                <!-- Duration -->
+                <div class="mb-3">
+                    <label class="form-label">Duration</label>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="less6hours">
+                        <label class="form-check-label" for="less6hours">Less than 6 hours</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="6to12hours">
+                        <label class="form-check-label" for="6to12hours">6 - 12 hours</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="12to24hours">
+                        <label class="form-check-label" for="12to24hours">12 - 24 hours</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="more24hours">
+                        <label class="form-check-label" for="more24hours">24+ hours</label>
+                    </div>
+                </div>
+
+                <!-- Time Selection -->
+                <div class="mb-3">
+                    <label class="form-label">Time</label>
+                    <div class="d-flex justify-content-between text-muted">
+                        <span>00-06</span>
+                        <span>06-12</span>
+                        <span>12-18</span>
+                        <span>18-00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content: Hotel Listings -->
+        <div class="col-md-9">
+            <h5 class="text-secondary fw-bold mb-4">
+                <i class="fas fa-map-marker-alt text-primary"></i>
+                Destination: @Model.HotelList.Count() places found
+            </h5>
+
+            <!-- Hotel Cards -->
+            @if (Model.HotelList.Any())
+            {
+                <div class="row g-4">
+                    @foreach (var item in Model.HotelList)
+                    {
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card shadow-sm border-0 h-100 hotel-card">
+                                <img src="@item.HotelUrl" class="card-img-top hotel-img" alt="Hotel Image">
+                                <div class="card-body">
+                                    <h5 class="text-primary fw-bold">@item.Name</h5>
+                                    <p class="text-muted">
+                                        <i class="fas fa-map-marker-alt me-1 text-danger"></i> @item.Location
+                                    </p>
+                                    <p class="text-muted">
+                                        <i class="fas fa-bed me-1"></i> Available Rooms: <span>@item.AvailableRooms</span>
+                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                        <p class="text-success fw-bold mb-0">
+                                            <i class="fas fa-tag"></i> BDT @item.PricePerNight / Night
+                                        </p>
+                                        <a href="@Url.Action("SearchHotelRooms", "Hotel", new { hotelId = item.Id })" class="btn btn-primary shadow-sm">
+                                            <i class="fas fa-check"></i> Select
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <h4 class="text-center text-muted my-5">
+                    <i class="fas fa-exclamation-circle"></i> No suitable hotel found
+                </h4>
+            }
+        </div>
+    </div>
+</div>
+
+
+
