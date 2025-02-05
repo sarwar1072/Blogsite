@@ -4,11 +4,127 @@
 } *@
 @section PageStyles {
     <link href="~/css/carddesigntour.css" rel="stylesheet" />
+
+    <link href="~/css/clickentindextour/tourlistcss.css" rel="stylesheet" />
 }
                       
 
-                             
 <div class="container mt-5">
+    <div class="row">
+        <!-- Sidebar: Filters -->
+        <div class="col-md-3">
+            <div class="card p-3 shadow-sm border-0">
+                <h5 class="fw-bold text-primary">Filter By</h5>
+
+                <!-- Price Range -->
+                <div class="mb-3">
+                    <label for="priceRange" class="form-label">Price Range</label>
+                    <input type="range" class="form-range" id="priceRange" min="0" max="30000">
+                    <div class="d-flex justify-content-between text-muted">
+                        <span>BDT 0</span>
+                        <span>BDT 30,000</span>
+                    </div>
+                </div>
+
+                <!-- Duration -->
+                <div class="mb-3">
+                    <label class="form-label">Duration</label>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="less6hours">
+                        <label class="form-check-label" for="less6hours">Less than 6 hours</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="6to12hours">
+                        <label class="form-check-label" for="6to12hours">6 - 12 hours</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="12to24hours">
+                        <label class="form-check-label" for="12to24hours">12 - 24 hours</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="more24hours">
+                        <label class="form-check-label" for="more24hours">24+ hours</label>
+                    </div>
+                </div>
+
+                <!-- Time Selection -->
+                <div class="mb-3">
+                    <label class="form-label">Time</label>
+                    <div class="d-flex justify-content-around text-muted">
+                        <span class="badge bg-light text-dark">00-06</span>
+                        <span class="badge bg-light text-dark">06-12</span>
+                        <span class="badge bg-light text-dark">12-18</span>
+                        <span class="badge bg-light text-dark">18-00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content: Tour Listings -->
+        <div class="col-md-9">
+            <h5 class="text-secondary fw-bold mb-4">
+                <i class="fas fa-map-marker-alt text-primary"></i> 
+                Destination: @Model.TourList.Count() places found
+            </h5>
+
+            <!-- Tour Cards -->
+            @if(Model.TourList.Any()) {
+                <div class="row g-4">
+                    @foreach (var item in Model.TourList) {
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card shadow-sm border-0 h-100 tour-card">
+                                <img src="@item.TourUrl" class="card-img-top tour-img" alt="@item.TourName">
+                                <div class="card-body">
+                                    <h5 class="text-primary fw-bold">@item.TourName</h5>
+                                    <p class="text-muted">
+                                        <i class="fas fa-map-marker-alt me-1 text-danger"></i> @item.Destination
+                                    </p>
+                                    <p class="text-muted">
+                                        <i class="fas fa-clock me-1 text-primary"></i> 3 Days
+                                    </p>
+                                    <p class="text-muted">
+                                        <i class="fas fa-users me-1 text-primary"></i> @item.MiniMumPeople - @item.MaxiMumPeople people
+                                    </p>
+                                    <p class="text-muted">
+                                        <i class="fas fa-info-circle me-1 text-primary"></i> @item.CancellationTerm
+                                    </p>
+                                    <p class="text-muted">
+                                        <i class="fas fa-file-alt me-1 text-primary"></i> Requirements: @item.Requirements
+                                    </p>
+
+                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                        <p class="text-success fw-bold mb-0">
+                                            <i class="fas fa-tag"></i> BDT @item.Price / Person
+                                        </p>
+                                        <a href="@Url.Action("Details", "Home", new { id = item.Id })" class="btn btn-primary shadow-sm">
+                                            <i class="fas fa-check"></i> Details
+                                        </a>
+                                    </div>
+
+                                    <div class="mt-2">
+                                        <span class="badge bg-secondary">
+                                            <i class="fas fa-map-signs me-2"></i> Spots Available: @item.SpotsAvailable
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else {
+                <h4 class="text-center text-muted my-5">
+                    <i class="fas fa-exclamation-circle"></i> No suitable tours found
+                </h4>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+                             
+@* <div class="container mt-5">
     <div class="row">
         <!-- Tour Sidebar (Filter) -->
         <div class="col-md-3">
@@ -118,3 +234,4 @@
         </div>
     </div>
 </div>
+ *@

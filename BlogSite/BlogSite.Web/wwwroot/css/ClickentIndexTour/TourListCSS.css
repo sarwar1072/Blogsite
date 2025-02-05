@@ -1,0 +1,19 @@
+
+/* Tour Card Hover Effect */
+.tour-card:hover {
+    transform: scale(1.03);
+    transition: 0.3s ease-in-out;
+}
+
+/* Image Styling */
+.tour-img {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Button Hover */
+.btn-primary:hover {
+    background-color: #0047ab;
+    border-color: #0047ab;
+}
