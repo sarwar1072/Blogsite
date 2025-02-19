@@ -1,4 +1,8 @@
-﻿  <!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@using Blogsite.Infrastructure.Entities.Membership
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,26 +23,64 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm fixed-top">
         <div class="container">
+            <!-- Brand Logo -->
             <a class="navbar-brand" href="#">Booking.com</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <!-- Navbar Content -->
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="/Admin/Dashboard" id="tourTab">
+                                Dashboard
+                            </a>
+                        </li>
+                    }
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Register</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Sign In</a>
+                        <partial name="_LoginPartial" />
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <section class="search-section text-white py-5">
+
+@*     <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm fixed-top">
+        <div class="container">
+            <!-- Brand Logo -->
+            <a class="navbar-brand" href="#">Booking.com</a>
+
+            <!-- Mobile Toggle Button -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            @if (SignInManager.IsSignedIn(User))
+            {
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/Admin/Dashboard" id="tourTab">
+                        Dashboard
+                    </a>
+                </li>
+            }
+            <!-- Navbar Links (Loaded from Partial View) -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+ *@
+    <section class="search-section text-white py-5 mt-5">
         <div class="container text-center">
             <h1 class="mb-3">Find Your Next Stay</h1>
             <p class="mb-4">Search low prices on hotels, homes, and much more...</p>
@@ -63,39 +105,6 @@
             </ul>
         </div>
     </section>
-
-  
-    @* <section class="search-section text-white py-5">
-        <div class="container text-center">
-            <h1 class="mb-3">Find Your Next Stay</h1>
-            <p class="mb-4">Search low prices on hotels, homes, and much more...</p>
-
-            <!-- Tabs Navigation -->
-            <div class="container">
-                <ul class="nav nav-tabs border-0 justify-content-center mb-4">
-                    <!-- Tour -->
-                    <li class="nav-item">
-                        <a class="nav-link " href="/Home/Index" id="tourTab">
-                            <i class="fas fa-umbrella-beach"></i> Tour
-                        </a>
-                    </li>
-                    <!-- Hotel -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Hotel/Index" id="hotelTab">
-                            <i class="fas fa-hotel"></i> Hotel
-                        </a>
-                    </li>
-                    <!-- Flight -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/Flight/Index" id="flightTab">
-                            <i class="fas fa-plane"></i> Flight
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section> *@
-
 
     <div class="container">
         <main role="main" class="pb-3">

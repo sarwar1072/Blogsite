@@ -5,6 +5,7 @@ using Blogsite.Infrastructure.Entities;
 using BlogSite.Web.Areas.Admin.Models;
 using BlogSite.Web.Areas.Admin.Models.TourModelFolder;
 using BlogSite.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System.CodeDom;
@@ -13,6 +14,8 @@ using System.Security.Cryptography.X509Certificates;
 namespace BlogSite.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "User, Admin")]
+
     public class TourController : Controller
     {
         protected readonly ILifetimeScope _scope;

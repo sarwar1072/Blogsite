@@ -68,7 +68,7 @@ namespace BlogSite.Web
             builder.RegisterType<RegisterModel>()
                 .AsSelf()
                 .InstancePerLifetimeScope();
-
+            builder.RegisterType< LoginModel >().AsSelf().InstancePerLifetimeScope();
             base.Load(builder);
         }
     }

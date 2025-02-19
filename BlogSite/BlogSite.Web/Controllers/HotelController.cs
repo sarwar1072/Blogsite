@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Blogsite.Infrastructure.Services;
 using BlogSite.Web.Models.HotelViewM;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static System.Formats.Asn1.AsnWriter;
 
@@ -129,6 +130,7 @@ namespace BlogSite.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult RoomBook(RoomDetailsModel model)
         {
             model.ResolveDependency(_scope);

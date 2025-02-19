@@ -4,11 +4,14 @@ using BlogSite.Web.Areas.Admin.Models;
 using BlogSite.Web.Areas.Admin.Models.TourDetailsFolder;
 using BlogSite.Web.Areas.Admin.Models.TourModelFolder;
 using BlogSite.Web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogSite.Web.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "User, Admin")]
+
     public class TourDetailsController : Controller
     {
         protected readonly ILifetimeScope _scope;
