@@ -12,7 +12,7 @@ namespace Blogsite.Infrastructure.Seeds
 				var rootUser = new ApplicationUser
 				{
 					Id = Guid.Parse("e9b3be8c-99c5-42c7-8f2e-1eb39f6d9125"),
-					Name="Admin",
+                    FirstName = "Admin",
 					UserName = "admin@gmail.com",
 					NormalizedUserName = "admin@gmail.com",
 					Email = "admin@gmail.com",
@@ -24,7 +24,7 @@ namespace Blogsite.Infrastructure.Seeds
 				var normalUser = new ApplicationUser
 				{
 					Id = Guid.Parse("8f3d96ce-76ec-4992-911a-33ceB81fa29d"),
-				    Name = "sarwar",
+                    FirstName = "sarwar",
 					UserName = "user@gmail.com.com",
 					NormalizedUserName = "user@gmail.com.com",
 					Email = "user@gmail.com.com",

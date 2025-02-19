@@ -10,6 +10,8 @@ using Serilog.Events;
 using Blogsite.Infrastructure;
 using Blogsite.Membership;
 using Blogsite.Infrastructure.DbContexts;
+using Blogsite.Infrastructure.Entities.Membership;
+using Blogsite.Membership.Services;
 
 namespace BlogSite.Web
 {
@@ -73,13 +75,13 @@ namespace BlogSite.Web
             //.AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
 
-            //builder.Services
-                //.AddIdentity<ApplicationUser, Role>()
-                //.AddEntityFrameworkStores<ApplicationDbContext>()
-                //.AddUserManager<UserManager>()
-                //.AddRoleManager<RoleManager>()
-                //.AddSignInManager<SignInManager>()
-                //.AddDefaultTokenProviders();
+            builder.Services
+                .AddIdentity<ApplicationUser, Role>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddUserManager<UserManager>()
+                .AddRoleManager<RoleManager>()
+                .AddSignInManager<SignInManager>()
+                .AddDefaultTokenProviders();
 
             builder.Services.Configure<IdentityOptions>(options =>
             {

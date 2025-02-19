@@ -1,0 +1,76 @@
+﻿@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+    <div class="main-wrapper">
+        <div class="page-wrapper full-page">
+            <div class="page-content d-flex align-items-center justify-content-center">
+
+                <div class="row w-100 mx-0 auth-page">
+                    <div class="col-md-8 col-xl-6 mx-auto">
+                        <div class="card">
+                            <div class="card-body p-5">
+                                <div class="auth-form-wrapper">
+                                    <h5 class="text-muted fw-normal mb-4">Create an StackOverflow account.</h5>
+                                    <form class="forms-sample" id="registerForm" asp-action="Register" asp-controller="Account"
+                                      asp-antiforgery="true" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label asp-for="FirstName" class="form-label">First Name</label>
+                                                <input asp-for="FirstName" class="form-control" autocomplete="First name"
+                                                       placeholder="First name" aria-required="true" />
+                                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label asp-for="LastName" class="form-label">Last Name</label>
+                                                <input asp-for="LastName" class="form-control" autocomplete="Last Name"
+                                                       placeholder="Last name" aria-required="true" />
+                                                <span asp-validation-for="LastName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label asp-for="Email" class="form-label">Email</label>
+                                                <input asp-for="Email" class="form-control" autocomplete="Email"
+                                                       placeholder="Email" aria-required="true" />
+                                                <span asp-validation-for="Email" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <label asp-for="Password" class="form-label">Password</label>
+                                                <input asp-for="Password" class="form-control" autocomplete="Password"
+                                                       placeholder="Password" aria-required="true" />
+                                                <span asp-validation-for="Password" class="text-danger"></span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label asp-for="ConfirmPassword" class="form-label">Confirm password</label>
+                                                <input asp-for="ConfirmPassword" class="form-control" autocomplete="ConfirmPasswordPhone Number"
+                                                       placeholder="ConfirmPassword" aria-required="true" />
+                                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <button id="registerSubmit" type="submit" class="btn btn-primary text-white me-2 mb-2 mb-md-0">Sign up</button>
+                                        </div>
+                                        <a class="d-block mt-3 text-muted" asp-area="" asp-controller="Account" asp-action="Login">Already a user? Sign in</a>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+    @section MainLayoutScript {
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+
+

@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@* @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
@@ -24,3 +24,38 @@ else
     </li>
 }
 </ul>
+ *@
+ @using Microsoft.AspNetCore.Identity
+@using Blogsite.Infrastructure.Entities.Membership
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <p class="nav-link text-dark stylish-font" title="User">Hello @User.Identity.Name.Split('@')[0]</p>
+        </li>
+
+        <li class="nav-item ">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="AddProfile">Update Profile</a>
+
+        </li>
+        <li class="nav-item">
+            <form class="form-inline" asp-area="" asp-action="Logout" asp-controller="Account" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-action="Register" asp-controller="Account">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-action="Login" asp-controller="Account">Login</a>
+        </li>
+    }
+</ul>
+@* asp-page="/Account/Manage/Index" *@
+@*  asp-area="" *@

@@ -30,9 +30,10 @@ namespace Blogsite.Membership.Services
             _mapper=mapper;
             _contextAccessor=contextAccessor;   
         }
-        
+
         private ApplicationUserEO GetSingleEntity(ApplicationUser user)
         {
+            
             var entity = _mapper.Map<ApplicationUserEO>(user);
             return entity;  
         }
