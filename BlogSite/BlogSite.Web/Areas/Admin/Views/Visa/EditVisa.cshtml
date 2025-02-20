@@ -1,0 +1,120 @@
+﻿@model EditVisaModel
+@{
+    ViewData["Title"] = "EditVisa";
+}
+
+<div class="container my-5">
+    <div class="card shadow-lg rounded-4 border-0">
+        <div class="card-body">
+            <h2 class="text-primary fw-bold text-center">Edit Visa</h2>
+            <form asp-action="EditVisa" method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="mb-3">
+                    <label asp-for="Destination" class="form-label">Destination</label>
+                    <input asp-for="Destination" class="form-control" />
+                    <span asp-validation-for="Destination" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="VisaType" class="form-label">Visa Type</label>
+                    <input asp-for="VisaType" class="form-control" />
+                    <span asp-validation-for="VisaType" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="VisaMode" class="form-label">Visa Mode</label>
+                    <select asp-for="VisaMode" class="form-control">
+                        <option value="E-Visa">E-Visa</option>
+                        <option value="Sticker Visa">Sticker Visa</option>
+                    </select>
+                    <span asp-validation-for="VisaMode" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col-md-6">
+                        <label asp-for="EntryType" class="form-label">Entry Type</label>
+                        <select asp-for="EntryType" class="form-control">
+                            <option value="Single">Single</option>
+                            <option value="Multiple">Multiple</option>
+                        </select>
+                        <span asp-validation-for="EntryType" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="VisaValidity" class="form-label">Visa Validity (days)</label>
+                        <input asp-for="VisaValidity" type="number" class="form-control" />
+                        <span asp-validation-for="VisaValidity" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3 row">
+                    <div class="col-md-6">
+                        <label asp-for="ProcessingTime" class="form-label">Processing Time (days)</label>
+                        <input asp-for="ProcessingTime" type="number" class="form-control" />
+                        <span asp-validation-for="ProcessingTime" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="MaxiMumStay" class="form-label">Maximum Stay (days)</label>
+                        <input asp-for="MaxiMumStay" type="number" class="form-control" />
+                        <span asp-validation-for="MaxiMumStay" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Price" class="form-label">Visa Price (USD)</label>
+                    <input asp-for="Price" type="number" step="0.01" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Requirements" class="form-label">Visa Requirements</label>
+                    <textarea asp-for="Requirements" class="form-control"></textarea>
+                    <span asp-validation-for="Requirements" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Policy" class="form-label">Visa Policy</label>
+                    <textarea asp-for="Policy" class="form-control"></textarea>
+                    <span asp-validation-for="Policy" class="text-danger"></span>
+                </div>
+
+                <!-- Cover Photo -->
+                <div class="mb-3">
+                    <label asp-for="CoverPhotoUrl" class="form-label">Visa Cover Photo</label>
+                    <input asp-for="CoverPhotoUrl" type="file" class="form-control" />
+                    <span asp-validation-for="CoverPhotoUrl" class="text-danger"></span>
+
+                    @if (!string.IsNullOrEmpty(Model.CoverUrl))
+                    {
+                        <div class="mt-2">
+                            <img src="@Model.CoverUrl" class="img-fluid rounded" alt="Cover Photo" width="150" />
+                        </div>
+                    }
+                </div>
+
+                <!-- Card Photo -->
+                <div class="mb-3">
+                    <label asp-for="CardPhotoUrl" class="form-label">Visa Card Photo</label>
+                    <input asp-for="CardPhotoUrl" type="file" class="form-control" />
+                    <span asp-validation-for="CardPhotoUrl" class="text-danger"></span>
+
+                    @if (!string.IsNullOrEmpty(Model.CardUrl))
+                    {
+                        <div class="mt-2">
+                            <img src="@Model.CardUrl" class="img-fluid rounded" alt="Card Photo" width="150" />
+                        </div>
+                    }
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 fw-bold">💾 Update Visa</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section PageScript
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

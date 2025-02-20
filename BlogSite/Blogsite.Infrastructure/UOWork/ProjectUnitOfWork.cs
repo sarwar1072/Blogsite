@@ -18,21 +18,24 @@ namespace Blogsite.Infrastructure.UOWork
         public IRoomRepository RoomRepository { get;private set;}  
         public IHotelBookingRepository HotelBookingRepository { get;private set;}   
         public IHotelFacilitiesRepositories HotelFacilitiesRepositories { get;private set;}
+        public IVisaRepository VisaRepository { get;private set;}   
         public ProjectUnitOfWork(ApplicationDbContext dbContext, ITourRepository tourRepository,
             ITourDetailsRepository tourDetailsRepository,
-            IHotelRepository hotelRepository,  
+            IHotelRepository hotelRepository,
             IRoomRepository roomRepository,
             IHotelFacilitiesRepositories hotelFacilities,
             IConsultationFormRepository formRepository,
-            IHotelBookingRepository hotelBookingRepository) :base(dbContext)
+            IHotelBookingRepository hotelBookingRepository,
+            IVisaRepository visaRepository) : base(dbContext)
         {
-                TourRepository = tourRepository;
-                TourDetailsRepository = tourDetailsRepository;  
-                ConsultationFormRepository = formRepository;
-                HotelRepository = hotelRepository;  
-                RoomRepository = roomRepository;
-               HotelFacilitiesRepositories = hotelFacilities;
-              HotelBookingRepository = hotelBookingRepository;    
+            TourRepository = tourRepository;
+            TourDetailsRepository = tourDetailsRepository;
+            ConsultationFormRepository = formRepository;
+            HotelRepository = hotelRepository;
+            RoomRepository = roomRepository;
+            HotelFacilitiesRepositories = hotelFacilities;
+            HotelBookingRepository = hotelBookingRepository;
+            VisaRepository = visaRepository;
         }
     }
 }

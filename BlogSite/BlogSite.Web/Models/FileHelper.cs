@@ -33,6 +33,10 @@ namespace BlogSite.Web.Models
             {
                 uploads = Path.Combine(_env.WebRootPath, "images");
             }
+            else if(file.Name== "CardPhotoUrl")
+            {
+                uploads = Path.Combine(_env.WebRootPath, "visaPhotos");
+            }
             else
             {
                 uploads = Path.Combine(_env.WebRootPath, "ListOfImages");

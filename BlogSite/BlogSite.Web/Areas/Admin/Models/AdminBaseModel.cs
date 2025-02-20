@@ -127,6 +127,17 @@ namespace BlogSite.Web.Areas.Admin.Models
                         }
                     }
                     ,
+                    {
+                        new MenuItem
+                        {
+                           Title="Visa",
+                           Childs=new List<MenuChildItem>
+                           {
+                               new MenuChildItem{Title="View Visa",Url="/Admin/Visa"},
+                               new MenuChildItem{Title="Add Visa",Url="/Admin/Visa/Add"}
+                           }
+                        }
+                    },
 
                      {
                         new MenuItem

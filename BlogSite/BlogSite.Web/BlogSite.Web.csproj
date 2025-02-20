@@ -27,4 +27,8 @@
     <ProjectReference Include="..\Blogsite.Membership\Blogsite.Membership.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\visaPhotos\" />
+  </ItemGroup>
+
 </Project>

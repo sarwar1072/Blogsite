@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+@section PageStyle
+{
+    <link rel="stylesheet" href="/Admin/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <table id="visa" class="table table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        <tr class="table-info">
+                            <th>Destination</th>
+                            <th>VisaType</th>
+                            <th>VisaMode</th>
+                            <th>EntryType</th>
+                            <th>Price</th>
+                            <th>Policy</th>
+                            <th>Requirements </th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tfoot>
+                        <tr class="table-info">
+                            <th>Destination</th>
+                            <th>VisaType</th>
+                            <th>VisaMode</th>
+                            <th>EntryType</th>
+                            <th>Price</th>
+                            <th>Policy</th>
+                            <th>Requirements </th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Delete</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure, you want to delete?</p>
+                <form id="deleteForm" action="/admin/Visa/Delete" method="post">
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" id="deleteId" value="" name="id" />
+                </form>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" id="deleteButton" class="btn btn-danger">Yes, Delete!</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+@section PageScript
+{
+    <script src="/Admin/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="/Admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+
+    <script src="~/js/VisaJS.js"></script>
+
+}

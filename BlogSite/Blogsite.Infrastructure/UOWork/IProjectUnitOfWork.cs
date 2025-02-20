@@ -17,5 +17,7 @@ namespace Blogsite.Infrastructure.UOWork
          IRoomRepository RoomRepository { get; }
          IHotelFacilitiesRepositories HotelFacilitiesRepositories { get; }
         IHotelBookingRepository HotelBookingRepository { get; }
+         IVisaRepository VisaRepository { get;  }
+
     }
 }

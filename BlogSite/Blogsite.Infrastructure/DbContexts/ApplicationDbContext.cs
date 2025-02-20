@@ -98,7 +98,7 @@ namespace Blogsite.Infrastructure.DbContexts
 
         public DbSet<ApplicationUser>? ApplicationUsers { get; set; }
         public DbSet<Booking>? Bookings { get; set; }
-        public DbSet<Flight>? Flights { get; set; }
+        public DbSet<Visa>? Visas { get; set; }
         public DbSet<Hotel>? Hotels { get; set; }
         public DbSet<Images>? Images { get; set; }
         public DbSet<Payment>? Payments { get; set; }  

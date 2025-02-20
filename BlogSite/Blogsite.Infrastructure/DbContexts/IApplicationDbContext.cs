@@ -8,7 +8,7 @@ namespace Blogsite.Infrastructure.DbContexts
     {
          DbSet<ApplicationUser>? ApplicationUsers { get; set; }
          DbSet<Booking>? Bookings { get; set; }
-         DbSet<Flight>? Flights { get; set; }
+         DbSet<Visa>? Visas { get; set; }
          DbSet<Hotel>? Hotels { get; set; }
          DbSet<Images>? Images { get; set; }
          DbSet<Payment>? Payments { get; set; }
