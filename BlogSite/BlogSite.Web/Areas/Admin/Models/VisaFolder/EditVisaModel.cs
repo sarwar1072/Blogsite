@@ -7,10 +7,10 @@ namespace BlogSite.Web.Areas.Admin.Models.VisaFolder
     {
         public int Id { get; set; }
         public string? Destination { get; set; }
-        public string? CoverUrl { get; set; }
-        public IFormFile CoverPhotoUrl { get; set; }
-        public string? CardUrl { get; set; }
-        public IFormFile CardPhotoUrl { get; set; }
+        //public string? CoverUrl { get; set; }
+        //public IFormFile CoverPhotoUrl { get; set; }
+        //public string? CardUrl { get; set; }
+        //public IFormFile CardPhotoUrl { get; set; }
         public string? VisaType { get; set; }
         public string? VisaMode { get; set; }
         public string? EntryType { get; set; }
@@ -28,9 +28,10 @@ namespace BlogSite.Web.Areas.Admin.Models.VisaFolder
         {
             var model = new Visa()
             {
+                Id = Id,
                 Destination = Destination,
-                CoverUrl = CoverUrl,
-                CardUrl = CardUrl,
+                //CoverUrl = CoverUrl,
+                //CardUrl = CardUrl,
                 VisaType = VisaType,
                 VisaMode = VisaMode,
                 EntryType = EntryType,
@@ -50,9 +51,10 @@ namespace BlogSite.Web.Areas.Admin.Models.VisaFolder
             var dataByid = _visaServices.GetByid(id);
             if (dataByid != null)
             {
+                Id= dataByid.Id;    
                 Destination = dataByid.Destination;
-                CoverUrl = dataByid.CoverUrl;
-                CardUrl = dataByid.CardUrl;
+                //CoverUrl = dataByid.CoverUrl;
+                //CardUrl = dataByid.CardUrl;
                 VisaType = dataByid.VisaType;
                 VisaMode = dataByid.VisaMode;
                 EntryType = dataByid.EntryType;
@@ -63,6 +65,11 @@ namespace BlogSite.Web.Areas.Admin.Models.VisaFolder
                 Requirements = dataByid.Requirements;
                 Policy = dataByid.Policy;
             }
+        }
+
+        public void RemoveVisa(int id)
+        {
+            _visaServices.DeleteVisa(id);
         }
     }
 }

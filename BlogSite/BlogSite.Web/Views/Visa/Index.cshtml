@@ -1,0 +1,33 @@
+﻿@model VisaViewModel
+
+<div class="container d-flex justify-content-center align-items-center p-4 ">
+    <form method="post" asp-action="VisaList" asp-controller="Visa" class="p-4 bg-white rounded shadow-lg" style="max-width: 500px; width: 100%;">
+        <h3 class="text-center mb-4">Search Visa</h3>
+
+        <!-- Destination Input -->
+        <div class="form-group position-relative mb-3">
+            <label for="VisaDestination" class="form-label fw-bold">Destination</label>
+            <input type="text"
+                   class="form-control"
+                   id="VisaDestination"
+                   name="destination"
+                   placeholder="Enter destination"
+                   autocomplete="off"
+                   value="@Model.Destination"
+                   style="border-radius: 8px;">
+            <div id="VisadestinationList"
+                 class="dropdown-menu shadow-sm p-2"
+                 style="display: none; position: absolute; width: 100%; border-radius: 8px; z-index: 1050;">
+                <!-- Suggested destinations will be dynamically appended here -->
+            </div>
+        </div>
+
+        <!-- Search Button -->
+        <button type="submit" class="btn btn-primary w-100" id="searchButton" style="border-radius: 8px;">
+            <i class="fas fa-search me-2"></i>Search Visa
+        </button>
+    </form>
+</div>
+
+
+ <h1>Visa</h1>

@@ -58,10 +58,10 @@ namespace Blogsite.Infrastructure.Services
             if (entity == null)
                 throw new InvalidOperationException("Visa can not be null");
 
-            // entity.Id = tour.Id;
+             //entity.Id = visa.Id;
             entity.Destination = visa.Destination;
-            entity.CoverUrl = visa.CoverUrl;
-            entity.CardUrl = visa.CardUrl;
+            //entity.CoverUrl = visa.CoverUrl;
+            //entity.CardUrl = visa.CardUrl;
             entity.VisaType = visa.VisaType;
             entity.VisaMode = visa.VisaMode;
             entity.EntryType = visa.EntryType;  
@@ -97,7 +97,21 @@ namespace Blogsite.Infrastructure.Services
 
             return list;
         }
-       
+        public IList<string> GetOnlyVisaDestinationName()
+        {
+            var entity = _projectUnitOfWork.VisaRepository.GetAll();
+
+            // Select distinct locations from the entity list
+            var locations = entity
+                .Select(c => c.Destination)
+                .Where(location => !string.IsNullOrEmpty(location)) // Optional: Filter out null or empty locations
+                .Distinct()
+                .ToList();
+
+            return locations;
+        }
+
+
         ////public void AddConsulationForm(ConsultationForm Form)
         ////{
 

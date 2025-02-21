@@ -45,8 +45,16 @@ namespace BlogSite.Web.Areas.Admin.Controllers
             {
                 try
                 {
-                    visa.CoverUrl = _fileHelper.UploadFile(visa.CoverPhotoUrl);
-                    visa.CardUrl = _fileHelper.UploadFile(visa.CardPhotoUrl);
+                    if (visa.CoverPhotoUrl != null)
+                    {
+                        visa.CoverUrl = _fileHelper.UploadFile(visa.CoverPhotoUrl);
+                    }
+                    if (visa.CardPhotoUrl != null)
+                    {
+                        visa.CardUrl = _fileHelper.UploadFile(visa.CardPhotoUrl);
+                    }
+                    //visa.CoverUrl = _fileHelper.UploadFile(visa.CoverPhotoUrl);
+                    //visa.CardUrl = _fileHelper.UploadFile(visa.CardPhotoUrl);
 
                     visa.AddVisa();
                     visa.Response = new ResponseModel("Added successfully", ResponseType.Success);
@@ -76,16 +84,16 @@ namespace BlogSite.Web.Areas.Admin.Controllers
             {
                 try
                 {
-                    if (model.CoverPhotoUrl != null)
-                    {
-                        _fileHelper.DeleteFile(model.CoverUrl);
-                        model.CoverUrl = _fileHelper.UploadFile(model.CoverPhotoUrl);
-                    }
-                    if (model.CardPhotoUrl != null)
-                    {
-                        _fileHelper.DeleteFile(model.CardUrl);
-                        model.CardUrl = _fileHelper.UploadFile(model.CardPhotoUrl);
-                    }
+                    //if (model.CoverPhotoUrl != null)
+                    //{
+                    //    _fileHelper.DeleteFile(model.CoverUrl);
+                    //    model.CoverUrl = _fileHelper.UploadFile(model.CoverPhotoUrl);
+                    //}
+                    //if (model.CardPhotoUrl != null)
+                    //{
+                    //    _fileHelper.DeleteFile(model.CardUrl);
+                    //    model.CardUrl = _fileHelper.UploadFile(model.CardPhotoUrl);
+                    //}
                     model.EditVisa();
                     model.Response = new ResponseModel("Edited successfully", ResponseType.Success);
                     return RedirectToAction("Index");
@@ -103,24 +111,24 @@ namespace BlogSite.Web.Areas.Admin.Controllers
             }
             return View(model);
         }
-        //[HttpPost, ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id)
-        //{
-        //    var dataDelete = _scope.Resolve<CreateTour>();
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            var dataDelete = _scope.Resolve<EditVisaModel>();
 
-        //    try
-        //    {
-        //        dataDelete.RemoveTour(id);
-        //        dataDelete.Response = new ResponseModel("Deleted", ResponseType.Success);
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogError($"{ex.Message}");
-        //        dataDelete.Response = new ResponseModel("Failed to delete", ResponseType.Failure);
-        //    }
-        //    return RedirectToAction(nameof(Index));
-        //}
+            try
+            {
+                dataDelete.RemoveVisa(id);
+                dataDelete.Response = new ResponseModel("Deleted", ResponseType.Success);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"{ex.Message}");
+                dataDelete.Response = new ResponseModel("Failed to delete", ResponseType.Failure);
+            }
+            return RedirectToAction(nameof(Index));
+        }
 
     }
 }

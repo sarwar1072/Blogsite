@@ -1,0 +1,89 @@
+﻿@model VisaViewModel
+@{
+    ViewData["Title"] = "VisaList";
+}
+
+
+<!-- Main Container -->
+<div class="container my-5">
+    <!-- Hero Section -->
+
+    <div class="position-relative rounded-4 overflow-hidden shadow-lg">
+        <!-- Background Image -->
+        <img src="@Model.CoverUrl" class="img-fluid w-100 rounded-4" alt="@Model.Destination Visa" style="height: 250px; object-fit: cover; filter: brightness(75%);">
+
+        <!-- Overlay Text -->
+        <div class="position-absolute top-50 start-50 translate-middle text-white text-center">
+            <h3 class="fw-light">Visa Requirements for</h3>
+            <h1 class="fw-bold display-4">@Model.Destination</h1>
+        </div>
+    </div>
+
+    <!-- Visa Categories -->
+    <div class="d-flex mt-4">
+        <button class="btn btn-danger px-4 me-2 rounded-pill">All</button>
+        <button class="btn btn-outline-dark px-4 rounded-pill">Tourist Visa</button>
+    </div>
+
+    <div class="row mt-4">
+        <!-- Left Column: Visa List -->
+        <div class="col-md-8">
+            @if (Model.VisaList.Any())
+            {
+                @foreach (var visa in Model.VisaList)
+                {
+                    <div class="card mb-4 border-0 shadow-lg rounded-4 p-3">
+                        <div class="row g-3 align-items-center">
+                            <div class="col-md-4">
+                                <img src="@visa.CardUrl" class="img-fluid rounded-3" alt="@visa.Destination">
+                            </div>
+                            <div class="col-md-8">
+                                <h3 class="fw-bold text-primary"><i class="fas fa-plane text-danger"></i> @visa.Destination Visa</h3>
+                                <ul class="list-unstyled">
+                                    <li><i class="fas fa-passport text-danger me-2"></i> <strong>Visa Type:</strong> @visa.VisaType</li>
+                                    <li><i class="fas fa-file-alt text-danger me-2"></i> <strong>Visa Mode:</strong> @visa.VisaMode</li>
+                                    <li><i class="fas fa-sign-in-alt text-danger me-2"></i> <strong>Entry Type:</strong> @visa.EntryType</li>
+                                    <li><i class="fas fa-clock text-danger me-2"></i> <strong>Processing Time:</strong> @visa.ProcessingTime Working Days</li>
+                                    <li><i class="fas fa-calendar-alt text-danger me-2"></i> <strong>Visa Validity:</strong> @visa.VisaValidity Days</li>
+                                    <li><i class="fas fa-plane-arrival text-danger me-2"></i> <strong>Max Stay:</strong> @visa.MaxiMumStay Days</li>
+                                </ul>
+                                <div class="d-flex align-items-center mt-2">
+                                    <h4 class="fw-bold text-danger">BDT @visa.Price</h4>
+                                    <small class="ms-2 text-muted">+ Service Charge: BDT 500 per person</small>
+                                </div>
+
+                                <div class="mt-3">
+                                    <button class="btn btn-danger px-4 rounded-pill">Select</button>
+                                    <button class="btn btn-outline-dark px-4 rounded-pill">View Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="alert alert-danger text-center p-4 fw-bold">No visas available.</div>
+            }
+        </div>
+
+        <!-- Right Column: Policy & Tracking -->
+        <div class="col-md-4">
+            <div class="card mb-4 p-3 shadow-sm rounded-4">
+                <h5 class="fw-bold"><i class="fas fa-search text-danger"></i> Track your Visa Status</h5>
+                <div class="input-group">
+                    <input type="text" class="form-control rounded-start" placeholder="Enter Tracking No.">
+                    <button class="btn btn-danger rounded-end">Search</button>
+                </div>
+            </div>
+
+            <div class="card p-3 shadow-sm rounded-4">
+                <h5 class="fw-bold"><i class="fas fa-question-circle text-danger"></i> Frequently Asked Questions (FAQ)</h5>
+                <p class="text-muted">What is the minimum duration of the bank statement needed to submit along with the visa?</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

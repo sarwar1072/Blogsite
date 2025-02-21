@@ -9,7 +9,8 @@
             <h2 class="text-primary fw-bold text-center">Edit Visa</h2>
             <form asp-action="EditVisa" method="post" enctype="multipart/form-data">
                 <input type="hidden" asp-for="Id" />
-
+                @* <input type="hidden" asp-for="CoverUrl" />
+                <input type="hidden" asp-for="CardUrl" /> *@
                 <div class="mb-3">
                     <label asp-for="Destination" class="form-label">Destination</label>
                     <input asp-for="Destination" class="form-control" />
@@ -79,7 +80,7 @@
                 </div>
 
                 <!-- Cover Photo -->
-                <div class="mb-3">
+                @* <div class="mb-3">
                     <label asp-for="CoverPhotoUrl" class="form-label">Visa Cover Photo</label>
                     <input asp-for="CoverPhotoUrl" type="file" class="form-control" />
                     <span asp-validation-for="CoverPhotoUrl" class="text-danger"></span>
@@ -90,10 +91,10 @@
                             <img src="@Model.CoverUrl" class="img-fluid rounded" alt="Cover Photo" width="150" />
                         </div>
                     }
-                </div>
+                </div> 
 
                 <!-- Card Photo -->
-                <div class="mb-3">
+                 <div class="mb-3">
                     <label asp-for="CardPhotoUrl" class="form-label">Visa Card Photo</label>
                     <input asp-for="CardPhotoUrl" type="file" class="form-control" />
                     <span asp-validation-for="CardPhotoUrl" class="text-danger"></span>
@@ -104,7 +105,7 @@
                             <img src="@Model.CardUrl" class="img-fluid rounded" alt="Card Photo" width="150" />
                         </div>
                     }
-                </div>
+                </div> *@
 
                 <button type="submit" class="btn btn-primary w-100 fw-bold">💾 Update Visa</button>
             </form>
