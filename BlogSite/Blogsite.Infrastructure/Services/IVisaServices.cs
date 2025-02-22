@@ -15,6 +15,8 @@ namespace Blogsite.Infrastructure.Services
         Visa GetByid(int id);
         void DeleteVisa(int id);
         IList<Visa> ListOfVisa(string destination);
+        int CountDestination(string destination);
+
         IList<string> GetOnlyVisaDestinationName();
 
 

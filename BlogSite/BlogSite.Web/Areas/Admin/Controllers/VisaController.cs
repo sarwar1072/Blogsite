@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Blogsite.Infrastructure.Services;
 using BlogSite.Web.Areas.Admin.Models;
 using BlogSite.Web.Areas.Admin.Models.TourModelFolder;
 using BlogSite.Web.Areas.Admin.Models.VisaFolder;
@@ -13,11 +14,13 @@ namespace BlogSite.Web.Areas.Admin.Controllers
         protected readonly ILifetimeScope _scope;
         IFileHelper _fileHelper;
         protected readonly ILogger<VisaController> _logger;
-        public VisaController(ILifetimeScope scope, IFileHelper fileHelper, ILogger<VisaController> logger)
+        private IVisaServices _visaServices;    
+        public VisaController(ILifetimeScope scope, IFileHelper fileHelper, ILogger<VisaController> logger,IVisaServices services)
         {
             _fileHelper = fileHelper;
             _scope = scope;
             _logger = logger;
+            _visaServices = services;
         }
         public IActionResult Index()
         {
@@ -45,7 +48,10 @@ namespace BlogSite.Web.Areas.Admin.Controllers
             {
                 try
                 {
-                    if (visa.CoverPhotoUrl != null)
+                    var count = _visaServices.CountDestination(visa.Destination.ToLower());
+
+
+                    if (visa.CoverPhotoUrl != null && count==0)
                     {
                         visa.CoverUrl = _fileHelper.UploadFile(visa.CoverPhotoUrl);
                     }

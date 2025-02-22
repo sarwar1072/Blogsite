@@ -34,8 +34,10 @@ namespace BlogSite.Web.Models.VisaViewModelFolder
             VisaList = new List<Visa>();
             if (entity.Any())
             {
-                CoverUrl = entity.First().CardUrl;
+                CoverUrl = entity.First().CoverUrl;
                 Destination = entity.First().Destination;
+                Policy = entity.First().Policy;
+                Requirements = entity.First().Requirements; 
             }
 
             foreach (var item in entity)
@@ -44,7 +46,7 @@ namespace BlogSite.Web.Models.VisaViewModelFolder
                 {
                     Id = item.Id,
                     Destination = item.Destination,
-                    CardUrl = item.CoverUrl,
+                    CardUrl = item.CardUrl,
                     VisaType = item.VisaType,
                     VisaMode = item.VisaMode,
                     EntryType = item.EntryType,
@@ -52,7 +54,8 @@ namespace BlogSite.Web.Models.VisaViewModelFolder
                     ProcessingTime = item.ProcessingTime,
                     MaxiMumStay = item.MaxiMumStay,
                     Price = item.Price,
-                    Policy = item.Policy,
+                    Policy=item.Policy,
+                    Requirements=item.Requirements,
                 });
 
             }

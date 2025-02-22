@@ -1,5 +1,6 @@
 ﻿using Blogsite.Infrastructure.Entities;
 using Blogsite.Infrastructure.Services;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace BlogSite.Web.Areas.Admin.Models.VisaFolder
 {
@@ -24,6 +25,7 @@ namespace BlogSite.Web.Areas.Admin.Models.VisaFolder
         
         public CreateVisaModel() { }
 
+       
         public void AddVisa()
         {
             var model = new Visa()

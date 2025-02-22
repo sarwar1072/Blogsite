@@ -3,15 +3,11 @@
     ViewData["Title"] = "VisaList";
 }
 
-
-<!-- Main Container -->
 <div class="container my-5">
     <!-- Hero Section -->
-
     <div class="position-relative rounded-4 overflow-hidden shadow-lg">
         <!-- Background Image -->
         <img src="@Model.CoverUrl" class="img-fluid w-100 rounded-4" alt="@Model.Destination Visa" style="height: 250px; object-fit: cover; filter: brightness(75%);">
-
         <!-- Overlay Text -->
         <div class="position-absolute top-50 start-50 translate-middle text-white text-center">
             <h3 class="fw-light">Visa Requirements for</h3>
@@ -32,7 +28,7 @@
             {
                 @foreach (var visa in Model.VisaList)
                 {
-                    <div class="card mb-4 border-0 shadow-lg rounded-4 p-3">
+                    <div class="card mb-4 border-0 shadow-lg rounded-4 p-3 visa-card">
                         <div class="row g-3 align-items-center">
                             <div class="col-md-4">
                                 <img src="@visa.CardUrl" class="img-fluid rounded-3" alt="@visa.Destination">
@@ -54,10 +50,39 @@
 
                                 <div class="mt-3">
                                     <button class="btn btn-danger px-4 rounded-pill">Select</button>
-                                    <button class="btn btn-outline-dark px-4 rounded-pill">View Details</button>
+@*                                     <button class="btn btn-danger mt-2 toggle-details-btn btntgle">View Details ▼</button>
+ *@                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Details Section (Inside Each Visa Card) -->
+@*                         <div class="details-section mt-3 p-3 border rounded-3 bg-light d-none togglesection">
+                            <ul class="nav nav-tabs" id="visaTabs-@visa.Id">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-bs-toggle="tab" href="#requirements-@visa.Id">Requirements</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-bs-toggle="tab" href="#policy-@visa.Id">Policies</a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content mt-2">
+                                <!-- Requirements -->
+                                <div id="requirements-@visa.Id" class="tab-pane fade show active">
+                                    <h6 class="fw-bold">Application Guideline</h6>
+                                    <p>@visa.Requirements</p>
+                                    <h6 class="fw-bold">Who can Apply?</h6>
+                                    <h6 class="fw-bold">List of Required Documents</h6>
+                                </div>
+
+                                <!-- Policies -->
+                                <div id="policy-@visa.Id" class="tab-pane fade">
+                                    <h6 class="fw-bold">Visa Policies</h6>
+                                    <p>@visa.Policy</p>
                                 </div>
                             </div>
                         </div>
+ *@
                     </div>
                 }
             }
@@ -85,5 +110,25 @@
     </div>
 </div>
 
+<!-- JavaScript to Handle View Details Toggle -->
+<script>
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".toggle-details-btn").forEach(button => {
+            button.addEventListener("click", function () {
+                var details = this.closest(".visa-card").querySelector(".details-section");
+
+                if (details.classList.contains("d-none")) {
+                    details.classList.remove("d-none");
+                    this.innerHTML = "Hide Details ▲";
+                } else {
+                    details.classList.add("d-none");
+                    this.innerHTML = "View Details ▼";
+                }
+            });
+        });
+    });
+
+</script>
 
 

@@ -23,12 +23,12 @@ namespace Blogsite.Infrastructure.Services
             {
                 throw new InvalidOperationException("Visa can not be null");
             }
-            var tourCount = _projectUnitOfWork.VisaRepository.GetCount(c => c.Destination == visa.Destination);
+            //var tourCount = _projectUnitOfWork.VisaRepository.GetCount(c => c.Destination == visa.Destination);
 
-            if (tourCount > 0)
-            {
-                throw new DuplicateException("Same visa exist");
-            }
+            //if (tourCount > 0)
+            //{
+            //    throw new DuplicateException("Same visa exist");
+            //}
             _projectUnitOfWork.VisaRepository.Add(visa);
             _projectUnitOfWork.Save();
         }
@@ -110,7 +110,10 @@ namespace Blogsite.Infrastructure.Services
 
             return locations;
         }
-
+        public int CountDestination(string destination)
+        {
+            return _projectUnitOfWork.VisaRepository.GetCount(x=>x.Destination.ToLower()==destination);   
+        } 
 
         ////public void AddConsulationForm(ConsultationForm Form)
         ////{
