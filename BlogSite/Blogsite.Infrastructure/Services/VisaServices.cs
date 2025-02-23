@@ -113,7 +113,12 @@ namespace Blogsite.Infrastructure.Services
         public int CountDestination(string destination)
         {
             return _projectUnitOfWork.VisaRepository.GetCount(x=>x.Destination.ToLower()==destination);   
-        } 
+        }
+        public Visa GetSingleVisa(int id)
+        {
+            var entity = _projectUnitOfWork.VisaRepository.GetById(id);
+            return entity;
+        }
 
         ////public void AddConsulationForm(ConsultationForm Form)
         ////{
@@ -134,11 +139,7 @@ namespace Blogsite.Infrastructure.Services
         //    return (result.data, result.total, result.totalDisplay);
         //}
 
-        //public Tour GetTourDetails(int id)
-        //{
-        //    var entity = _projectUnitOfWork.TourRepository.GetFirstOrDefault(x => x.Id == id, "Images,TourDetails");
-        //    return entity;
-        //}
+
 
 
         //public IList<Tour> ListOfPopularDestination()

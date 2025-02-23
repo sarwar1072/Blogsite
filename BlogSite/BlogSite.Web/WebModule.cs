@@ -75,6 +75,7 @@ namespace BlogSite.Web
             builder.RegisterType<VisaModel>().InstancePerLifetimeScope();
             builder.RegisterType<EditVisaModel>().InstancePerLifetimeScope();
             builder.RegisterType<VisaViewModel>().InstancePerLifetimeScope();
+            builder.RegisterType<VisaConfirmFormModel>().InstancePerLifetimeScope();
             base.Load(builder);
         }
     }

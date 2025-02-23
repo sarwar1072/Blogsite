@@ -19,7 +19,7 @@ namespace BlogSite.Web.Controllers
             return View();
         }
         [HttpGet]
-        public async Task<IActionResult> Register(string returnUrl = null!)
+        public async Task<IActionResult> Register(string returnUrl = "/")
         {
             var model = _lifetimeScope.Resolve<RegisterModel>();
             model.ReturnUrl = returnUrl;
@@ -49,7 +49,7 @@ namespace BlogSite.Web.Controllers
                         }
                         else
                         {
-                            return RedirectToAction("Index", "Question", new { area = "ForPost" });
+                            return RedirectToAction(model.ReturnUrl);
                         }
                     }
                     foreach (var error in result.Errors)
@@ -68,7 +68,7 @@ namespace BlogSite.Web.Controllers
             }
             return View(model);
         }
-        public async Task<IActionResult> RegisterConfirmation(string email, string returnUrl = null)
+        public async Task<IActionResult> RegisterConfirmation(string email, string returnUrl = "/")
         {
             var model = _lifetimeScope.Resolve<RegistrationConfirmationModel>();
             var registerModel = _lifetimeScope.Resolve<RegisterModel>();
@@ -100,7 +100,7 @@ namespace BlogSite.Web.Controllers
 
             return View();
         }
-        public async Task<IActionResult> Login(string returnUrl = null)
+        public async Task<IActionResult> Login(string returnUrl = "/")
         {
             var model = _lifetimeScope.Resolve<LoginModel>();
             var registerModel = _lifetimeScope.Resolve<RegisterModel>();
@@ -135,7 +135,7 @@ namespace BlogSite.Web.Controllers
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    await model.RedirectByUserRole();
+                    //await model.RedirectByUserRole();
                     return LocalRedirect(model.ReturnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -158,7 +158,7 @@ namespace BlogSite.Web.Controllers
             return View(model);
         }
         [HttpPost, ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout(string returnUrl = null!)
+        public async Task<IActionResult> Logout(string returnUrl = "/")
         {
             var model = _lifetimeScope.Resolve<LoginModel>();
             await model.SignOutAsync();

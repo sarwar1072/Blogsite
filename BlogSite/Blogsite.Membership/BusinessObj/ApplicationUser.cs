@@ -15,6 +15,9 @@ namespace Blogsite.Membership.BusinessObj
         public DateTime? BirthOfDate { get; set; }
         public DateTime? CreatedAt { get; set; }
         public string? Email { get; set; }
+        public int? Phone { get; set; }
+        public int? NumberOfTravellers { get; set; }
+        public DateTime? DateTime { get; set; }
         public string? Password { get; set; }
         public bool RememberMe { get; set; }
     }

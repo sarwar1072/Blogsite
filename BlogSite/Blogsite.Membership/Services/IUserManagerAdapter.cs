@@ -1,4 +1,5 @@
-﻿using Blogsite.Membership.Enums;
+﻿using Blogsite.Membership.BusinessObj;
+using Blogsite.Membership.Enums;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -22,5 +23,8 @@ namespace Blogsite.Membership.Services
                                             string confirmPassword);
         Task RolesAsync(string userid, RoleType[] types);
         Task<T> FindByUsernameAsync(string email);
+         
+          Task<ApplicationUser>  FindUserId(Guid userId);
+
     }
 }

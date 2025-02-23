@@ -20,7 +20,7 @@
                                     <div class="auth-form-wrapper px-4 py-5">
                                         <a href="#" class="noble-ui-logo d-block mb-2 text-muted"><span>Problem And Solution</span></a>
                                         <h5 class="text-muted fw-normal mb-4">Welcome back! Log in to your account.</h5>
-                                        <form class="forms-sample" method="post" asp-action="Login" asp-controller="Account" asp-antiforgery="true" enctype="multipart/form-data">
+                                    <form class="forms-sample" method="post" asp-action="Login" asp-controller="Account" asp-route-returnUrl="@Model.ReturnUrl" asp-antiforgery="true" enctype="multipart/form-data">
                                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                             <div class="mb-3">
                                                 <label for="userEmail" class="form-label">Email address</label>
@@ -41,6 +41,9 @@
                                             <div class="mb-2">
                                                 <button type="submit" class="btn btn-primary me-2 mb-2 mb-md-0 text-white">Login</button>
                                             </div>
+                                        <div class="mb-2">
+                                            <a class="d-block mt-3 text-muted" asp-route-returnUrl="@Context.Request.Path" asp-area="" asp-controller="Account" asp-action="Register">Already a user? Register</a>
+                                        </div>
                                         </form>
                                     </div>
                                 </div>

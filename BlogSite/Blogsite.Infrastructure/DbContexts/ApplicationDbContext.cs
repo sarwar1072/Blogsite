@@ -108,5 +108,6 @@ namespace Blogsite.Infrastructure.DbContexts
         public DbSet<Room>? Rooms { get; set; }
         public DbSet<HotelBooking>? HotelBookings { get; set;}
         public DbSet<HotelFacilities>? HotelFacilities { get;}
+        public DbSet<UserForm>? UserForms { get; set; }   
     }
 }

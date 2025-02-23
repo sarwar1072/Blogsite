@@ -34,11 +34,7 @@ namespace BlogSite.Web.Controllers
 
             return View(model);
         }
-        //public IActionResult ListOfTourDestination(string Destination)
-        //{
-        //    var model = _scope.Resolve<TourViewModel>();
-
-        //}
+        
         public IActionResult GetListOfDetination()
         {          
             try
@@ -55,42 +51,7 @@ namespace BlogSite.Web.Controllers
             }
             return View();
         }
-        public IActionResult Details(int id)
-        {
-            try
-            {
-                var model = _scope.Resolve<TourDetailsModel>();
-                model.ResolveDependency(_scope);
-
-                model.GetTourDetails(id);
-                //_logger.LogInformation("Returning TourList view with model data");
-                return View(model);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"{ex.Message}");
-                ViewBag.Message = "Error";
-            }
-            return View();
-        }
-        [HttpPost]
-        public IActionResult Details([FromBody] TourDetailsModel model)
-        {
-            try
-            {
-                model.ResolveDependency(_scope);
-                //await model.GetUserInfoAsync();
-                model.AddConsult();
-                return View(model);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"{ex.Message}");
-                ViewBag.Message = "Error";
-            }
-
-            return View();
-        }
+       
         public IActionResult TourList(string Destination)
         {
             if (Destination != null)
@@ -133,8 +94,43 @@ namespace BlogSite.Web.Controllers
 
             }
             return View();
-        }   
+        }
+        public IActionResult Details(int id)
+        {
+            try
+            {
+                var model = _scope.Resolve<TourDetailsModel>();
+                model.ResolveDependency(_scope);
 
+                model.GetTourDetails(id);
+                //_logger.LogInformation("Returning TourList view with model data");
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"{ex.Message}");
+                ViewBag.Message = "Error";
+            }
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Details([FromBody] TourDetailsModel model)
+        {
+            try
+            {
+                model.ResolveDependency(_scope);
+                //await model.GetUserInfoAsync();
+                model.AddConsult();
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"{ex.Message}");
+                ViewBag.Message = "Error";
+            }
+
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

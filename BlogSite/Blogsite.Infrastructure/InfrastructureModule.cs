@@ -59,6 +59,8 @@ namespace Blogsite.Infrastructure
             builder.RegisterType<HotelBookingRepository>().As<IHotelBookingRepository>().InstancePerLifetimeScope();
             builder.RegisterType<VisaRepository>().As<IVisaRepository>().InstancePerLifetimeScope();
             builder.RegisterType<VisaServices>().As<IVisaServices>().InstancePerLifetimeScope();
+            builder.RegisterType< UserFormRepository >().As<IUserFormRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<userFormServices>().As<IuserFormServices>().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

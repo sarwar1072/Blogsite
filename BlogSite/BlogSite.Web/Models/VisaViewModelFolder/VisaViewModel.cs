@@ -26,7 +26,7 @@ namespace BlogSite.Web.Models.VisaViewModelFolder
         {
             _visaServices = visaServices;
         }
-
+        
         public IList<Visa> ListofVisa(string destination)
         {
             var entity = _visaServices.ListOfVisa(destination);

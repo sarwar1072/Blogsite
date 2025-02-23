@@ -18,7 +18,8 @@ namespace Blogsite.Infrastructure.UOWork
         public IRoomRepository RoomRepository { get;private set;}  
         public IHotelBookingRepository HotelBookingRepository { get;private set;}   
         public IHotelFacilitiesRepositories HotelFacilitiesRepositories { get;private set;}
-        public IVisaRepository VisaRepository { get;private set;}   
+        public IVisaRepository VisaRepository { get;private set;}
+        public IUserFormRepository UserFormRepository { get;private set;}   
         public ProjectUnitOfWork(ApplicationDbContext dbContext, ITourRepository tourRepository,
             ITourDetailsRepository tourDetailsRepository,
             IHotelRepository hotelRepository,
@@ -26,7 +27,7 @@ namespace Blogsite.Infrastructure.UOWork
             IHotelFacilitiesRepositories hotelFacilities,
             IConsultationFormRepository formRepository,
             IHotelBookingRepository hotelBookingRepository,
-            IVisaRepository visaRepository) : base(dbContext)
+            IVisaRepository visaRepository, IUserFormRepository userFormRepository) : base(dbContext)
         {
             TourRepository = tourRepository;
             TourDetailsRepository = tourDetailsRepository;
@@ -36,6 +37,7 @@ namespace Blogsite.Infrastructure.UOWork
             HotelFacilitiesRepositories = hotelFacilities;
             HotelBookingRepository = hotelBookingRepository;
             VisaRepository = visaRepository;
+            UserFormRepository = userFormRepository;    
         }
     }
 }

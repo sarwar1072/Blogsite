@@ -4,6 +4,7 @@ using Blogsite.Infrastructure.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogSite.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250223061113_num18")]
+    partial class num18
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -242,6 +244,9 @@ namespace BlogSite.Web.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("DateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -269,11 +274,17 @@ namespace BlogSite.Web.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<int?>("NumberOfTravellers")
+                        .HasColumnType("int");
+
                     b.Property<string>("Password")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Phone")
+                        .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
@@ -311,16 +322,16 @@ namespace BlogSite.Web.Migrations
                         {
                             Id = new Guid("e9b3be8c-99c5-42c7-8f2e-1eb39f6d9125"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e5da5a36-5978-4b44-9ecc-3a1943490da7",
+                            ConcurrencyStamp = "f329dec0-9b73-4a35-8444-728eb0cc0266",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             FirstName = "Admin",
                             LockoutEnabled = true,
                             NormalizedEmail = "admin@gmail.com",
                             NormalizedUserName = "admin@gmail.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAELDAa04+FEaS9sufGGB1et4GjyEYnpmxlTC68vCjUcmdw7jhpM82MDat9ETndV0jKg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHX+PtmVgkaCZWGWn9OpbyrxAKgMA5CFdRsDrLkpmeuHiAECp/ZL1sjdDGOM51Q8Pg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "33cfc12b-d4ed-4aba-8997-3cec4bd52026",
+                            SecurityStamp = "231bd51c-416d-48bc-97ee-49e975feeda3",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com"
                         },
@@ -328,16 +339,16 @@ namespace BlogSite.Web.Migrations
                         {
                             Id = new Guid("8f3d96ce-76ec-4992-911a-33ceb81fa29d"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e3083fa4-5181-4d29-ade0-c07f2bfce058",
+                            ConcurrencyStamp = "ab251d14-e576-4400-9214-5b1c8f7d6e0a",
                             Email = "user@gmail.com.com",
                             EmailConfirmed = true,
                             FirstName = "sarwar",
                             LockoutEnabled = true,
                             NormalizedEmail = "user@gmail.com.com",
                             NormalizedUserName = "user@gmail.com.com",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMv+oJgx02mvSFGDrAGc0qFBvSWp5RYuex1/4h1+mo3i1Uj6H85Y2LLVwZmUQ9khAg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEN31yoXLn5yprcHvqlyHHrOHETGEJfDxAvdjwGsJSu1Q9AQa29AhxjutZRn9h1xmzQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d3852cdc-26eb-4a49-950e-1762dee369da",
+                            SecurityStamp = "efd4ccec-1d83-4517-879a-be26dd1bb3fb",
                             TwoFactorEnabled = false,
                             UserName = "user@gmail.com.com"
                         });
@@ -374,14 +385,14 @@ namespace BlogSite.Web.Migrations
                         new
                         {
                             Id = new Guid("2c5e174e-3b0e-446f-86af-483d56fd7210"),
-                            ConcurrencyStamp = "638759333580094256",
+                            ConcurrencyStamp = "638759094733182164",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = new Guid("e943ffbf-65a4-4d42-bb74-f2ca9ea8d22a"),
-                            ConcurrencyStamp = "638759333580094285",
+                            ConcurrencyStamp = "638759094733182186",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -657,44 +668,6 @@ namespace BlogSite.Web.Migrations
                     b.ToTable("ToursDetails");
                 });
 
-            modelBuilder.Entity("Blogsite.Infrastructure.Entities.UserForm", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime?>("DepartureDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("NumberOfTravellers")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Remark")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("VisaId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("applicationUserid")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("VisaId");
-
-                    b.HasIndex("applicationUserid");
-
-                    b.ToTable("UserForms");
-                });
-
             modelBuilder.Entity("Blogsite.Infrastructure.Entities.Visa", b =>
                 {
                     b.Property<int>("Id")
@@ -869,25 +842,6 @@ namespace BlogSite.Web.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("TourDetails");
-                });
-
-            modelBuilder.Entity("Blogsite.Infrastructure.Entities.UserForm", b =>
-                {
-                    b.HasOne("Blogsite.Infrastructure.Entities.Visa", "Visa")
-                        .WithMany()
-                        .HasForeignKey("VisaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Blogsite.Infrastructure.Entities.Membership.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("applicationUserid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ApplicationUser");
-
-                    b.Navigation("Visa");
                 });
 
             modelBuilder.Entity("Blogsite.Infrastructure.Entities.Booking", b =>

@@ -104,7 +104,17 @@ namespace Blogsite.Membership.Services
                 return GetSingleBusinessObj(user);
             }
         }
+        public async Task<ApplicationUser> FindUserId(Guid userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
 
+            //var user2 = new ApplicationUser
+            //{
+            //    FirstName=
+            //};
+            var user2 = GetSingleBusinessObj(user);
+            return user2;
+        }
         public async Task<IList<string>> GetUserRolesAsync(string email)
         {
             if (email is null)
@@ -153,6 +163,7 @@ namespace Blogsite.Membership.Services
             var user = await _userManager.FindByIdAsync(userId);
             return user;
         }
+        
         public async Task<IdentityResult> ChangePassword(string userId, string newPassword,
                                                          string confirmPassword)
         {
