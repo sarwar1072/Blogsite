@@ -121,8 +121,8 @@ namespace BlogSite.Web.Controllers
                 model.ResolveDependency(_scope);
 
                 model.AddUserForm();
-                return View(model);
-                
+                return RedirectToAction("WishPage");
+
             }
             catch (Exception e)
             {
@@ -132,6 +132,12 @@ namespace BlogSite.Web.Controllers
 
             return View();
         }
+        public IActionResult WishPage()
+        {
+            return View();
+        }
+
+
 
 
     }

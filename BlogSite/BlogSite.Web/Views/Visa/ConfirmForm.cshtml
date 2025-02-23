@@ -1,0 +1,181 @@
+﻿@model VisaConfirmFormModel
+
+@{
+    ViewData["Title"] = "Visa Request Form";
+}
+
+<div class="container my-5">
+    <div class="row">
+        <!-- Left Side: Visa Request Form -->
+
+        <div class="col-md-8">
+            <div class="card p-4 shadow-lg rounded-4 border-0">
+                <h3 class="fw-bold text-primary">Visa Request Form</h3>
+
+                <form method="post" asp-action="ConfirmForm" asp-controller="Visa">
+                    <input asp-for="UserId" hidden />
+                    <input asp-for="VisaId" hidden />
+
+                    <!-- Visa Type & Tags -->
+                    <div class="d-flex align-items-center mt-3">
+                        <h4 class="fw-bold text-dark">@Model.Destination Visa</h4>
+                        <span class="badge bg-primary ms-2">@Model.VisaType</span>
+                        <span class="badge bg-success ms-2">@Model.VisaMode</span>
+                        <span class="badge bg-warning ms-2 text-dark">@Model.EntryType</span>
+                    </div>
+
+                    <hr>
+                    <!-- Contact Information -->
+                    <h5 class="fw-bold text-secondary">Contact Information <small class="text-muted">(Please provide your details)</small></h5>
+
+                    <div class="mb-3">
+                        <label class="fw-bold">Contact Name <span class="text-danger">*</span></label>
+                        <input type="text" asp-for="Name" class="form-control shadow-sm" id="fullName" placeholder="Full Name" required>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="fw-bold">Mobile Number <span class="text-danger">*</span></label>
+                            <div class="input-group shadow-sm">
+                                <span class="input-group-text bg-light border-0">+880</span>
+                                <input type="text" asp-for="Phone" class="form-control border-0" id="mobileNumber" placeholder="XXXXXXXXXX" required>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="fw-bold">Email Address <span class="text-danger">*</span></label>
+                            <input type="email" asp-for="Email" class="form-control shadow-sm" id="email" placeholder="Email Address" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="fw-bold">Departure Date <span class="text-danger">*</span></label>
+                            <input type="date" asp-for="DepartureDate" id="date" class="form-control shadow-sm" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="fw-bold">Number of Travellers</label>
+                            <div class="input-group">
+                                <button type="button" class="btn btn-outline-primary" onclick="decreaseTravellers()">-</button>
+                                <input type="number" name="NumberOfTravellers" id="numberOfTravellers" class="form-control text-center shadow-sm border-0" value="1" min="1" required>
+                                <button type="button" class="btn btn-outline-primary" onclick="increaseTravellers()">+</button>
+                            </div>
+                        </div>
+                  
+
+                       @*  <div class="col-md-6 mb-3">
+                            <label class="fw-bold">Number of Travellers</label>
+                            <div class="d-flex align-items-center">
+                                <button type="button" class="btn btn-outline-primary rounded-circle px-3 minus">-</button>
+                                <input type="number" asp-for="NumberOfTravellers" class="form-control text-center mx-2 shadow-sm border-0" value="1" min="1" style="max-width: 50px;">
+                                <button type="button" class="btn btn-outline-primary rounded-circle px-3 plus">+</button>
+                            </div>
+                        </div> *@
+                    </div>
+
+                    <!-- Message Box -->
+                    <div class="mb-3">
+                        <label class="fw-bold">Type your message here</label>
+                        <textarea class="form-control shadow-sm" rows="3" asp-for="Remark" id="textBox" placeholder="Type your message here"></textarea>
+                    </div>
+
+                    <!-- Terms & Conditions -->
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="terms" required>
+                        <label class="form-check-label text-muted" for="terms">
+                            By submitting a request, I accept
+                            <a href="#" class="text-danger fw-bold">Terms & Conditions</a>,
+                            <a href="#" class="text-danger fw-bold">Privacy Policy</a>, and
+                            <a href="#" class="text-danger fw-bold">Refund Policy</a>.
+                        </label>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="d-flex">
+                        <button type="button" class="btn btn-outline-secondary px-4 rounded-pill shadow-sm">Back</button>
+                        <button type="submit" class="btn btn-primary px-4 ms-3 rounded-pill shadow-sm" >Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+        <!-- Right Side: Visa Price Summary -->
+        <div class="col-md-4">
+            <div class="card p-4 shadow-lg rounded-4 border-0 bg-light">
+
+                <h5 class="fw-bold text-dark">Your Price Summary</h5>
+
+                <table class="table mt-3">
+                    <tbody>
+                        <tr>
+                            <td class="text-muted">Visa Validity</td>
+
+                            <td class="text-end fw-bold text-dark">@Model.VisaValidity Days</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted">Visa Fee X 1</td>
+                            <td class="text-end fw-bold text-dark">@Model.Price BDT</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted">FirstTrip Processing Fee X 1</td>
+                            <td class="text-end fw-bold">2,500 BDT</td>
+                        </tr>
+                        <tr class="table-warning">
+                            <td><strong>Total Payable</strong></td>
+                            <td class="text-end text-success fw-bold">
+                                @(Model.Price + 2500) BDT
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="text-muted small mt-2">
+                    <i class="fas fa-info-circle text-warning"></i>
+                    Prices may vary depending on traveller’s requirements.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function increaseTravellers() {
+        let input = document.getElementById('numberOfTravellers');
+        input.value = parseInt(input.value) + 1;
+    }
+
+    function decreaseTravellers() {
+        let input = document.getElementById('numberOfTravellers');
+        if (parseInt(input.value) > 1) {
+            input.value = parseInt(input.value) - 1;
+        }
+    }
+
+    // function BtnClick() {
+    //     var obj = {
+    //         FirstName: $("#nm").val(),
+    //         LastName: $("#lm").val(),
+    //         EmailAddress: $("#em").val(),
+    //         PhoneNumber: $("#pm").val(),
+    //         PreferredJourneyDate: $("#jd").val(),
+    //         AdditionalRequirements: $("#ar").val()
+    //     };
+    //     $.ajax({
+    //         url: '/Home/Details',
+    //         type: 'POST',
+    //         data: JSON.stringify(obj),
+    //         contentType: 'application/json; charset=utf-8',
+    //         success: function () {
+    //             $('#consultationForm').hide();
+    //             $('#successMessage').removeClass('d-none');
+    //         },
+    //         error: function (xhr, status, error) {
+    //             alert('Error: ' + error);
+    //         }
+    //     });
+    // }
+    // onclick = "BtnClick()
+</script>
