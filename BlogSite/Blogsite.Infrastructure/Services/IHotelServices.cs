@@ -14,6 +14,7 @@ namespace Blogsite.Infrastructure.Services
         Hotel GetByid(int id);
         IList<Hotel> GetAlHotesls();
         Room GetRoomDetailsById(int id);
+        IList<Hotel> GetAlHoteslsForDropDown();
 
         IList<Hotel> SearchedHotelList(string Location, DateTime CheckInDate, DateTime CheckOutDate, int NumberOfGuests);
         IList<string> GetAllHoteslsWithoutLimit();

@@ -1,14 +1,18 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BlogSite.Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"] - Booking.com</title>
+
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/BlogSite.Web.styles.css" asp-append-version="true" />
     <link href="~/css/footer.css" rel="stylesheet" />
     <link href="~/css/searchcss.css" rel="stylesheet" />
+
+    <link href="~/css/cssforlayout.css" rel="stylesheet" />
+    <link href="~/css/navdesign.css" rel="stylesheet" />
+    <link href="~/css/sectionlayoutcss.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -17,130 +21,98 @@
 
 </head>
 <body>
-   
-    <!-- Search Section -->
-    <section class="search-section  text-white py-5" id="content">
-        <div class="container text-center">
-            <h1>Find your next stay</h1>
-            <p>Search low prices on hotels, homes, and much more...</p>
-            <div class="container">
-                <h2>Search Options</h2>
 
-                <partial name="_SearchTab" />
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bg-primary shadow-sm">
+        <div class="container">
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold text-primary d-flex align-items-center" href="/">
+                <img src="~/logo.jpg" alt="Logo" class="me-2" style="height: 40px;">
+                Travel Booking
+            </a>
+            <!-- Navbar Toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                <!-- Placeholder for tab content -->
-                <div id="tourContent" class="tab-content ">
-                    <h3>Tour Search</h3>
-                    <!-- Tour search form content goes here -->
+            <!-- Navbar Links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto fw-semibold">
+                    <li class="nav-item">
+                        <a class="nav-link text-white active border-bottom border-warning pb-1" href="/Visa/Index">
+                            <i class="fas fa-passport"></i> Visa
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/Home/Index">
+                            <i class="fas fa-umbrella-beach"></i> Tour
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/Hotel/Index">
+                            <i class="fas fa-hotel"></i> Hotel
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Currency & Sign In -->
+                <div class="d-flex align-items-center">
+                    <div class="dropdown me-3">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <img src="~/currency.jpg" width="20" class="me-1"> BDT
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">USD</a></li>
+                            <li><a class="dropdown-item" href="#">EUR</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="collapse navbar-collapse bg-secondary justify-content-end" id="navbarNav">
+                        <ul class="navbar-nav">
+                            
+                            <li class="nav-item">
+                                <partial name="_LoginPartial" />
+                            </li>
+                        </ul>
+                    </div>
+                   @*  <a href="/Account/Login" class="btn btn-secondary px-4">
+                        <i class="fas fa-user"></i> Sign In
+                    </a> *@
+
                 </div>
-                <div id="hotelContent" class="tab-content">
-                    <h3>Hotel Search</h3>
-                    <!-- Hotel search form content goes here -->
-                </div>
-                <div id="flightContent" class="tab-content ">
-                    <h3>Flight Search</h3>
-                    <!-- Flight search form content goes here -->
-                </div>
-
-                <!-- for search  tour"-->
-                <div id="tourSearch" class="search-form mt-4" style="display: none;">
-                    <h3>Search for Tours</h3>
-                    <form method="post" asp-action="TourList" asp-controller="Home">
-                        <div class="form-group position-relative">
-                            <label for="tourDestination">Destination</label>
-                            <input type="text" class="form-control" id="tourDestination" name="destination" placeholder="Enter destination" autocomplete="off">
-                            <!-- Dropdown for tour destination suggestions -->
-                            <div id="destinationList" class="dropdown-menu" style="display: none; position: absolute; width: 100%;">
-                                <!-- Suggested destinations will be appended here dynamically -->
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Search Tour</button>
-                    </form>
-
-                    @*             <partial name="Search" />
-                    *@
-                </div>
-
-                <!-- Hotel Search Form -->
-                <div id="hotelSearch" class="search-form mt-4" style="display: none;">
-                    <h3>Search for Hotels</h3>
-                    <form method="post" id="hotelForm" asp-action="SearchHotel" asp-controller="Home">
-                        <div class="form-group position-relative">
-                            <label for="hotelLocation">Location</label>
-                            <input type="text" class="form-control" id="hotelLocation" name="location" placeholder="Enter location">
-                            <div id="HotelLocationList" class="dropdown-menu" style="display: none; position: absolute; width: 100%;">
-                                <!-- Suggested destinations will be appended here dynamically -->
-                            </div>
-                        </div>
-                       
-                        <div class="form-group">
-                            <label for="checkInDate">Check-in Date</label>
-                            <input type="date" class="form-control" id="checkInDate" name="checkInDate">
-                        </div>
-                        <div class="form-group">
-                            <label for="checkOutDate">Check-out Date</label>
-                            <input type="date" class="form-control" id="checkOutDate" name="checkOutDate">
-                        </div>
-                        <div class="form-group">
-                            <label for="numberOfGuests">Number of Guests</label>
-                            <input type="number" id="Number" name="NumberOfGuests" class="form-control" min="1" required>
-                        </div>
-                        <button type="submit" class="btn btn-secondary">Search Hotel</button>
-                    </form>
-@*                     <partial name="_hotelsearchpartial" />
- *@                </div>
-
-                <!-- Flight Search Form -->
-                <div id="flightSearch" class="search-form mt-4" style="display: none;">
-                    <h3>Search for Flights</h3>
-                    <form method="get" asp-action="SearchFlight" asp-controller="Flight">
-                        <div class="form-group">
-                            <label for="departureCity">Departure City</label>
-                            <input type="text" class="form-control" id="departureCity" name="departureCity" placeholder="Enter departure city">
-                        </div>
-                        <div class="form-group">
-                            <label for="arrivalCity">Arrival City</label>
-                            <input type="text" class="form-control" id="arrivalCity" name="arrivalCity" placeholder="Enter arrival city">
-                        </div>
-                        <div class="form-group">
-                            <label for="flightDate">Flight Date</label>
-                            <input type="date" class="form-control" id="flightDate" name="flightDate">
-                        </div>
-                        <button type="submit" class="btn btn-success">Search Flight</button>
-                    </form>
-                </div>
-
             </div>
         </div>
-    </section>
+    </nav>
 
-    <!-- Bootstrap JS -->
+    <!-- Main Content -->
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
+
+    <!-- Footer -->
     <partial name="_footer" />
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Bootstrap & jQuery Scripts -->
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="~/js/searchdropdown.js"></script>
-    <script src="~/js/searchjs.js"></script>
 
-    <script src="~/js/hotelsearchdropdown.js"></script>
+    <script src="~/js/visajsfolder/visadropdown.js"></script>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
+    <script src="~/js/navdesignjs.js"></script>
 
     <!-- jQuery, Popper.js, and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    @await RenderSectionAsync("Scripts", required: false)
+    @RenderSection("MainLayoutScript", false)
 
 </body>
 </html>

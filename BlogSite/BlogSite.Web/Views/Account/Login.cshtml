@@ -2,9 +2,12 @@
 @{
     ViewData["Title"] = "Login";
 }
+@{
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
 
-
-    <div class="main-wrapper">
+  
+     <div class="main-wrapper">
         <div class="page-wrapper full-page">
             <div class="page-content d-flex align-items-center justify-content-center">
 
@@ -55,7 +58,7 @@
             </div>
         </div>
     </div>
-
+ 
     
 @section MainLayoutScript {
     <partial name="_ValidationScriptsPartial" />

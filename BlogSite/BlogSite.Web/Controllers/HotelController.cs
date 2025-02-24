@@ -23,6 +23,7 @@ namespace BlogSite.Web.Controllers
         {
             var model=_scope.Resolve<HotelModelView>();
             model.ListOfHotel();
+            
             return View(model);
         }
         [HttpGet]
@@ -45,6 +46,11 @@ namespace BlogSite.Web.Controllers
         //  [HttpPost]
         public IActionResult SearchHotel(string location, string checkInDate, string checkOutDate, int numberOfGuests)
         {
+            if (string.IsNullOrEmpty(location))
+            {
+                _logger.LogWarning("Location is empty!");
+                return View();
+            }
             HttpContext.Session.SetString("Location", location );
             HttpContext.Session.SetString("CheckInDate", checkInDate );
             HttpContext.Session.SetString("CheckOutDate", checkOutDate );

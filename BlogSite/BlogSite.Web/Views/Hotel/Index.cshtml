@@ -5,8 +5,119 @@
     <form method="post" asp-action="SearchHotel" asp-controller="Hotel" class="p-4 bg-white rounded shadow-lg" style="max-width: 600px; width: 100%;">
         <h3 class="text-center mb-4">Search Hotels</h3>
 
-        <!-- Location -->
-        <div class="form-group position-relative mb-3">
+        <div class="row">
+            <!-- Location -->
+            <div class="col-md-6">
+                <div class="form-group position-relative mb-3">
+                    <label for="hotelLocation" class="form-label fw-bold">Hotel Location</label>
+                    <select asp-for="Location"
+                            asp-items="Model.HotelDropdownList()"
+                            class="form-control"
+                            style="border-radius: 8px;" id="hotelLocation">
+                        <option value="">Please Select One</option>
+                    </select>
+                    <span asp-validation-for="Location" class="text-danger"></span>
+                </div>
+            </div>
+
+            <!-- Number of Guests -->
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="numberOfGuests" class="form-label fw-bold">Number of Guests</label>
+                    <input type="number"
+                           id="numberOfGuests"
+                           name="NumberOfGuests"
+                           class="form-control"
+                           min="1"
+                           required
+                           value="@Model.NumberOfGuests"
+                           style="border-radius: 8px;">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Check-in Date -->
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="checkInDate" class="form-label fw-bold">Check-in Date</label>
+                    <input type="date"
+                           class="form-control"
+                           id="checkInDate"
+                           name="checkInDate"
+                           value="@Model.CheckInDate.ToString("yyyy-MM-dd")"
+                           style="border-radius: 8px;">
+                </div>
+            </div>
+
+            <!-- Check-out Date -->
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="checkOutDate" class="form-label fw-bold">Check-out Date</label>
+                    <input type="date"
+                           class="form-control"
+                           id="checkOutDate"
+                           name="checkOutDate"
+                           value="@Model.CheckOutDate.ToString("yyyy-MM-dd")"
+                           style="border-radius: 8px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100 mt-3" style="border-radius: 8px;">
+            <i class="fas fa-search me-2"></i> Search Hotel
+        </button>
+    </form>
+</div>
+
+
+
+
+<div class="container my-5">
+    <h3 class="text-primary mb-4 fw-bold">🌟 Popular Hotels</h3>
+    <div class="row g-4">
+        @if (Model.ListOfHotel != null && Model.HotelList.Any())
+        {
+            foreach (var hotel in Model.ListOfHotel())
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="card border-0 shadow-sm h-100">
+                        <a href="@Url.Action("SearchHotelRooms", "Hotel", new { hotelId = hotel.Id })" class="text-decoration-none">
+                            <img src="@hotel.HotelUrl" class="card-img-top rounded-top" alt="@hotel.Name" style="height: 200px; object-fit: cover;">
+                        </a>
+                        <div class="card-body text-center">
+                            <h5 class="card-title fw-bold">
+                                <a href="@Url.Action("SearchHotelRooms", "Hotel", new { hotelId = hotel.Id })" class="text-dark text-decoration-none">
+                                    @hotel.Name
+                                </a>
+                            </h5>
+                        </div>
+                        <div class="card-footer bg-white text-center py-3">
+                            <a href="@Url.Action("SearchHotelRooms", "Hotel", new { hotelId = hotel.Id })" class="btn btn-primary px-4">View Rooms</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <p class="text-center text-muted">No hotels available.</p>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+ @section MainLayoutScript{
+    <script src="~/js/defaultvaluehotel.js"></script>
+
+}
+
+@*         <div class="form-group position-relative mb-3">
             <label for="hotelLocation" class="form-label fw-bold">Location</label>
             <input type="text"
                    class="form-control"
@@ -22,6 +133,25 @@
                 <!-- Suggested destinations will be dynamically appended here -->
             </div>
         </div>
+ *@
+
+@* <div class="container d-flex justify-content-center align-items-center p-5">
+    <form method="post" asp-action="SearchHotel" asp-controller="Hotel" class="p-4 bg-white rounded shadow-lg" style="max-width: 600px; width: 100%;">
+        <h3 class="text-center mb-4">Search Hotels</h3>
+
+        <!-- Location -->
+
+        <div class="form-group position-relative mb-3">
+            <label for="hotelLocation" class="form-label fw-bold">Hotel Location</label>
+            <select asp-for="Location"
+                    asp-items="Model.HotelDropdownList()"
+                    class="form-control"
+                    style="border-radius: 8px;">
+                <option value="">Please Select One</option>
+            </select>
+            <span asp-validation-for="Location" class="text-danger"></span>
+        </div>
+
 
         <!-- Check-in Date -->
         <div class="form-group mb-3">
@@ -64,147 +194,4 @@
         </button>
     </form>
 </div>
-
-<div class="container my-5">
-    <h3 class="text-primary mb-4 fw-bold">🌟 Popular Hotels</h3>
-    <div class="row g-4">
-        @if (Model.ListOfHotel != null && Model.HotelList.Any())
-        {
-            foreach (var hotel in Model.ListOfHotel())
-            {
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="card border-0 shadow-sm h-100">
-                        <a href="@Url.Action("SearchHotelRooms", "Hotel", new { hotelId = hotel.Id })" class="text-decoration-none">
-                            <img src="@hotel.HotelUrl" class="card-img-top rounded-top" alt="@hotel.Name" style="height: 200px; object-fit: cover;">
-                        </a>
-                        <div class="card-body text-center">
-                            <h5 class="card-title fw-bold">
-                                <a href="@Url.Action("SearchHotelRooms", "Hotel", new { hotelId = hotel.Id })" class="text-dark text-decoration-none">
-                                    @hotel.Name
-                                </a>
-                            </h5>
-                        </div>
-                        <div class="card-footer bg-white text-center py-3">
-                            <a href="@Url.Action("SearchHotelRooms", "Hotel", new { hotelId = hotel.Id })" class="btn btn-primary px-4">View Rooms</a>
-                        </div>
-                    </div>
-                </div>
-            }
-        }
-        else
-        {
-            <div class="col-12">
-                <p class="text-center text-muted">No hotels available.</p>
-            </div>
-        }
-    </div>
-</div>
-
-
-@* <div class="container my-5">
-    <h3 class="text-primary mb-4">Popular Hotels</h3>
-    <div class="row">
-        @if (Model.ListOfHotel != null && Model.HotelList.Any())
-        {
-            foreach (var hotel in Model.ListOfHotel())
-            {
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100">
-                        <a href="@Url.Action("SearchHotelRooms", "Hotel", new
-                        {
-                             hotelId = hotel.Id,                               
-                        })" class="text-decoration-none">
-                            <img src="@hotel.HotelUrl" class="card-img-top" alt="@hotel.Name">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title text-center">
-                                <a href="@Url.Action("SearchHotelRooms", "Hotel", new
-                                {
-                                    hotelId = hotel.Id,                                   
-                                })" class="text-dark text-decoration-none">
-                                    @hotel.Name
-                                </a>
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-            }
-        }
-        else
-        {
-            <div class="col-12">
-                <p class="text-center">No hotels available.</p>
-            </div>
-        }
-    </div>
-</div> *@
-
-
-
-
-@* <div class="col-md-9">
-    <h5></h5>
-    <!-- Single Tour Card -->
-    @if (Model.HotelList.Any())
-    {
-        @foreach (var item in Model.HotelList)
-        {
-            <div class="card mb-4 p-3">
-                <div class="row">
-                    <div class="col-md-4">
-                        <!-- Tour Image -->
-                        <img src="@item.HotelUrl" class="img-fluid rounded" alt="Tour Image">
-                    </div>
-                    <div class="col-md-8">
-                        <!-- Tour Information -->
-                        <h5 class="text-primary">Honeymoon at @item.Name</h5>
-                        <p class="text-muted">@item.Location</p>
-                        <p class="text-muted">
-                            Available Rooms: <span>@item.AvailableRooms </span>
-                        </p>
-                        @*                             <p class="text-muted">@item.PricePerNight</p>
-                     <div class="d-flex align-items-center">
-                            <p class="text-primary font-weight-bold">Starting From BDT @item.PricePerNight Per Person</p>
-                            <a href="@Url.Action("SearchHotelRooms", "Hotel",new {hotelId = item.Id })" class="btn btn-primary ml-auto">Select</a>
-                        </div>
-                          <div>
-                <span class="badge badge-secondary">Spots Available: @item.SpotsAvailable</span>
-                </div >
-                    </div>
-                </div>
-            </div>
-        }
-
-    }
-    else
-    {
-        <h4 class="d-flex justify-content-center align-items-center m-5">No suitable hotel found</h4>
-    }
-    <!-- End of Single Tour Card -->
-</div>
  *@
-@* <style>
-    #HotelLocationList {
-        background-color: #fff;
-        border: 1px solid #ddd;
-        max-height: 200px; /* Limit height for large lists */
-        overflow-y: auto; /* Enable scrolling */
-    }
-
-        #HotelLocationList .dropdown-item {
-            padding: 10px 15px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-            #HotelLocationList .dropdown-item:hover {
-                background-color: #f8f9fa;
-            }
-
-</style>
- *@
-
- @section MainLayoutScript{
-    <script src="~/js/defaultvaluehotel.js"></script>
-
-}

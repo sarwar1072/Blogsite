@@ -35,6 +35,10 @@ namespace Blogsite.Infrastructure.Services
         {
             return _unitOfWork.HotelRepository.GetAll().Take(4).ToList();
         }
+        public IList<Hotel> GetAlHoteslsForDropDown()
+        {
+            return _unitOfWork.HotelRepository.GetAll().DistinctBy(c => c.Location).ToList();
+        }
         public IList<string> GetAllHoteslsWithoutLimit()
         {
             var entity = _unitOfWork.HotelRepository.GetAll();

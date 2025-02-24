@@ -1,4 +1,7 @@
 ﻿@model TourDetailsModel
+@{
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
 
 @section PageStyles {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -38,11 +41,11 @@
 }
 
 <div class="container my-4">
-    <h1 class="text-center text-primary fw-bold">@Model.TourName</h1>
+    <h1 class="text-center text-secondary fw-bold">@Model.TourName</h1>
     <div class="row g-4 mt-4">
         <!-- Carousel Section -->
         <div class="col-lg-8">
-            <div id="tourCarousel" class="carousel slide rounded overflow-hidden shadow-sm" data-bs-ride="carousel">
+            <div id="tourCarousel" class="carousel slide rounded overflow-hidden shadow-lg" data-bs-ride="carousel">
                 <!-- Carousel Indicators -->
                 <div class="carousel-indicators">
                     @for (int i = 0; i < Model.TourImages.Count; i++)
@@ -84,7 +87,7 @@
 
         <!-- Tour Details Section -->
         <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card shadow-sm">
+            <div class="card shadow-lg">
                 <!-- Card Header with Title -->
                 <div class="card-body">
                     <h5 class="card-title fw-bold">@Model.TourName</h5>
@@ -130,8 +133,8 @@
  <div class="container mt-5">
     <div class="row g-4">
 
-         <div class="col-md-8">
-            <div class="accordion" id="detailsAccordion">
+        <div class="col-md-8 shadow-lg">
+            <div class="accordion " id="detailsAccordion">
                 <div class="card">
                     <div class="card-header" id="headingOverview">
                         <h5 class="mb-0">
@@ -258,7 +261,7 @@
 
         <!-- Consultation Form Section -->
         <div class="col-lg-4">
-            <div id="successMessage" class="bg-light p-4 rounded text-center d-none">
+            <div id="successMessage" class="bg-light p-4 rounded text-center d-none shadow-lg">
                 <div class="icon-check">
                     <i class="fa fa-check-circle text-success display-4"></i>
                 </div>
@@ -266,7 +269,7 @@
                 <p>One of our tour experts will reach out to you soon!</p>
             </div>
 
-            <div id="consultationForm" class="bg-light p-4 rounded shadow-sm">
+            <div id="consultationForm" class="bg-light p-4 rounded shadow-lg">
                 <h5 class="text-uppercase mb-4 fw-bold text-center">Get Free Tour Consultation</h5>
                 <form id="tourConsultationForm">
                     <div class="form-floating mb-3">

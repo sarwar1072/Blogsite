@@ -1,4 +1,7 @@
 ﻿@model VisaConfirmFormModel
+@{
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
 
 @{
     ViewData["Title"] = "Visa Request Form";
@@ -100,24 +103,20 @@
             </div>
         </div>
 
-
-
         <!-- Right Side: Visa Price Summary -->
         <div class="col-md-4">
             <div class="card p-4 shadow-lg rounded-4 border-0 bg-light">
 
                 <h5 class="fw-bold text-dark">Your Price Summary</h5>
-
                 <table class="table mt-3">
                     <tbody>
                         <tr>
                             <td class="text-muted">Visa Validity</td>
-
                             <td class="text-end fw-bold text-dark">@Model.VisaValidity Days</td>
                         </tr>
                         <tr>
                             <td class="text-muted">Visa Fee X 1</td>
-                            <td class="text-end fw-bold text-dark">@Model.Price BDT</td>
+                            <td class="text-end fw-bold text-dark">@(Model.Price ) BDT</td>
                         </tr>
                         <tr>
                             <td class="text-muted">FirstTrip Processing Fee X 1</td>
@@ -126,7 +125,7 @@
                         <tr class="table-warning">
                             <td><strong>Total Payable</strong></td>
                             <td class="text-end text-success fw-bold">
-                                @(Model.Price + 2500) BDT
+                                @(Model.Price  + 2500) BDT
                             </td>
                         </tr>
                     </tbody>
@@ -153,29 +152,4 @@
             input.value = parseInt(input.value) - 1;
         }
     }
-
-    // function BtnClick() {
-    //     var obj = {
-    //         FirstName: $("#nm").val(),
-    //         LastName: $("#lm").val(),
-    //         EmailAddress: $("#em").val(),
-    //         PhoneNumber: $("#pm").val(),
-    //         PreferredJourneyDate: $("#jd").val(),
-    //         AdditionalRequirements: $("#ar").val()
-    //     };
-    //     $.ajax({
-    //         url: '/Home/Details',
-    //         type: 'POST',
-    //         data: JSON.stringify(obj),
-    //         contentType: 'application/json; charset=utf-8',
-    //         success: function () {
-    //             $('#consultationForm').hide();
-    //             $('#successMessage').removeClass('d-none');
-    //         },
-    //         error: function (xhr, status, error) {
-    //             alert('Error: ' + error);
-    //         }
-    //     });
-    // }
-    // onclick = "BtnClick()
 </script>

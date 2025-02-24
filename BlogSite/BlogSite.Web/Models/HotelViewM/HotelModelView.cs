@@ -3,6 +3,7 @@ using Blogsite.Infrastructure.Entities;
 using Blogsite.Infrastructure.Services;
 using BlogSite.Web.Areas.Admin.Models;
 using DevSkill.Data;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis;
 using System.CodeDom;
 
@@ -109,6 +110,36 @@ namespace BlogSite.Web.Models.HotelViewM
                 }
             }        
         }
+
+        //public IList<SelectListItem> HotelDropdownList()
+        //{
+        //    var hotel = new List<SelectListItem>();
+        //    foreach (var item in _hotelServices.GetAlHoteslsForDropDown())
+        //    {
+        //        var addItem = new SelectListItem
+        //        {
+        //            Text = item.Location,
+        //            Value = item.Id.ToString()
+        //        };
+        //        hotel.Add(addItem);
+        //    }
+        //    return hotel;
+        //}
+        public IList<SelectListItem> HotelDropdownList()
+        {
+            var hotel = new List<SelectListItem>();
+            foreach (var item in _hotelServices.GetAlHoteslsForDropDown())
+            {
+                var addItem = new SelectListItem
+                {
+                    Text = item.Location,   // Display Location Name
+                    Value = item.Location   // Ensure Value is also Location Name
+                };
+                hotel.Add(addItem);
+            }
+            return hotel;
+        }
+
         public IList<Hotel> ListOfHotel()
         {
             var entity = _hotelServices.GetAlHotesls();
