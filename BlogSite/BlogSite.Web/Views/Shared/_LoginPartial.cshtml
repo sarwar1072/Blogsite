@@ -3,11 +3,7 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-
-
-
-
-<ul class="navbar-nav bg-secondary rounded-3 p-3">
+<ul class="navbar-nav  rounded-3 p-3">
     @if (SignInManager.IsSignedIn(User))
     {
         <!-- Display User Greeting -->
@@ -17,7 +13,7 @@
 
         <!-- Logout Button -->
         <li class="nav-item">
-            <form class="d-inline" asp-area="" asp-action="Logout" asp-controller="Account" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <form class="d-inline btn" asp-area="" asp-action="Logout" asp-controller="Account" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button type="submit" class="btn btn-outline-light w-100">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </button>
@@ -27,14 +23,14 @@
     else
     {
         <!-- Register Button -->
-        <li class="nav-item">
-            <a class="btn btn-outline-light w-100 mb-2" asp-area="" asp-action="Register" asp-controller="Account">
+        <li class="nav-item ">
+            <a class="btn btn-danger w-100 mb-2" asp-area="" asp-action="Register" asp-controller="Account">
                 <i class="fas fa-user-plus"></i> Register
             </a>
         </li>
 
         <!-- Login Button -->
-        <li class="nav-item">
+        <li class="nav-item ml-2">
             <a class="btn btn-warning text-dark w-100" asp-area="" asp-action="Login" asp-controller="Account">
                 <i class="fas fa-sign-in-alt"></i> Log In
             </a>
