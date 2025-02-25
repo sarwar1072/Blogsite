@@ -4,25 +4,23 @@
 @inject UserManager<ApplicationUser> UserManager
 
 
-<style>
-    .nav-link.btn:hover {
-        opacity: 0.8;
-        transition: opacity 0.3s ease;
-    }
-</style>
 
-<ul class="navbar-nav bg-secondary">
+
+
+<ul class="navbar-nav bg-secondary rounded-3 p-3">
     @if (SignInManager.IsSignedIn(User))
     {
         <!-- Display User Greeting -->
         <li class="nav-item">
-            <p class="nav-link text-white stylish-font" title="User">Hello @User.Identity.Name.Split('@')[0]</p>
+            <span class="nav-link text-white fw-semibold">👋 Hello, @User.Identity.Name.Split('@')[0]</span>
         </li>
 
         <!-- Logout Button -->
         <li class="nav-item">
-            <form class="form-inline" asp-area="" asp-action="Logout" asp-controller="Account" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-link bg-secondary text-white btn-block">Logout</button>
+            <form class="d-inline" asp-area="" asp-action="Logout" asp-controller="Account" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="btn btn-outline-light w-100">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
             </form>
         </li>
     }
@@ -30,47 +28,16 @@
     {
         <!-- Register Button -->
         <li class="nav-item">
-            <a class="nav-link btn btn-secondary text-white btn-block" asp-area="" asp-action="Register" asp-controller="Account">
+            <a class="btn btn-outline-light w-100 mb-2" asp-area="" asp-action="Register" asp-controller="Account">
                 <i class="fas fa-user-plus"></i> Register
             </a>
         </li>
 
         <!-- Login Button -->
         <li class="nav-item">
-            <a class="nav-link btn btn-secondary text-white btn-block" asp-area="" asp-action="Login" asp-controller="Account">
+            <a class="btn btn-warning text-dark w-100" asp-area="" asp-action="Login" asp-controller="Account">
                 <i class="fas fa-sign-in-alt"></i> Log In
             </a>
         </li>
     }
 </ul>
-
-
-
-@* <ul class="navbar-nav bg-secondary">
-    @if (SignInManager.IsSignedIn(User))
-    {
-        <li class="nav-item">
-            <p class="nav-link text-white stylish-font" title="User">Hello @User.Identity.Name.Split('@')[0]</p>
-        </li>
-     
-        <li class="nav-item">
-            <form class="form-inline" asp-area="" asp-action="Logout" asp-controller="Account" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="nav-link btn btn-link bg-secondary text-white">Logout</button>
-            </form>
-        </li>
-    }
-    else
-    {
-        <li class="nav-item">
-            <a class="nav-link text-white" asp-area="" asp-action="Register" asp-controller="Account">
-                <i class="fas fa-user-plus"></i> Register
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-white" asp-area="" asp-action="Login" asp-controller="Account">
-                <i class="fas fa-sign-in-alt"></i> Log In
-            </a>
-        </li>
-    }
-</ul>
- *@

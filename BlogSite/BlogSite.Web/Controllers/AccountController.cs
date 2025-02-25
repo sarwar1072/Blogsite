@@ -49,7 +49,7 @@ namespace BlogSite.Web.Controllers
                         }
                         else
                         {
-                            return RedirectToAction(model.ReturnUrl);
+                            return RedirectToAction("Index","Home");
                         }
                     }
                     foreach (var error in result.Errors)

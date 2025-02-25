@@ -1,8 +1,9 @@
 
 /* Additional Custom Styling */
 body {
-    /*background-color: #f8f9fa;*/ /* Light background */
+    padding-top: 70px; /* Adjust based on navbar height */
 }
+
 
 .navbar-brand {
     font-weight: bold;
