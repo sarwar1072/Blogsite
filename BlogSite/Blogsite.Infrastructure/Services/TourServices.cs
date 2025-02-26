@@ -43,6 +43,10 @@ namespace Blogsite.Infrastructure.Services
             _projectUnitOfWork.ConsultationFormRepository.Add(Form);
             _projectUnitOfWork.Save();
         }
+        public IList<Tour> GetAllTourForDropDown()
+        {
+            return _projectUnitOfWork.TourRepository.GetAll().DistinctBy(c => c.Destination).ToList();
+        }
         public (IList<ConsultationForm> forms, int total, int totalDisplay) GetConsultForm(int pageindex, int pagesize, string searchText, string orderBy)
         {
 

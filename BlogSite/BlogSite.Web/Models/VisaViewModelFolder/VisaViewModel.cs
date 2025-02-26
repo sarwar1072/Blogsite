@@ -1,5 +1,6 @@
 ﻿using Blogsite.Infrastructure.Entities;
 using Blogsite.Infrastructure.Services;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BlogSite.Web.Models.VisaViewModelFolder
 {
@@ -61,5 +62,20 @@ namespace BlogSite.Web.Models.VisaViewModelFolder
             }
             return VisaList;
         }
+        public IList<SelectListItem> VisaDropdownList()
+        {
+            var visa = new List<SelectListItem>();
+            foreach (var item in _visaServices.GetAllVisaForDropDown())
+            {
+                var addItem = new SelectListItem
+                {
+                    Text = item.Destination,   // Display Location Name
+                    Value = item.Destination   // Ensure Value is also Location Name
+                };
+                visa.Add(addItem);
+            }
+            return visa;
+        }
+
     }
 }

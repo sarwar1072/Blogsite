@@ -139,17 +139,17 @@ namespace BlogSite.Web.Areas.Admin.Models
                         }
                     },
 
-                     {
-                        new MenuItem
-                        {
-                           Title="Company",
-                           Childs=new List<MenuChildItem>
-                           {
-                               new MenuChildItem{Title="View Company",Url="/Admin/Company"},
-                               new MenuChildItem{Title="Add Company",Url="/Admin/Company/AddCompany"}
-                           }
-                        }
-                    }
+                    // {
+                    //    new MenuItem
+                    //    {
+                    //       Title="Company",
+                    //       Childs=new List<MenuChildItem>
+                    //       {
+                    //           new MenuChildItem{Title="View Company",Url="/Admin/Company"},
+                    //           new MenuChildItem{Title="Add Company",Url="/Admin/Company/AddCompany"}
+                    //       }
+                    //    }
+                    //}
                 }
             };
         }

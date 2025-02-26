@@ -3,10 +3,9 @@ html {
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f8fb;
 }
 
-@media (min-width: 768px) {
+/*@media (min-width: 768px) {
   html {
     font-size: 16px;
   }
@@ -15,19 +14,20 @@ html {
 html {
   position: relative;
   min-height: 100%;
-}
+}*/
 
 body {
-/*    margin-bottom: 60px;
-*/    /*background-color: #ffffff;*/ /* Or any consistent color */
+        
+/* background-color: #EDF2F5;
+*/    /*#ffffff; */ /*Or any consistent color */
 }
 
- Style for the search section 
+ /*Style for the search section 
 .search-section {
-    background-color: #00008b;
+    background-color: #00008b;*/
        /* #003580
   The dark blue background */
-}
+/*}
 
 .search-section h1 {
     font-weight: bold;
@@ -51,4 +51,4 @@ body {
 }
 .dropdown-item {
     cursor: pointer;
-}
+}*/

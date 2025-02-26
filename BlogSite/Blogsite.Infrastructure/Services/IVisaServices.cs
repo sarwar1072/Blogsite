@@ -17,6 +17,7 @@ namespace Blogsite.Infrastructure.Services
         IList<Visa> ListOfVisa(string destination);
         int CountDestination(string destination);
         Visa GetSingleVisa(int id);
+        IList<Visa> GetAllVisaForDropDown();
 
         IList<string> GetOnlyVisaDestinationName();
 

@@ -10,6 +10,7 @@ namespace Blogsite.Infrastructure.Services
     public interface IuserFormServices
     {
         void AddUserForm(UserForm userForm);
+        List<UserForm> ListOfVBookedVisa(Guid UserId);
 
     }
 }

@@ -37,33 +37,7 @@ namespace BlogSite.Web.Models.tourViewModel
             _tourServices = _lifetimeScope.Resolve<ITourServices>();
             base.ResolveDependency(lifetimeScope);
         }
-        //public void TourDetails(int id)
-
-        //{
-        //    var data=_tourServices.GetTourDetails(id);
-
-        //    if(data != null) {
-        //        id= data.Id;
-        //        TourName = data.TourName;
-        //        TourUrl = data.TourUrl; 
-        //        Destination = data.Destination; 
-        //        MaxiMumPeople = data.MaxiMumPeople;
-        //        MiniMumPeople = data.MiniMumPeople;
-        //        MapUrl = data.MapUrl;
-        //        Requirements = data.Requirements;   
-        //        CancellationTerm = data.CancellationTerm;   
-        //    }
-        //    TourImages = new List<Images>(); 
-        //    foreach(var image in data.Images)
-        //    {
-        //        TourImages.Add(new Images
-        //        {
-        //            ImageUrl=image.ImageUrl,
-        //            AlternativeText=image.AlternativeText,
-
-        //        });  
-        //    }
-        //}
+       
         public IList<Tour> PopularTourDestination()
         {
             var data = _tourServices.ListOfPopularDestination();
@@ -127,38 +101,22 @@ namespace BlogSite.Web.Models.tourViewModel
             }  
             return TourList;
         }
+        public IList<SelectListItem> TourDropdownList()
+        {
+            var hotel = new List<SelectListItem>();
+            foreach (var item in _tourServices.GetAllTourForDropDown())
+            {
+                var addItem = new SelectListItem
+                {
+                    Text = item.Destination,   // Display Location Name
+                    Value = item.Destination   // Ensure Value is also Location Name
+                };
+                hotel.Add(addItem);
+            }
+            return hotel;
+        }
 
 
-        //public IList<SelectListItem> ListOfCoverType()
-        //{
-        //    var cover = new List<SelectListItem>();
-        //    foreach (var item in _productService.GetCoverTypes())
-        //    {
-        //        var addItem = new SelectListItem
-        //        {
-        //            Text = item.Name,
-        //            Value = item.Id.ToString()
-        //        };
-        //        cover.Add(addItem);
-        //    }
-        //    return cover;
-        //}
-        //public IList<SelectListItem> GetAll()
-        //{
-        //    var model = new List<SelectListItem>();
-            
-        //        foreach (var tour in _tourServices.ListOfTourName())
-        //        {
-        //            var addItem = new SelectListItem()
-        //            {
-        //                Text=tour.Destination,
-        //                Value=tour.Id.ToString(),
-
-        //            }; 
-        //        model.Add(addItem);
-        //        }
-        //    return model;            
-        //}
 
     }
 }

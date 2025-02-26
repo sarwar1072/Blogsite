@@ -61,6 +61,7 @@ namespace Blogsite.Infrastructure
             builder.RegisterType<VisaServices>().As<IVisaServices>().InstancePerLifetimeScope();
             builder.RegisterType< UserFormRepository >().As<IUserFormRepository>().InstancePerLifetimeScope();
             builder.RegisterType<userFormServices>().As<IuserFormServices>().InstancePerLifetimeScope();
+            builder.RegisterType< DashboardServices >().As<IDashboardServices>().InstancePerLifetimeScope();
 
             base.Load(builder);
         }

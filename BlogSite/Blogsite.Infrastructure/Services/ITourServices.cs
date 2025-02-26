@@ -20,6 +20,7 @@ namespace Blogsite.Infrastructure.Services
         IList<TourDetails> GetTypeOfTour();
         IList<Tour> ListOfPopularDestination();
         IList<Tour> ListOfPopularTours();
+        IList<Tour> GetAllTourForDropDown();
 
         void AddConsulationForm(ConsultationForm Form);
         (IList<ConsultationForm> forms, int total, int totalDisplay) GetConsultForm(int pageindex, int pagesize, string searchText, string orderBy);

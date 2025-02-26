@@ -1,7 +1,49 @@
-﻿
+﻿@model DashboardModel
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Dashboard";
 }
 
-<h1>Index</h1>
+@section PageStyle
+{
+    <link href="~/css/dashboardcss/dashboarddesign.css" rel="stylesheet" />
+}
+
+    <div class="container py-5">
+        <div class="row justify-content-center g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-header text-center">
+                        <i class="fas fa-map-marked-alt icon"></i>
+                        Total Tour Locations
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">@Model.TotalTours</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-header text-center">
+                        <i class="fas fa-hotel icon"></i>
+                        Total Hotels
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">@Model.TotalHotel</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card text-white bg-warning mb-3">
+                    <div class="card-header text-center">
+                        <i class="fas fa-passport icon"></i>
+                        Total Visa Destinations
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">@Model.TotalVisaDestination</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 

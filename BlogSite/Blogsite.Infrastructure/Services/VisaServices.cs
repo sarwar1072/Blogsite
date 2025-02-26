@@ -110,6 +110,10 @@ namespace Blogsite.Infrastructure.Services
 
             return locations;
         }
+        public IList<Visa> GetAllVisaForDropDown()
+        {
+            return _projectUnitOfWork.VisaRepository.GetAll().DistinctBy(c => c.Destination).ToList();
+        }
         public int CountDestination(string destination)
         {
             return _projectUnitOfWork.VisaRepository.GetCount(x=>x.Destination.ToLower()==destination);   

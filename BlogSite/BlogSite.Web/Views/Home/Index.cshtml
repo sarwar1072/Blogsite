@@ -4,34 +4,29 @@
     <link href="~/css/clickentindextour/tourindex.css" rel="stylesheet" />
 
 }
-<div class="container d-flex justify-content-center align-items-center p-4 ">
-    <form method="post" asp-action="TourList" asp-controller="Home" class="p-4 bg-white rounded shadow-lg" style="max-width: 500px; width: 100%;">
-        <h3 class="text-center mb-4">Search Tour</h3>
 
-        <!-- Destination Input -->
-        <div class="form-group position-relative mb-3">
-            <label for="tourDestination" class="form-label fw-bold">Destination</label>
-            <input type="text"
-                   class="form-control"
-                   id="tourDestination"
-                   name="destination"
-                   placeholder="Enter destination"
-                   autocomplete="off"
-                   value="@Model.Destination"
-                   style="border-radius: 8px;">
-            <div id="destinationList"
-                 class="dropdown-menu shadow-sm p-2"
-                 style="display: none; position: absolute; width: 100%; border-radius: 8px; z-index: 1050;">
-                <!-- Suggested destinations will be dynamically appended here -->
-            </div>
+
+<div class="container d-flex justify-content-center align-items-center mt-5">
+    <form method="post" asp-action="TourList" asp-controller="Home"
+          class="p-4 bg-white rounded shadow-lg" style="max-width: 500px; width: 100%;">
+
+        <h3 class="text-center mb-4 fw-bold">Search Tour</h3>
+
+        <div class="mb-3">
+            <label for="tourDestination" class="form-label fw-bold">Tour Destination</label>
+            <select asp-for="Destination" asp-items="Model.TourDropdownList()"
+                    class="form-select" id="tourDestination" style="border-radius: 8px;">
+                <option value="">Please Select One</option>
+            </select>
+            <span asp-validation-for="Destination" class="text-danger"></span>
         </div>
 
-        <!-- Search Button -->
-        <button type="submit" class="btn btn-primary w-100" id="searchButton" style="border-radius: 8px;">
-            <i class="fas fa-search me-2"></i>Search Tour
+        <button type="submit" class="btn btn-primary w-100" style="border-radius: 8px;">
+            <i class="fas fa-search me-2"></i> Search Tour
         </button>
     </form>
 </div>
+
 
 <div class="container my-5">
     <h3 class="text-primary mb-4 fw-bold text-center">🌍 Popular Destinations</h3>
@@ -125,112 +120,6 @@
     </div>
 </div>
 
-<!-- Custom CSS for Hover Effects -->
-@* <style>
-    .hover-card {
-        transition: transform 0.3s ease-in-out;
-    }
-
-        .hover-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-    .carousel-control-prev-icon, .carousel-control-next-icon {
-        filter: invert(1);
-    }
-</style>
- *@
-
-  @* <div class="container my-5">
-    <h3 class="text-primary mb-4">Popular Destinations</h3>
-    <div id="popularDestiCarousel" class="carousel slide" data-bs-ride="carousel">
-        <!-- Left and right navigation -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#popularDestiCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#popularDestiCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-
-        <!-- Carousel items -->
-        <div class="carousel-inner">
-            @if (Model.PopularTourDestination() != null && Model.TourList.Any())
-            {
-                // Initialize counter for grouping into sets of four
-                var counter = 0;
-                foreach (var group in Model.PopularTourDestination().Select((tour, index) => new { tour, index })
-                .GroupBy(x => x.index / 4)) // Group items into sets of 4
-                {
-                    <div class="carousel-item @(counter == 0 ? "active" : "")">
-                        <div class="row">
-                            @foreach (var item in group)
-                            {
-                                <div class="col-md-3">
-                                     <a href="/Home/TourList?Destination=@item.tour.Destination" class="text-decoration-none">
- 
-                                        <div class="card">
-                                            <img src="@item.tour.TourUrl" class="card-img-top" alt="@item.tour.TourName">
-                                            <div class="card-body">
-                                                    <h5 class="card-title text-center">@item.tour.Destination</h5>                                           
-                                            </div>
-                                        </div>
-                                     </a>
-                                 </div>                               
-                            }
-                        </div>
-                    </div>
-                    counter++;
-                }
-            }
-            else
-            {
-                <div class="carousel-item active">
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <p>No destinations available.</p>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
-    </div>
-</div>
-
-<div class="container my-5">
-    <h3 class="text-primary mb-4">Popular Tours</h3>
-    <div class="row">
-        @if (Model.ListOfTours != null && Model.TourList.Any())
-        {
-            foreach (var tour in Model.ListOfTours())
-            {
-                <div class="col-md-3 mb-4">
-                    <div class="card h-100">
-                        <!-- Link to details page -->
-                        <a href="@Url.Action("Details", "Home", new { id = tour.Id })" class="text-decoration-none">
-                            <img src="@tour.TourUrl" class="card-img-top" alt="@tour.TourName">
-                        </a>
-                        <div class="card-body">
-                            <h5 class="card-title text-center">
-                                <a href="@Url.Action("Details", "Home", new { id = tour.Id })" class="text-dark text-decoration-none">
-                                    @tour.TourName
-                                </a>
-                            </h5>
-                        </div>
-                    </div>
-                </div>
-            }
-        }
-        else
-        {
-            <div class="col-12">
-                <p class="text-center">No tours available.</p>
-            </div>
-        }
-    </div>
-</div> *@
 
 
 
@@ -248,23 +137,22 @@
 }
 
 
-@* <style>
-    #destinationList {
-        background-color: #fff;
-        border: 1px solid #ddd;
-        max-height: 200px; /* Limit the height */
-        overflow-y: auto; /* Add scroll for long lists */
-    }
 
-        #destinationList .dropdown-item {
-            padding: 8px 12px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
 
-            #destinationList .dropdown-item:hover {
-                background-color: #f1f1f1;
-            }
-
-</style>
- *@
+<!-- Destination Input -->
+@*  <div class="form-group position-relative mb-3">
+            <label for="tourDestination" class="form-label fw-bold">Destination</label>
+            <input type="text"
+                   class="form-control"
+                   id="tourDestination"
+                   name="destination"
+                   placeholder="Enter destination"
+                   autocomplete="off"
+                   value="@Model.Destination"
+                   style="border-radius: 8px;">
+            <div id="destinationList"
+                 class="dropdown-menu shadow-sm p-2"
+                 style="display: none; position: absolute; width: 100%; border-radius: 8px; z-index: 1050;">
+                <!-- Suggested destinations will be dynamically appended here -->
+            </div>
+        </div> *@

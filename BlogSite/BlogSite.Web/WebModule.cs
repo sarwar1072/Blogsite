@@ -7,6 +7,7 @@ using BlogSite.Web.Areas.Admin.Models.TourDetailsFolder;
 using BlogSite.Web.Areas.Admin.Models.TourModelFolder;
 using BlogSite.Web.Areas.Admin.Models.VisaFolder;
 using BlogSite.Web.Models;
+using BlogSite.Web.Models.VisaBookingModelFolder;
 using BlogSite.Web.Models.HotelViewM;
 using BlogSite.Web.Models.tourViewModel;
 using BlogSite.Web.Models.VisaViewModelFolder;
@@ -76,6 +77,9 @@ namespace BlogSite.Web
             builder.RegisterType<EditVisaModel>().InstancePerLifetimeScope();
             builder.RegisterType<VisaViewModel>().InstancePerLifetimeScope();
             builder.RegisterType<VisaConfirmFormModel>().InstancePerLifetimeScope();
+            builder.RegisterType<DashboardModel>().InstancePerLifetimeScope();
+            builder.RegisterType<VisaBookingViewModel>().InstancePerLifetimeScope();
+
             base.Load(builder);
         }
     }

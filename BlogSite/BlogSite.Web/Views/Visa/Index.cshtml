@@ -1,37 +1,28 @@
 ﻿@model VisaViewModel
 
-<div class="container d-flex justify-content-center align-items-center p-4 ">
-    <form method="post" asp-action="VisaList" asp-controller="Visa" class="p-4 bg-white rounded shadow-lg" style="max-width: 500px; width: 100%;">
-        <h3 class="text-center mb-4">Search Visa</h3>
+    
+<div class="container d-flex justify-content-center align-items-center mt-5">
+    <form method="post" asp-action="VisaList" asp-controller="Visa"
+          class="p-4 bg-white rounded shadow-lg" style="max-width: 500px; width: 100%;">
 
-        <!-- Destination Input -->
-        <div class="form-group position-relative mb-3">
-            <label for="VisaDestination" class="form-label fw-bold">Destination</label>
-            <input type="text"
-                   class="form-control"
-                   id="VisaDestination"
-                   name="destination"
-                   placeholder="Enter destination"
-                   autocomplete="off"
-                   value="@Model.Destination"
-                   style="border-radius: 8px;">
-            <div id="VisadestinationList"
-                 class="dropdown-menu shadow-sm p-2"
-                 style="display: none; position: absolute; width: 100%; border-radius: 8px; z-index: 1050;">
-                <!-- Suggested destinations will be dynamically appended here -->
-            </div>
+        <h3 class="text-center mb-4 fw-bold">Search Visa</h3>
+
+        <div class="mb-3">
+            <label for="VisaDestination" class="form-label fw-bold">Visa Destination</label>
+            <select asp-for="Destination" asp-items="Model.VisaDropdownList()"
+                    class="form-select" id="visaDestination" style="border-radius: 8px;">
+                <option value="">Please Select One</option>
+            </select>
+            <span asp-validation-for="Destination" class="text-danger"></span>
         </div>
 
-        <!-- Search Button -->
-        <button type="submit" class="btn btn-primary w-100" id="searchButton" style="border-radius: 8px;">
-            <i class="fas fa-search me-2"></i>Search Visa
+        <button type="submit" class="btn btn-primary w-100" style="border-radius: 8px;">
+            <i class="fas fa-search me-2"></i> Search Visa
         </button>
     </form>
 </div>
 
-
-
-<div class="container-fluid px-0">
+<div class="container-fluid px-0 mt-5">
     <!-- Hero Section -->
     <header class="hero bg-primary text-white text-center py-5">
         <div class="container">
