@@ -19,7 +19,9 @@ namespace Blogsite.Infrastructure.Entities
         public string? RoomPreference { get; set; } // Radio button value
         public string? NoteToProperty { get; set; } // Textarea
         public int? RoomId { get; set; }
-        public Room? Room { get; set; } 
+        public Room? Room { get; set; }
+        public Guid UserId { get; set; }
+        public int? HotelId { get; set; }
         public DateTime CheckInDate { get; set; }
         public DateTime CheckOutDate { get; set; }
     }

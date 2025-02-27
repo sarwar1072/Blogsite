@@ -11,6 +11,7 @@ namespace Blogsite.Infrastructure.Services
     {
         void AddUserForm(UserForm userForm);
         List<UserForm> ListOfVBookedVisa(Guid UserId);
+         List<HotelBooking> ListOfVBookedHotel(Guid UserId);
 
     }
 }

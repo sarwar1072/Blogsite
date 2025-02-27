@@ -3,6 +3,7 @@ using Blogsite.Infrastructure.Services;
 using BlogSite.Web.Models.HotelViewM;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using static System.Formats.Asn1.AsnWriter;
 
 namespace BlogSite.Web.Controllers
@@ -26,23 +27,7 @@ namespace BlogSite.Web.Controllers
             
             return View(model);
         }
-        [HttpGet]
-        public IActionResult GetListOfHotel()
-        {
-            try
-            {
-                var model = _scope.Resolve<HotelModelView>();
-                var htModel = model.ListOfHotel();
-
-                return Json(htModel);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"{ex.Message}");
-                ViewBag.Message = "Error";
-            }
-            return View();
-        }
+        
         //  [HttpPost]
         public IActionResult SearchHotel(string location, string checkInDate, string checkOutDate, int numberOfGuests)
         {
@@ -158,9 +143,16 @@ namespace BlogSite.Web.Controllers
                     CheckOutDate = DateTime.Parse(checkOutDate),
                     NumberOfGuests = numberOfGuests.Value
                 };
-                // Initialize your model and call AddBookingInfo
-                //var data = new RoomDetailsModel();
-                model.AddBookingInfo(filter);
+
+                var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get logged-in user ID as string
+                Guid userId = Guid.Empty; // Default value in case of conversion failure
+
+                if (!string.IsNullOrEmpty(userIdString) && Guid.TryParse(userIdString, out Guid parsedUserId))
+                {
+                    userId = parsedUserId;
+                }
+
+                model.AddBookingInfo(filter,userId);
 
                 return RedirectToAction(nameof(WishPage));
             }
@@ -174,7 +166,22 @@ namespace BlogSite.Web.Controllers
         {
             return View();
         }
+        public IActionResult GetListOfHotel()
+        {
+            try
+            {
+                var model = _scope.Resolve<HotelModelView>();
+                var htModel = model.ListOfHotel();
 
+                return Json(htModel);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"{ex.Message}");
+                ViewBag.Message = "Error";
+            }
+            return View();
+        }
         public IActionResult GetHotelList()
         {
             try

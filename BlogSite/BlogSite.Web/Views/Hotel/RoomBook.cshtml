@@ -16,6 +16,7 @@
                     <h2 class="card-title text-primary fw-bold text-center">Review Your Booking</h2>
                     <h3 class="mt-3 fw-semibold text-dark">@Model.Name</h3>
                     <input type="hidden" asp-for="Id" id="roomid" />
+
                     <p class="text-muted">👥 @Model.filter.NumberOfGuests Guests | 🏨 1 Room</p>
 
                     <div class="d-flex justify-content-between mt-4">
@@ -81,6 +82,7 @@
 
         <form asp-action="RoomBook" method="post">
             <input type="hidden" asp-for="Id" id="roomid" />
+            <input type="hidden" asp-for="HotelId" id="HotelId" />
 
             <!-- Request Options -->
             <div class="mb-4">

@@ -28,7 +28,7 @@ namespace BlogSite.Web.Models.HotelViewM
         public int NumberOfGuests { get; set; }
         public Hotel hotel { set; get; }
         public int nights {  get; set; }
-       
+        public Guid UserId { get; set; }
         public bool AirportTransfer { get; set; }
         public bool ExtraBed { get; set; }
         public bool RoomOnHigherFloor { get; set; }
@@ -56,14 +56,17 @@ namespace BlogSite.Web.Models.HotelViewM
 
             base.ResolveDependency(lifetimeScope);
         }
-        public void AddBookingInfo(HotelSearchFilter filter)
+        public void AddBookingInfo(HotelSearchFilter filter,Guid UserId)
         {
             var model = new HotelBooking()
             {
+
                 CheckInDate = filter.CheckInDate,  
                 CheckOutDate = filter.CheckOutDate,  
                 NumberOfGuests=filter.NumberOfGuests,
                 RoomId=Id,
+                HotelId=HotelId,
+                UserId=UserId,
                 AirportTransfer=AirportTransfer,    
                 ExtraBed=ExtraBed,  
                 RoomOnHigherFloor=RoomOnHigherFloor,    
@@ -81,6 +84,7 @@ namespace BlogSite.Web.Models.HotelViewM
             if(data != null)
             {
                 Id = data.Id;
+                HotelId = data.HotelId; 
                 RoomType=data.RoomType; 
                 Price=data.Price;
                 RoomFacilities=data.RoomFacilities; 
@@ -88,6 +92,7 @@ namespace BlogSite.Web.Models.HotelViewM
                 RoomPhUrl=data.RoomPhUrl;   
                 hotel = new Hotel
                 {
+                   // Id=data.Hotel.Id,  
                     Name = data.Hotel.Name,
                     Location= data.Hotel.Location,  
                     HotelUrl = data.Hotel.HotelUrl,

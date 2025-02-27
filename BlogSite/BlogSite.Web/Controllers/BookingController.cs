@@ -31,8 +31,10 @@ namespace BlogSite.Web.Controllers
 
             var model = _scope.Resolve<VisaBookingViewModel>();
             model.GetBookingById(userId);
+            model.GetBookingHotelById(userId);  
 
             return View(model);
         }
+
     }
 }
