@@ -3,19 +3,42 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<ul class="navbar-nav  rounded-3 p-3">
+
+
+
+
+<ul class="navbar-nav text-white rounded-3 p-2">
     @if (SignInManager.IsSignedIn(User))
     {
-        <!-- Display User Greeting -->
-        <li class="nav-item">
-            <span class="nav-link text-white fw-semibold">👋 Hello, @User.Identity.Name.Split('@')[0]</span>
+        <!-- User Dropdown -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle fw-semibold btn btn-outline-light text-dark" href="#" id="navbarDropdown" role="button"
+               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                👋 Hello, @User.Identity.Name.Split('@')[0]
+            </a>
+            <div class="dropdown-menu dropdown-menu-end shadow-lg">
+                <a class="dropdown-item" asp-action="Index" asp-controller="Dashboard" asp-area="Admin">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+                <a class="dropdown-item" asp-action="Index" asp-controller="Booking" asp-area="">
+                    <i class="bi bi-calendar-check"></i> My Booking
+                </a>
+                <div class="dropdown-divider"></div>
+                <form class="d-inline" asp-area="" asp-action="Logout" asp-controller="Account"
+                      asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="btn btn-outline-danger w-100">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </button>
+                </form>
+            </div>
         </li>
 
-        <!-- Logout Button -->
-        <li class="nav-item">
-            <form class="d-inline btn" asp-area="" asp-action="Logout" asp-controller="Account" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+        <!-- Logout Button (Visible on Small Screens) -->
+        <li class="nav-item d-lg-none mt-2">
+            <form asp-area="" asp-action="Logout" asp-controller="Account"
+                  asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button type="submit" class="btn btn-outline-light w-100">
-                    <i class="fas fa-sign-out-alt"></i> Logout
+                    <i class="bi bi-box-arrow-right"></i> Logout
                 </button>
             </form>
         </li>
@@ -23,17 +46,70 @@
     else
     {
         <!-- Register Button -->
-        <li class="nav-item ">
+        <li class="nav-item">
             <a class="btn btn-danger w-100 mb-2" asp-area="" asp-action="Register" asp-controller="Account">
-                <i class="fas fa-user-plus"></i> Register
+                <i class="bi bi-person-plus"></i> Register
+            </a>
+        </li>
+
+        <!-- Login Button -->
+        <li class="nav-item ml-3">
+            <a class="btn btn-warning text-white w-100" asp-area="" asp-action="Login" asp-controller="Account">
+                <i class="bi bi-box-arrow-in-right"></i> Log In
+            </a>
+        </li>
+    }
+</ul>
+
+
+@* <ul class="navbar-nav  text-gray-dark rounded-3 p-3">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <!-- User Dropdown -->
+        <li class="nav-item btn btn-outline-light dropdown">
+            <a class="nav-link dropdown-toggle text-gray-dark fw-semibold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                👋 Hello, @User.Identity.Name.Split('@')[0]
+            </a>
+            <div class="dropdown-menu dropdown-menu-end shadow-lg">
+                <a class="dropdown-item" asp-action="Index" asp-controller="Dashboard" asp-area="Admin">
+                    <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+                <a class="dropdown-item" asp-action="Index" asp-controller="Booking" asp-area="">
+                    <i class="bi bi-calendar-check"></i> My Booking
+                </a>
+                <div class="dropdown-divider"></div>
+                <form class="d-inline" asp-area="" asp-action="Logout" asp-controller="Account" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <button type="submit" class="btn btn-outline-danger w-100">
+                        <i class="bi bi-box-arrow-right"></i> Logout
+                    </button>
+                </form>
+            </div>
+        </li>
+
+        <!-- Separate Logout Button (Visible on Small Screens) -->
+        <li class="nav-item d-lg-none mt-2">
+            <form asp-area="" asp-action="Logout" asp-controller="Account" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="btn btn-outline-light w-100">
+                    <i class="bi bi-box-arrow-right"></i> Logout
+                </button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <!-- Register Button -->
+        <li class="nav-item">
+            <a class="btn btn-danger w-100 mb-2" asp-area="" asp-action="Register" asp-controller="Account">
+                <i class="bi bi-person-plus"></i> Register
             </a>
         </li>
 
         <!-- Login Button -->
         <li class="nav-item ml-2">
-            <a class="btn btn-warning text-dark w-100" asp-area="" asp-action="Login" asp-controller="Account">
-                <i class="fas fa-sign-in-alt"></i> Log In
+            <a class="btn btn-warning text-white w-100" asp-area="" asp-action="Login" asp-controller="Account">
+                <i class="bi bi-box-arrow-in-right"></i> Log In
             </a>
         </li>
     }
 </ul>
+ *@

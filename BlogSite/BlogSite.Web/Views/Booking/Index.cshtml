@@ -3,38 +3,122 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+@{
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
 
+@section PageStyles
+{
+    <link href="~/css/bookingpagecss/bopagestyle.css" rel="stylesheet" />
 
-<div class="container mt-4">
-    <h2 class="mb-4">My Bookings</h2>
+}
 
-    @if (Model.GetBookingById != null )
-    {
-        <div class="row">
-            @foreach (var booking in Model.UserForm)
-            {
-                <div class="col-md-6 mb-4">
-                    <div class="card shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title"><i class="bi bi-airplane"></i> @booking.Visa.Destination Visa</h5>
-                            <p class="card-text"><strong>Phone:</strong> @booking.Phone</p>
-                            <p class="card-text"><strong>Email:</strong> @booking.Email</p>
-                            <p class="card-text"><strong>Departure Date:</strong> @booking.DepartureDate</p>
-                            <p class="card-text"><strong>Visa Type:</strong> @booking.Visa.VisaType</p>
-                            <p class="card-text"><strong>Visa Mode:</strong> @booking.Visa.VisaMode</p>
-                            <p class="card-text"><strong>Entry Type:</strong> @booking.Visa.EntryType</p>
-                            <button class="btn btn-primary"><i class="bi bi-eye"></i> View Details</button>
-                        </div>
+<div class="container mt-4 bookingId">
+    <h2 class="booking-header">My Bookings</h2>
+    <div class="d-flex justify-content-center mb-3">
+        <button class="btn btn-outline-primary mx-2">All</button>
+        <button class="btn btn-primary mx-2">Pending</button>
+    </div>
+
+    <div class="row">
+        <!-- Sidebar Filters -->
+        <div class="col-md-3">
+            <div class="filter-section">
+                <h5><i class="bi bi-funnel"></i> Filters</h5>
+                <div class="mb-3">
+                    <strong>Product Type</strong><br>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"> <label class="form-check-label">Visa</label>
+                    </div>
+                    @* <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="visaCheckbox">
+                        <label class="form-check-label">
+                            <a href="@Url.Action("Index", "Booking")" class="text-decoration-none">Visa</a>
+                        </label>
+                    </div> *@
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"> <label class="form-check-label">Hotel</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"> <label class="form-check-label">Tour</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"> <label class="form-check-label">Gift Card</label>
                     </div>
                 </div>
+                <div>
+                    <strong>Year</strong><br>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"> <label class="form-check-label">2025</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"> <label class="form-check-label">2024</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"> <label class="form-check-label">2023</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox"> <label class="form-check-label">2022</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bookings Section -->
+        <div class="col-md-9">
+            <h4 class="fw-bold text-dark mb-3"><i class="bi bi-clock-history"></i> Bookings</h4>
+            @if (Model.UserForm.Any())
+            {
+                @foreach (var booking in Model.UserForm)
+                {
+                    <div class="booking-card d-flex flex-column mb-4">
+
+                        <!-- Top Badges Section -->
+                        <div class="badge-container  mb-2">
+                            <span class="badge bg-secondary">@booking.Visa.VisaType</span>
+                            <span class="badge bg-secondary ms-2">@booking.Visa.VisaMode</span>
+                            <span class="badge bg-secondary ms-2 ">@booking.Visa.EntryType</span>
+                        </div>
+
+                        <div class="d-flex align-items-center">
+                            <!-- Left Image -->
+                            <div class="col-md-3">
+                                <img src="@booking.Visa.CardUrl" alt="Tour Image" class="img-fluid">
+                            </div>
+
+                            <!-- Right Details -->
+                            <div class="booking-details col-md-9">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h6 class="mb-1">
+                                        <i class="bi bi-airplane"></i> @booking.Visa.Destination Visa
+                                    </h6>
+                                    <span class="badge rounded-pill bg-warning">@booking.ProcessStatus</span>
+                                </div>
+                                <p class="text-muted mb-1"><i class="bi bi-telephone"></i> @booking.Phone</p>
+                                <p class="text-muted mb-1"><i class="bi bi-envelope"></i> @booking.Email</p>
+                                <p class="text-muted mb-1">
+                                    <i class="bi bi-calendar-event"></i> <strong>Departure Date:</strong> @booking.DepartureDate?.ToString("ddd, dd MMM yyyy")
+                                </p>
+                                <p class="text-muted mb-1">
+                                    <i class="bi bi-calendar-event"></i> <strong>Requested Date:</strong> @DateTime.Today.ToString("ddd, dd MMM yyyy")
+                                </p>
+                                <button class="btn btn-view-details">
+                                    <i class="bi bi-eye"></i> View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            }
+            else{
+                <div class="alert alert-warning text-center p-4">
+                    <h4>No Bookings Found</h4>
+                    <p>It looks like you haven’t booked anything yet.</p>
+                    <a href="@Url.Action("Index", "Visa")" class="btn btn-danger mt-2">Browse Visas</a>
+                </div>
+
             }
         </div>
-    }
-    else
-    {
-        <div class="alert alert-warning" role="alert">
-            No bookings found.
-        </div>
-    }
+    </div>
 </div>

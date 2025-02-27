@@ -20,6 +20,7 @@ namespace Blogsite.Infrastructure.Entities
         public int? NumberOfTravellers { get; set; }
         public DateTime? DepartureDate { get; set; }
         public string? Remark { get; set; }
+        public string? ProcessStatus {  get; set; } 
 
     }
 }

@@ -26,20 +26,23 @@ namespace BlogSite.Web.Models.VisaBookingModelFolder
                         Phone = item.Phone,
                         Email = item.Email,
                         DepartureDate = item.DepartureDate,
+                        ProcessStatus = item.ProcessStatus,
                         Visa=new Visa
                         {
                             Destination=item.Visa.Destination,
                             VisaType=item.Visa.VisaType,    
                             VisaMode=item.Visa.VisaMode,
                             EntryType=item.Visa.EntryType,
+                            CardUrl=item.Visa.CardUrl,  
                         },
                     }) ; 
                     
                 }
             }
             return UserForm;
-
         }
+
+
 
     }
 }

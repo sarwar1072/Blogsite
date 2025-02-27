@@ -47,7 +47,9 @@ namespace BlogSite.Web.Models.VisaViewModelFolder
                 Email=Email,    
                 NumberOfTravellers=NumberOfTravellers,  
                 DepartureDate= DepartureDate,
-                Remark= Remark
+                Remark= Remark,
+                ProcessStatus="Requested",    
+                
             };
             _userFormsServices.AddUserForm(data);   
             
