@@ -7,10 +7,10 @@ using BlogSite.Web.Areas.Admin.Models.TourDetailsFolder;
 using BlogSite.Web.Areas.Admin.Models.TourModelFolder;
 using BlogSite.Web.Areas.Admin.Models.VisaFolder;
 using BlogSite.Web.Models;
-using BlogSite.Web.Models.VisaBookingModelFolder;
 using BlogSite.Web.Models.HotelViewM;
 using BlogSite.Web.Models.tourViewModel;
 using BlogSite.Web.Models.VisaViewModelFolder;
+using BlogSite.Web.Models.BookingModelFolder;
 
 namespace BlogSite.Web
 {
@@ -72,14 +72,14 @@ namespace BlogSite.Web
                 .AsSelf()
                 .InstancePerLifetimeScope();
             builder.RegisterType< LoginModel >().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterType<CreateVisaModel>().InstancePerLifetimeScope();
-            builder.RegisterType<VisaModel>().InstancePerLifetimeScope();
-            builder.RegisterType<EditVisaModel>().InstancePerLifetimeScope();
-            builder.RegisterType<VisaViewModel>().InstancePerLifetimeScope();
-            builder.RegisterType<VisaConfirmFormModel>().InstancePerLifetimeScope();
-            builder.RegisterType<DashboardModel>().InstancePerLifetimeScope();
-            builder.RegisterType<VisaBookingViewModel>().InstancePerLifetimeScope();
-
+            builder.RegisterType<CreateVisaModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<VisaModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<EditVisaModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<VisaViewModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<VisaConfirmFormModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<DashboardModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<VisaBookingViewModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType< HotelBookingModel >().AsSelf().AsSelf().InstancePerLifetimeScope();   
             base.Load(builder);
         }
     }

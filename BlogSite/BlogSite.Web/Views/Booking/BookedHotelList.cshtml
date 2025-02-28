@@ -1,0 +1,70 @@
+﻿@model HotelBookingModel
+@{
+    ViewData["Title"] = "BookedHotelList";
+}
+
+@{
+    Layout = "~/Views/Shared/_BookingLayout.cshtml";
+}
+
+@section PageStyles
+{
+    <link href="~/css/bookingpagecss/bopagestyle.css" rel="stylesheet" />
+
+}
+<div class="col-md-9">
+    <h4 class="fw-bold text-dark mb-3"><i class="bi bi-clock-history"></i>Hotel Bookings</h4>
+    @if (Model.HotelBooking.Any())
+    {
+        @foreach (var booking in Model.HotelBooking)
+        {
+            <div class="booking-card d-flex flex-column mb-4">              
+                <div class="d-flex align-items-center">
+                    <!-- Left Image -->
+                    <div class="col-md-3">
+                        <img src="@booking.Room.Hotel.HotelUrl" alt="Hotel Image" class="img-fluid">
+                    </div>
+
+                    <!-- Right Details -->
+                    <div class="booking-details col-md-9">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h6 class="mb-1">
+                                 @booking.Room.Hotel.Name
+                            </h6>
+                            <h6 class="mb-1">
+                                <i class="bi bi-airplane"></i> @booking.Room.Hotel.Location 
+                            </h6>
+                            <span class="badge rounded-pill bg-warning">Requested</span>
+                        </div>
+                        <p class="text-muted mb-1">Room Type: @booking.Room.RoomType</p>
+                        <p class="text-muted mb-1">Room price @booking.Room.Price</p>
+                        <p class="text-muted mb-1">Guest No: @booking.NumberOfGuests</p>
+
+                        <p class="text-muted mb-1">
+                            <i class="bi bi-calendar-event"></i> <strong>Departure Date:</strong> @booking.CheckInDate.ToString("ddd, dd MMM yyyy")
+                        </p>
+                        <p class="text-muted mb-1">
+                            <i class="bi bi-calendar-event"></i> <strong>Departure Date:</strong> @booking.CheckOutDate.ToString("ddd, dd MMM yyyy")
+                        </p>
+                        <p class="text-muted mb-1">
+                            <i class="bi bi-calendar-event"></i> <strong>Requested Date:</strong> @DateTime.Today.ToString("ddd, dd MMM yyyy")
+                        </p>
+                        <button class="btn btn-view-details">
+                            <i class="bi bi-eye"></i> View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+    else
+    {
+        <div class="alert alert-warning text-center p-4">
+            <h4>No Bookings Found</h4>
+            <p>It looks like you haven’t booked anything yet.</p>
+            <a href="@Url.Action("Index", "Hotel")" class="btn btn-danger mt-2">Browse Visas</a>
+        </div>
+
+    }
+</div>

@@ -2,7 +2,7 @@
 using Blogsite.Infrastructure.Entities.Membership;
 using Blogsite.Infrastructure.Services;
 
-namespace BlogSite.Web.Models.VisaBookingModelFolder
+namespace BlogSite.Web.Models.BookingModelFolder
 {
     public class VisaBookingViewModel
     {
@@ -41,12 +41,7 @@ namespace BlogSite.Web.Models.VisaBookingModelFolder
             }
             return UserForm;
         }
-        public List<HotelBooking> GetBookingHotelById(Guid userId)
-        {
-            var data = _services.ListOfVBookedHotel(userId);
-            
-            return data;
-        }
+        
 
 
 

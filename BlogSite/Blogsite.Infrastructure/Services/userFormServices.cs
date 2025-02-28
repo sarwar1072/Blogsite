@@ -26,11 +26,7 @@ namespace Blogsite.Infrastructure.Services
         {
             return _projectUnitOfWork.UserFormRepository.GetDynamic(c => c.applicationUserid == UserId, null, x => x.Include(y => y.Visa),false).ToList();
         }
-        public List<HotelBooking> ListOfVBookedHotel(Guid UserId)
-        {
-            return _projectUnitOfWork.HotelBookingRepository.GetDynamic(c => c.UserId == UserId, null, x => x.Include(y => y.Room).ThenInclude
-            (x=>x.Hotel), false).ToList();
-        }
+       
     }
 }
 

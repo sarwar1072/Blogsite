@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace Blogsite.Infrastructure.Services
 {
-    public interface IuserFormServices
+    public interface IHotelBookingServices
     {
-        void AddUserForm(UserForm userForm);
-        List<UserForm> ListOfVBookedVisa(Guid UserId);
+        List<HotelBooking> ListOfVBookedHotel(Guid UserId);
 
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace BlogSite.Web.Models.HotelViewM
+﻿using Blogsite.Infrastructure.Services;
+
+namespace BlogSite.Web.Models.HotelViewM
 {
     public class BookingRequestViewModel
     {
@@ -13,5 +15,12 @@
         public string? BedType { get; set; } // Radio button value
         public string? RoomPreference { get; set; } // Radio button value
         public string? NoteToProperty { get; set; } // Textarea
+        private IHotelBookingServices _services;
+        public BookingRequestViewModel(IHotelBookingServices hotelBooking)
+        {
+            _services = hotelBooking;
+        }
+
+
     }
 }

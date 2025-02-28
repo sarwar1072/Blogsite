@@ -1,0 +1,55 @@
+﻿<nav class="navbar navbar-expand-lg bg-primary bg-gradient shadow-sm fixed-top">
+    <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand fw-bold text-white d-flex align-items-center" href="/">
+            <img src="~/logo.jpg" alt="Logo" class="me-2 rounded-circle shadow" style="height: 45px; width: 45px; object-fit: cover;">
+            Travel Booking
+        </a>
+
+        <!-- Navbar Toggler -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar Content -->
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <!-- Centered Navigation Links -->
+            <ul class="navbar-nav mx-auto fw-semibold">
+                <li class="nav-item">
+                    <a class="nav-link text-white active border-bottom border-warning pb-1" href="/Visa/Index">
+                        <i class="fas fa-passport"></i> Visa
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/Home/Index">
+                        <i class="fas fa-umbrella-beach"></i> Tour
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="/Hotel/Index">
+                        <i class="fas fa-hotel"></i> Hotel
+                    </a>
+                </li>
+            </ul>
+
+            <!-- Currency & Sign In Section -->
+            <div class="d-flex align-items-center">
+                <!-- Currency Dropdown -->
+                <div class="dropdown me-3">
+                    <button class="btn btn-light dropdown-toggle text-dark fw-semibold" type="button" data-bs-toggle="dropdown">
+                        <img src="~/currency.jpg" width="20" class="me-1"> BDT
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">USD</a></li>
+                        <li><a class="dropdown-item" href="#">EUR</a></li>
+                    </ul>
+                </div>
+
+                <!-- Sign In Button -->
+
+                <partial name="_LoginPartial" />
+
+            </div>
+        </div>
+    </div>
+</nav>
