@@ -34,22 +34,7 @@ namespace BlogSite.Web.Controllers
 
             return View(model);
         }
-        //[Authorize] 
-        //public IActionResult BookedVisalIst()
-        //{
-        //    var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get logged-in user ID as string
-        //    Guid userId = Guid.Empty; // Default value in case of conversion failure
-
-        //    if (!string.IsNullOrEmpty(userIdString) && Guid.TryParse(userIdString, out Guid parsedUserId))
-        //    {
-        //        userId = parsedUserId;
-        //    }
-
-        //    var model = _scope.Resolve<VisaBookingViewModel>();
-        //    model.GetBookingById(userId);
-
-        //    return View(model);
-        //}
+        
         [Authorize] 
         public IActionResult BookedHotelList()
         {
@@ -65,6 +50,10 @@ namespace BlogSite.Web.Controllers
             model.GetHotelBookingList(userId);
             return View(model); 
         }
+        //public IActionResult TourBookingAction(int tourId)
+        //{
+        //    return View();  
+        //}
 
     }
 }

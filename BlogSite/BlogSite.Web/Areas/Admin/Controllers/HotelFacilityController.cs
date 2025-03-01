@@ -2,6 +2,7 @@
 using BlogSite.Web.Areas.Admin.Models;
 using BlogSite.Web.Areas.Admin.Models.HotelFacFolder;
 using BlogSite.Web.Areas.Admin.Models.HotelmodelFolder;
+using BlogSite.Web.Areas.Admin.Models.TourModelFolder;
 using BlogSite.Web.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -55,6 +56,58 @@ namespace BlogSite.Web.Areas.Admin.Controllers
                 }
             }
             return View();
+        }
+        public IActionResult EditHotelFascilities(int id)
+        {
+            var model = _scope.Resolve<EditHotelfacility>();
+            model.Load(id);
+            return View(model);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult EditHotelFascilities(EditHotelfacility model)
+        {
+            model.ResolveDependency(_scope);
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                   
+                    model.EditDetails();
+                    model.Response = new ResponseModel("Edited successfully", ResponseType.Success);
+                    return RedirectToAction("Index");
+                }
+                //catch (DuplicationException ex)
+                //{
+                //    //model.Response = new ResponseModel(ex.Message, ResponseType.Failure);
+                //}
+                catch (Exception ex)
+                {
+                   // _logger.LogError($"{ex.Message}");
+
+                    model.Response = new ResponseModel("edited fail", ResponseType.Failure);
+                }
+            }
+            return View(model);
+        }
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Delete(int id)
+        {
+            var dataDelete = _scope.Resolve<EditHotelfacility>();
+
+            try
+            {
+                dataDelete.RemoveHotelfasci(id);
+                dataDelete.Response = new ResponseModel("Deleted", ResponseType.Success);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                //_logger.LogError($"{ex.Message}");
+                dataDelete.Response = new ResponseModel("Failed to delete", ResponseType.Failure);
+            }
+            return RedirectToAction(nameof(Index));
         }
 
     }

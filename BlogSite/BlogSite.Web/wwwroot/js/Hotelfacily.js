@@ -1,5 +1,5 @@
 ﻿$(function () {
-    $('#tour').DataTable({
+    $('#hoteldetails').DataTable({
         "processing": true,
         "serverSide": true,
         "ajax": "/Admin/HotelFacility/GetHotelFacility",
@@ -14,7 +14,7 @@
                 "targets": 7,
                 "width": "20%",
                 "render": function (data, type, row) {
-                    return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/admin/TourDetails/EditTourDetails/${data}'" value='${data}'>
+                    return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/admin/HotelFacility/EditHotelFascilities/${data}'" value='${data}'>
                                                                         <i class="fas fa-pencil-alt">
                                                                         </i>
                                                                         Edit
@@ -29,7 +29,7 @@
         ]
     });
 
-    $('#tour').on('click', '.show-bs-modal', function (event) {
+    $('#hoteldetails').on('click', '.show-bs-modal', function (event) {
                 var id = $(this).data("id");
     var modal = $("#modal-default");
     modal.find('.modal-body p').text('Are you sure you want to delete this record?')

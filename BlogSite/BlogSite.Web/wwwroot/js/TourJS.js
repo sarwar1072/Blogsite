@@ -43,4 +43,5 @@
     $("#deleteButton").click(function () {
         $("#deleteForm").submit();
             });
-        });
+});
+

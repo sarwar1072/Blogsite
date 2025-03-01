@@ -14,7 +14,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <table id="tour" class="table table table-striped table-bordered">
+                <table id="hoteldetails" class="table table table-striped table-bordered">
                     <thead class="thead-dark">
                         <tr class="table-info">
                             <th>Business Fac</th>
@@ -61,7 +61,7 @@
             </div>
             <div class="modal-body">
                 <p>Are you sure, you want to delete?</p>
-                <form id="deleteForm" action="/admin/Room/Delete" method="post">
+                <form id="deleteForm" action="/admin/HotelFacility/Delete" method="post">
                     @Html.AntiForgeryToken()
                     <input type="hidden" id="deleteId" value="" name="id" />
                 </form>
@@ -81,6 +81,9 @@
     <script src="/Admin/plugins/datatables/jquery.dataTables.js"></script>
     <script src="/Admin/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
 
+
     <script src="~/js/hotelfacily.js"></script>
 
+
+    
 }
