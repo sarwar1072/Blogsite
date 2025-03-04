@@ -1,6 +1,12 @@
 ﻿using Autofac;
+using Blogsite.Membership.BusinessObj;
+using Blogsite.Membership.Services;
 using BlogSite.Web.Models;
+using BlogSite.Web.Models.VisaViewModelFolder;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static System.Formats.Asn1.AsnWriter;
+using System.Security.Claims;
 
 namespace BlogSite.Web.Controllers
 {
@@ -9,10 +15,14 @@ namespace BlogSite.Web.Controllers
         protected readonly ILogger<AccountController> _logger;
 
         protected readonly ILifetimeScope _lifetimeScope;
-        public AccountController(ILifetimeScope scope, ILogger<AccountController> logger)
+        protected IUserManagerAdapter<ApplicationUser> _userManagerAdapter;
+        
+        public AccountController(ILifetimeScope scope, ILogger<AccountController> logger,
+                          IUserManagerAdapter<ApplicationUser> userManagerAdapter)
         {
-                _lifetimeScope = scope;
-            _logger = logger;   
+            _lifetimeScope = scope;
+            _logger = logger;
+            _userManagerAdapter = userManagerAdapter;
         }
         public IActionResult Index()
         {
@@ -153,11 +163,10 @@ namespace BlogSite.Web.Controllers
                     return View(model);
                 }
             }
-
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-        [HttpPost, ValidateAntiForgeryToken]
+       // [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout(string returnUrl = "/")
         {
             var model = _lifetimeScope.Resolve<LoginModel>();
@@ -165,13 +174,14 @@ namespace BlogSite.Web.Controllers
             _logger.LogInformation("User logged out.");
             if (returnUrl != null)
             {
-                return LocalRedirect(returnUrl);
+                return RedirectToAction("Index", "Home");
             }
             else
             {
-                return RedirectToAction();
+                return RedirectToAction("Index", "Home");
             }
         }
+
 
     }
 }

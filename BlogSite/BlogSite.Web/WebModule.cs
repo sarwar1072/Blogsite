@@ -79,7 +79,9 @@ namespace BlogSite.Web
             builder.RegisterType<VisaConfirmFormModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<DashboardModel>().AsSelf().InstancePerLifetimeScope();
             builder.RegisterType<VisaBookingViewModel>().AsSelf().InstancePerLifetimeScope();
-            builder.RegisterType< HotelBookingModel >().AsSelf().AsSelf().InstancePerLifetimeScope();   
+            builder.RegisterType< HotelBookingModel >().AsSelf().AsSelf().InstancePerLifetimeScope(); 
+            builder.RegisterType< UserAccessor >().As<IUserAccessor>().InstancePerLifetimeScope();
+            builder.RegisterType<UserInfoModel>().AsSelf().InstancePerLifetimeScope();
             base.Load(builder);
         }
     }

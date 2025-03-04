@@ -58,24 +58,37 @@
 
     <div class="container-fluid mt-4 controlnav">
         <div class="row">
-            <!-- Sidebar -->
+
             <div class="col-md-3 p-3">
                 <div class="sidebar bg-white rounded p-3" id="sidebar">
                     <nav class="nav flex-column">
-                        <a href="#" class="nav-link text-dark fw-semibold"><i class="bi bi-person-circle me-2"></i> My Account</a>
-                        <a href="#" class="nav-link text-dark fw-semibold"><i class="bi bi-people me-2"></i> Travellers</a>
-                        <a href="/Booking/Index" class="nav-link text-white fw-semibold bg-danger rounded px-3 py-2"><i class="bi bi-calendar-check me-2"></i> My Bookings</a>
-                        <a href="#" class="nav-link text-dark fw-semibold"><i class="bi bi-lock me-2"></i> Change Password</a>
-                        <a href="#" class="nav-link text-dark fw-semibold"><i class="bi bi-headset me-2"></i> Support</a>
-                        <a href="#" class="nav-link text-dark fw-semibold"><i class="bi bi-box-arrow-left me-2"></i> Logout</a>
+                        <a href="/Booking/AccountInfo" class="nav-link nv text-dark fw-semibold" data-tab="account">
+                            <i class="bi bi-person-circle me-2"></i> My Account
+                        </a>
+                        <a href="/Booking/Traveller" class="nav-link text-dark nv fw-semibold" data-tab="travellers">
+                            <i class="bi bi-people me-2"></i> Travellers
+                        </a>
+                        <a href="/Booking/Index" class="nav-link nv text-dark fw-semibold" data-tab="bookings">
+                            <i class="bi bi-calendar-check me-2"></i> My Bookings
+                        </a>
+                        <a href="#" class="nav-link text-dark nv fw-semibold" data-tab="password">
+                            <i class="bi bi-lock me-2"></i> Change Password
+                        </a>
+                        <a href="/Booking/Traveller" class="nav-link text-dark nv fw-semibold" data-tab="support">
+                            <i class="bi bi-headset me-2"></i> Support
+                        </a>
+                        <a href="/Account/Logout" class="nav-link nv text-dark fw-semibold" data-tab="logout">
+                            <i class="bi bi-box-arrow-left me-2"></i> Logout
+                        </a>
                     </nav>
                 </div>
             </div>
 
+
             <!-- Main Content -->
             <div class="col-md-9">
                 <div class="container">
-                    <div class="row">
+@*                     <div class="row">
                         <!-- Booking Type Tabs -->
                         <div class="col-9 d-flex flex-wrap justify-content-center gap-2 mb-3">
                             <a href="/Booking/BookedHotelList" class="btn btn-outline-danger tab-btn" data-tab="hotel">Hotel</a>
@@ -83,7 +96,7 @@
                             <a href="#" class="btn btn-outline-danger tab-btn" data-tab="tour">Tour</a>
                         </div>
                     </div>
-
+ *@
                     <!-- Dynamic Page Content -->
                     <div class="mt-4">
                         @RenderBody()
@@ -101,13 +114,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     @RenderSection("MainLayoutScript", false)
-    <script src="~/js/jstourindex/bookingbartoggle.js"></script>
+    
+    <script src="~/js/bookyayoutjs/bookingbartoggle.js"></script>
 
     <script src="~/js/jstourindex/sidebarformobile.js"></script>
 
-    
-
-</body>
+      </body>
 </html>
 
 

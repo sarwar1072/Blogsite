@@ -1,17 +1,19 @@
 ﻿@model HotelBookingModel
 @{
     ViewData["Title"] = "BookedHotelList";
+    Layout = "~/Views/Shared/_BookingLayout.cshtml";
+
 }
 
-@{
-    Layout = "~/Views/Shared/_BookingLayout.cshtml";
-}
+
 
 @section PageStyles
 {
     <link href="~/css/bookingpagecss/bopagestyle.css" rel="stylesheet" />
 
 }
+<partial name="_TravelPartial" />
+
 <div class="col-md-9">
     <h4 class="fw-bold text-dark mb-3"><i class="bi bi-clock-history"></i> booked  hotel</h4>
     @if (Model.HotelBooking.Any())
