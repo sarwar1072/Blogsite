@@ -68,13 +68,13 @@
                         <a href="/Booking/Traveller" class="nav-link text-dark nv fw-semibold" data-tab="travellers">
                             <i class="bi bi-people me-2"></i> Travellers
                         </a>
-                        <a href="/Booking/Index" class="nav-link nv text-dark fw-semibold" data-tab="bookings">
+                        <a href="/Booking/Index" class="nav-link nv active text-dark fw-semibold" data-tab="bookings">
                             <i class="bi bi-calendar-check me-2"></i> My Bookings
                         </a>
                         <a href="#" class="nav-link text-dark nv fw-semibold" data-tab="password">
                             <i class="bi bi-lock me-2"></i> Change Password
                         </a>
-                        <a href="/Booking/Traveller" class="nav-link text-dark nv fw-semibold" data-tab="support">
+                        <a href="/Booking/Support" class="nav-link text-dark nv fw-semibold" data-tab="support">
                             <i class="bi bi-headset me-2"></i> Support
                         </a>
                         <a href="/Account/Logout" class="nav-link nv text-dark fw-semibold" data-tab="logout">
@@ -88,15 +88,6 @@
             <!-- Main Content -->
             <div class="col-md-9">
                 <div class="container">
-@*                     <div class="row">
-                        <!-- Booking Type Tabs -->
-                        <div class="col-9 d-flex flex-wrap justify-content-center gap-2 mb-3">
-                            <a href="/Booking/BookedHotelList" class="btn btn-outline-danger tab-btn" data-tab="hotel">Hotel</a>
-                            <a href="/Booking/Index" class="btn btn-outline-danger tab-btn" data-tab="visa">Visa</a>
-                            <a href="#" class="btn btn-outline-danger tab-btn" data-tab="tour">Tour</a>
-                        </div>
-                    </div>
- *@
                     <!-- Dynamic Page Content -->
                     <div class="mt-4">
                         @RenderBody()
@@ -118,6 +109,8 @@
     <script src="~/js/bookyayoutjs/bookingbartoggle.js"></script>
 
     <script src="~/js/jstourindex/sidebarformobile.js"></script>
+
+
 
       </body>
 </html>
