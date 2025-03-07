@@ -19,6 +19,8 @@ namespace Blogsite.Infrastructure.DbContexts
          DbSet<HotelBooking>? HotelBookings { get; set; }
          DbSet<HotelFacilities>? HotelFacilities { get; }
          DbSet<UserForm>? UserForms { get; set; }
+         DbSet<Traveller>? Travellers { get; set; }
+
 
 
     }

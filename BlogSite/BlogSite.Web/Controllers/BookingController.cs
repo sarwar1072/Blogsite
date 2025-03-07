@@ -4,6 +4,7 @@ using Blogsite.Infrastructure.Services;
 using Blogsite.Membership.Services;
 using BlogSite.Web.Models;
 using BlogSite.Web.Models.BookingModelFolder;
+using BlogSite.Web.Models.Travelfolder;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -58,8 +59,21 @@ namespace BlogSite.Web.Controllers
         }
         public IActionResult Traveller()
         {
-            return View();  
+            var model=_scope.Resolve<TravelModel>();    
+            return View(model);  
         }
+        [HttpPost]
+        [Authorize]
+        public IActionResult Traveller([FromBody] TravelModel travel)
+        {
+             Guid UserId = CurrentUser != null ? CurrentUser.Id : Guid.Empty;
+            travel.ResolveDependency(_scope);
+            travel.AddTraveller(UserId);
+
+            return View();
+        }
+
+
         [Authorize]
         public async Task<IActionResult> AccountInfo()
         {

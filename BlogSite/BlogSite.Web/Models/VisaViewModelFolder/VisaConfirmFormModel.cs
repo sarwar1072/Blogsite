@@ -15,7 +15,7 @@ namespace BlogSite.Web.Models.VisaViewModelFolder
         public string? VisaMode { get; set; }
         public string? EntryType { get; set; }
         public int? VisaValidity { get; set; }
-       public int? MaxiMumStay { get; set; } 
+        public int? MaxiMumStay { get; set; } 
         public double Price { get; set; }
         public string?  Name { get; set; }
         public string?  Email{ get; set; }

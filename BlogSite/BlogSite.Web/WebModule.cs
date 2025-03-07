@@ -11,6 +11,7 @@ using BlogSite.Web.Models.HotelViewM;
 using BlogSite.Web.Models.tourViewModel;
 using BlogSite.Web.Models.VisaViewModelFolder;
 using BlogSite.Web.Models.BookingModelFolder;
+using BlogSite.Web.Models.Travelfolder;
 
 namespace BlogSite.Web
 {
@@ -82,6 +83,8 @@ namespace BlogSite.Web
             builder.RegisterType< HotelBookingModel >().AsSelf().AsSelf().InstancePerLifetimeScope(); 
             builder.RegisterType< UserAccessor >().As<IUserAccessor>().InstancePerLifetimeScope();
             builder.RegisterType<UserInfoModel>().AsSelf().InstancePerLifetimeScope();
+            builder.RegisterType<TravelModel>().AsSelf().InstancePerLifetimeScope();
+
             base.Load(builder);
         }
     }

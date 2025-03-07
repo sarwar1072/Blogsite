@@ -65,6 +65,8 @@ namespace Blogsite.Infrastructure
 
             builder.RegisterType< HotelBookingServices >().As< IHotelBookingServices >().InstancePerLifetimeScope();
             builder.RegisterType<TourBookingServices>().As<ITourBookingServices>().InstancePerLifetimeScope();
+            builder.RegisterType<TravellerRepository>().As<ITravellerRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<TravelServices>().As<ITravelServices>().InstancePerLifetimeScope();
 
             base.Load(builder);
         }
