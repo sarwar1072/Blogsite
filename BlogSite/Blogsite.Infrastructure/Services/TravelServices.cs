@@ -56,5 +56,13 @@ namespace Blogsite.Infrastructure.Services
             return entity;
         }
 
+        public IList<Traveller> GetByUserId(Guid id)
+        {
+            var list = _projectUnitOfWork.TravellerRepository.Get(x => x.UserId == id, null,
+                            null, false);
+
+            return list; 
+        }
+
     }
 }

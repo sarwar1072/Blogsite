@@ -11,6 +11,7 @@ namespace Blogsite.Infrastructure.Services
     {
         void AddTraveller(Traveller traveller);
         Traveller GetByid(int id);
+        IList<Traveller> GetByUserId(Guid id);
 
     }
 }

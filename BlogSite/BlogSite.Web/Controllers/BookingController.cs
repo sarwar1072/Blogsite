@@ -70,10 +70,19 @@ namespace BlogSite.Web.Controllers
             travel.ResolveDependency(_scope);
             travel.AddTraveller(UserId);
 
-            return View();
+            return Json(travel);
         }
+        [HttpGet]
+        [Authorize]
 
+        public IActionResult GetTravellers()
+        {
+            Guid UserId = CurrentUser != null ? CurrentUser.Id : Guid.Empty;
 
+            var travellers = _scope.Resolve<TravelModel>();
+            travellers.ListOfTravellerByUserId(UserId);
+            return PartialView("_ListOfTravellerpartial", travellers); 
+        }
         [Authorize]
         public async Task<IActionResult> AccountInfo()
         {

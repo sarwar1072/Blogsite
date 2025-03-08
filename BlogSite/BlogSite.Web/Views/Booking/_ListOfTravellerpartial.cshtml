@@ -1,0 +1,9 @@
+﻿@model TravelModel
+
+@foreach (var traveller in Model.TravellerList)
+{
+    <div class="traveller-item">
+        <p><strong>@traveller.Name</strong> - @traveller.Email</p>
+        <button class="btn btn-danger btn-sm delete-btn" data-id="@traveller.Id">Delete</button>
+    </div>
+}

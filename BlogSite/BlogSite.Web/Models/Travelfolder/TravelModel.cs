@@ -15,6 +15,7 @@ namespace BlogSite.Web.Models.Travelfolder
         public DateTime? ExpireDate { get; set; }
         public string? PassportNo { get; set; }
        public Guid? UserId { get; set; }
+        public IList<Traveller> TravellerList { get; set; } 
         public TravelModel(ITravelServices travelServices)
         {
             _travelServices = travelServices;
@@ -44,5 +45,17 @@ namespace BlogSite.Web.Models.Travelfolder
             };
             _travelServices.AddTraveller(data);
         }
+
+        public IList<Traveller> ListOfTravellerByUserId(Guid UserId)
+        {
+            var data=_travelServices.GetByUserId(UserId);
+            TravellerList = new List<Traveller>();    
+            foreach (var item in data)
+            {
+                TravellerList.Add(item);
+            }
+            return TravellerList;
+        }
+
     }
 }

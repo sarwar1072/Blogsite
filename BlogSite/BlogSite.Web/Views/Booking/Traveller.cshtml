@@ -9,7 +9,6 @@
 <div class="container mt-5 d-flex justify-content-center">
     <div class="col-md-8">
         <h2 class="text-center mb-4">Traveller Section</h2>
-
         <!-- Add Traveller Button -->
         <div class="text-center">
             <button class="btn btn-primary mb-3 px-4" id="showFormBtn">+ Add Traveller</button>
@@ -54,58 +53,13 @@
         <!-- Traveller List -->
         <h4 class="text-center mt-4">Traveller List</h4>
         <div id="travellerList" class="mt-3">
-            @* @Html.Partial("_TravellerList", Model) *@
-        </div>
+@*             @Html.Partial("_ListOfTravellerpartial",)
+ *@        </div>
     </div>
 </div>
 
 @section MainLayoutScript {
-    <script>
-        // $(document).ready(function () {
-        //     // Toggle form visibility
-        //     $("#showFormBtn").click(function () {
-        //         $("#travellerForm").toggle();
-        //     });
-
-        //     // Handle form submission
-        //     $("#travellerFormElement").submit(function (event) {
-        //         event.preventDefault();
-
-        //         // Create object from form values
-        //         var obj = {
-        //             Name: $("#name").val(),
-        //             Email: $("#email").val(),
-        //             PassportNo: $("#passNo").val(),
-        //             DateOfBirth: $("#dateOfbirth").val(),
-        //             Phone: $("#phone").val(),
-        //             ExpireDate: $("#expireDate").val(),
-        //         };
-
-        //         $.ajax({
-        //             url: '/Booking/Traveller', // Ensure this matches your controller action
-        //             type: 'POST',
-        //             data: JSON.stringify(obj),
-        //             contentType: 'application/json; charset=utf-8',
-        //             success: function (response) {
-        //                 alert("Successfully inserted!");
-
-        //                 // Clear the form
-        //                 $("#travellerFormElement")[0].reset();
-
-        //                 // Hide the form after submission
-        //                 $("#travellerForm").hide();
-
-        //                 // Update traveller list dynamically
-        //                 $("#travellerList").html(response);
-        //             },
-        //             error: function (xhr, status, error) {
-        //                 alert('Error: ' + xhr.responseText);
-        //             }
-        //         });
-        //     });
-        // });
-
-
+@*     <script>       
         $(document).ready(function () {
             // Toggle form visibility
             $("#showFormBtn").click(function () {
@@ -133,8 +87,6 @@
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json', // Ensure JSON response
                     success: function (response) {
-                        alert("Successfully inserted!");
-
                         // Clear the form
                         $("#travellerFormElement")[0].reset();
 
@@ -151,6 +103,67 @@
             });
         });
 
+    </script>
+ *@
+ <script>
+$(document).ready(function () {
+    // Toggle form visibility
+    $("#showFormBtn").click(function () {
+        $("#travellerForm").toggle();
+    });
+    // Handle form submission
+    $("#travellerFormElement").submit(function (event) {
+        event.preventDefault();
+
+        // Create object from form values
+        var obj = {
+            Name: $("#name").val(),
+            Email: $("#email").val(),
+            PassportNo: $("#passNo").val(),
+            DateOfBirth: $("#dateOfbirth").val(),
+            Phone: $("#phone").val(),
+            ExpireDate: $("#expireDate").val(),
+        };
+        $.ajax({
+            url: '/Booking/Traveller', // Ensure this matches your controller action
+            type: 'POST',
+            data: JSON.stringify(obj),
+            contentType: 'application/json; charset=utf-8',
+            success: function (response) {
+                alert("Successfully inserted!");
+
+                // Clear the form
+                $("#travellerFormElement")[0].reset();
+
+                // Hide the form after submission
+                $("#travellerForm").hide();
+
+                // Fetch updated list
+                fetchTravellerList();
+            },
+            error: function (xhr, status, error) {
+                alert('Error: ' + xhr.responseText);
+            }
+        });
+    });
+
+    // Function to fetch updated traveller list
+    function fetchTravellerList() {
+        $.ajax({
+            url: '/Booking/GetTravellers', // This should be your controller action
+            type: 'GET',
+            success: function (data) {
+                $("#travellerList").html(data);
+            },
+            error: function (xhr, status, error) {
+                alert('Error fetching traveller list.');
+            }
+        });
+    }
+
+    // Fetch list on page load
+    fetchTravellerList();
+});
     </script>
 }
 
