@@ -1,37 +1,4 @@
 ﻿
-//document.addEventListener("DOMContentLoaded", function () {
-//    const sidebarLinks = document.querySelectorAll(".nv");
-
-//    // Retrieve stored active states from localStorage
-//    const activeSidebarTab = localStorage.getItem("activeSidebarTab");
-
-//    // Set the active class for the sidebar
-//    if (activeSidebarTab) {
-//        sidebarLinks.forEach(link => {
-//            link.classList.remove("active", "bg-danger", "text-white", "rounded", "px-3", "py-2");
-//            if (link.getAttribute("data-tab") === activeSidebarTab) {
-//                link.classList.add("active", "bg-danger", "text-white", "rounded", "px-3", "py-2");
-//            }
-//        });
-//    }
-
-    
-
-//    // Click event for sidebar navigation
-//    sidebarLinks.forEach(link => {
-//        link.addEventListener("click", function () {
-//            sidebarLinks.forEach(l => l.classList.remove("active", "bg-danger", "text-white", "rounded", "px-3", "py-2"));
-//            this.classList.add("active", "bg-danger", "text-white", "rounded", "px-3", "py-2");
-
-//            // Store the active sidebar tab
-//            localStorage.setItem("activeSidebarTab", this.getAttribute("data-tab"));
-//        });
-//    });
-   
-//});
-
-
-
 document.addEventListener("DOMContentLoaded", function () {
     const sidebarLinks = document.querySelectorAll(".nv");
     const tabButtons = document.querySelectorAll(".tab-btn");

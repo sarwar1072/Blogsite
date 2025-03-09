@@ -1,9 +1,29 @@
 ﻿@model TravelModel
 
-@foreach (var traveller in Model.TravellerList)
-{
-    <div class="traveller-item">
-        <p><strong>@traveller.Name</strong> - @traveller.Email</p>
-        <button class="btn btn-danger btn-sm delete-btn" data-id="@traveller.Id">Delete</button>
-    </div>
-}
+
+<div class="container-fluid bg-light p-3 rounded">
+   
+
+    @foreach (var traveller in Model.TravellerList)
+    {
+        <div class="row align-items-center bg-white p-3 my-2 shadow-sm rounded">
+            <div class="col-md-6 d-flex align-items-center flex-wrap gap-3">
+                <span class=" fs-7">@traveller.Name</span> <!-- Smaller text -->
+                <span class="text-muted small">
+                    <i class="fas fa-envelope me-1"></i>@traveller.Email
+                </span>
+                <span class="text-muted  small">
+                    <i class="fas fa-phone me-1"></i>@traveller.Phone
+                </span>
+            </div>
+            <div class="col-md-6 text-md-end text-start">
+                <button class="btn btn-outline-secondary btn-sm fs-7 edit-btn" data-id="@traveller.Id">
+                    <i class="fas fa-edit"></i> Edit
+                </button>
+                <button class="btn btn-outline-danger btn-sm fs-7 delete-btn" data-id="@traveller.Id">
+                    <i class="fas fa-trash"></i> Delete
+                </button>
+            </div>
+        </div>
+    }
+</div>

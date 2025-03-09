@@ -15,7 +15,9 @@ namespace BlogSite.Web.Models.Travelfolder
         public DateTime? ExpireDate { get; set; }
         public string? PassportNo { get; set; }
        public Guid? UserId { get; set; }
+        public int Count { get; set; }
         public IList<Traveller> TravellerList { get; set; } 
+        public Traveller SingleTraveller { get; set; }
         public TravelModel(ITravelServices travelServices)
         {
             _travelServices = travelServices;
@@ -24,11 +26,16 @@ namespace BlogSite.Web.Models.Travelfolder
         {
                 
         }
+
         public override void ResolveDependency(ILifetimeScope lifetimeScope)
         {
             _lifetimeScope = lifetimeScope;
             _travelServices = _lifetimeScope.Resolve<ITravelServices>();
             base.ResolveDependency(lifetimeScope);
+        }
+        public void NoOfTraveller()
+        {
+           Count= _travelServices.TravellerCount();
         }
         public void AddTraveller(Guid UserId)
         {
@@ -45,7 +52,23 @@ namespace BlogSite.Web.Models.Travelfolder
             };
             _travelServices.AddTraveller(data);
         }
-
+        public void RemoveTraveller(int id)
+        {
+            _travelServices.DeleteTraveller(id);
+        }
+        public Traveller GetById(int id)
+        {
+            var data=_travelServices.GetByid(id);
+            SingleTraveller = new Traveller();
+            SingleTraveller.Id = data.Id;
+            SingleTraveller.Name = data.Name;   
+            SingleTraveller.Phone = data.Phone; 
+            SingleTraveller.Email = data.Email;
+            SingleTraveller.ExpireDate = data.ExpireDate;
+            SingleTraveller.DateOfBirth = data.DateOfBirth; 
+            SingleTraveller.PassportNo = data.PassportNo;   
+            return SingleTraveller;
+        }    
         public IList<Traveller> ListOfTravellerByUserId(Guid UserId)
         {
             var data=_travelServices.GetByUserId(UserId);

@@ -55,13 +55,27 @@ namespace Blogsite.Infrastructure.Services
             var entity = _projectUnitOfWork.TravellerRepository.GetById(id);
             return entity;
         }
-
+        public int TravellerCount()
+        {
+            var entity = _projectUnitOfWork.TravellerRepository.GetCount();
+            return entity;
+        }
         public IList<Traveller> GetByUserId(Guid id)
         {
             var list = _projectUnitOfWork.TravellerRepository.Get(x => x.UserId == id, null,
                             null, false);
 
             return list; 
+        }
+        public void DeleteTraveller(int id)
+        {
+            var entity = _projectUnitOfWork.TravellerRepository.GetById(id);
+            if (entity == null)
+            {
+                throw new InvalidOperationException("traveller is not found");
+            }
+            _projectUnitOfWork.TravellerRepository.Remove(entity);
+            _projectUnitOfWork.Save();
         }
 
     }

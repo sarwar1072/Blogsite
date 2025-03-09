@@ -2,12 +2,16 @@
 using Autofac.Core.Lifetime;
 using Blogsite.Infrastructure.Services;
 using Blogsite.Membership.Services;
+using BlogSite.Web.Areas.Admin.Models.VisaFolder;
+using BlogSite.Web.Areas.Admin.Models;
 using BlogSite.Web.Models;
 using BlogSite.Web.Models.BookingModelFolder;
 using BlogSite.Web.Models.Travelfolder;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using static System.Formats.Asn1.AsnWriter;
+using System.Diagnostics;
 
 namespace BlogSite.Web.Controllers
 {
@@ -59,7 +63,8 @@ namespace BlogSite.Web.Controllers
         }
         public IActionResult Traveller()
         {
-            var model=_scope.Resolve<TravelModel>();    
+            var model=_scope.Resolve<TravelModel>();
+            model.NoOfTraveller();
             return View(model);  
         }
         [HttpPost]
@@ -72,9 +77,9 @@ namespace BlogSite.Web.Controllers
 
             return Json(travel);
         }
+
         [HttpGet]
         [Authorize]
-
         public IActionResult GetTravellers()
         {
             Guid UserId = CurrentUser != null ? CurrentUser.Id : Guid.Empty;
@@ -83,24 +88,49 @@ namespace BlogSite.Web.Controllers
             travellers.ListOfTravellerByUserId(UserId);
             return PartialView("_ListOfTravellerpartial", travellers); 
         }
+        
+        public IActionResult DeleteTraveller(int  id) 
+        {
+            var dataDelete = _scope.Resolve<TravelModel>();
+
+            try
+            {
+                dataDelete.RemoveTraveller(id);
+              //  dataDelete.Response = new ResponseModel("Deleted", ResponseType.Success);
+                return RedirectToAction(nameof(Traveller));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"{ex.Message}");
+                //dataDelete.Response = new ResponseModel("Failed to delete", ResponseType.Failure);
+            }
+            return View();  
+        }
+        public IActionResult EditTraveller(int id)
+        {
+
+            var model = _scope.Resolve<TravelModel>();
+           var data= model.GetById(id);  
+            return Json(data);
+        }
         [Authorize]
         public async Task<IActionResult> AccountInfo()
         {
-            
-          //  Guid UserId = CurrentUser != null ? CurrentUser.Id : Guid.Empty;
+            //  Guid UserId = CurrentUser != null ? CurrentUser.Id : Guid.Empty;
             // var user = await _userManagerAdapter.FindUserId(UserId);
             var model = _scope.Resolve<UserInfoModel>();
 
             if (CurrentUser != null)
             {
-               model.FirstName= CurrentUser.FirstName;  
-                model.LastName= CurrentUser.LastName;   
-                model.Email= CurrentUser.Email; 
+                model.FirstName = CurrentUser.FirstName;
+                model.LastName = CurrentUser.LastName;
+                model.Email = CurrentUser.Email;
             }
-                           
+
             return View(model);
         }
 
-
     }
 }
+
+
