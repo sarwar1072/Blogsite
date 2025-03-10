@@ -174,126 +174,39 @@
         });
 
         // Handle Update Submit
-        $("#editTravellerForm").submit(function (event) {
-            event.preventDefault();
+        // $("#editTravellerForm").submit(function (event) {
+        //     event.preventDefault();
 
-            var updatedTraveller = {
-                Id: $("#travellerId").val(),
-                Name: $("#editName").val(),
-                Email: $("#editEmail").val(),
-                PassportNo: $("#editPassNo").val(),
-                Phone: $("#editPhone").val(),
-                DateOfBirth: $("#editDateOfBirth").val(),
-                ExpireDate: $("#editExpireDate").val()
-            };
+        //     var updatedTraveller = {
+        //         Id: $("#travellerId").val(),
+        //         Name: $("#editName").val(),
+        //         Email: $("#editEmail").val(),
+        //         PassportNo: $("#editPassNo").val(),
+        //         Phone: $("#editPhone").val(),
+        //         DateOfBirth: $("#editDateOfBirth").val(),
+        //         ExpireDate: $("#editExpireDate").val()
+        //     };
 
-            $.ajax({
-                url: "/Booking/UpdateTraveller",
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(updatedTraveller),
-                success: function () {
-                    alert("Traveller updated successfully!");
+        //     $.ajax({
+        //         url: "/Booking/UpdateTraveller",
+        //         type: "POST",
+        //         contentType: "application/json",
+        //         data: JSON.stringify(updatedTraveller),
+        //         success: function () {
+        //             alert("Traveller updated successfully!");
 
-                    // Hide Modal after successful update
-                    $("#editTravellerModal").modal("hide");
+        //             // Hide Modal after successful update
+        //             $("#editTravellerModal").modal("hide");
 
-                    // Refresh traveller list dynamically
-                    location.reload();
-                },
-                error: function () {
-                    alert("Error updating traveller.");
-                }
-            });
-        });
+        //             // Refresh traveller list dynamically
+        //             location.reload();
+        //         },
+        //         error: function () {
+        //             alert("Error updating traveller.");
+        //         }
+        //     });
+        // });
     </script>
-
-
-
-@*      <script>
-        $(document).on("click", ".edit-btn", function () {
-            var travellerId = $(this).data("id"); // Get Traveller ID
-            $.ajax({
-                url: "/Booking/EditTraveller", // Controller Action to Fetch Traveller Data
-                type: "GET",
-                data: { id: travellerId },
-                success: function (data) {
-                    // Fill Form Fields with Traveller Data
-                    $("#name").val(data.name);
-                    $("#email").val(data.email);
-                    $("#passNo").val(data.passportNo);
-                    $("#phone").val(data.phone);
-                    $("#dateOfbirth").val(data.dateOfBirth);
-                    $("#expireDate").val(data.expireDate);
-
-                    // Store ID in Hidden Field (for Updating)
-                    $("#travellerId").val(travellerId);
-
-                    // Show Form
-                    $("#travellerForm").removeClass("d-none");
-                    $("#showFormBtn").text("Update Traveller").removeClass("btn-danger").addClass("btn-primary");
-                },
-                error: function (xhr) {
-                    alert("Error: " + xhr.responseText);
-                }
-            });
-        });
-    </script>
- *@ 
-
-@*      <script>
-        $(document).on("click", ".edit-btn", function () {
-            var travellerId = $(this).data("id"); // Get Traveller ID
-            $.ajax({
-                url: "/Booking/EditTraveller", // Controller Action to Fetch Traveller Data
-                type: "GET",
-                data: { id: travellerId },
-                success: function (data) {
-                    // Fill Form Fields with Traveller Data
-                    $("#name").val(data.name);
-                    $("#email").val(data.email);
-                    $("#passNo").val(data.passportNo);
-                    $("#phone").val(data.phone);
-                    $("#dateOfbirth").val(data.dateOfBirth);
-                    $("#expireDate").val(data.expireDate);
-
-                    // Store ID in Hidden Field (for Updating)
-                    $("#travellerId").val(travellerId);
-
-                    // Change button text and color for update mode
-                    $("#submitTravellerBtn").text("Update Traveller").removeClass("btn-success").addClass("btn-primary");
-
-                    // Show Form
-                    $("#travellerForm").removeClass("d-none");
-                },
-                error: function (xhr) {
-                    alert("Error: " + xhr.responseText);
-                }
-            });
-        });
-
-        // Submit form (Handle both Add & Update)
-        $("#travellerFormElement").submit(function (e) {
-            e.preventDefault(); // Prevent default form submission
-
-            var travellerId = $("#travellerId").val(); // Check hidden field
-            var url = travellerId ? "/Booking/UpdateTraveller" : "/Booking/Traveller"; // Update or Add
-
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: $(this).serialize(), // Serialize form data
-                success: function (response) {
-                    alert(response.message);
-                    location.reload(); // Refresh list after update/add
-                },
-                error: function (xhr) {
-                    alert("Error: " + xhr.responseText);
-                }
-            });
-        });
-    </script>
- *@ 
 }
 
 

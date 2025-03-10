@@ -62,9 +62,9 @@ namespace Blogsite.Infrastructure.Services
             var entity = _projectUnitOfWork.TravellerRepository.GetById(id);
             return entity;
         }
-        public int TravellerCount()
+        public int TravellerCount(Guid id)
         {
-            var entity = _projectUnitOfWork.TravellerRepository.GetCount();
+            var entity = _projectUnitOfWork.TravellerRepository.GetCount(x=>x.UserId== id);
             return entity;
         }
         public IList<Traveller> GetByUserId(Guid id)

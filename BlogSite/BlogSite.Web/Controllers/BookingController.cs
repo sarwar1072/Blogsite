@@ -28,16 +28,11 @@ namespace BlogSite.Web.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get logged-in user ID as string
-            Guid userId = Guid.Empty; // Default value in case of conversion failure
-
-            if (!string.IsNullOrEmpty(userIdString) && Guid.TryParse(userIdString, out Guid parsedUserId))
-            {
-                userId = parsedUserId;
-            }
+            
+            Guid UserId = CurrentUser != null ? CurrentUser.Id : Guid.Empty;
 
             var model = _scope.Resolve<VisaBookingViewModel>();
-            model.GetBookingById(userId);
+            model.GetBookingById(UserId);
 
             return View(model);
         }
@@ -45,26 +40,18 @@ namespace BlogSite.Web.Controllers
         [Authorize] 
         public IActionResult BookedHotelList()
         {
-            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier); // Get logged-in user ID as string
-            Guid userId = Guid.Empty; // Default value in case of conversion failure
-
-            if (!string.IsNullOrEmpty(userIdString) && Guid.TryParse(userIdString, out Guid parsedUserId))
-            {
-                userId = parsedUserId;
-            }
+            Guid UserId = CurrentUser != null ? CurrentUser.Id : Guid.Empty;
 
             var model = _scope.Resolve<HotelBookingModel>();
-            model.GetHotelBookingList(userId);
+            model.GetHotelBookingList(UserId);
             return View(model); 
-        }
-        public IActionResult Support()
-        {
-            return View();
-        }
+        }      
         public IActionResult Traveller()
         {
-            var model=_scope.Resolve<TravelModel>();
-            model.NoOfTraveller();
+            Guid UserId = CurrentUser != null ? CurrentUser.Id : Guid.Empty;
+
+            var model =_scope.Resolve<TravelModel>();
+            model.NoOfTraveller(UserId);
             return View(model);  
         }
         [HttpPost]

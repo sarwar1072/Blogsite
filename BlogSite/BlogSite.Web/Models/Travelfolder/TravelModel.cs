@@ -33,9 +33,9 @@ namespace BlogSite.Web.Models.Travelfolder
             _travelServices = _lifetimeScope.Resolve<ITravelServices>();
             base.ResolveDependency(lifetimeScope);
         }
-        public void NoOfTraveller()
+        public void NoOfTraveller(Guid UserId)
         {
-           Count= _travelServices.TravellerCount();
+           Count= _travelServices.TravellerCount(UserId);
         }
         public void AddTraveller(Guid UserId)
         {
