@@ -14,6 +14,7 @@ namespace Blogsite.Infrastructure.Services
         IList<Traveller> GetByUserId(Guid id);
         int TravellerCount();
         void DeleteTraveller(int id);
+        void EditTraveller(Traveller traveller);
 
     }
 }

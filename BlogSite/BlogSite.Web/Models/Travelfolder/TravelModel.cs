@@ -52,6 +52,21 @@ namespace BlogSite.Web.Models.Travelfolder
             };
             _travelServices.AddTraveller(data);
         }
+        public void EditTraveller()
+        {
+            var data = new Traveller
+            {
+                Id=Id,
+                Name = Name,
+                Phone = Phone,
+                Email = Email,
+                DateOfBirth = DateOfBirth,
+                ExpireDate = ExpireDate,
+                PassportNo = PassportNo,
+
+            };
+            _travelServices.EditTraveller(data);
+        }
         public void RemoveTraveller(int id)
         {
             _travelServices.DeleteTraveller(id);

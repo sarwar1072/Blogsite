@@ -33,23 +33,30 @@ namespace Blogsite.Infrastructure.Services
             _projectUnitOfWork.Save();
         }
 
-        //public void EditTraveller(Traveller traveller)
-        //{
-        //    if ( traveller is null)
-        //    {
-        //        throw new InvalidOperationException("Traveller can not be null");
-        //    }
+        public void EditTraveller(Traveller traveller)
+        {
+            if (traveller is null)
+            {
+                throw new InvalidOperationException("Traveller can not be null");
+            }
 
-        //    var entity = _projectUnitOfWork.VisaRepository.GetById(visa.Id);
+            var entity = _projectUnitOfWork.TravellerRepository.GetById(traveller.Id);
 
-        //    if (entity == null)
-        //        throw new InvalidOperationException("Visa can not be null");
+            if (entity == null)
+                throw new InvalidOperationException("Traveller can not be null");
 
+            // entity.Id = tour.Id;
+            entity.Name = traveller.Name;
+            entity.Email = traveller.Email;
+            entity.Phone = traveller.Phone;
+            entity.PassportNo = traveller.PassportNo;
+            entity.ExpireDate = traveller.ExpireDate;
+            entity.DateOfBirth = traveller.DateOfBirth;
             
 
-        //    _projectUnitOfWork.VisaRepository.Edit(entity);
-        //    _projectUnitOfWork.Save();
-        //}
+            _projectUnitOfWork.TravellerRepository.Edit(entity);
+            _projectUnitOfWork.Save();
+        }
         public Traveller GetByid(int id)
         {
             var entity = _projectUnitOfWork.TravellerRepository.GetById(id);

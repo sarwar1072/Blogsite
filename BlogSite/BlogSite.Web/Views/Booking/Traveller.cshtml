@@ -14,7 +14,7 @@
             </span>
         </div>
         <div id="travellerList" class="mt-3 ">
-        </div>
+       </div>
 
         <div class="text-end mt-3">
             <button class="btn btn-danger px-4 py-2 fw-semibold" id="showFormBtn">
@@ -28,6 +28,8 @@
             <h4 class="text-center">Add Traveller</h4>
             <form id="travellerFormElement">
                 <div class="row">
+                    <input type="hidden" id="travellerId" name="TravellerId">
+
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Name:</label>
                         <input type="text" class="form-control" id="name" name="Name" required>
@@ -149,6 +151,67 @@
 
     <script>
         $(document).on("click", ".edit-btn", function () {
+            var travellerId = $(this).data("id");
+
+            $.ajax({
+                url: "/Booking/GetTravellerById", // Replace with your actual API endpoint
+                type: "GET",
+                data: { id: travellerId },
+                success: function (data) {
+                    // Fill modal inputs with data from the backend
+                    $("#travellerId").val(data.id);
+                    $("#editName").val(data.name);
+                    $("#editEmail").val(data.email);
+                    $("#editPassNo").val(data.passportNo);
+                    $("#editPhone").val(data.phone);
+                    $("#editDateOfBirth").val(data.dateOfBirth);
+                    $("#editExpireDate").val(data.expireDate);
+                },
+                error: function () {
+                    alert("Failed to load traveller data.");
+                }
+            });
+        });
+
+        // Handle Update Submit
+        $("#editTravellerForm").submit(function (event) {
+            event.preventDefault();
+
+            var updatedTraveller = {
+                Id: $("#travellerId").val(),
+                Name: $("#editName").val(),
+                Email: $("#editEmail").val(),
+                PassportNo: $("#editPassNo").val(),
+                Phone: $("#editPhone").val(),
+                DateOfBirth: $("#editDateOfBirth").val(),
+                ExpireDate: $("#editExpireDate").val()
+            };
+
+            $.ajax({
+                url: "/Booking/UpdateTraveller",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(updatedTraveller),
+                success: function () {
+                    alert("Traveller updated successfully!");
+
+                    // Hide Modal after successful update
+                    $("#editTravellerModal").modal("hide");
+
+                    // Refresh traveller list dynamically
+                    location.reload();
+                },
+                error: function () {
+                    alert("Error updating traveller.");
+                }
+            });
+        });
+    </script>
+
+
+
+@*      <script>
+        $(document).on("click", ".edit-btn", function () {
             var travellerId = $(this).data("id"); // Get Traveller ID
             $.ajax({
                 url: "/Booking/EditTraveller", // Controller Action to Fetch Traveller Data
@@ -176,7 +239,61 @@
             });
         });
     </script>
+ *@ 
 
+@*      <script>
+        $(document).on("click", ".edit-btn", function () {
+            var travellerId = $(this).data("id"); // Get Traveller ID
+            $.ajax({
+                url: "/Booking/EditTraveller", // Controller Action to Fetch Traveller Data
+                type: "GET",
+                data: { id: travellerId },
+                success: function (data) {
+                    // Fill Form Fields with Traveller Data
+                    $("#name").val(data.name);
+                    $("#email").val(data.email);
+                    $("#passNo").val(data.passportNo);
+                    $("#phone").val(data.phone);
+                    $("#dateOfbirth").val(data.dateOfBirth);
+                    $("#expireDate").val(data.expireDate);
+
+                    // Store ID in Hidden Field (for Updating)
+                    $("#travellerId").val(travellerId);
+
+                    // Change button text and color for update mode
+                    $("#submitTravellerBtn").text("Update Traveller").removeClass("btn-success").addClass("btn-primary");
+
+                    // Show Form
+                    $("#travellerForm").removeClass("d-none");
+                },
+                error: function (xhr) {
+                    alert("Error: " + xhr.responseText);
+                }
+            });
+        });
+
+        // Submit form (Handle both Add & Update)
+        $("#travellerFormElement").submit(function (e) {
+            e.preventDefault(); // Prevent default form submission
+
+            var travellerId = $("#travellerId").val(); // Check hidden field
+            var url = travellerId ? "/Booking/UpdateTraveller" : "/Booking/Traveller"; // Update or Add
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: $(this).serialize(), // Serialize form data
+                success: function (response) {
+                    alert(response.message);
+                    location.reload(); // Refresh list after update/add
+                },
+                error: function (xhr) {
+                    alert("Error: " + xhr.responseText);
+                }
+            });
+        });
+    </script>
+ *@ 
 }
 
 

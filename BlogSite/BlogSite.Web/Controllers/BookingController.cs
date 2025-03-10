@@ -106,12 +106,19 @@ namespace BlogSite.Web.Controllers
             }
             return View();  
         }
-        public IActionResult EditTraveller(int id)
+        public IActionResult GetTravellerById(int id)
         {
 
             var model = _scope.Resolve<TravelModel>();
            var data= model.GetById(id);  
             return Json(data);
+        }
+        [HttpPost]
+        public IActionResult UpdateTraveller(TravelModel model)
+        {
+            model.ResolveDependency(_scope);
+            model.EditTraveller();
+            return RedirectToAction("Traveller");  
         }
         [Authorize]
         public async Task<IActionResult> AccountInfo()

@@ -17,13 +17,92 @@
                 </span>
             </div>
             <div class="col-md-6 text-md-end text-start">
-                <button class="btn btn-outline-secondary btn-sm fs-7 edit-btn" data-id="@traveller.Id">
+               @*  <button class="btn btn-outline-secondary btn-sm fs-7 edit-btn" data-id="@traveller.Id">
+                    <i class="fas fa-edit"></i> Edit
+                </button> *@
+                <button class="btn btn-outline-secondary btn-sm fs-7 edit-btn"
+                        data-id="@traveller.Id"
+                        data-bs-toggle="modal"
+                        data-bs-target="#editTravellerModal">
                     <i class="fas fa-edit"></i> Edit
                 </button>
+
                 <button class="btn btn-outline-danger btn-sm fs-7 delete-btn" data-id="@traveller.Id">
                     <i class="fas fa-trash"></i> Delete
                 </button>
             </div>
         </div>
     }
+</div>
+
+<div class="modal fade" id="editTravellerModal" tabindex="-1" aria-labelledby="editTravellerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editTravellerModalLabel">Edit Traveller</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editTravellerForm" asp-action="UpdateTraveller" asp-controller="Booking" method="post">
+                    <input type="hidden" asp-for="Id" id="travellerId" />
+
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label">Name</label>
+                        <input type="text" asp-for="Name" class="form-control" id="editName" required />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label">Email</label>
+                        <input type="email" asp-for="Email" class="form-control" id="editEmail" required />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="PassportNo" class="form-label">Passport Number</label>
+                        <input type="text" asp-for="PassportNo" class="form-control" id="editPassNo" required />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Phone" class="form-label">Phone</label>
+                        <input type="text" asp-for="Phone" class="form-control" id="editPhone" required />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="DateOfBirth" class="form-label">Date of Birth</label>
+                        <input type="date" asp-for="DateOfBirth" class="form-control" id="editDateOfBirth" required />
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="ExpireDate" class="form-label">Expire Date</label>
+                        <input type="date" asp-for="ExpireDate" class="form-control" id="editExpireDate" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+
+@*                 <form id="editTravellerForm" asp-action="UpdateTraveller" asp-controller="Booking">
+                    <input type="hidden" id="travellerId">
+
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" id="editName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="editEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Passport Number</label>
+                        <input type="text" class="form-control" id="editPassNo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone</label>
+                        <input type="text" class="form-control" id="editPhone" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Date of Birth</label>
+                        <input type="date" class="form-control" id="editDateOfBirth" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Expire Date</label>
+                        <input type="date" class="form-control" id="editExpireDate" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+ *@            </div>
+        </div>
+    </div>
 </div>
